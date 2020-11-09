@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, Component }  from 'react';
 import { Animated, StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, AppRegistry, Dimensions,
-  TouchableHighlight, TouchableWithoutFeedback, Alert, } from 'react-native';
+  TouchableHighlight, TouchableWithoutFeedback, } from 'react-native';
 import { DefaultTheme, Text, Button, RadioButton, TouchableRipple, ToggleButton, TextInput , Paragraph, Dialog, Portal, Appbar, 
   ProgressBar, Colors, Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
@@ -15,7 +15,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
   State,
   TapGestureHandler,
 } from 'react-native-gesture-handler';
-import PopupDialog, { Animation, DialogTitle, SlideAnimation, DialogContent , } from 'react-native-popup-dialog';
+import PopupDialog, { Animation, SlideAnimation } from 'react-native-popup-dialog';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -26,28 +26,9 @@ import { VerticalMotionExample } from './src/test';
 import { MovingSquare } from './src/MovingSquare';
 import { RotatingSquare } from './src/RotatingSquare';
 import { DraggableBox } from './src/DraggableBox';
-import { MyModal } from './src/MyModal';
-
-const WINDOW_H = Dimensions.get('window').height;
-const WINDOW_W = Dimensions.get('window').width;
-
-const slideAnimation = new SlideAnimation({ slideFrom: 'top', useNativeDriver: true, });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const slideAnimation = new SlideAnimation({ slideFrom: 'top' });
 
 export class SlideDialogTest extends Component {
   constructor(props) {
@@ -67,7 +48,9 @@ export class SlideDialogTest extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button onPress={this.openSlideAnimationDialog}> <Text>Open Dialog - Slide Animation</Text></Button>
+        <TouchableOpacity onPress={this.openSlideAnimationDialog} >
+          <Text>Open Dialog - Slide Animation</Text>
+        </TouchableOpacity>
 
         <PopupDialog
           dialogTitle={<DialogTitle title="Popup Dialog - Slide Animation" />}
@@ -84,39 +67,6 @@ export class SlideDialogTest extends Component {
 		);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function TitleScreen({navigation}){
@@ -150,7 +100,7 @@ function PetChoiceScreen({navigation}){
     setable(buttonable === false ? true : false);
   }
   const MoveToMainStack = () =>{
-    navigation.navigate("Main");
+    navigation.navigate("MainStack");
   }
 return(
   <View style={styles.petchoicebackground}>
@@ -173,12 +123,77 @@ return(
 );
 }
 
+
+const MainStack = createStackNavigator();
+const collectionDrawer = createDrawerNavigator();
+const petinfoDrawer = createDrawerNavigator();
+
+function MainStackScreen(){
+return(
+  // <View style={styles.container}>
+  //   <Text>MainStackScreen</Text>
+  //   <FontAwesome5 name="home" size={24} color="black" />
+
+    // <MainStack.Navigator headerMode={'none'}>
+    //       <MainStack.Screen name="Main" component={MainScreen} />
+    //       <MainStack.Screen name="Eat" component={EatStackScreen}/>
+    //       <MainStack.Screen name="Clean" component={CleanStackScreen}/>
+    //       <MainStack.Screen name="Fun" component={FunStackScreen}/>
+    //       <MainStack.Screen name="Sleep" component={SleepScreen}/>
+    //       <MainStack.Screen name="Achieve" component={AchieveDrawerScreen}/>
+    //       <MainStack.Screen name="Setting" component={SettingDrawerScreen}/>
+    //       <MainStack.Screen name="Funiture" component={FunitureStackScreen}/>
+    // </MainStack.Navigator>
+
+    <collectionDrawer.Navigator initialRouteName="Main" headerMode={'none'}>
+    <collectionDrawer.Screen name="Main" component={MainScreen} />
+    </collectionDrawer.Navigator>
+
+    // <petinfoDrawer.Navigator drawerPosition={'right'} drawerWidth={200} drawerBackgroundColor={'gray'} 
+    // headerMode={'none'} drawerContent={props => <MyDrawerContent {...props} />}>
+    // <petinfoDrawer.Screen name="Main" component={MainScreen} />
+    // </petinfoDrawer.Navigator>
+
+  // </View>
+);
+}
+
+function MyDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="X"
+        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
+      />
+    </DrawerContentScrollView>
+  );
+}
+
 export default App;
 
 function MainScreen({navigation}) {
-  const [coin, setCoin] = useState(3000);
-  const [jam, setJam] = useState(100);
-  const [heart, setHeart] = useState(70);
+  const MoveToEat = () =>{
+    navigation.navigate("Eat");
+  }
+  const MoveToClean = () =>{
+    navigation.navigate("Clean");
+  }
+  const MoveToFun = () =>{
+    navigation.navigate("Fun");
+  }
+  const MoveToSleep = () =>{
+    navigation.navigate("Sleep");
+  }
+  const MoveToAchieve = () =>{
+    navigation.navigate("Achieve");
+  }
+  const MoveToSetting = () =>{
+    navigation.navigate("Setting");
+  }
+  const MoveToFuniture = () =>{
+    navigation.navigate("Funiture");
+  }
 
   const [achievevisible, setachieveVisible] = useState(false);
   const showachieveDialog = () => setachieveVisible(true);
@@ -240,7 +255,6 @@ function MainScreen({navigation}) {
     setfunVisible(false);
     setminigameVisible(false);
     setrewardVisible(false);
-    setCoin(coin => coin + 100);
   }
 
   const [questrewardvisible, setquestrewardVisible] = useState(false);
@@ -248,7 +262,6 @@ function MainScreen({navigation}) {
   const hidequestrewardDialog = () => {
     setquestrewardVisible(false);
     setquestVisible(false);
-    setCoin(coin => coin + 100);
   }
 
   const [questvisible, setquestVisible] = useState(false);
@@ -270,10 +283,7 @@ function MainScreen({navigation}) {
   }
 
   const [buysuccessvisible, setbuysuccessVisible] = useState(false);
-  const showbuysuccessDialog = () => { 
-    setbuysuccessVisible(true);
-    setCoin(coin => coin - 100);
-  }
+  const showbuysuccessDialog = () => setbuysuccessVisible(true);
   const hidebuysuccessDialog = () => {
     setbuysuccessVisible(false);
     setitemcheckVisible(false);
@@ -295,6 +305,9 @@ function MainScreen({navigation}) {
   }
 
   const [lightvisible, setlightVisible] = useState(false);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   return(
     <View style={styles.container}>
     <Button disabled onPress={() => {}} style={styles.mainbackground1}><Text ></Text></Button>
@@ -303,7 +316,6 @@ function MainScreen({navigation}) {
     {(lightvisible == true) ?
         <DraggableBox /> : <Text></Text>
     }
-
 
     <Image source={require('./assets/images/egg.png')} style={styles.eggbackground} resizeMode ="cover"/>
 
@@ -316,40 +328,93 @@ function MainScreen({navigation}) {
     <Image source={require('./assets/images/coin.png')} style={styles.coinimage} resizeMode ="cover"/>
     <Image source={require('./assets/images/diamond.png')} style={styles.jamimage} resizeMode ="cover"/>
     <Image source={require('./assets/images/heart.png')} style={styles.heartimage} resizeMode ="cover"/>
-    <Button disabled onPress={() => {}} style={styles.coinnum}><Text style={styles.coinfont}>{coin}</Text></Button>
-    <Button disabled onPress={() => {}} style={styles.jamnum}><Text style={styles.jamfont}>{jam}</Text></Button>
-    <Button disabled onPress={() => {}} style={styles.heartgauge}><Text style={styles.heartfont}>{heart}%</Text></Button>
+    <Button disabled onPress={() => {}} style={styles.coinnum}><Text style={styles.coinfont}>3000</Text></Button>
+    <Button disabled onPress={() => {}} style={styles.jamnum}><Text style={styles.jamfont}>100</Text></Button>
+    <Button disabled onPress={() => {}} style={styles.heartgauge}><Text style={styles.heartfont}>70%</Text></Button>
 
-    <RotatingSquare />
-    <MovingSquare />  
-    <MyModal />  
+    <TouchableHighlight
+        style={styles.openButton}
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      >
+        <Text style={styles.textStyle}>Show Modal</Text>
+      </TouchableHighlight>
+
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
+      <RotatingSquare />
+      <MovingSquare />
+     
 
     <Button disabled onPress={() => {}} style={styles.achievebackground}><Text ></Text></Button>
+    {/* <Button onPress = {MoveToAchieve} style={styles.achievebutton}><Text style={styles.achievebuttonfont}>업적</Text></Button> */}
     <Button color={Colors.black} onPress={showachieveDialog} style={styles.achievebutton}>업적</Button>
     <Button disabled onPress={() => {}} style={styles.settingbackground}><Text ></Text></Button>
+    {/* <Button onPress = {MoveToSetting} style={styles.settingbutton}><Text style={styles.settingbuttonfont}>설정</Text></Button> */}
     <Button color={Colors.black} onPress={showsettingDialog} style={styles.settingbutton}>설정</Button>
     <Button disabled onPress={() => {}} style={styles.funiturebackground}><Text ></Text></Button>
+    {/* <Button onPress = {MoveToFuniture} style={styles.funiturebutton}><Text style={styles.funiturebuttonfont}>가구</Text></Button> */}
     <Button color={Colors.black} onPress={showfunitureDialog} style={styles.funiturebutton}>가구</Button>
     
   <Button disabled onPress={() => {}} style={styles.bottommenu}><Text></Text></Button>
   <Button disabled onPress={() => {}} style={styles.eatbackground}><Text></Text></Button>
   <Button disabled onPress={() => {}} style={styles.eatgauge}><Text></Text></Button>
+{/* <Button onPress = {MoveToEat} style={styles.eatbutton}><Text style={styles.eatbuttonfont}>식사</Text></Button> */}
   <Button color={Colors.black} onPress={showeatDialog} style={styles.eatbutton}>식사</Button>
     
     <Button disabled onPress={() => {}} style={styles.cleanbackground}><Text ></Text></Button>
   <Button disabled onPress={() => {}} style={styles.cleangauge}><Text ></Text></Button>
+    {/* <Button onPress = {MoveToClean} style={styles.cleanbutton}><Text style={styles.cleanbuttonfont}>청결</Text></Button> */}
     <Button color={Colors.black} onPress={showcleanDialog} style={styles.cleanbutton}>청결</Button>
 
     <Button disabled onPress={() => {}} style={styles.funbackground}><Text ></Text></Button>
   <Button disabled onPress={() => {}} style={styles.fungauge}><Text ></Text></Button>
+    {/* <Button onPress = {MoveToFun} style={styles.funbutton}><Text style={styles.funbuttonfont}>재미</Text></Button> */}
     <Button color={Colors.black} onPress={showfunDialog} style={styles.funbutton}>재미</Button>
 
     <Button disabled onPress={() => {}} style={styles.sleepbackground}><Text ></Text></Button>
   <Button disabled onPress={() => {}} style={styles.sleepgauge}><Text ></Text></Button>
+    {/* <Button onPress = {MoveToSleep} style={styles.sleepbutton}><Text style={styles.sleepbuttonfont}>수면</Text></Button> */}
     <Button color={Colors.black} onPress={showsleepDialog} style={styles.sleepbutton}>수면</Button>
 
+{/* <NavigationContainer>
+  <collectionDrawer   drawerPosition={'left'}   drawerWidth={350}
+    drawerContent={props => <MyDrawerContent {...props} />}>
+  <collectionDrawer.Screen name="collection" component={MainScreen} />
+  </collectionDrawer>
+</NavigationContainer>
+    
+<NavigationContainer>
+  <petinfoDrawer   drawerPosition={'right'}   drawerWidth={350}
+    drawerContent={props => <MyDrawerContent {...props} />}>
+  <petinfoDrawer.Screen name="Petinfo" component={MainScreen} />
+  </petinfoDrawer>
+</NavigationContainer> */}
 
-  <Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.acheivelist}>
+  <Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.acheivelist} dialogAnimation={slideAnimation}>
   <Dialog.Title style={styles.textcenter}>업적</Dialog.Title>
   <Dialog.Content>
     <Paragraph style={styles.achieveinfo}><Text style={styles.achievefont}>업적 내용</Text></Paragraph>
@@ -400,7 +465,7 @@ function MainScreen({navigation}) {
 <Dialog visible={shopvisible} onDismiss={hideshopDialog} style={styles.acheivelist}>
   <Dialog.Title style={styles.todayquest}>상점</Dialog.Title>
   <Dialog.Content>
-  <Button disabled onPress={() => {}} style={styles.shopcoinnum}><Text style={styles.shopcoinfont}>    {coin}</Text></Button>
+  <Button disabled onPress={() => {}} style={styles.shopcoinnum}><Text style={styles.shopcoinfont}>    3000</Text></Button>
   <Image source={require('./assets/images/coin.png')} style={styles.shopcoinimage} resizeMode ="cover"/>
   <Button disabled onPress={() => {}} style={styles.foodbackground}><Text></Text></Button>
   <Button color={Colors.black} onPress={showitemcheckDialog} style={styles.foodbutton}><Text style={styles.foodfont}>상품 이미지</Text></Button>
@@ -587,18 +652,429 @@ function MainScreen({navigation}) {
   );
 }
 
+const EatStack = createStackNavigator();
+
+function EatStackScreen(){
+return(
+  <EatStack.Navigator>
+  <EatStack.Screen name="Eat" component={EatScreen}/>
+  <EatStack.Screen name="FoodList" component={FoodListScreen}/>
+  <EatStack.Screen name="Fullness" component={FullnessScreen}/>
+  <EatStack.Screen name="Main" component={MainScreen}/>
+  </EatStack.Navigator>
+);
+}
+
+function EatScreen({navigation}){
+  const MoveToFoodList = () =>{
+    navigation.navigate("FoodList");
+  }
+return(
+  <View style={styles.container}>
+    <Text>EatScreen</Text>
+    <Button onPress = {MoveToFoodList} title="FoodList" />
+  </View>
+);
+}
+
+function FoodListScreen({navigation}){
+  const MoveToFullness = () =>{
+    navigation.navigate("Fullness");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FoodListScreen</Text>
+    <Button onPress = {MoveToFullness} title="Fullness" />
+  </View>
+);
+}
+
+function FullnessScreen({navigation}){
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FullnessScreen</Text>
+    <Button onPress = {MoveToMain} title="Main" />
+  </View>
+);
+}
+
+const CleanStack = createStackNavigator();
+
+function CleanStackScreen(){
+return(
+  <CleanStack.Navigator>
+  <CleanStack.Screen name="Clean" component={CleanScreen}/>
+  <CleanStack.Screen name="CleanList" component={CleanListScreen}/>
+  <CleanStack.Screen name="Cleanliness" component={CleanlinessScreen}/>
+  <CleanStack.Screen name="Main" component={MainScreen}/>
+  </CleanStack.Navigator>
+);
+}
+
+function CleanScreen({navigation}){
+  const MoveToCleanList = () =>{
+    navigation.navigate("CleanList");
+  }
+return(
+  <View style={styles.container}>
+    <Text>CleanScreen</Text>
+    <Button onPress = {MoveToCleanList} title="CleanList" />
+  </View>
+);
+}
+
+function CleanListScreen({navigation}){
+  const MoveToCleanliness = () =>{
+    navigation.navigate("Cleanliness");
+  }
+return(
+  <View style={styles.container}>
+    <Text>CleanListScreen</Text>
+    <Button onPress = {MoveToCleanliness} title="Cleanliness" />
+  </View>
+);
+}
+
+function CleanlinessScreen({navigation}){
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+return(
+  <View style={styles.container}>
+    <Text>CleanlinessScreen</Text>
+    <Button onPress = {MoveToMain} title="Main" />
+  </View>
+);
+}
+
+const FunStack = createStackNavigator();
+
+function FunStackScreen(){
+return(
+  <FunStack.Navigator>
+  <FunStack.Screen name="Fun" component={FunScreen}/>
+  <FunStack.Screen name="MiniGame" component={MiniGameScreen}/>
+  <FunStack.Screen name="FunScore" component={FunScoreScreen}/>
+  <FunStack.Screen name="FunReWard" component={FunReWardScreen}/>
+  <CleanStack.Screen name="Main" component={MainScreen}/>
+  </FunStack.Navigator>
+);
+}
+
+function FunScreen({navigation}){
+  const MoveToMiniGame = () =>{
+    navigation.navigate("MiniGame");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FunScreen</Text>
+    <Button onPress = {MoveToMiniGame} title="MiniGame" />
+  </View>
+);
+}
+
+function MiniGameScreen({navigation}){
+  const MoveToFunScore = () =>{
+    navigation.navigate("FunScore");
+  }
+return(
+  <View style={styles.container}>
+    <Text>MiniGameScreen</Text>
+    <Button onPress = {MoveToFunScore} title="FunScore" />
+  </View>
+);
+}
+
+function FunScoreScreen({navigation}){
+  const MoveToFunReWard = () =>{
+    navigation.navigate("FunReWard");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FunScoreScreen</Text>
+    <Button onPress = {MoveToFunReWard} title="FunReWard" />
+  </View>
+);
+}
+
+function FunReWardScreen({navigation}){
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FunReWardScreen</Text>
+    <Button onPress = {MoveToMain} title="Main" />
+  </View>
+);
+}
+
+function SleepScreen({navigation}){
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+return(
+  <View style={styles.container}>
+    <Text>SleepScreen</Text>
+    <Button onPress = {MoveToMain} title="Main" />
+  </View>
+);
+}
+
+const AchieveDrawer = createDrawerNavigator();
+
+function AchieveDrawerScreen(){
+return(
+  <AchieveDrawer.Navigator>
+  <AchieveDrawer.Screen name="Achieve" component={AchieveScreen} />
+  <AchieveDrawer.Screen name="AchieveReward" component={AchieveRewardScreen} />
+  <AchieveDrawer.Screen name="Main" component={MainScreen} />
+  </AchieveDrawer.Navigator>
+);
+}
+
+function AchieveScreen({navigation}){
+  const MoveToAchieveReward = () =>{
+    navigation.navigate("AchieveReward");
+  }
+return(
+  <View style={styles.container}>
+    <Text>AchieveScreen</Text>
+    <Button onPress = {MoveToAchieveReward} title="AchieveReward" />
+  </View>
+);
+}
+
+function AchieveRewardScreen({navigation}){
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+  const OpenDrawer = () =>{
+    navigation.dispatch(DrawerActions.openDrawer());
+  }
+  const ToggleDrawer = () =>{
+    navigation.dispatch(DrawerActions.toggleDrawer());
+  }
+return(
+  <View style={styles.container}>
+    <Text>AchieveRewardScreen</Text>
+    <Button onPress = {MoveToMain} title="Main" />
+    <Button onPress = {OpenDrawer} title="Open Drawer"/>
+    <Button onPress = {ToggleDrawer} title="Toggle Drawer"/>
+  </View>
+);
+}
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Close drawer"
+        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
+      />
+      <DrawerItem
+        label="Toggle drawer"
+        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+      />
+      <Image source={require('./assets/favicon.png')} styles={styles.box}/>
+    </DrawerContentScrollView>
+  );
+}
+
+const SettingDrawer = createDrawerNavigator();
+
+function SettingDrawerScreen(){
+return(
+  <SettingDrawer.Navigator 
+  drawerPosition={'right'}
+  drawerBackgroundColor={'orange'}
+  drawerWidth={200}
+  drawerContent={props => <CustomDrawerContent {...props} />}>
+  <SettingDrawer.Screen name="Setting" component={SettingStackScreen} />
+  <SettingDrawer.Screen name="Main" component={MainScreen} />
+  </SettingDrawer.Navigator>
+);
+}
+
+const SettingStack = createStackNavigator();
+
+function SettingStackScreen(){
+return(
+  <SettingStack.Navigator>
+  <SettingStack.Screen name="Setting" component={SettingScreen}/>
+  <SettingStack.Screen name="Quest" component={QuestScreen}/>
+  <SettingStack.Screen name="Attend" component={AttendScreen}/>
+  <SettingStack.Screen name="Shop" component={ShopScreen}/>
+  <SettingStack.Screen name="Collection" component={CollectionScreen}/>
+  <SettingStack.Screen name="Main" component={MainScreen}/>
+  </SettingStack.Navigator>
+);
+}
+
+function SettingScreen({navigation}) {
+  const MoveToQuest = () =>{
+    navigation.navigate("Quest");
+  }
+  const MoveToAttend = () =>{
+    navigation.navigate("Attend");
+  }
+  const MoveToShop = () =>{
+    navigation.navigate("Shop");
+  }
+  const MoveToCollection = () =>{
+    navigation.navigate("Collection");
+  }
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+  return(
+    <View style={styles.container}>
+    <Text>SettingScreen</Text>
+    <FontAwesome5 name="home" size={24} color="black" />
+    <Button onPress = {MoveToQuest} title="Quest" />
+    <Button onPress = {MoveToAttend} title="Attend" />
+    <Button onPress = {MoveToShop} title="Shop" />
+    <Button onPress = {MoveToCollection} title="Collection" />
+    <Button onPress = {MoveToMain} title="Main" />
+    </View>
+  );
+}
+
+function QuestScreen({navigation}){
+  const MoveToSetting = () =>{
+    navigation.navigate("Setting");
+  }
+return(
+  <View style={styles.container}>
+    <Text>QuestScreen</Text>
+    <Button onPress = {MoveToSetting} title="Setting" />
+  </View>
+);
+}
+
+function AttendScreen({navigation}){
+  const MoveToSetting = () =>{
+    navigation.navigate("Setting");
+  }
+return(
+  <View style={styles.container}>
+    <Text>AttendScreen</Text>
+    <Button onPress = {MoveToSetting} title="Setting" />
+  </View>
+);
+}
+
+function ShopScreen({navigation}){
+  const MoveToSetting = () =>{
+    navigation.navigate("Setting");
+  }
+return(
+  <View style={styles.container}>
+    <Text>ShopScreen</Text>
+    <Button onPress = {MoveToSetting} title="Setting" />
+  </View>
+);
+}
+
+function CollectionScreen({navigation}){
+  const MoveToSetting = () =>{
+    navigation.navigate("Setting");
+  }
+return(
+  <View style={styles.container}>
+    <Text>CollectionScreen</Text>
+    <Button onPress = {MoveToSetting} title="Setting" />
+  </View>
+);
+}
+
+const FunitureStack = createStackNavigator();
+
+function FunitureStackScreen(){
+return(
+  <FunitureStack.Navigator>
+  <FunitureStack.Screen name="Funiture" component={FunitureScreen}/>
+  <FunitureStack.Screen name="FunitureList" component={FunitureListScreen}/>
+  <FunitureStack.Screen name="FuniturePosition" component={FuniturePositionScreen}/>
+  <FunitureStack.Screen name="Main" component={MainScreen}/>
+  </FunitureStack.Navigator>
+);
+}
+
+function FunitureScreen({navigation}){
+  const MoveToFunitureList = () =>{
+    navigation.navigate("FunitureList");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FunitureScreen</Text>
+    <Button onPress = {MoveToFunitureList} title="FunitureList" />
+  </View>
+);
+}
+
+function FunitureListScreen({navigation}){
+  const MoveToFuniturePosition = () =>{
+    navigation.navigate("FuniturePosition");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FunitureListScreen</Text>
+    <Button onPress = {MoveToFuniturePosition} title="FuniturePosition" />
+  </View>
+);
+}
+
+function FuniturePositionScreen({navigation}){
+  const MoveToMain = () =>{
+    navigation.navigate("Main");
+  }
+return(
+  <View style={styles.container}>
+    <Text>FuniturePositionScreen</Text>
+    <Button onPress = {MoveToMain} title="Main" />
+  </View>
+);
+}
+
+function MainTitle() {
+  return(
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', backgroundColor: '#f4511e'}}>
+    <FontAwesome5 name="home" size={24} color="black" />
+    <Text style={{color : 'white', fontsize:18}}>Main</Text>
+    </View>
+  );
+}
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 // export default 
 function App() {
+  const pressText = () =>{
+    console.log("you pressed touchable");
+  } 
   return (
       <NavigationContainer>
-      <Stack.Navigator headerMode={'none'}>
+      <Stack.Navigator headerMode={'none'}
+      // initialRouteName="Title" screenOptions={{title : '100일몽', headerStyle: {
+      //       backgroundColor: '#f4511e',
+      //     },
+      //     headerTintColor: '#fff',
+      //     headerTitleStyle: {
+      //       fontWeight: 'bold',
+      //       alignItems: 'center',
+      //     },}}
+          >
         <Stack.Screen name="Title" component={TitleScreen} />
         <Stack.Screen name="Intro" component={IntroScreen} />
         <Stack.Screen name="PetChoice" component={PetChoiceScreen} />
-        <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="MainStack" component={MainStackScreen} /*options={{headerTitle : props => <MainTitle{...props} /> }}*/></Stack.Screen>
       </Stack.Navigator>
       </NavigationContainer>
   );
@@ -1857,6 +2333,43 @@ const styles = StyleSheet.create({
     backgroundColor : 'gray',
   },
 
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  },
 
 
   dialogContentView: {
