@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, Component }  from 'react';
-import { Animated, StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, AppRegistry, Dimensions,
+import { StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, AppRegistry, Dimensions,
   TouchableHighlight, TouchableWithoutFeedback, Alert, } from 'react-native';
 import { DefaultTheme, Text, Button, RadioButton, TouchableRipple, ToggleButton, TextInput , Paragraph, Dialog, Portal, Appbar, 
   ProgressBar, Colors, Provider as PaperProvider } from 'react-native-paper';
@@ -27,11 +27,24 @@ import { MovingSquare } from './src/MovingSquare';
 import { RotatingSquare } from './src/RotatingSquare';
 import { DraggableBox } from './src/DraggableBox';
 import { MyModal } from './src/MyModal';
+//import { ReanimatedScreen } from './src/notuse/animationcode';
+
+import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
+
 
 const WINDOW_H = Dimensions.get('window').height;
 const WINDOW_W = Dimensions.get('window').width;
 
 const slideAnimation = new SlideAnimation({ slideFrom: 'top', useNativeDriver: true, });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -125,7 +138,7 @@ function TitleScreen({navigation}){
   }
 return(
   <View style={styles.container}>
-    <Text style={styles.title}>TITLE</Text>
+    <Image source={require('./assets/images/title/title.png')} style={styles.title} resizeMode ="stretch"/>
     <Button onPress = {MoveToIntro} style={styles.titlebutton}> <Text style={styles.titlebuttonfont}>화면을 터치해 주세요.</Text></Button>
   </View>
 );
@@ -137,9 +150,22 @@ function IntroScreen({navigation}){
   }
 return(
   <View style={styles.introbackground}>
-    <Text style={styles.introimage}></Text>
-    <Text style={styles.intro}>인트로영상</Text>
-    <Button onPress = {MoveToPetChoice} style={styles.introbutton}> <Text style={styles.introbuttonfont}>SKip ></Text></Button>
+    <Image source={require('./assets/images/intro/intro.png')} style={styles.intro} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/prologuebg.png')} style={styles.prologuebg} resizeMode ="stretch"/>
+
+    <Text style={styles.prologuefont}>프롤로그</Text>
+
+    <Image source={require('./assets/images/intro/prologue.png')} style={styles.prologue} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/selectcircle.png')} style={styles.introcircle1} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/normalcircle.png')} style={styles.introcircle2} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/normalcircle.png')} style={styles.introcircle3} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/normalcircle.png')} style={styles.introcircle4} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/normalcircle.png')} style={styles.introcircle5} resizeMode ="stretch"/>
+
+    <Text style={styles.prologueinfofont}>꿈속에 나오던 미지의 공간 ...</Text>
+
+    <Image source={require('./assets/images/intro/button.png')} style={styles.introbuttonbg} resizeMode ="stretch"/>
+    <TouchableOpacity style={styles.introbutton} onPress={MoveToPetChoice}><Text style={styles.introbuttonfont}>Skip ></Text></TouchableOpacity>
   </View>
 );
 }
@@ -154,20 +180,35 @@ function PetChoiceScreen({navigation}){
   }
 return(
   <View style={styles.petchoicebackground}>
-    <Text style={styles.introimage}></Text>
+    <Image source={require('./assets/images/intro/intro.png')} style={styles.intro} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/intro/prologuebg.png')} style={styles.prologuebg} resizeMode ="stretch"/>
+
     {(buttonable == false) ?
-    <Button onPress={isbottondown} style={styles.petchoicebutton1}>  </Button> :
-    <Button onPress={isbottondown} style={styles.petchoicebutton1_1}>  </Button>
+    <Button disabled onPress={() => {}}></Button> :
+    <Button disabled onPress={() => {}} style={styles.petchoiceborder}></Button>
     }
-    <Image source={require('./assets/images/egg.png')} style={styles.egg1} resizeMode ="cover"/>
-    <Button disabled onPress={() => {}} style={styles.petchoicebutton2} ></Button>
-    <Image source={require('./assets/images/egg.png')} style={styles.egg2} resizeMode ="cover"/>
-    <Button disabled onPress={() => {}} style={styles.petchoicebutton3}></Button>
-    <Image source={require('./assets/images/egg.png')} style={styles.egg3} resizeMode ="cover"/>
-    <Text style={styles.petchoice}>알설명</Text>
+    
+    <Image source={require('./assets/images/petchoice/pet1bg.png')} style={styles.pet1} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/pet1.png')} style={styles.pet1} resizeMode ="stretch"/>
+    <Button onPress={isbottondown} style={styles.pet1}></Button>
+
+    {/* <TouchableOpacity onPress={isbottondown}>
+    <Image style={styles.pet1} resizeMode ="stretch" source={require('./assets/images/petchoice/pet1.png')} />
+    </TouchableOpacity> */}
+
+    <Image source={require('./assets/images/petchoice/pet2bg.png')} style={styles.pet2} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/pet2.png')} style={styles.pet2} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/pet3bg.png')} style={styles.pet3} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/pet3.png')} style={styles.pet3} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/petinfo.png')} style={styles.petinfobg} resizeMode ="stretch"/>
+    <Text style={styles.petchoiceinfo}>자연의 싱그러움이 느껴지는</Text> 
+    <Text style={styles.petchoiceinfo2}> 미지의 알. </Text> 
+    <Text style={styles.petchoiceinfo3}>육성 난이도 :  쉬움 </Text> 
+
+    <Image source={require('./assets/images/intro/button.png')} style={styles.choicebuttonbg} resizeMode ="stretch"/>
     {(buttonable == false) ?
-    <Button disabled onPress={() => {}} style={styles.choicebutton}><Text style={styles.petchoicebuttonfont}>선택하기</Text></Button> :
-    <Button onPress = {MoveToMainStack} style={styles.choicebutton}><Text style={styles.petchoicebuttonfont}>선택하기</Text></Button>
+    <TouchableOpacity disabled style={styles.choicebutton} onPress={MoveToMainStack}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>:
+    <TouchableOpacity style={styles.choicebutton} onPress={MoveToMainStack}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>
     }
   </View>
 );
@@ -179,6 +220,11 @@ function MainScreen({navigation}) {
   const [coin, setCoin] = useState(3000);
   const [jam, setJam] = useState(100);
   const [heart, setHeart] = useState(70);
+
+  const [eattabname, seteattabname] = useState("과일");
+  const seteattabfruit = () => seteattabname("과일");
+  const seteattabmeat = () => seteattabname("육류");
+  const seteattabetc = () => seteattabname("그외");
 
   const [achievevisible, setachieveVisible] = useState(false);
   const showachieveDialog = () => setachieveVisible(true);
@@ -295,21 +341,23 @@ function MainScreen({navigation}) {
   }
 
   const [lightvisible, setlightVisible] = useState(false);
+
+  const [menu, setmenunum] = useState(true);
+  const setmenu1 = () => setmenunum(true);
+  const setmenu2 = () => setmenunum(false);
+  
   return(
     <View style={styles.container}>
-    <Button disabled onPress={() => {}} style={styles.mainbackground1}><Text ></Text></Button>
-    <Button disabled onPress={() => {}} style={styles.mainbackground2}><Text ></Text></Button>
+    <Image source={require('./assets/images/main/main.png')} style={styles.main} resizeMode ="stretch"/>
 
     {(lightvisible == true) ?
         <DraggableBox /> : <Text></Text>
     }
 
-
-    <Image source={require('./assets/images/egg.png')} style={styles.eggbackground} resizeMode ="cover"/>
-
-    <Button disabled onPress={() => {}} style={styles.statebackground}><Text></Text></Button>
-    <Button disabled onPress={() => {}} style={styles.state}><Text style={styles.statefont}>상태</Text></Button>
-    <Button disabled onPress={() => {}} style={styles.topmenu}><Text ></Text></Button>
+    <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/>
+    <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/>
+    <Image source={require('./assets/images/main/circle.png')} style={styles.stagebg} resizeMode ="cover"/>
+    <Button disabled onPress={() => {}} style={styles.stage}><Text style={styles.statefont}>stage</Text></Button>
     <Button disabled onPress={() => {}} style={styles.gamemoneybackground}><Text ></Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartbackground}><Text ></Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartgaugeimage}><Text ></Text></Button>
@@ -320,36 +368,92 @@ function MainScreen({navigation}) {
     <Button disabled onPress={() => {}} style={styles.jamnum}><Text style={styles.jamfont}>{jam}</Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartgauge}><Text style={styles.heartfont}>{heart}%</Text></Button>
 
-    <RotatingSquare />
+    {/* <RotatingSquare />
     <MovingSquare />  
-    <MyModal />  
+    <MyModal />  */}
 
-    <Button disabled onPress={() => {}} style={styles.achievebackground}><Text ></Text></Button>
-    <Button color={Colors.black} onPress={showachieveDialog} style={styles.achievebutton}>업적</Button>
-    <Button disabled onPress={() => {}} style={styles.settingbackground}><Text ></Text></Button>
-    <Button color={Colors.black} onPress={showsettingDialog} style={styles.settingbutton}>설정</Button>
-    <Button disabled onPress={() => {}} style={styles.funiturebackground}><Text ></Text></Button>
-    <Button color={Colors.black} onPress={showfunitureDialog} style={styles.funiturebutton}>가구</Button>
+    <Image source={require('./assets/images/main/menu.png')} style={styles.menubg} resizeMode ="stretch"/>
+    <Button color={Colors.black} onPress={showsettingDialog} style={styles.menubutton}></Button>
+
     
   <Button disabled onPress={() => {}} style={styles.bottommenu}><Text></Text></Button>
+
   <Button disabled onPress={() => {}} style={styles.eatbackground}><Text></Text></Button>
-  <Button disabled onPress={() => {}} style={styles.eatgauge}><Text></Text></Button>
-  <Button color={Colors.black} onPress={showeatDialog} style={styles.eatbutton}>식사</Button>
-    
+  <Image source={require('./assets/images/main/eat.png')} style={styles.eatgauge} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={showeatDialog} style={styles.eatbutton}></Button>
+
     <Button disabled onPress={() => {}} style={styles.cleanbackground}><Text ></Text></Button>
-  <Button disabled onPress={() => {}} style={styles.cleangauge}><Text ></Text></Button>
-    <Button color={Colors.black} onPress={showcleanDialog} style={styles.cleanbutton}>청결</Button>
+    <Image source={require('./assets/images/main/clean.png')} style={styles.cleangauge} resizeMode ="stretch"/>
+    <Button color={Colors.black} onPress={showcleanDialog} style={styles.cleanbutton}></Button>
 
     <Button disabled onPress={() => {}} style={styles.funbackground}><Text ></Text></Button>
-  <Button disabled onPress={() => {}} style={styles.fungauge}><Text ></Text></Button>
-    <Button color={Colors.black} onPress={showfunDialog} style={styles.funbutton}>재미</Button>
+    <Image source={require('./assets/images/main/funny.png')} style={styles.fungauge} resizeMode ="stretch"/>
+    <Button color={Colors.black} onPress={showfunDialog} style={styles.funbutton}></Button>
 
     <Button disabled onPress={() => {}} style={styles.sleepbackground}><Text ></Text></Button>
-  <Button disabled onPress={() => {}} style={styles.sleepgauge}><Text ></Text></Button>
-    <Button color={Colors.black} onPress={showsleepDialog} style={styles.sleepbutton}>수면</Button>
+    <Image source={require('./assets/images/main/sleep.png')} style={styles.sleepgauge} resizeMode ="stretch"/>
+    <Button color={Colors.black} onPress={showsleepDialog} style={styles.sleepbutton}></Button>
+
+<Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.settinglist}>
+  <Dialog.Title style={styles.textcenter}>메뉴</Dialog.Title>
+  <Dialog.Content>
+
+    
+  {(menu == true) ?
+        <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> :
+        <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>
+  }
+  <Text style={styles.menufont}>메뉴</Text>
+
+  <Image style={styles.menu1} source={require('./assets/images/menu/menu1.png')} resizeMode ="stretch"/>
+  {(menu == true) ?
+        <Image style={styles.menu1num} source={require('./assets/images/menu/1.1.png')} resizeMode ="stretch"/> :
+        <Image style={styles.menu1num} source={require('./assets/images/menu/1.png')} resizeMode ="stretch"/>
+  }
+
+{(menu == true) ?
+     <Button disabled color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button> :
+     <Button color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button>
+  }
+
+  <Image style={styles.menu2} source={require('./assets/images/menu/menu2.png')} resizeMode ="stretch"/>
+  {(menu == true) ?
+        <Image style={styles.menu2num} source={require('./assets/images/menu/2.png')} resizeMode ="stretch"/> :
+        <Image style={styles.menu2num} source={require('./assets/images/menu/2.1.png')} resizeMode ="stretch"/>
+  }
+
+{(menu == true) ?
+      <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button> :
+      <Button disabled color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
+  }
+    
+  <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button>
+
+  <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button>
+
+  <Image style={styles.menufuniture} source={require('./assets/images/menu/funitureposition.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={showfunitureDialog} style={styles.menufuniturebutton}><Text></Text></Button>
+
+  <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>
 
 
-  <Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.acheivelist}>
+{/* 
+  <Image style={styles.menuachieve} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={showachieveDialog} style={styles.menuachievebutton}><Text></Text></Button>
+
+  <Image style={styles.menustore} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={showcollectionDialog} style={styles.menustorebutton}><Text></Text></Button>
+
+  <Image style={styles.menudictionary} source={require('./assets/images/menu/dictionary.png')} resizeMode ="stretch"/>
+  <Button color={Colors.black} onPress={() => {}} style={styles.menudictionarybutton}><Text></Text></Button> */}
+
+  </Dialog.Content>
+</Dialog>
+
+<Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.acheivelist}>
   <Dialog.Title style={styles.textcenter}>업적</Dialog.Title>
   <Dialog.Content>
     <Paragraph style={styles.achieveinfo}><Text style={styles.achievefont}>업적 내용</Text></Paragraph>
@@ -358,20 +462,6 @@ function MainScreen({navigation}) {
   <Dialog.Actions>
   <Button disabled color={Colors.black} onPress={hideachieveDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hideachieveDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
-  </Dialog.Actions>
-</Dialog>
-
-<Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.settinglist}>
-  <Dialog.Title style={styles.textcenter}>설정</Dialog.Title>
-  <Dialog.Content>
-  <Button color={Colors.black} onPress={showquestDialog} style={styles.settingquest}><Text style={styles.settingfont}>퀘스트</Text></Button>
-  <Button color={Colors.black} onPress={showshopDialog} style={styles.settingshop}><Text style={styles.settingfont}>상점</Text></Button>
-  <Button color={Colors.black} onPress={showcollectionDialog} style={styles.settingcollection}><Text style={styles.settingfont}>수집품</Text></Button>
-  <Button color={Colors.black} onPress={showfunDialog} style={styles.settingminigame}><Text style={styles.settingfont}>미니 게임</Text></Button>
-  </Dialog.Content>
-  <Dialog.Actions>
-  <Button disabled color={Colors.black} onPress={hidesettingDialog} style={styles.xbuttonbackground}></Button>
-    <Button color={Colors.black} onPress={hidesettingDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
 </Dialog>
 
@@ -486,7 +576,7 @@ function MainScreen({navigation}) {
   </Dialog.Actions>
 </Dialog>
 
-    <Dialog visible={eatvisible} onDismiss={hideeatDialog} style={styles.foodlist}>
+    {/* <Dialog visible={eatvisible} onDismiss={hideeatDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>음식 목록</Dialog.Title>
   <Dialog.Content>
   <Button disabled onPress={() => {}} style={styles.foodbackground}><Text></Text></Button>
@@ -497,7 +587,45 @@ function MainScreen({navigation}) {
   <Button disabled color={Colors.black} onPress={hideeatDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hideeatDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
-</Dialog>
+</Dialog> */}
+
+<Modal
+          animationType="fade"
+          transparent={true}
+          visible={eatvisible}
+          contentContainerStyle={{backgroundColor : 'white', padding : 20}}
+          >
+  <View style={styles.eatmodal}>
+     <View style={styles.textcenter}>
+
+        <Image style={styles.eatfruit} source={require('./assets/images/eat/fruit.png')} resizeMode ="stretch"/>
+        <Image style={styles.eatmeat} source={require('./assets/images/eat/meat.png')} resizeMode ="stretch"/>
+        <Image style={styles.eatetc} source={require('./assets/images/eat/etc.png')} resizeMode ="stretch"/>
+
+        {eattabname == "과일" && <Text style={{ ...styles.eattabname, backgroundColor: "#FFCC18"}}>{eattabname}</Text>}
+        {eattabname == "육류" && <Text style={{ ...styles.eattabname, backgroundColor: "#CA7222"}}>{eattabname}</Text>}
+        {eattabname == "그외" && <Text style={{ ...styles.eattabname, backgroundColor: "#6C1C1C"}}>{eattabname}</Text>}
+
+
+        <Button onPress={seteattabfruit} style={styles.eatfruitbutton}><Text>과일</Text></Button>
+        <Button onPress={seteattabmeat} style={styles.eatmeatbutton}><Text>육류</Text></Button>
+        <Button onPress={seteattabetc} style={styles.eatetcbutton}><Text>그외</Text></Button>
+
+        <Image style={styles.eatapple} source={require('./assets/images/eat/apple.png')} resizeMode ="stretch"/>
+        <Image style={styles.eatwatermelon} source={require('./assets/images/eat/watermelon.png')} resizeMode ="stretch"/>
+
+
+        <Text></Text>
+        <Text></Text>
+        <TouchableHighlight
+                style={styles.eattabbackbutton}
+                onPress={hideeatDialog}>
+          <Text style={styles.textcenter}>X</Text>
+        </TouchableHighlight> 
+
+     </View>
+  </View>
+</Modal>
 
 <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
@@ -632,50 +760,24 @@ const styles = StyleSheet.create({
     flex:1,
   },
 
+
+
+
+
+  
   title:{
-    position: 'absolute',
-    fontSize: 50,
-    top : 100,
+    width : WINDOW_W,
+    height : WINDOW_H,
   },
 
   titlebutton:{
     position: 'absolute',
-    bottom: 100,
+    bottom: 80,
   },
 
   titlebuttonfont:{
-    fontSize: 25,
+    fontSize: 20,
     color: 'black',
-  },
-
-  intro:{
-    position: 'absolute',
-    justifyContent: 'center',
-    top : 200,
-    fontSize: 32,
-  },
-
-  introbutton:{
-    position: 'absolute',
-    right : 75,
-    bottom: 75,
-    borderRadius: 20,
-    backgroundColor : '#A9A8B8',
-  },
-
-  introbuttonfont:{
-    fontSize: 15,
-    color: 'black',
-  },
-
-  introimage:{
-    position: 'absolute',
-    left : 50,
-    top: 75,
-    width : 300,
-    height: 550,
-    backgroundColor: 'gray',
-    opacity: 0.5,
   },
 
   introbackground:{
@@ -686,6 +788,108 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  intro:{
+    width : WINDOW_W,
+    height : WINDOW_H+20,
+  },
+
+  prologuebg : {
+    position: 'absolute',
+    left : 50+10,
+    top: 75,
+    width : 300,
+    height: 550,
+  },
+
+  prologue : {
+    position: 'absolute',
+    left : 75+10,
+    top: 100,
+    width : 250,
+    height: 450,
+  },
+
+  introcircle1 : {
+    position: 'absolute',
+    left : 140,
+    bottom: 120,
+    width : 15,
+    height: 15,
+  },
+
+  introcircle2 : {
+    position: 'absolute',
+    left : 140+30,
+    bottom: 120+2,
+    width : 10,
+    height: 10,
+  },
+
+  introcircle3 : {
+    position: 'absolute',
+    left : 140 + 60,
+    bottom: 120 + 2,
+    width : 10,
+    height: 10,
+  },
+
+  introcircle4 : {
+    position: 'absolute',
+    left : 140 + 90,
+    bottom: 120 + 2,
+    width : 10,
+    height: 10,
+  },
+
+  introcircle5 : {
+    position: 'absolute',
+    left : 140 + 120,
+    bottom: 120 + 2,
+    width : 10,
+    height: 10,
+  },
+
+  introbuttonbg:{
+    position: 'absolute',
+    right : 65,
+    bottom: 75,
+    borderRadius: 20,
+  },
+
+  introbutton:{
+    position: 'absolute',
+    right : 65 +20,
+    bottom: 75 +10,
+    borderRadius: 20,
+  },
+
+  introbuttonfont:{
+    fontSize: 15,
+    color: 'white',
+  },
+
+  prologuefont : {
+    position: 'absolute',
+    left: 180,
+    top : 95,
+    fontSize: 15,
+    color: 'black',
+  },
+
+  prologueinfofont : {
+    position: 'absolute',
+    left: 135,
+    bottom : 155,
+    fontSize: 12,
+    color: 'black',
+  },
+
+
+
+
+
+
 
   petchoicebackground:{
     flex : 1,
@@ -740,54 +944,119 @@ const styles = StyleSheet.create({
     opacity : 0.6,
   },
 
-  egg1:{
+  petchoiceborder:{
     position: 'absolute',
-    width : 90,
-    height: 90,
-    left : 153,
-    top: 110,
+    width : 110,
+    height: 110,
+    left : 155,
+    top: 105-4,
+
+    backgroundColor : 'red',
+    borderRadius : 15,
   },
 
-  egg2:{
+  pet1button:{
     position: 'absolute',
-    width : 90,
-    height: 90,
+    width : 110,
+    height: 110,
+    left : 155,
+    top: 105,
+  },
+
+  pet1:{
+    position: 'absolute',
+    width : 110,
+    height: 110,
+    left : 155,
+    top: 105,
+  },
+
+  pet2:{
+    position: 'absolute',
+    width : 110,
+    height: 110,
+    left : 90+5,
+    top: 220,
+  },
+
+  pet3:{
+    position: 'absolute',
+    width : 110,
+    height: 110,
+    left : 220-5,
+    top: 220,
+  },
+
+  petinfobg : {
+    position: 'absolute',
+    width : 240,
+    height: 240,
     left : 90,
-    top: 235,
+    bottom: 90,
   },
 
-  egg3:{
+  choicebuttonbg:{
     position: 'absolute',
-    width : 90,
-    height: 90,
-    left : 220,
-    top: 235,
+    right : 90,
+    bottom: 100,
   },
 
   choicebutton:{
     position: 'absolute',
-    right : 115,
-    bottom: 110,
-    borderRadius: 20,
-    backgroundColor : 'gray',
+    right : 90+22,
+    bottom: 100+12,
   },
 
   petchoicebuttonfont:{
     fontSize: 10,
-    color: 'black',
+    color: 'white',
   },
-
-  petchoice:{
+  
+  petchoiceinfo:{
     position: 'absolute',
     width : 225,
     height: 225,
-    right : 100,
-    bottom: 100,
-    backgroundColor : '#A9A8B8',
-    fontSize: 20,
+    left : 95,
+    bottom: 100+20+20,
+    fontSize: 13,
     textAlign: 'center',
     lineHeight: 225,
     borderRadius: 20,
+  },
+
+  petchoiceinfo2:{
+    position: 'absolute',
+    width : 225,
+    height: 225,
+    left : 95,
+    bottom: 100+20,
+    fontSize: 13,
+    textAlign: 'center',
+    lineHeight: 225,
+    borderRadius: 20,
+  },
+
+  petchoiceinfo3:{
+    position: 'absolute',
+    width : 225,
+    height: 225,
+    left : 100,
+    bottom: 100 - 50,
+    fontSize: 13,
+    textAlign: 'center',
+    lineHeight: 225,
+    borderRadius: 20,
+  },
+
+
+
+
+
+
+  main:{
+    position: 'absolute',
+    width : WINDOW_W,
+    height : WINDOW_H,
   },
 
   mainbackground1:{
@@ -808,54 +1077,51 @@ const styles = StyleSheet.create({
     backgroundColor : '#A9A8B8',
   },
 
-  eggbackground:{
+  mainpetbg:{
     position: 'absolute',
-    width : 150,
-    height: 150,
-    top: 280,
+    width : 175,
+    height: 175,
+    top: 400+20,
+    left : 100+30,
   },
 
-  statebackground:{
+  mainsmile:{
     position: 'absolute',
     width : 60,
     height: 60,
-    left : 5,
-    top: 35,
-    borderRadius: 50,
-    backgroundColor : '#A9A8B8',
+    left : 25,
+    top: 30 -2,
+  },
+
+  stagebg:{
+    position: 'absolute',
+    width : 50,
+    height: 50,
+    left : 10,
+    top: 100,
   },
   
-  state:{
+  stage:{
     position: 'absolute',
-    width : 60,
-    height: 60,
-    left : 5,
-    top: 45,
+    left : 0+3,
+    top: 100+5,
   },
 
   statefont:{
-    fontSize: 15,
+    fontSize: 8,
     color: 'black',
+    fontWeight : 'bold',
   },
 
-  topmenu:{
-    position: 'absolute',
-    width : 330,
-    height: 70,
-    right : 10,
-    top: 30,
-    borderRadius: 20,
-    backgroundColor : '#A9A8B8',
-  },
 
   gamemoneybackground:{
     position: 'absolute',
     width : 290,
     height: 20,
     right : 30,
-    top: 40,
+    top: 30,
     borderRadius: 25,
-    backgroundColor : '#CFCFD7',
+    backgroundColor : 'white',
   },
 
   coinimage:{
@@ -863,7 +1129,7 @@ const styles = StyleSheet.create({
     width : 20,
     height: 20,
     left : 96,
-    top: 40,
+    top: 30,
   },
 
   coinnum:{
@@ -871,7 +1137,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 120,
-    top: 30,
+    top: 20,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -885,7 +1151,7 @@ const styles = StyleSheet.create({
     width : 20,
     height: 20,
     left : 236,
-    top: 40,
+    top: 30,
   },
 
   jamnum:{
@@ -893,7 +1159,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 260,
-    top: 30,
+    top: 20,
     textAlign: 'center',
     textAlignVertical: 'center',
    },
@@ -907,9 +1173,9 @@ const styles = StyleSheet.create({
     width : 290,
     height: 20,
     right : 30,
-    top: 70,
+    top: 60,
     borderRadius: 25,
-    backgroundColor : '#CFCFD7',
+    backgroundColor : 'white',
   },
 
   heartgaugeimage:{
@@ -917,7 +1183,7 @@ const styles = StyleSheet.create({
     width : 200,
     height: 20,
     right : 120,
-    top: 70,
+    top: 60,
     borderRadius: 25,
     backgroundColor : '#FF6969',
   },
@@ -927,7 +1193,7 @@ const styles = StyleSheet.create({
     width : 15,
     height: 15,
     left : 100,
-    top: 74,
+    top: 64,
   },
 
   heartgauge:{
@@ -935,7 +1201,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 190,
-    top: 60,
+    top: 50,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -969,24 +1235,18 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 
-  settingbackground:{
+  menubg:{
     position: 'absolute',
-    width : 60,
-    height: 60,
-    right : 20,
-    top: 180,
-    borderRadius: 50,
-    backgroundColor : '#A9A8B8',
+    width : 50,
+    height: 50,
+    right : 10,
+    top: 100,
   },
 
-  settingbutton:{
+  menubutton:{
     position: 'absolute',
-    width : 60,
-    height: 60,
-    right : 20,
-    top: 190,
-    textAlign: 'center',
-    lineHeight: 60,
+    right : 0,
+    top: 100,
   },
 
   settingbuttonfont:{
@@ -1004,37 +1264,26 @@ const styles = StyleSheet.create({
     backgroundColor : '#A9A8B8',
   },
 
-  funiturebutton:{
-    position: 'absolute',
-    width : 60,
-    height: 60,
-    right : 20,
-    top: 260,
-    textAlign: 'center',
-    lineHeight: 60,
-  },
 
-  funiturebuttonfont:{
-    fontSize: 15,
-    color: 'black',
-  },
+
 
   bottommenu:{
     position: 'absolute',
-    width : 370,
+    width : WINDOW_W,
     height: 100,
-    left : 20,
-    bottom: 40,
-    borderRadius: 20,
-    backgroundColor : '#CFCFD7',
+    left : 0,
+    bottom: 0,
+    borderTopLeftRadius : 20,
+    borderTopRightRadius : 20,
+    backgroundColor : 'lightgray',
   },
 
   eatbackground:{
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 30,
-    bottom: 50,
+    left : 20-5,
+    bottom: 10,
     borderRadius: 20,
     backgroundColor : '#A9A8B8',
   },
@@ -1042,20 +1291,17 @@ const styles = StyleSheet.create({
   eatgauge:{
     position: 'absolute',
     width : 80,
-    height: 35,
-    left : 30,
-    bottom: 50,
-    borderRadius: 20,
-    backgroundColor : 'gray',
-    opacity : 0.7,
+    height: 80,
+    left : 20-5,
+    bottom: 10,
   },
 
   eatbutton:{
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 30,
-    bottom: 30,
+    left : 20-5,
+    bottom: -10,
     textAlign: 'center',
     lineHeight: 80,
   },
@@ -1069,8 +1315,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 120,
-    bottom: 50,
+    left : 120-5,
+    bottom: 10,
     borderRadius: 20,
     backgroundColor : '#A9A8B8',
   },
@@ -1078,20 +1324,17 @@ const styles = StyleSheet.create({
   cleangauge:{
     position: 'absolute',
     width : 80,
-    height: 45,
-    left : 120,
-    bottom: 50,
-    borderRadius: 20,
-    backgroundColor : 'gray',
-    opacity : 0.7,
+    height: 80,
+    left : 120-5,
+    bottom: 10,
   },
 
   cleanbutton:{
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 120,
-    bottom: 30,
+    left : 120-5,
+    bottom: -10,
     textAlign: 'center',
     lineHeight: 80,
   },
@@ -1105,8 +1348,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 210,
-    bottom: 50,
+    left : 210+5,
+    bottom: 10,
     borderRadius: 20,
     backgroundColor : '#A9A8B8',
   },
@@ -1114,20 +1357,17 @@ const styles = StyleSheet.create({
   fungauge:{
     position: 'absolute',
     width : 80,
-    height: 65,
-    left : 210,
-    bottom: 50,
-    borderRadius: 20,
-    backgroundColor : 'gray',
-    opacity : 0.7,
+    height: 80,
+    left : 210+5,
+    bottom: 10,
   },
 
   funbutton:{
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 210,
-    bottom: 30,
+    left : 210+5,
+    bottom: -10,
     textAlign: 'center',
     lineHeight: 80,
   },
@@ -1141,29 +1381,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 300,
-    bottom: 50,
+    left : 310+5,
+    bottom: 10,
     borderRadius: 20,
-    backgroundColor : '#A9A8B8',
+    backgroundColor : 'gray',
   },
 
   sleepgauge:{
     position: 'absolute',
     width : 80,
-    height: 30,
-    left : 300,
-    bottom: 50,
-    borderRadius: 20,
-    backgroundColor : 'gray',
-    opacity : 0.7,
+    height: 80,
+    left : 310+5,
+    bottom: 10,
   },
 
   sleepbutton:{
     position: 'absolute',
     width : 80,
     height: 80,
-    left : 300,
-    bottom: 30,
+    left : 310+5,
+    bottom: -10,
     textAlign: 'center',
     lineHeight: 80,
   },
@@ -1371,15 +1608,87 @@ const styles = StyleSheet.create({
   },
 
 
+  eatmodal:{
+    position: 'absolute',
+    width : 300,
+    height : 500,
+    left : 55,
+    top : 50,
+    backgroundColor : 'white',
+  },
+
+  eattabname:{
+    top : 20,
+    textAlign:'center',
+    fontSize : 20,
+    borderTopLeftRadius : 15,
+    borderTopRightRadius : 15,
+  },
+
+  eatfruit :{
+    position: 'absolute',
+    width : 100,
+    height : 50,
+    left : 0,
+    top : -10,
+  },
+
+  eatfruitbutton :{
+    position: 'absolute',
+    width : 100,
+    height : 30,
+    left : 0,
+    top : -10,
+  },
+
+  eatmeat:{
+    position: 'absolute',
+    width : 100,
+    height : 50,
+    left : 100,
+    top : -10,
+  },
+
+  eatmeatbutton :{
+    position: 'absolute',
+    width : 100,
+    height : 30,
+    left : 100,
+    top : -10,
+  },
+
+  eatetc:{
+    position: 'absolute',
+    width : 100,
+    height : 50,
+    left : 200,
+    top : -10,
+  },
+
+  eatetcbutton :{
+    position: 'absolute',
+    width : 100,
+    height : 30,
+    left : 200,
+    top : -10,
+  },
 
 
+  eatapple:{
+    position: 'absolute',
+    top : 100,
+    left : 15,
+  },
 
+  eatwatermelon:{
+    position: 'absolute',
+    top : 100+120,
+    left : 15,
+  },
 
-
-
-
-
-
+  eattabbackbutton:{
+    backgroundColor: Colors.blue50,
+  },
 
 
 
@@ -1547,58 +1856,172 @@ const styles = StyleSheet.create({
   settinglist:{
     position: 'absolute',
     left : 30,
-    backgroundColor: Colors.grey500,
     width : 300,
-    height : 400,
+    height : 430,
+    backgroundColor: '#8E9AFF',
+    borderRadius : 30,
   },
 
-  settingquest:{
+  menu1:{
     position: 'absolute',
-    width : 250,
-    height : 60,
-    left : 25,
-    bottom : -40,
-    backgroundColor : '#CFCFD7',
-    justifyContent: 'center',
-    borderRadius: 10,
+    width : 130,
+    height : 30,
+    left : 20-5,
+    top : -100-5+20,
   },
 
-  settingshop :{
+  menu2:{
     position: 'absolute',
-    width : 250,
-    height : 60,
-    left : 25,
-    bottom : -120,
-    backgroundColor : '#CFCFD7',
-    justifyContent: 'center',
-    borderRadius: 10,
+    width : 130,
+    height : 30,
+    left : 150+5,
+    top : -100-5+20,
   },
 
-  settingcollection:{
+  menu1num:{
     position: 'absolute',
-    width : 250,
-    height : 60,
-    left : 25,
-    bottom : -200,
-    backgroundColor : '#CFCFD7',
-    justifyContent: 'center',
-    borderRadius: 10,
+    left : 75,
+    top : -95+20,
   },
 
-  settingminigame:{
+  menu2num:{
     position: 'absolute',
-    width : 250,
-    height : 60,
-    left : 25,
-    bottom : -280,
-    backgroundColor : '#CFCFD7',
-    justifyContent: 'center',
-    borderRadius: 10,
+    left : 215,
+    top : -95+20,
   },
 
-  settingfont:{
-    fontSize : 15,
+  menubg1 : {
+    position: 'absolute',
+    width : 300,
+    height : 400+30,
+    left : 0,
+    bottom : -335-1,
   },
+
+  menufont:{
+    position: 'absolute',
+    left : 132,
+    top : -50,
+    color : 'white',
+    fontSize : 20,
+  },
+
+  menuquest:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -50,
+  },
+
+  menuquestbutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -50-10,
+  },
+
+  menushop :{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -130,
+  },
+
+  menushopbutton :{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -130-10,
+  },
+
+  menufuniture:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -210,
+  },
+
+  menufuniturebutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -210-10,
+  },
+
+  menusetting:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -290,
+  },
+
+  menusettingbutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -290-10,
+  },
+
+  menuachieve:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -50,
+  },
+
+  menuachievebutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -50-10,
+  },
+
+  menustore :{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -130,
+  },
+
+  menustorebutton :{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -130-10,
+  },
+
+  menudictionary:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -210,
+  },
+
+  menudictionarybutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -210-10,
+  },
+
+
+
+
+
 
   todayquest:{
     width : 125,

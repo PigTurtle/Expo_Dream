@@ -3,6 +3,7 @@ import { Modal, View, TouchableHighlight, Dimensions} from 'react-native';
 import { Text, Button, } from 'react-native-paper';
 
 const WINDOW_H = Dimensions.get('window').height;
+const WINDOW_W = Dimensions.get('window').width;
 
 export class MyModal extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export class MyModal extends Component {
         <Button onPress = {()=> {this.setModalVisible(true)}} style={objectStyles.myopenButton}> <Text style={objectStyles.textStyle}>Show Modal</Text></Button>
   
       <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={this.state.modalVisible}
           >
@@ -66,7 +67,9 @@ const objectStyles = {
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5
+        elevation: 5,
+        width : WINDOW_W,
+        height : WINDOW_H - 50,
       },
       openButton: {
         backgroundColor: "#F194FF",
