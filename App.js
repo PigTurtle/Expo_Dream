@@ -226,15 +226,27 @@ function MainScreen({navigation}) {
   const seteattabmeat = () => seteattabname("육류");
   const seteattabetc = () => seteattabname("그외");
 
+  const [cleantabname, setcleantabname] = useState("솔");
+  const setcleantabbrush = () => setcleantabname("솔");
+  const setcleantabdetergent = () => setcleantabname("세정제");
+  const setcleantabtub = () => setcleantabname("욕조");
+
+  const [dictionaryinfo, setdictionaryinfo] = useState(false);
+  const setdictionaryinfofalse = () => setdictionaryinfo(false);
+  const setdictionaryinfotrue = () => setdictionaryinfo(true);
+
   const [achievevisible, setachieveVisible] = useState(false);
   const showachieveDialog = () => setachieveVisible(true);
   const hideachieveDialog = () => setachieveVisible(false);
   const [settingvisible, setsettingVisible] = useState(false);
   const showsettingDialog = () => setsettingVisible(true);
   const hidesettingDialog = () => setsettingVisible(false);
-  const [funiturevisible, setfunitureVisible] = useState(false);
-  const showfunitureDialog = () => setfunitureVisible(true);
-  const hidefunitureDialog = () => setfunitureVisible(false);
+  const [furniturevisible, setfurnitureVisible] = useState(false);
+  const showfurnitureDialog = () => setfurnitureVisible(true);
+  const hidefurnitureDialog = () => setfurnitureVisible(false);
+  const [dictionaryvisible, setdictionaryVisible] = useState(false);
+  const showdictionaryDialog = () => setdictionaryVisible(true);
+  const hidedictionaryDialog = () => setdictionaryVisible(false);
   const [eatvisible, seteatVisible] = useState(false);
   const showeatDialog = () => seteatVisible(true);
   const hideeatDialog = () => seteatVisible(false);
@@ -248,16 +260,15 @@ function MainScreen({navigation}) {
   const showsleepDialog = () => setsleepVisible(true);
   const hidesleepDialog = () => setsleepVisible(false);
 
-  const [funiturecheckvisible, setfuniturecheckVisible] = useState(false);
-  const showfuniturecheckDialog = () => setfuniturecheckVisible(true);
-  const showfuniture = () => {
-    setfunitureVisible(false);
-    setfuniturecheckVisible(false);
+  const [furniturecheckvisible, setfurniturecheckVisible] = useState(false);
+  const showfurniturecheckDialog = () => setfurniturecheckVisible(true);
+  const showfurniture = () => {
+    setfurnitureVisible(false);
+    setfurniturecheckVisible(false);
     setlightVisible(true);
   }
-  const hidefuniturecheckDialog = () => {
-    setfunitureVisible(false);
-    setfuniturecheckVisible(false);
+  const hidefurniturecheckDialog = () => {
+    setfurniturecheckVisible(false);
   }
 
   const [foodvisible, setfoodVisible] = useState(false);
@@ -345,6 +356,14 @@ function MainScreen({navigation}) {
   const [menu, setmenunum] = useState(true);
   const setmenu1 = () => setmenunum(true);
   const setmenu2 = () => setmenunum(false);
+
+  const [quest, setquest] = useState("daily");
+  const setquestdaily = () => setquest("daily");
+  const setquestattend = () => setquest("attend");
+
+  const [furniture, setfurniture] = useState("wall");
+  const setfurniturewall = () => setfurniture("wall");
+  const setfurniturefloor = () => setfurniture("floor");
   
   return(
     <View style={styles.container}>
@@ -372,8 +391,11 @@ function MainScreen({navigation}) {
     <MovingSquare />  
     <MyModal />  */}
 
-    <Image source={require('./assets/images/main/menu.png')} style={styles.menubg} resizeMode ="stretch"/>
-    <Button color={Colors.black} onPress={showsettingDialog} style={styles.menubutton}></Button>
+    <TouchableOpacity
+                style={styles.menubg}
+                onPress={showsettingDialog}>
+          <Image source={require('./assets/images/main/menu.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
 
     
   <Button disabled onPress={() => {}} style={styles.bottommenu}><Text></Text></Button>
@@ -398,11 +420,12 @@ function MainScreen({navigation}) {
   <Dialog.Title style={styles.textcenter}>메뉴</Dialog.Title>
   <Dialog.Content>
 
-    
-  {(menu == true) ?
+  <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> 
+  {menu == false && <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>}    
+  {/* {(menu == true) ?
         <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> :
         <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>
-  }
+  } */}
   <Text style={styles.menufont}>메뉴</Text>
 
   <Image style={styles.menu1} source={require('./assets/images/menu/menu1.png')} resizeMode ="stretch"/>
@@ -411,7 +434,7 @@ function MainScreen({navigation}) {
         <Image style={styles.menu1num} source={require('./assets/images/menu/1.png')} resizeMode ="stretch"/>
   }
 
-{(menu == true) ?
+  {(menu == true) ?
      <Button disabled color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button> :
      <Button color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button>
   }
@@ -426,18 +449,40 @@ function MainScreen({navigation}) {
       <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button> :
       <Button disabled color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
   }
+     
+
+  {(menu == true) ?
+      <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/> :
+      <Image style={styles.menuquest} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/>
+  }   
+
+  {(menu == true) ?
+     <Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button> :
+     <Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
+  }  
+
+  {(menu == true) ?
+      <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/> :
+      <Image style={styles.menushop} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>
+  }   
+
+  {(menu == true) ?
+     <Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button> :
+     <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
+  }  
+
+  {(menu == true) ?
+      <Image style={styles.menufurniture} source={require('./assets/images/menu/furnitureposition.png')} resizeMode ="stretch"/> :
+      <Image style={styles.menufurniture} source={require('./assets/images/menu/dictionary.png')} resizeMode ="stretch"/>
+  }   
+
+  {(menu == true) ?
+     <Button color={Colors.black} onPress={showfurnitureDialog} style={styles.menufurniturebutton}><Text></Text></Button> :
+     <Button color={Colors.black} onPress={showdictionaryDialog} style={styles.menufurniturebutton}><Text></Text></Button>
+  }  
     
-  <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/>
-  <Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button>
-
-  <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
-  <Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button>
-
-  <Image style={styles.menufuniture} source={require('./assets/images/menu/funitureposition.png')} resizeMode ="stretch"/>
-  <Button color={Colors.black} onPress={showfunitureDialog} style={styles.menufuniturebutton}><Text></Text></Button>
-
-  <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
-  <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>
+  {menu == true && <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>}
+  {menu == true && <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>}
 
 
 {/* 
@@ -453,7 +498,7 @@ function MainScreen({navigation}) {
   </Dialog.Content>
 </Dialog>
 
-<Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.acheivelist}>
+{/* <Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.acheivelist}>
   <Dialog.Title style={styles.textcenter}>업적</Dialog.Title>
   <Dialog.Content>
     <Paragraph style={styles.achieveinfo}><Text style={styles.achievefont}>업적 내용</Text></Paragraph>
@@ -463,9 +508,54 @@ function MainScreen({navigation}) {
   <Button disabled color={Colors.black} onPress={hideachieveDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hideachieveDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
+</Dialog> */}
+
+<Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.achieve}>
+  <Dialog.Content>
+
+  <Image style={styles.achievebg} source={require('./assets/images/achieve/achievebg.png')} resizeMode ="stretch"/>
+
+  <Text style={styles.achievetitle}>ACHIEVEMENT</Text>
+
+  <Image style={styles.achieveslot1bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot1image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
+  {/* <Image style={styles.achieveslot1check} source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/> */}
+  <Text style={styles.slot1title}>집사로 간택되었습니...다?</Text>
+  <Text style={styles.slot1info}>알을 선택하세요.</Text>
+
+  <Image style={styles.achieveslot2bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot2image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot2check} source={require('./assets/images/achieve/defaultimage.png')} resizeMode ="stretch"/>
+  <Text style={styles.slot2title}>초보 집사의 한걸음</Text>
+  <Text style={styles.slot2info}>알을 부화시키세요.</Text>
+
+  <Image style={styles.achieveslot3bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot3image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot3check} source={require('./assets/images/achieve/defaultimage.png')} resizeMode ="stretch"/>
+  <Text style={styles.slot3title}>사회적 거리두기</Text>
+  <Text style={styles.slot3info}>청결도를 1회 올리세요.</Text>
+
+  <Image style={styles.achieveslot4bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot4image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot4check} source={require('./assets/images/achieve/defaultimage.png')} resizeMode ="stretch"/>
+
+  <Image style={styles.achieveslot5bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot5image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot5check} source={require('./assets/images/achieve/defaultimage.png')} resizeMode ="stretch"/>
+
+  <Image style={styles.achievebarbg} source={require('./assets/images/achieve/achievebarbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achievebar} source={require('./assets/images/achieve/achievebar.png')} resizeMode ="stretch"/>
+
+  <TouchableOpacity
+                style={styles.achieveslot1check}
+                onPress={hideachieveDialog}>
+          <Image source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+
+  </Dialog.Content>
 </Dialog>
 
-<Dialog visible={questvisible} onDismiss={hidequestDialog} style={styles.acheivelist}>
+{/* <Dialog visible={questvisible} onDismiss={hidequestDialog} style={styles.acheivelist}>
   <Dialog.Title style={styles.todayquest}>일일 도전</Dialog.Title>
   <Dialog.Content>
     <Button color={Colors.black} onPress={showquestrewardDialog} style={styles.questinfo}><Text style={styles.questfont}>일일 퀘스트</Text></Button>
@@ -475,7 +565,64 @@ function MainScreen({navigation}) {
   <Button disabled color={Colors.black} onPress={hidequestDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hidequestDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
+</Dialog> */}
+
+
+
+
+<Dialog visible={questvisible} onDismiss={hidequestDialog} style={styles.quest}>
+  <Dialog.Title style={styles.textcenter}>퀘스트</Dialog.Title>
+  <Dialog.Content>
+
+  <TouchableOpacity
+                style={styles.questmenu1}
+                onPress={setquestdaily}>
+          <Image source={require('./assets/images/quest/tab1.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+  <Text style={styles.dailyreward}>일일 도전</Text>
+
+  <TouchableOpacity
+                style={styles.questmenu2}
+                onPress={setquestattend}>
+  <Image source={require('./assets/images/quest/tab2.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+  <Text style={styles.attendancereward}>출석 보상</Text>
+
+  {(quest == "daily") ?
+      <Text style={{...styles.questtitlefont, backgroundColor: "#959FFF"}}>일일 도전</Text> :
+      <Text style={{...styles.questtitlefont, backgroundColor: "#3C3C94"}}>출석 보상</Text>
+  }
+
+{quest == "daily" && <Image style={styles.dailyslot1} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.checkslot1} source={require('./assets/images/quest/checkbutton1.png')} resizeMode ="stretch"/>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot1}>아무 펫의 청결도를 2회 올리세요.</Text>}
+
+{quest == "daily" && <Image style={styles.dailyslot2} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.checkslot2} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot2}></Text>}
+
+{quest == "daily" && <Image style={styles.dailyslot3} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.checkslot3} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot3}></Text>}
+
+{quest == "daily" && <Image style={styles.dailyslot4} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.checkslot4} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot4}></Text>}
+
+{quest != "daily" && <Image style={styles.attendbg} source={require('./assets/images/quest/attendbg.png')} resizeMode ="stretch"/>}
+
+{quest != "daily" && <Image style={styles.attendslot1} source={require('./assets/images/quest/checkbutton1.png')} resizeMode ="stretch"/>}
+{quest != "daily" && <Image style={styles.attendslot2} source={require('./assets/images/quest/checkbutton2.png')} resizeMode ="stretch"/>}
+{quest != "daily" && <Image style={styles.attendslot3} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+{quest != "daily" && <Image style={styles.attendslot4} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+{quest != "daily" && <Image style={styles.attendslot5} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+
+  </Dialog.Content>
 </Dialog>
+
+
+
+
 
 <Dialog visible={questrewardvisible} onDismiss={hidequestrewardDialog} style={styles.questreward}>
   <Dialog.Title style={styles.textcenter}>퀘스트 보상</Dialog.Title>
@@ -552,28 +699,105 @@ function MainScreen({navigation}) {
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={funiturevisible} onDismiss={hidefunitureDialog} style={styles.foodlist}>
+{/* <Dialog visible={furniturevisible} onDismiss={hidefurnitureDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>가구 목록</Dialog.Title>
   <Dialog.Content>
   <Button disabled onPress={() => {}} style={styles.foodbackground}><Text></Text></Button>
-  <Button color={Colors.black} onPress={showfuniturecheckDialog} style={styles.foodbutton}><Text style={styles.foodfont}>가구 이미지</Text></Button>
+  <Button color={Colors.black} onPress={showfurniturecheckDialog} style={styles.foodbutton}><Text style={styles.foodfont}>가구 이미지</Text></Button>
     <Paragraph style={styles.foodname}><Text style={styles.foodfont}>가구 이름</Text></Paragraph>
   </Dialog.Content>
   <Dialog.Actions>
-  <Button disabled color={Colors.black} onPress={hidefunitureDialog} style={styles.xbuttonbackground}></Button>
-    <Button color={Colors.black} onPress={hidefunitureDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
+  <Button disabled color={Colors.black} onPress={hidefurnitureDialog} style={styles.xbuttonbackground}></Button>
+    <Button color={Colors.black} onPress={hidefurnitureDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
+  </Dialog.Actions>
+</Dialog> */}
+
+<Dialog visible={furniturevisible} onDismiss={hidefurnitureDialog} style={styles.quest}>
+  <Dialog.Title style={styles.textcenter}>가구 목록</Dialog.Title>
+  <Dialog.Content>
+
+  <TouchableOpacity
+                style={styles.questmenu1}
+                onPress={setfurniturewall}>
+          <Image source={require('./assets/images/furnitureposition/tab1.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+  <Text style={styles.dailyreward}>벽 가구</Text>
+
+  <TouchableOpacity
+                style={styles.questmenu2}
+                onPress={setfurniturefloor}>
+  <Image source={require('./assets/images/furnitureposition/tab2.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+  <Text style={styles.attendancereward}>바닥 가구</Text>
+
+  {(furniture == "wall") ?
+      <Text style={{...styles.furnituretitlefont, backgroundColor: "#F6C473"}}>벽 가구</Text> :
+      <Text style={{...styles.furnituretitlefont, backgroundColor: "#50497F"}}>바닥 가구</Text>
+  }
+
+{furniture == "wall" &&   <TouchableOpacity
+                style={styles.dailyslot1}
+                onPress={showfurniturecheckDialog}>
+          <Image source={require('./assets/images/furnitureposition/slot1.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>}
+
+{furniture == "wall" &&   <TouchableOpacity
+                style={styles.furniturexbutton}
+                onPress={hidefurnitureDialog}>
+          <Image source={require('./assets/images/furnitureposition/xbutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>}
+
+
+  </Dialog.Content>
+</Dialog>
+
+<Dialog visible={furniturecheckvisible} onDismiss={hidefurniturecheckDialog} style={styles.furniturecheck}>
+  <Dialog.Content>
+  <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'벽걸이 식물'</Text></Paragraph>
+    <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>이 가구를 배치하시겠습니까?</Text></Paragraph>
+  </Dialog.Content>
+  <Dialog.Actions>
+    <Button color={Colors.black} onPress={showfurniture} style={styles.furnitureyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
+    <Button color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={funiturecheckvisible} onDismiss={hidefuniturecheckDialog} style={styles.funiturecheck}>
-  <Dialog.Title style={styles.textcenter}>'가구 이름'</Dialog.Title>
+
+
+<Dialog visible={dictionaryvisible} onDismiss={hidedictionaryDialog} style={styles.dictionary}>
   <Dialog.Content>
-    <Paragraph style={styles.textcenter}><Text style={styles.yesbuttonfont}>이 가구를 배치하시겠습니까?</Text></Paragraph>
+
+  <Image style={styles.achievebg} source={require('./assets/images/dictionary/dictionarybg.png')} resizeMode ="stretch"/>
+  <Text style={styles.dictionarytitlefont}>도감</Text>
+
+  <Image style={styles.dicpage1} source={require('./assets/images/dictionary/page1.png')} resizeMode ="stretch"/>
+  <Image style={styles.dicpage2} source={require('./assets/images/dictionary/page2.png')} resizeMode ="stretch"/>
+
+  <TouchableOpacity
+                style={styles.dicslot1}
+                onPress={setdictionaryinfotrue}>
+          <Image source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+                style={styles.dicslot2}
+                onPress={hidedictionaryDialog}>
+          <Image source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+  
+  <Image style={styles.dicslot3} source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>
+  <Image style={styles.dicslot4} source={require('./assets/images/dictionary/dic4.png')} resizeMode ="stretch"/>
+
+  <Image style={styles.dicslot5} source={require('./assets/images/dictionary/dic5.png')} resizeMode ="stretch"/>
+
+  <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/>
+
+  {dictionaryinfo && <Text style={styles.dicinfobg}></Text>}
+  {dictionaryinfo && <TouchableOpacity style={styles.dicinfopet1} onPress={setdictionaryinfofalse}>
+          <Image source={require('./assets/images/dictionary/pet1info.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>}
+
   </Dialog.Content>
-  <Dialog.Actions>
-    <Button color={Colors.black} onPress={showfuniture} style={styles.yesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
-    <Button color={Colors.black} onPress={hidefuniturecheckDialog} style={styles.nobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
-  </Dialog.Actions>
 </Dialog>
 
     {/* <Dialog visible={eatvisible} onDismiss={hideeatDialog} style={styles.foodlist}>
@@ -606,16 +830,42 @@ function MainScreen({navigation}) {
         {eattabname == "육류" && <Text style={{ ...styles.eattabname, backgroundColor: "#CA7222"}}>{eattabname}</Text>}
         {eattabname == "그외" && <Text style={{ ...styles.eattabname, backgroundColor: "#6C1C1C"}}>{eattabname}</Text>}
 
+        {(eattabname == "과일") ?
+        <Button disabled onPress={seteattabfruit} style={styles.eatfruitbutton}><Text style={styles.white}>과일</Text></Button> :
+        <Button color={Colors.black} onPress={seteattabfruit} style={styles.eatfruitbutton}><Text>과일</Text></Button>
+        }
 
-        <Button onPress={seteattabfruit} style={styles.eatfruitbutton}><Text>과일</Text></Button>
-        <Button onPress={seteattabmeat} style={styles.eatmeatbutton}><Text>육류</Text></Button>
-        <Button onPress={seteattabetc} style={styles.eatetcbutton}><Text>그외</Text></Button>
+        {(eattabname == "육류") ?
+        <Button disabled onPress={seteattabmeat} style={styles.eatmeatbutton}><Text style={styles.white}>육류</Text></Button> :
+        <Button color={Colors.black} onPress={seteattabmeat} style={styles.eatmeatbutton}><Text>육류</Text></Button>
+        }
 
-        <Image style={styles.eatapple} source={require('./assets/images/eat/apple.png')} resizeMode ="stretch"/>
-        <Image style={styles.eatwatermelon} source={require('./assets/images/eat/watermelon.png')} resizeMode ="stretch"/>
+        {(eattabname == "그외") ?
+        <Button disabled onPress={seteattabetc} style={styles.eatetcbutton}><Text style={styles.white}>그외</Text></Button>:
+        <Button color={Colors.black} onPress={seteattabetc} style={styles.eatetcbutton}><Text>그외</Text></Button>
+        }
 
+        {eattabname == "과일" && <Image style={styles.eatslot1} source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>}
+        {eattabname == "과일" && <Image style={styles.eatslot2} source={require('./assets/images/eat/watermelonslot.png')} resizeMode ="stretch"/>}
+        {eattabname == "과일" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+        {eattabname == "과일" && <Image style={styles.eatslot4} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
 
-        <Text></Text>
+        {eattabname == "육류" && <Image style={styles.eatslot1} source={require('./assets/images/eat/beef.png')} resizeMode ="stretch"/>}
+        {eattabname == "육류" && <Image style={styles.eatslot2} source={require('./assets/images/eat/chicken.png')} resizeMode ="stretch"/>}
+        {eattabname == "육류" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+        {eattabname == "육류" && <Image style={styles.eatslot4} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+
+        {eattabname == "그외" && <Image style={styles.eatslot1} source={require('./assets/images/eat/coldpill.png')} resizeMode ="stretch"/>}
+        {eattabname == "그외" && <Image style={styles.eatslot2} source={require('./assets/images/eat/headachepill.png')} resizeMode ="stretch"/>}
+        {eattabname == "그외" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+        {eattabname == "그외" && <Image style={styles.eatslot4} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+
+        {/* <TouchableOpacity
+                style={styles.eatslot1button}
+                onPress={hideeatDialog}>
+          <Image source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> */}
+
         <Text></Text>
         <TouchableHighlight
                 style={styles.eattabbackbutton}
@@ -623,11 +873,15 @@ function MainScreen({navigation}) {
           <Text style={styles.textcenter}>X</Text>
         </TouchableHighlight> 
 
+        {/* <View style={styles.eatslot1button}>
+        <Button color={Colors.black} onPress={hideeatDialog} style={styles.eatslot1button}></Button> 
+        </View> */}
+
      </View>
   </View>
 </Modal>
 
-<Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
+{/* <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
   <Dialog.Content>
   <Button disabled onPress={() => {}} style={styles.foodbackground}><Text></Text></Button>
@@ -638,7 +892,65 @@ function MainScreen({navigation}) {
   <Button disabled color={Colors.black} onPress={hidecleanDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hidecleanDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
-</Dialog>
+</Dialog> */}
+
+<Modal
+          animationType="fade"
+          transparent={true}
+          visible={cleanvisible}
+          contentContainerStyle={{backgroundColor : 'white', padding : 20}}
+          >
+  <View style={styles.eatmodal}>
+     <View style={styles.textcenter}>
+
+        <Image style={styles.eatfruit} source={require('./assets/images/clean/brush.png')} resizeMode ="stretch"/>
+        <Image style={styles.eatmeat} source={require('./assets/images/clean/detergent.png')} resizeMode ="stretch"/>
+        <Image style={styles.eatetc} source={require('./assets/images/clean/tub.png')} resizeMode ="stretch"/>
+
+        {cleantabname == "솔" && <Text style={{ ...styles.eattabname, backgroundColor: "#AAFFF0"}}>{cleantabname}</Text>}
+        {cleantabname == "세정제" && <Text style={{ ...styles.eattabname, backgroundColor: "#3DACEA"}}>{cleantabname}</Text>}
+        {cleantabname == "욕조" && <Text style={{ ...styles.eattabname, backgroundColor: "#25308E"}}>{cleantabname}</Text>}
+
+        {(cleantabname == "솔") ?
+        <Button disabled onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text style={styles.white}>솔</Text></Button> :
+        <Button color={Colors.black} onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text>솔</Text></Button>
+        }
+
+        {(cleantabname == "세정제") ?
+        <Button disabled onPress={setcleantabdetergent} style={styles.eatmeatbutton}><Text style={styles.white}>세정제</Text></Button> :
+        <Button color={Colors.black} onPress={setcleantabdetergent} style={styles.eatmeatbutton}><Text>세정제</Text></Button>
+        }
+
+        {(cleantabname == "욕조") ?
+        <Button disabled onPress={setcleantabtub} style={styles.eatetcbutton}><Text style={styles.white}>욕조</Text></Button>:
+        <Button color={Colors.black} onPress={setcleantabtub} style={styles.eatetcbutton}><Text>욕조</Text></Button>
+        }
+
+        {cleantabname == "솔" && <Image style={styles.eatslot1} source={require('./assets/images/clean/brushslot1.png')} resizeMode ="stretch"/>}
+        {cleantabname == "솔" && <Image style={styles.eatslot2} source={require('./assets/images/clean/brushslot2.png')} resizeMode ="stretch"/>}
+        {cleantabname == "솔" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "솔" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+
+        {cleantabname == "세정제" && <Image style={styles.eatslot1} source={require('./assets/images/clean/detergentslot1.png')} resizeMode ="stretch"/>}
+        {cleantabname == "세정제" && <Image style={styles.eatslot2} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "세정제" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "세정제" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+
+        {cleantabname == "욕조" && <Image style={styles.eatslot1} source={require('./assets/images/clean/tubslot1.png')} resizeMode ="stretch"/>}
+        {cleantabname == "욕조" && <Image style={styles.eatslot2} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "욕조" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "욕조" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+
+        <Text></Text>
+        <TouchableHighlight
+                style={styles.eattabbackbutton}
+                onPress={hidecleanDialog}>
+          <Text style={styles.textcenter}>X</Text>
+        </TouchableHighlight> 
+
+     </View>
+  </View>
+</Modal>
 
 <Dialog visible={funvisible} onDismiss={hidefunDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>미니게임 이름</Dialog.Title>
@@ -1245,8 +1557,11 @@ const styles = StyleSheet.create({
 
   menubutton:{
     position: 'absolute',
+    width : 20,
+    height: 20,
     right : 0,
     top: 100,
+    borderRadius : 100,
   },
 
   settingbuttonfont:{
@@ -1254,7 +1569,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 
-  funiturebackground:{
+  furniturebackground:{
     position: 'absolute',
     width : 60,
     height: 60,
@@ -1620,9 +1935,10 @@ const styles = StyleSheet.create({
   eattabname:{
     top : 20,
     textAlign:'center',
-    fontSize : 20,
-    borderTopLeftRadius : 15,
-    borderTopRightRadius : 15,
+    fontSize : 15,
+    borderTopLeftRadius : 10,
+    borderTopRightRadius : 10,
+    padding : 10,
   },
 
   eatfruit :{
@@ -1674,15 +1990,36 @@ const styles = StyleSheet.create({
   },
 
 
-  eatapple:{
+  eatslot1:{
     position: 'absolute',
     top : 100,
     left : 15,
   },
 
-  eatwatermelon:{
+  eatslot1button:{
     position: 'absolute',
-    top : 100+120,
+    top: 20,
+    left: 15,
+    height: 85,
+    width: 260,
+    zIndex: 1,
+  },
+
+  eatslot2:{
+    position: 'absolute',
+    top : 100+100,
+    left : 15,
+  },
+
+  eatslot3:{
+    position: 'absolute',
+    top : 100+100+100,
+    left : 15,
+  },
+
+  eatslot4:{
+    position: 'absolute',
+    top : 100+100+100+100,
     left : 15,
   },
 
@@ -1690,17 +2027,20 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blue50,
   },
 
+  white : {
+    color : 'white',
+  },
 
 
 
 
 
-  funiturecheck:{
-    backgroundColor: Colors.grey500,
+  furniturecheck:{
+    backgroundColor: '#50497F',
     position: 'absolute',
-    left : 20,
+    left : 30,
     width : 300,
-    height : 170,
+    height : 150,
   },
 
   itemname:{
@@ -1796,6 +2136,31 @@ const styles = StyleSheet.create({
     fontSize : 15,
   },
 
+  furniturecheckfont:{
+    fontSize : 15,
+    color : 'white',
+  },
+
+  furnitureyesbutton:{
+    position: 'absolute',
+    width : 120,
+    left : 20,
+    bottom : -20,
+    backgroundColor : '#F6C473',
+    textAlign:'center',
+    borderRadius: 10,
+  },
+
+  furniturenobutton:{
+    position: 'absolute',
+    width : 120,
+    right : 20,
+    bottom : -20,
+    backgroundColor : '#F1ECF5',
+    textAlign:'center',
+    borderRadius: 10,
+  },
+
   nobutton:{
     position: 'absolute',
     width : 120,
@@ -1862,19 +2227,233 @@ const styles = StyleSheet.create({
     borderRadius : 30,
   },
 
+  quest : {
+    position: 'absolute',
+    left : 30,
+    width : 300,
+    height : 430+120,
+    backgroundColor: 'white',
+    borderRadius : 30,
+  },
+
+  achieve: {
+    left : -30,
+    width : WINDOW_W+20,
+    height : WINDOW_H+20,
+    backgroundColor: 'white',
+  },
+
+  achievebg : {
+    left : -20,
+    top : -15,
+    width : WINDOW_W,
+    height : WINDOW_H,
+  },
+
+  achievetitle :{
+    position: 'absolute',
+    left : 110,
+    top : 50,
+    fontSize : 30,
+    color : 'white',
+  },
+
+  achieveslot1bg:{
+    position: 'absolute',
+    width : 310,
+    height : 75,
+    left : 50,
+    top : 150,
+  },
+
+  achieveslot2bg:{
+    position: 'absolute',
+    width : 310,
+    height : 75,
+    left : 50,
+    top : 150+100,
+  },
+
+  achieveslot3bg:{
+    position: 'absolute',
+    width : 310,
+    height : 75,
+    left : 50,
+    top : 150+100+100,
+  },
+
+  achieveslot4bg:{
+    position: 'absolute',
+    width : 310,
+    height : 75,
+    left : 50,
+    top : 150+100+100+100,
+  },
+
+  achieveslot5bg:{
+    position: 'absolute',
+    width : 310,
+    height : 75,
+    left : 50,
+    top : 150+100+100+100+100,
+  },
+
+  achieveslot1image:{
+    position: 'absolute',
+    width : 50,
+    height : 50,
+    left : 60,
+    top : 162,
+  },
+
+  achieveslot2image:{
+    position: 'absolute',
+    width : 50,
+    height : 50,
+    left : 60,
+    top : 162+100,
+  },
+
+  achieveslot3image:{
+    position: 'absolute',
+    width : 50,
+    height : 50,
+    left : 60,
+    top : 162+100+100,
+  },
+
+  achieveslot4image:{
+    position: 'absolute',
+    width : 50,
+    height : 50,
+    left : 60,
+    top : 162+100+100+100,
+  },
+
+  achieveslot5image:{
+    position: 'absolute',
+    width : 50,
+    height : 50,
+    left : 60,
+    top : 162+100+100+100+100,
+  },
+
+  achieveslot1check:{
+    position: 'absolute',
+    left : 300,
+    top : 165,
+  },
+
+  achieveslot2check:{
+    position: 'absolute',
+    left : 300,
+    top : 165+100,
+  },
+
+  achieveslot3check:{
+    position: 'absolute',
+    left : 300,
+    top : 165+100+100,
+  },
+
+  achieveslot4check:{
+    position: 'absolute',
+    left : 300,
+    top : 165+100+100+100,
+  },
+
+  achieveslot5check:{
+    position: 'absolute',
+    left : 300,
+    top : 165+100+100+100+100,
+  },
+
+  achievebarbg:{
+    position: 'absolute',
+    left : 380,
+    top : 145,
+  },
+
+  achievebar:{
+    position: 'absolute',
+    left : 380+1,
+    top : 145+2,
+  },
+
+  slot1title :{
+    position: 'absolute',
+    left : 125,
+    top : 165,
+    fontSize : 15,
+  },
+
+  slot2title :{
+    position: 'absolute',
+    left : 125,
+    top : 165+100,
+    fontSize : 15,
+  },
+
+  slot3title :{
+    position: 'absolute',
+    left : 125,
+    top : 165+100+100,
+    fontSize : 15,
+  },
+
+  slot1info :{
+    position: 'absolute',
+    left : 125,
+    top : 195,
+    fontSize : 13,
+    color : 'gray',
+  },
+
+  slot2info :{
+    position: 'absolute',
+    left : 125,
+    top : 195+100,
+    fontSize : 13,
+    color : 'gray',
+  },
+
+  slot3info :{
+    position: 'absolute',
+    left : 125,
+    top : 195+100+100,
+    fontSize : 13,
+    color : 'gray',
+  },
+
   menu1:{
     position: 'absolute',
-    width : 130,
+    width : 130+10,
     height : 30,
-    left : 20-5,
+    left : 20-10,
     top : -100-5+20,
+  },
+
+  questmenu1:{
+    position: 'absolute',
+    width : 130+10,
+    height : 30,
+    left : 0,
+    top : -80,
+  },
+
+  questmenu2:{
+    position: 'absolute',
+    width : 130+10,
+    height : 30,
+    right : 10,
+    top : -80,
   },
 
   menu2:{
     position: 'absolute',
-    width : 130,
+    width : 130+10,
     height : 30,
-    left : 150+5,
+    left : 150,
     top : -100-5+20,
   },
 
@@ -1904,6 +2483,170 @@ const styles = StyleSheet.create({
     top : -50,
     color : 'white',
     fontSize : 20,
+    paddingTop : 10,
+  },
+
+  questtitlefont:{
+    width : 300,
+    height : 60,
+    left : -24,
+    top : -40,
+    fontSize : 20,
+    justifyContent : 'center',
+    textAlign:'center',
+    textAlignVertical : 'center',
+    borderTopLeftRadius : 5,
+    borderTopRightRadius : 5,
+  },
+
+  furnituretitlefont:{
+    width : 300,
+    height : 60,
+    left : -24,
+    top : -40,
+    fontSize : 20,
+    justifyContent : 'center',
+    textAlign:'center',
+    textAlignVertical : 'center',
+    borderTopLeftRadius : 5,
+    borderTopRightRadius : 5,
+    color : 'white',
+  },
+
+  furniturexbutton:{
+    position: 'absolute',
+    left : 265,
+    top : -30,
+  },
+
+  attendbg:{
+    position: 'absolute',
+    width : 250,
+    height : 400,
+    left : 25,
+    top : 50,
+  },
+
+  dailyslot1:{
+    position: 'absolute',
+    left : 20,
+    top : 50,
+  },
+
+  dailyslot2:{
+    position: 'absolute',
+    left : 20,
+    top : 50+100,
+  },
+
+  dailyslot3:{
+    position: 'absolute',
+    left : 20,
+    top : 50+100+100,
+  },
+
+  dailyslot4:{
+    position: 'absolute',
+    left : 20,
+    top : 50+100+100+100,
+  },
+
+  checkslot1:{
+    position: 'absolute',
+    left : 30,
+    top : 60,
+  },
+
+  checkslot2:{
+    position: 'absolute',
+    left : 30,
+    top : 60+100,
+  },
+
+  checkslot3:{
+    position: 'absolute',
+    left : 30,
+    top : 60+100+100,
+  },
+
+  checkslot4:{
+    position: 'absolute',
+    left : 30,
+    top : 60+100+100+100,
+  },
+
+  dailyinfoslot1:{
+    position: 'absolute',
+    left : 90,
+    top : 75,
+    fontSize : 12,
+  },
+
+  dailyinfoslot2:{
+    position: 'absolute',
+    left : 90,
+    top : 75+100,
+    fontSize : 12,
+  },
+
+  dailyinfoslot3:{
+    position: 'absolute',
+    left : 90,
+    top : 75+100+100,
+    fontSize : 12,
+  },
+
+  dailyinfoslot4:{
+    position: 'absolute',
+    left : 90,
+    top : 75+100+100+100,
+    fontSize : 12,
+  },
+
+  attendslot1:{
+    position: 'absolute',
+    left : 35,
+    top : 60,
+  },
+
+  attendslot2:{
+    position: 'absolute',
+    left : 35+60,
+    top : 60,
+  },
+
+  attendslot3:{
+    position: 'absolute',
+    left : 35+60+60,
+    top : 60,
+  },
+
+  attendslot4:{
+    position: 'absolute',
+    left : 35+60+60+60,
+    top : 60,
+  },
+
+  attendslot5:{
+    position: 'absolute',
+    left : 35,
+    top : 60+60,
+  },
+
+  dailyreward:{
+    position: 'absolute',
+    left : 40,
+    top : -70,
+    fontSize : 20,
+    color : 'white',
+  },
+
+  attendancereward:{
+    position: 'absolute',
+    left : 40+140,
+    top : -70,
+    fontSize : 20,
+    color : 'white',
   },
 
   menuquest:{
@@ -1938,7 +2681,7 @@ const styles = StyleSheet.create({
     bottom : -130-10,
   },
 
-  menufuniture:{
+  menufurniture:{
     position: 'absolute',
     width : 200,
     height : 70,
@@ -1946,7 +2689,7 @@ const styles = StyleSheet.create({
     bottom : -210,
   },
 
-  menufuniturebutton:{
+  menufurniturebutton:{
     position: 'absolute',
     width : 200,
     height : 70,
@@ -2019,9 +2762,83 @@ const styles = StyleSheet.create({
   },
 
 
+  dictionary: {
+    left : -30,
+    width : WINDOW_W+20,
+    height : WINDOW_H+20,
+    backgroundColor: 'black',
+  },
 
+  dictionarytitlefont:{
+    position: 'absolute',
+    left : 200-20,
+    top : 130,
+    fontSize : 25,
+    fontWeight : 'bold',
+  },
 
+  dicpage1:{
+    position: 'absolute',
+    left : 240,
+    top : 32,
+  },
 
+  dicpage2:{
+    position: 'absolute',
+    left : 240+70,
+    top : 32,
+  },
+
+  dicslot1:{
+    position: 'absolute',
+    left : 50,
+    top : 171,
+  },
+
+  dicslot2:{
+    position: 'absolute',
+    left : 230,
+    top : 180,
+  },
+
+  dicslot3:{
+    position: 'absolute',
+    left : 50,
+    top : 171+150+2,
+  },
+
+  dicslot4:{
+    position: 'absolute',
+    left : 230+7,
+    top : 180+150-2,
+  },
+
+  dicslot5:{
+    position: 'absolute',
+    left : 50,
+    top : 171+150+150+10,
+  },
+
+  dicslot6:{
+    position: 'absolute',
+    left : 230+8,
+    top : 180+150+150,
+  },
+
+  dicinfobg:{
+    position: 'absolute',
+    left : 0,
+    top : 80,
+    width : WINDOW_W,
+    height : WINDOW_H,
+    backgroundColor : '#F1ECF5',
+  },
+
+  dicinfopet1:{
+    position: 'absolute',
+    left : 20,
+    top : 80,
+  },
 
   todayquest:{
     width : 125,
