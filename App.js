@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, Component }  from 'react';
-import { StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, AppRegistry, Dimensions,
+import React, {useState, Component, useEffect}  from 'react';
+import { StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, FlatList, AppRegistry, Dimensions,
   TouchableHighlight, TouchableWithoutFeedback, Alert, } from 'react-native';
 import { DefaultTheme, Text, Button, RadioButton, TouchableRipple, ToggleButton, TextInput , Paragraph, Dialog, Portal, Appbar, 
   ProgressBar, Colors, Provider as PaperProvider } from 'react-native-paper';
@@ -27,39 +27,17 @@ import { MovingSquare } from './src/MovingSquare';
 import { RotatingSquare } from './src/RotatingSquare';
 import { DraggableBox } from './src/DraggableBox';
 import { MyModal } from './src/MyModal';
-//import { ReanimatedScreen } from './src/notuse/animationcode';
+import { ReanimatedScreen2 } from './src/Reanimated2Box';
+import { ReanimatedScreen } from './src/animationcode';
 
-import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
+import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
+  useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
 
 
 const WINDOW_H = Dimensions.get('window').height;
 const WINDOW_W = Dimensions.get('window').width;
 
 const slideAnimation = new SlideAnimation({ slideFrom: 'top', useNativeDriver: true, });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export class SlideDialogTest extends Component {
@@ -106,40 +84,27 @@ export class SlideDialogTest extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function TitleScreen({navigation}){
   const MoveToIntro = () =>{
     navigation.navigate("Intro");
   }
+  const [showText, setShowText] = useState(true);
+
+  useEffect(() => {
+    // 1초마다 깜빡거림
+    const interval = setInterval(() => {
+      setShowText((showText) => !showText);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
 return(
   <View style={styles.container}>
     <Image source={require('./assets/images/title/title.png')} style={styles.title} resizeMode ="stretch"/>
-    <Button onPress = {MoveToIntro} style={styles.titlebutton}> <Text style={styles.titlebuttonfont}>화면을 터치해 주세요.</Text></Button>
+    <View style={styles.titlebutton}>
+    <Text style={[ styles.titlebuttonfont, {display: showText ? 'none' : 'flex'} ]}>
+          화면을 터치해 주세요. </Text></View>
+    <TouchableOpacity style={styles.titlebuttonbg} onPress={MoveToIntro} activeOpacity={1}></TouchableOpacity>
   </View>
 );
 }
@@ -165,7 +130,7 @@ return(
     <Text style={styles.prologueinfofont}>꿈속에 나오던 미지의 공간 ...</Text>
 
     <Image source={require('./assets/images/intro/button.png')} style={styles.introbuttonbg} resizeMode ="stretch"/>
-    <TouchableOpacity style={styles.introbutton} onPress={MoveToPetChoice}><Text style={styles.introbuttonfont}>Skip ></Text></TouchableOpacity>
+    <TouchableOpacity style={styles.introbutton} onPress={MoveToPetChoice} activeOpacity={1}><Text style={styles.introbuttonfont}>Skip ></Text></TouchableOpacity>
   </View>
 );
 }
@@ -188,9 +153,16 @@ return(
     <Button disabled onPress={() => {}} style={styles.petchoiceborder}></Button>
     }
     
-    <Image source={require('./assets/images/petchoice/pet1bg.png')} style={styles.pet1} resizeMode ="stretch"/>
-    <Image source={require('./assets/images/petchoice/pet1.png')} style={styles.pet1} resizeMode ="stretch"/>
-    <Button onPress={isbottondown} style={styles.pet1}></Button>
+    <Image source={require('./assets/images/petchoice/pet1bg.png')} style={styles.pet1bg} resizeMode ="stretch"/>
+    {/* <Image source={require('./assets/images/petchoice/pet1.png')} style={styles.pet1bg} resizeMode ="stretch"/>
+    <Button onPress={isbottondown} style={styles.pet1}></Button> */}
+
+    <TouchableOpacity
+                style={styles.pet1}
+                onPress={isbottondown} activeOpacity={1}>
+          <Image source={require('./assets/images/petchoice/pet1.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+
 
     {/* <TouchableOpacity onPress={isbottondown}>
     <Image style={styles.pet1} resizeMode ="stretch" source={require('./assets/images/petchoice/pet1.png')} />
@@ -208,13 +180,86 @@ return(
     <Image source={require('./assets/images/intro/button.png')} style={styles.choicebuttonbg} resizeMode ="stretch"/>
     {(buttonable == false) ?
     <TouchableOpacity disabled style={styles.choicebutton} onPress={MoveToMainStack}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>:
-    <TouchableOpacity style={styles.choicebutton} onPress={MoveToMainStack}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.choicebutton} onPress={MoveToMainStack} activeOpacity={1}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>
     }
   </View>
 );
 }
 
 export default App;
+
+const FruitData = [
+  {
+    key : 1,
+    id: './assets/images/eat/appleslot.png',
+    title: "apple",
+  },
+  {
+    key : 2,
+    id: './assets/images/eat/watermelon.png',
+    title: "watermelon",
+  },
+  {
+    key : 3,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 4,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 5,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 6,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 7,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 8,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 9,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+  {
+    key : 10,
+    id: './assets/images/eat/slotdefault.png',
+    title: "default",
+  },
+];
+
+const Item = ({item, onPress}) => (
+  <TouchableOpacity
+  style={[styles.image]}
+  onPress={onPress} activeOpacity={1}>
+<Image source={{require : item.id}} resizeMode ="stretch"/>
+</TouchableOpacity>
+);
+
+const styles2 = StyleSheet.create({
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  image:{
+    width : 100,
+    height : 100,
+  }
+});
 
 function MainScreen({navigation}) {
   const [coin, setCoin] = useState(3000);
@@ -239,7 +284,10 @@ function MainScreen({navigation}) {
   const showachieveDialog = () => setachieveVisible(true);
   const hideachieveDialog = () => setachieveVisible(false);
   const [settingvisible, setsettingVisible] = useState(false);
-  const showsettingDialog = () => setsettingVisible(true);
+  const showsettingDialog = () => {
+    setmenu1();
+    setsettingVisible(true);
+  }
   const hidesettingDialog = () => setsettingVisible(false);
   const [furniturevisible, setfurnitureVisible] = useState(false);
   const showfurnitureDialog = () => setfurnitureVisible(true);
@@ -248,10 +296,16 @@ function MainScreen({navigation}) {
   const showdictionaryDialog = () => setdictionaryVisible(true);
   const hidedictionaryDialog = () => setdictionaryVisible(false);
   const [eatvisible, seteatVisible] = useState(false);
-  const showeatDialog = () => seteatVisible(true);
+  const showeatDialog = () => {
+    seteattabfruit();
+    seteatVisible(true);
+  }
   const hideeatDialog = () => seteatVisible(false);
   const [cleanvisible, setcleanVisible] = useState(false);
-  const showcleanDialog = () => setcleanVisible(true);
+  const showcleanDialog = () => {
+    setcleantabbrush();
+    setcleanVisible(true);
+  }
   const hidecleanDialog = () => setcleanVisible(false);
   const [funvisible, setfunVisible] = useState(false);
   const showfunDialog = () => setfunVisible(true);
@@ -364,6 +418,15 @@ function MainScreen({navigation}) {
   const [furniture, setfurniture] = useState("wall");
   const setfurniturewall = () => setfurniture("wall");
   const setfurniturefloor = () => setfurniture("floor");
+
+  const renderEatFruit = ({ item }) => {
+    return (
+      <Item
+        item={item}
+        onPress={hideeatDialog}
+      />
+    );
+    }
   
   return(
     <View style={styles.container}>
@@ -393,7 +456,7 @@ function MainScreen({navigation}) {
 
     <TouchableOpacity
                 style={styles.menubg}
-                onPress={showsettingDialog}>
+                onPress={showsettingDialog} activeOpacity={1}>
           <Image source={require('./assets/images/main/menu.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
 
@@ -402,19 +465,42 @@ function MainScreen({navigation}) {
 
   <Button disabled onPress={() => {}} style={styles.eatbackground}><Text></Text></Button>
   <Image source={require('./assets/images/main/eat.png')} style={styles.eatgauge} resizeMode ="stretch"/>
-  <Button color={Colors.black} onPress={showeatDialog} style={styles.eatbutton}></Button>
+  {/* <Button color={Colors.black} onPress={showeatDialog} style={styles.eatbutton}></Button> */}
+  <TouchableOpacity
+                style={styles.eatbutton}
+                onPress={showeatDialog} activeOpacity={1}>
+  </TouchableOpacity>
 
     <Button disabled onPress={() => {}} style={styles.cleanbackground}><Text ></Text></Button>
     <Image source={require('./assets/images/main/clean.png')} style={styles.cleangauge} resizeMode ="stretch"/>
-    <Button color={Colors.black} onPress={showcleanDialog} style={styles.cleanbutton}></Button>
+    {/* <Button color={Colors.black} onPress={showcleanDialog} style={styles.cleanbutton}></Button> */}
+    <TouchableOpacity
+                style={styles.cleanbutton}
+                onPress={showcleanDialog} activeOpacity={1}>
+  </TouchableOpacity>
 
     <Button disabled onPress={() => {}} style={styles.funbackground}><Text ></Text></Button>
     <Image source={require('./assets/images/main/funny.png')} style={styles.fungauge} resizeMode ="stretch"/>
-    <Button color={Colors.black} onPress={showfunDialog} style={styles.funbutton}></Button>
+    {/* <Button color={Colors.black} onPress={showfunDialog} style={styles.funbutton}></Button> */}
+    <TouchableOpacity
+                style={styles.funbutton}
+                onPress={showfunDialog} activeOpacity={1}>
+  </TouchableOpacity>
 
     <Button disabled onPress={() => {}} style={styles.sleepbackground}><Text ></Text></Button>
     <Image source={require('./assets/images/main/sleep.png')} style={styles.sleepgauge} resizeMode ="stretch"/>
-    <Button color={Colors.black} onPress={showsleepDialog} style={styles.sleepbutton}></Button>
+    {/* <Button color={Colors.black} onPress={showsleepDialog} style={styles.sleepbutton}></Button> */}
+    <TouchableOpacity
+                style={styles.sleepbutton}
+                onPress={showsleepDialog} activeOpacity={1}>
+  </TouchableOpacity>
+
+  {/* <FlatList
+        data={FruitData}
+        renderItem={renderEatFruit}
+        keyExtractor={(item) => item.key}
+      /> */}
+
 
 <Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.settinglist}>
   <Dialog.Title style={styles.textcenter}>메뉴</Dialog.Title>
@@ -436,7 +522,11 @@ function MainScreen({navigation}) {
 
   {(menu == true) ?
      <Button disabled color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button> :
-     <Button color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button>
+    //  <Button color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button>
+    <TouchableOpacity
+                style={styles.menu1}
+                onPress={setmenu1} >
+  </TouchableOpacity>
   }
 
   <Image style={styles.menu2} source={require('./assets/images/menu/menu2.png')} resizeMode ="stretch"/>
@@ -446,19 +536,31 @@ function MainScreen({navigation}) {
   }
 
 {(menu == true) ?
-      <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button> :
-      <Button disabled color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
+      // <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
+      <TouchableOpacity
+                style={styles.menu2}
+                onPress={setmenu2} >
+  </TouchableOpacity> :
+       <Button disabled color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
+  
   }
      
-
   {(menu == true) ?
       <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/> :
       <Image style={styles.menuquest} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/>
   }   
 
   {(menu == true) ?
-     <Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button> :
-     <Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
+     //<Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button>
+     <TouchableOpacity
+     style={styles.menuquestbutton}
+     onPress={showquestDialog} >
+</TouchableOpacity> :
+     //<Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
+     <TouchableOpacity
+     style={styles.menuquestbutton}
+     onPress={showachieveDialog} >
+</TouchableOpacity>
   }  
 
   {(menu == true) ?
@@ -467,8 +569,16 @@ function MainScreen({navigation}) {
   }   
 
   {(menu == true) ?
-     <Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button> :
-     <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
+     //<Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button> 
+     <TouchableOpacity
+     style={styles.menushopbutton}
+     onPress={showshopDialog} >
+</TouchableOpacity> :
+     // <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
+     <TouchableOpacity
+     style={styles.menushopbutton}
+     onPress={()=>{}} >
+</TouchableOpacity>
   }  
 
   {(menu == true) ?
@@ -477,12 +587,25 @@ function MainScreen({navigation}) {
   }   
 
   {(menu == true) ?
-     <Button color={Colors.black} onPress={showfurnitureDialog} style={styles.menufurniturebutton}><Text></Text></Button> :
-     <Button color={Colors.black} onPress={showdictionaryDialog} style={styles.menufurniturebutton}><Text></Text></Button>
+     // <Button color={Colors.black} onPress={showfurnitureDialog} style={styles.menufurniturebutton}><Text></Text></Button> 
+     <TouchableOpacity
+     style={styles.menufurniturebutton}
+     onPress={showfurnitureDialog} >
+</TouchableOpacity> :
+    // <Button color={Colors.black} onPress={showdictionaryDialog} style={styles.menufurniturebutton}><Text></Text></Button>
+    <TouchableOpacity
+    style={styles.menufurniturebutton}
+    onPress={showdictionaryDialog} >
+</TouchableOpacity>
   }  
     
   {menu == true && <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>}
-  {menu == true && <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>}
+  {menu == true && // <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>
+  <TouchableOpacity
+  style={styles.menusettingbutton}
+  onPress={() => {}} >
+</TouchableOpacity>
+}
 
 
 {/* 
@@ -548,7 +671,7 @@ function MainScreen({navigation}) {
 
   <TouchableOpacity
                 style={styles.achieveslot1check}
-                onPress={hideachieveDialog}>
+                onPress={hideachieveDialog} activeOpacity={1}>
           <Image source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
 
@@ -576,17 +699,17 @@ function MainScreen({navigation}) {
 
   <TouchableOpacity
                 style={styles.questmenu1}
-                onPress={setquestdaily}>
+                onPress={setquestdaily} activeOpacity={1}>
           <Image source={require('./assets/images/quest/tab1.png')} resizeMode ="stretch"/>
+          <Text style={styles.dailyreward}>일일 도전</Text>
         </TouchableOpacity>
-  <Text style={styles.dailyreward}>일일 도전</Text>
 
   <TouchableOpacity
                 style={styles.questmenu2}
-                onPress={setquestattend}>
+                onPress={setquestattend} activeOpacity={1}>
   <Image source={require('./assets/images/quest/tab2.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>
   <Text style={styles.attendancereward}>출석 보상</Text>
+        </TouchableOpacity>
 
   {(quest == "daily") ?
       <Text style={{...styles.questtitlefont, backgroundColor: "#959FFF"}}>일일 도전</Text> :
@@ -718,17 +841,17 @@ function MainScreen({navigation}) {
 
   <TouchableOpacity
                 style={styles.questmenu1}
-                onPress={setfurniturewall}>
+                onPress={setfurniturewall} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/tab1.png')} resizeMode ="stretch"/>
+          <Text style={styles.furniturewall}>벽 가구</Text>
         </TouchableOpacity>
-  <Text style={styles.dailyreward}>벽 가구</Text>
 
   <TouchableOpacity
                 style={styles.questmenu2}
-                onPress={setfurniturefloor}>
+                onPress={setfurniturefloor} activeOpacity={1}>
   <Image source={require('./assets/images/furnitureposition/tab2.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>
   <Text style={styles.attendancereward}>바닥 가구</Text>
+        </TouchableOpacity>
 
   {(furniture == "wall") ?
       <Text style={{...styles.furnituretitlefont, backgroundColor: "#F6C473"}}>벽 가구</Text> :
@@ -737,13 +860,13 @@ function MainScreen({navigation}) {
 
 {furniture == "wall" &&   <TouchableOpacity
                 style={styles.dailyslot1}
-                onPress={showfurniturecheckDialog}>
+                onPress={showfurniturecheckDialog} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/slot1.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 
 {furniture == "wall" &&   <TouchableOpacity
                 style={styles.furniturexbutton}
-                onPress={hidefurnitureDialog}>
+                onPress={hidefurnitureDialog} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/xbutton.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 
@@ -757,8 +880,17 @@ function MainScreen({navigation}) {
     <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>이 가구를 배치하시겠습니까?</Text></Paragraph>
   </Dialog.Content>
   <Dialog.Actions>
-    <Button color={Colors.black} onPress={showfurniture} style={styles.furnitureyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
-    <Button color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
+    <Button disabled color={Colors.black} onPress={showfurniture} style={styles.furnitureyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
+    <TouchableOpacity
+                style={styles.furnitureyesbuttonbg}
+                onPress={showfurniture} activeOpacity={1}><Text></Text>
+    </TouchableOpacity>
+
+    <Button disabled color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
+    <TouchableOpacity
+                style={styles.furniturenobuttonbg}
+                onPress={hidefurniturecheckDialog} activeOpacity={1}><Text></Text>
+    </TouchableOpacity>
   </Dialog.Actions>
 </Dialog>
 
@@ -775,13 +907,13 @@ function MainScreen({navigation}) {
 
   <TouchableOpacity
                 style={styles.dicslot1}
-                onPress={setdictionaryinfotrue}>
+                onPress={setdictionaryinfotrue} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
 
         <TouchableOpacity
                 style={styles.dicslot2}
-                onPress={hidedictionaryDialog}>
+                onPress={hidedictionaryDialog} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
   
@@ -793,7 +925,7 @@ function MainScreen({navigation}) {
   <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/>
 
   {dictionaryinfo && <Text style={styles.dicinfobg}></Text>}
-  {dictionaryinfo && <TouchableOpacity style={styles.dicinfopet1} onPress={setdictionaryinfofalse}>
+  {dictionaryinfo && <TouchableOpacity style={styles.dicinfopet1} onPress={setdictionaryinfofalse} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/pet1info.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 
@@ -832,18 +964,24 @@ function MainScreen({navigation}) {
 
         {(eattabname == "과일") ?
         <Button disabled onPress={seteattabfruit} style={styles.eatfruitbutton}><Text style={styles.white}>과일</Text></Button> :
-        <Button color={Colors.black} onPress={seteattabfruit} style={styles.eatfruitbutton}><Text>과일</Text></Button>
+        <Button disabled color={Colors.black} onPress={seteattabfruit} style={styles.eatfruitbutton}><Text>과일</Text></Button>
         }
+        {eattabname != "과일" && <TouchableOpacity style={styles.eatfruitbutton} 
+        onPress={seteattabfruit} activeOpacity={1}><Text></Text></TouchableOpacity>}
 
         {(eattabname == "육류") ?
         <Button disabled onPress={seteattabmeat} style={styles.eatmeatbutton}><Text style={styles.white}>육류</Text></Button> :
-        <Button color={Colors.black} onPress={seteattabmeat} style={styles.eatmeatbutton}><Text>육류</Text></Button>
+        <Button disabled color={Colors.black} onPress={seteattabmeat} style={styles.eatmeatbutton}><Text>육류</Text></Button>
         }
+        {eattabname != "육류" && <TouchableOpacity style={styles.eatmeatbutton} 
+        onPress={seteattabmeat} activeOpacity={1}><Text></Text></TouchableOpacity>}
 
         {(eattabname == "그외") ?
         <Button disabled onPress={seteattabetc} style={styles.eatetcbutton}><Text style={styles.white}>그외</Text></Button>:
-        <Button color={Colors.black} onPress={seteattabetc} style={styles.eatetcbutton}><Text>그외</Text></Button>
+        <Button disabled color={Colors.black} onPress={seteattabetc} style={styles.eatetcbutton}><Text>그외</Text></Button>
         }
+        {eattabname != "그외" && <TouchableOpacity style={styles.eatetcbutton} 
+        onPress={seteattabetc} activeOpacity={1}><Text></Text></TouchableOpacity>}
 
         {eattabname == "과일" && <Image style={styles.eatslot1} source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>}
         {eattabname == "과일" && <Image style={styles.eatslot2} source={require('./assets/images/eat/watermelonslot.png')} resizeMode ="stretch"/>}
@@ -862,16 +1000,16 @@ function MainScreen({navigation}) {
 
         {/* <TouchableOpacity
                 style={styles.eatslot1button}
-                onPress={hideeatDialog}>
+                onPress={hideeatDialog} activeOpacity={1}>
           <Image source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>
         </TouchableOpacity> */}
 
         <Text></Text>
-        <TouchableHighlight
+        <TouchableOpacity
                 style={styles.eattabbackbutton}
-                onPress={hideeatDialog}>
+                onPress={hideeatDialog} activeOpacity={1}>
           <Text style={styles.textcenter}>X</Text>
-        </TouchableHighlight> 
+        </TouchableOpacity> 
 
         {/* <View style={styles.eatslot1button}>
         <Button color={Colors.black} onPress={hideeatDialog} style={styles.eatslot1button}></Button> 
@@ -913,18 +1051,24 @@ function MainScreen({navigation}) {
 
         {(cleantabname == "솔") ?
         <Button disabled onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text style={styles.white}>솔</Text></Button> :
-        <Button color={Colors.black} onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text>솔</Text></Button>
+        <Button disabled color={Colors.black} onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text>솔</Text></Button>
         }
+        {cleantabname != "솔" && <TouchableOpacity style={styles.eatfruitbutton} 
+        onPress={setcleantabbrush} activeOpacity={1}><Text></Text></TouchableOpacity>}
 
         {(cleantabname == "세정제") ?
         <Button disabled onPress={setcleantabdetergent} style={styles.eatmeatbutton}><Text style={styles.white}>세정제</Text></Button> :
-        <Button color={Colors.black} onPress={setcleantabdetergent} style={styles.eatmeatbutton}><Text>세정제</Text></Button>
+        <Button disabled color={Colors.black} onPress={setcleantabdetergent} style={styles.eatmeatbutton}><Text>세정제</Text></Button>
         }
+        {cleantabname != "세정제" && <TouchableOpacity style={styles.eatmeatbutton} 
+        onPress={setcleantabdetergent} activeOpacity={1}><Text></Text></TouchableOpacity>}
 
         {(cleantabname == "욕조") ?
         <Button disabled onPress={setcleantabtub} style={styles.eatetcbutton}><Text style={styles.white}>욕조</Text></Button>:
-        <Button color={Colors.black} onPress={setcleantabtub} style={styles.eatetcbutton}><Text>욕조</Text></Button>
+        <Button disabled color={Colors.black} onPress={setcleantabtub} style={styles.eatetcbutton}><Text>욕조</Text></Button>
         }
+        {cleantabname != "욕조" && <TouchableOpacity style={styles.eatetcbutton} 
+        onPress={setcleantabtub} activeOpacity={1}><Text></Text></TouchableOpacity>}
 
         {cleantabname == "솔" && <Image style={styles.eatslot1} source={require('./assets/images/clean/brushslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "솔" && <Image style={styles.eatslot2} source={require('./assets/images/clean/brushslot2.png')} resizeMode ="stretch"/>}
@@ -942,11 +1086,11 @@ function MainScreen({navigation}) {
         {cleantabname == "욕조" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
 
         <Text></Text>
-        <TouchableHighlight
+        <TouchableOpacity
                 style={styles.eattabbackbutton}
-                onPress={hidecleanDialog}>
+                onPress={hidecleanDialog} activeOpacity={1}>
           <Text style={styles.textcenter}>X</Text>
-        </TouchableHighlight> 
+        </TouchableOpacity> 
 
      </View>
   </View>
@@ -1022,7 +1166,6 @@ function MainScreen({navigation}) {
   </Dialog.Actions>
 </Dialog>
 
-
 </View>
   );
 }
@@ -1085,6 +1228,12 @@ const styles = StyleSheet.create({
   titlebutton:{
     position: 'absolute',
     bottom: 80,
+  },
+
+  titlebuttonbg:{
+    position: 'absolute',
+    width : WINDOW_W,
+    height : WINDOW_H,
   },
 
   titlebuttonfont:{
@@ -1276,6 +1425,14 @@ const styles = StyleSheet.create({
   },
 
   pet1:{
+    position: 'absolute',
+    width : 100,
+    height: 100,
+    left : 161,
+    top: 107,
+  },
+
+  pet1bg:{
     position: 'absolute',
     width : 110,
     height: 110,
@@ -1616,9 +1773,7 @@ const styles = StyleSheet.create({
     width : 80,
     height: 80,
     left : 20-5,
-    bottom: -10,
-    textAlign: 'center',
-    lineHeight: 80,
+    bottom: 10,
   },
 
   eatbuttonfont:{
@@ -1649,9 +1804,7 @@ const styles = StyleSheet.create({
     width : 80,
     height: 80,
     left : 120-5,
-    bottom: -10,
-    textAlign: 'center',
-    lineHeight: 80,
+    bottom: 10,
   },
 
   cleanbuttonfont:{
@@ -1682,9 +1835,7 @@ const styles = StyleSheet.create({
     width : 80,
     height: 80,
     left : 210+5,
-    bottom: -10,
-    textAlign: 'center',
-    lineHeight: 80,
+    bottom: 10,
   },
 
   funbuttonfont:{
@@ -1715,9 +1866,7 @@ const styles = StyleSheet.create({
     width : 80,
     height: 80,
     left : 310+5,
-    bottom: -10,
-    textAlign: 'center',
-    lineHeight: 80,
+    bottom: 10,
   },
 
   sleepbuttonfont:{
@@ -2151,6 +2300,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
+  furnitureyesbuttonbg:{
+    position: 'absolute',
+    width : 120,
+    height : 40,
+    left : 20,
+    bottom : -20,
+  },
+
   furniturenobutton:{
     position: 'absolute',
     width : 120,
@@ -2159,6 +2316,14 @@ const styles = StyleSheet.create({
     backgroundColor : '#F1ECF5',
     textAlign:'center',
     borderRadius: 10,
+  },
+
+  furniturenobuttonbg:{
+    position: 'absolute',
+    width : 120,
+    height : 40,
+    right : 20,
+    bottom : -20,
   },
 
   nobutton:{
@@ -2635,16 +2800,24 @@ const styles = StyleSheet.create({
 
   dailyreward:{
     position: 'absolute',
-    left : 40,
-    top : -70,
+    left : 37,
+    top : 10,
+    fontSize : 20,
+    color : 'white',
+  },
+
+  furniturewall:{
+    position: 'absolute',
+    left : 45,
+    top : 10,
     fontSize : 20,
     color : 'white',
   },
 
   attendancereward:{
     position: 'absolute',
-    left : 40+140,
-    top : -70,
+    left : 37,
+    top : 10,
     fontSize : 20,
     color : 'white',
   },
@@ -2662,7 +2835,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50-10,
+    bottom : -50+5,
   },
 
   menushop :{
@@ -2678,7 +2851,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -130-10,
+    bottom : -130+5,
   },
 
   menufurniture:{
@@ -2694,7 +2867,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -210-10,
+    bottom : -210+5,
   },
 
   menusetting:{
@@ -2710,7 +2883,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -290-10,
+    bottom : -290+5,
   },
 
   menuachieve:{
@@ -3149,8 +3322,6 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor : 'red',
   },
-
-
 
 
 
