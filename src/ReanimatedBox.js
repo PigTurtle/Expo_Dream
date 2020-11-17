@@ -83,7 +83,7 @@ export class ReanimatedScreen extends Component  {
                 <TouchableOpacity style={[styles.box, {backgroundColor: 'red'}]}
                     onPress={this.addBox} >
                     <Text style={styles.commandText}>
-                        諛뺤뒪 �앹꽦
+                        박스 생성
                     </Text>
                 </TouchableOpacity>
                 <View style={{flex:0.5, position: 'absolute', top: '50%'}}>

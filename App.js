@@ -27,8 +27,9 @@ import { MovingSquare } from './src/MovingSquare';
 import { RotatingSquare } from './src/RotatingSquare';
 import { DraggableBox } from './src/DraggableBox';
 import { MyModal } from './src/MyModal';
-import { ReanimatedScreen2 } from './src/Reanimated2Box';
-import { ReanimatedScreen } from './src/animationcode';
+import { ReanimatedScreen } from './src/ReanimatedBox';
+import { ReanimatedScreen2 } from './src/ReanimatedBox2';
+import { ReanimatedScreen3 } from './src/ReanimatedBox3';
 
 import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
   useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
@@ -105,6 +106,7 @@ return(
     <Text style={[ styles.titlebuttonfont, {display: showText ? 'none' : 'flex'} ]}>
           화면을 터치해 주세요. </Text></View>
     <TouchableOpacity style={styles.titlebuttonbg} onPress={MoveToIntro} activeOpacity={1}></TouchableOpacity>
+    {/* <ReanimatedScreen3></ReanimatedScreen3> */}
   </View>
 );
 }
@@ -148,12 +150,16 @@ return(
     <Image source={require('./assets/images/intro/intro.png')} style={styles.intro} resizeMode ="stretch"/>
     <Image source={require('./assets/images/intro/prologuebg.png')} style={styles.prologuebg} resizeMode ="stretch"/>
 
-    {(buttonable == false) ?
+    {/* {(buttonable == false) ?
     <Button disabled onPress={() => {}}></Button> :
     <Button disabled onPress={() => {}} style={styles.petchoiceborder}></Button>
+    } */}
+
+    {(buttonable == false) ?
+    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet1bg} resizeMode ="stretch"/> :
+    <Image source={require('./assets/images/petchoice/petbg2.png')} style={styles.pet1bg} resizeMode ="stretch"/>
     }
-    
-    <Image source={require('./assets/images/petchoice/pet1bg.png')} style={styles.pet1bg} resizeMode ="stretch"/>
+
     {/* <Image source={require('./assets/images/petchoice/pet1.png')} style={styles.pet1bg} resizeMode ="stretch"/>
     <Button onPress={isbottondown} style={styles.pet1}></Button> */}
 
@@ -168,9 +174,9 @@ return(
     <Image style={styles.pet1} resizeMode ="stretch" source={require('./assets/images/petchoice/pet1.png')} />
     </TouchableOpacity> */}
 
-    <Image source={require('./assets/images/petchoice/pet2bg.png')} style={styles.pet2} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet2} resizeMode ="stretch"/>
     <Image source={require('./assets/images/petchoice/pet2.png')} style={styles.pet2} resizeMode ="stretch"/>
-    <Image source={require('./assets/images/petchoice/pet3bg.png')} style={styles.pet3} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet3} resizeMode ="stretch"/>
     <Image source={require('./assets/images/petchoice/pet3.png')} style={styles.pet3} resizeMode ="stretch"/>
     <Image source={require('./assets/images/petchoice/petinfo.png')} style={styles.petinfobg} resizeMode ="stretch"/>
     <Text style={styles.petchoiceinfo}>자연의 싱그러움이 느껴지는</Text> 
@@ -266,19 +272,70 @@ function MainScreen({navigation}) {
   const [jam, setJam] = useState(100);
   const [heart, setHeart] = useState(70);
 
+  const [stagevisible, setstageVisible] = useState(false);
+  const showstageDialog = () => setstageVisible(true);
+  const hidestageDialog = () => setstageVisible(false);
+
+  const [shoptabnum, setshoptabnum] = useState(1);
+  const [shoptabname, setshoptab] = useState("식사류");
+  const setshoptabeat = () => {
+    setshoptab("식사류");
+    setshoptabnum(1);
+  }
+  const setshoptabclean = () => {
+    setshoptab("청결류");
+    setshoptabnum(2);
+  }
+  const setshoptabphil = () => {
+    setshoptab("약품류");
+    setshoptabnum(3);
+  }
+  const setshoptabmoney = () => {
+    setshoptab("재화");
+    setshoptabnum(4);
+  }
+  const setshoptabevent = () => {
+    setshoptab("이벤트");
+    setshoptabnum(5);
+  }
+
+  const [eattabnum, seteattabnum] = useState(1);
   const [eattabname, seteattabname] = useState("과일");
-  const seteattabfruit = () => seteattabname("과일");
-  const seteattabmeat = () => seteattabname("육류");
-  const seteattabetc = () => seteattabname("그외");
+  const seteattabfruit = () => {
+    seteattabname("과일");
+    seteattabnum(1);
+  }
+  const seteattabmeat = () => {
+  seteattabname("육류");
+  seteattabnum(2);
+  }
+  const seteattabetc = () => {
+    seteattabname("그외");
+    seteattabnum(3);
+  }
 
+  const [cleantabnum, setcleantabnum] = useState(1);
   const [cleantabname, setcleantabname] = useState("솔");
-  const setcleantabbrush = () => setcleantabname("솔");
-  const setcleantabdetergent = () => setcleantabname("세정제");
-  const setcleantabtub = () => setcleantabname("욕조");
+  const setcleantabbrush = () => {
+    setcleantabname("솔");
+    setcleantabnum(1);
+  }
+  const setcleantabdetergent = () => {
+    setcleantabname("세정제");
+    setcleantabnum(2);
+  }
+  const setcleantabtub = () => {
+    setcleantabname("욕조");
+    setcleantabnum(3);
+  }
 
+  const [dictionarypetnum, setdictionarypetnum] = useState(1);
   const [dictionaryinfo, setdictionaryinfo] = useState(false);
+  const setdictionaryinfotrue = (petnum) => {
+    setdictionarypetnum(petnum);
+    setdictionaryinfo(true);
+  }
   const setdictionaryinfofalse = () => setdictionaryinfo(false);
-  const setdictionaryinfotrue = () => setdictionaryinfo(true);
 
   const [achievevisible, setachieveVisible] = useState(false);
   const showachieveDialog = () => setachieveVisible(true);
@@ -419,14 +476,14 @@ function MainScreen({navigation}) {
   const setfurniturewall = () => setfurniture("wall");
   const setfurniturefloor = () => setfurniture("floor");
 
-  const renderEatFruit = ({ item }) => {
-    return (
-      <Item
-        item={item}
-        onPress={hideeatDialog}
-      />
-    );
-    }
+  // const renderEatFruit = ({ item }) => {
+  //   return (
+  //     <Item
+  //       item={item}
+  //       onPress={hideeatDialog}
+  //     />
+  //   );
+  //   }
   
   return(
     <View style={styles.container}>
@@ -438,8 +495,14 @@ function MainScreen({navigation}) {
 
     <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/>
     <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/>
-    <Image source={require('./assets/images/main/circle.png')} style={styles.stagebg} resizeMode ="cover"/>
-    <Button disabled onPress={() => {}} style={styles.stage}><Text style={styles.statefont}>stage</Text></Button>
+
+    <TouchableOpacity
+                style={styles.mainstage}
+                onPress={showstageDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/circle.png')} resizeMode ="cover"/>
+          <Text style={styles.stage}>stage</Text>
+        </TouchableOpacity>
+
     <Button disabled onPress={() => {}} style={styles.gamemoneybackground}><Text ></Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartbackground}><Text ></Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartgaugeimage}><Text ></Text></Button>
@@ -461,38 +524,76 @@ function MainScreen({navigation}) {
         </TouchableOpacity>
 
     
-  <Button disabled onPress={() => {}} style={styles.bottommenu}><Text></Text></Button>
+  {/* <Button disabled onPress={() => {}} style={styles.bottommenu}><Text></Text></Button> */}
+  <Image source={require('./assets/images/main/bottommenubg.png')} style={styles.bottommenu} resizeMode ="stretch"/>
 
-  <Button disabled onPress={() => {}} style={styles.eatbackground}><Text></Text></Button>
-  <Image source={require('./assets/images/main/eat.png')} style={styles.eatgauge} resizeMode ="stretch"/>
+  {/* <Button disabled onPress={() => {}} style={styles.eatbackground}><Text></Text></Button>
+  <Image source={require('./assets/images/main/eat.png')} style={styles.eatgauge} resizeMode ="stretch"/> */}
   {/* <Button color={Colors.black} onPress={showeatDialog} style={styles.eatbutton}></Button> */}
+  {/* <TouchableOpacity
+                style={styles.eatbutton}
+                onPress={showeatDialog} activeOpacity={1}>
+  </TouchableOpacity> */}
+
+<Image source={require('./assets/images/main/gaugebg.png')} style={styles.eatgaugebg} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/eatgauge.png')} style={styles.eatgauge} resizeMode ="stretch"/>
+
   <TouchableOpacity
                 style={styles.eatbutton}
                 onPress={showeatDialog} activeOpacity={1}>
+                  <Image source={require('./assets/images/main/eat.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
 
-    <Button disabled onPress={() => {}} style={styles.cleanbackground}><Text ></Text></Button>
-    <Image source={require('./assets/images/main/clean.png')} style={styles.cleangauge} resizeMode ="stretch"/>
+
+    {/* <Button disabled onPress={() => {}} style={styles.cleanbackground}><Text ></Text></Button>
+    <Image source={require('./assets/images/main/clean.png')} style={styles.cleangauge} resizeMode ="stretch"/> */}
     {/* <Button color={Colors.black} onPress={showcleanDialog} style={styles.cleanbutton}></Button> */}
-    <TouchableOpacity
+    {/* <TouchableOpacity
                 style={styles.cleanbutton}
                 onPress={showcleanDialog} activeOpacity={1}>
+  </TouchableOpacity> */}
+
+  <Image source={require('./assets/images/main/gaugebg.png')} style={styles.cleangaugebg} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/cleangauge.png')} style={styles.cleangauge} resizeMode ="stretch"/>
+
+  <TouchableOpacity
+                style={styles.cleanbutton}
+                onPress={showcleanDialog} activeOpacity={1}>
+                  <Image source={require('./assets/images/main/clean.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
 
-    <Button disabled onPress={() => {}} style={styles.funbackground}><Text ></Text></Button>
-    <Image source={require('./assets/images/main/funny.png')} style={styles.fungauge} resizeMode ="stretch"/>
+    {/* <Button disabled onPress={() => {}} style={styles.funbackground}><Text ></Text></Button>
+    <Image source={require('./assets/images/main/funny.png')} style={styles.fungauge} resizeMode ="stretch"/> */}
     {/* <Button color={Colors.black} onPress={showfunDialog} style={styles.funbutton}></Button> */}
-    <TouchableOpacity
+    {/* <TouchableOpacity
                 style={styles.funbutton}
                 onPress={showfunDialog} activeOpacity={1}>
+  </TouchableOpacity> */}
+
+<Image source={require('./assets/images/main/gaugebg.png')} style={styles.fungaugebg} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/funnygauge.png')} style={styles.fungauge} resizeMode ="stretch"/>
+
+<TouchableOpacity
+                style={styles.funbutton}
+                onPress={showfunDialog} activeOpacity={1}>
+                  <Image source={require('./assets/images/main/funny.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
 
-    <Button disabled onPress={() => {}} style={styles.sleepbackground}><Text ></Text></Button>
-    <Image source={require('./assets/images/main/sleep.png')} style={styles.sleepgauge} resizeMode ="stretch"/>
+    {/* <Button disabled onPress={() => {}} style={styles.sleepbackground}><Text ></Text></Button>
+    <Image source={require('./assets/images/main/sleep.png')} style={styles.sleepgauge} resizeMode ="stretch"/> */}
     {/* <Button color={Colors.black} onPress={showsleepDialog} style={styles.sleepbutton}></Button> */}
-    <TouchableOpacity
+    {/* <TouchableOpacity
                 style={styles.sleepbutton}
                 onPress={showsleepDialog} activeOpacity={1}>
+  </TouchableOpacity> */}
+
+<Image source={require('./assets/images/main/gaugebg.png')} style={styles.sleepgaugebg} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/sleepgauge.png')} style={styles.sleepgauge} resizeMode ="stretch"/>
+
+<TouchableOpacity
+                style={styles.sleepbutton}
+                onPress={showsleepDialog} activeOpacity={1}>
+                  <Image source={require('./assets/images/main/sleep.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
 
   {/* <FlatList
@@ -501,24 +602,51 @@ function MainScreen({navigation}) {
         keyExtractor={(item) => item.key}
       /> */}
 
+<Dialog visible={stagevisible} onDismiss={hidestageDialog} style={styles.stageScene}>
+  <Dialog.Content>
+  <Image style={styles.stagebg} source={require('./assets/images/main/stage.png')} resizeMode ="stretch"/>
+
+  <TouchableOpacity
+                style={styles.stagenature}
+                onPress={hidestageDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/stagenature.png')} resizeMode ="cover"/>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+                style={styles.stagespace}
+                onPress={hidestageDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/stagespace.png')} resizeMode ="cover"/>
+        </TouchableOpacity>
+
+  </Dialog.Content>
+  <Dialog.Actions>
+  </Dialog.Actions>
+</Dialog>
 
 <Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.settinglist}>
   <Dialog.Title style={styles.textcenter}>메뉴</Dialog.Title>
   <Dialog.Content>
 
-  <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> 
-  {menu == false && <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>}    
+  {/* <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> 
+  {menu == false && <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>}     */}
   {/* {(menu == true) ?
         <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> :
         <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>
   } */}
+  <Image style={styles.menubg1} source={require('./assets/images/menu/menubg.png')} resizeMode ="stretch"/> 
   <Text style={styles.menufont}>메뉴</Text>
 
-  <Image style={styles.menu1} source={require('./assets/images/menu/menu1.png')} resizeMode ="stretch"/>
+  {/* <Image style={styles.menu1} source={require('./assets/images/menu/menu1.png')} resizeMode ="stretch"/>
   {(menu == true) ?
         <Image style={styles.menu1num} source={require('./assets/images/menu/1.1.png')} resizeMode ="stretch"/> :
         <Image style={styles.menu1num} source={require('./assets/images/menu/1.png')} resizeMode ="stretch"/>
-  }
+  } */}
+    {/* {(menu == true) ?
+        <Image style={styles.menu1} source={require('./assets/images/menu/menu1.1.png')} resizeMode ="stretch"/> :
+        <Image style={styles.menu1} source={require('./assets/images/menu/menu1.2.png')} resizeMode ="stretch"/>
+  } */}
+    <Image style={styles.menu1} source={require('./assets/images/menu/menu1.1.png')} resizeMode ="stretch"/>
+  {menu == false && <Image style={styles.menu1} source={require('./assets/images/menu/menu1.2.png')} resizeMode ="stretch"/>}
 
   {(menu == true) ?
      <Button disabled color={Colors.black} onPress={setmenu1} style={styles.menu1}><Text ></Text></Button> :
@@ -529,11 +657,17 @@ function MainScreen({navigation}) {
   </TouchableOpacity>
   }
 
-  <Image style={styles.menu2} source={require('./assets/images/menu/menu2.png')} resizeMode ="stretch"/>
+  {/* <Image style={styles.menu2} source={require('./assets/images/menu/menu2.png')} resizeMode ="stretch"/>
   {(menu == true) ?
         <Image style={styles.menu2num} source={require('./assets/images/menu/2.png')} resizeMode ="stretch"/> :
         <Image style={styles.menu2num} source={require('./assets/images/menu/2.1.png')} resizeMode ="stretch"/>
-  }
+  } */}
+      {/* {(menu == true) ?
+        <Image style={styles.menu2} source={require('./assets/images/menu/menu2.2.png')} resizeMode ="stretch"/> :
+        <Image style={styles.menu2} source={require('./assets/images/menu/menu2.1.png')} resizeMode ="stretch"/>
+  } */}
+    <Image style={styles.menu2} source={require('./assets/images/menu/menu2.2.png')} resizeMode ="stretch"/>
+  {menu == false && <Image style={styles.menu2} source={require('./assets/images/menu/menu2.1.png')} resizeMode ="stretch"/>}
 
 {(menu == true) ?
       // <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
@@ -547,7 +681,7 @@ function MainScreen({navigation}) {
      
   {(menu == true) ?
       <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menuquest} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/>
+      <Image style={styles.menuquest} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
   }   
 
   {(menu == true) ?
@@ -559,25 +693,25 @@ function MainScreen({navigation}) {
      //<Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
      <TouchableOpacity
      style={styles.menuquestbutton}
-     onPress={showachieveDialog} >
+     onPress={showshopDialog} >
 </TouchableOpacity>
   }  
 
   {(menu == true) ?
-      <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menushop} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>
+      <Image style={styles.menushop} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/> :
+      <Image style={styles.menushop} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
   }   
 
   {(menu == true) ?
      //<Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button> 
      <TouchableOpacity
      style={styles.menushopbutton}
-     onPress={showshopDialog} >
+     onPress={showachieveDialog} >
 </TouchableOpacity> :
      // <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
      <TouchableOpacity
      style={styles.menushopbutton}
-     onPress={()=>{}} >
+     onPress={() => {}} >
 </TouchableOpacity>
   }  
 
@@ -599,7 +733,7 @@ function MainScreen({navigation}) {
 </TouchableOpacity>
   }  
     
-  {menu == true && <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>}
+  {menu == true && <Image style={styles.menusetting} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>}
   {menu == true && // <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>
   <TouchableOpacity
   style={styles.menusettingbutton}
@@ -720,15 +854,15 @@ function MainScreen({navigation}) {
 {quest == "daily" && <Image style={styles.checkslot1} source={require('./assets/images/quest/checkbutton1.png')} resizeMode ="stretch"/>}
 {quest == "daily" &&   <Text style={styles.dailyinfoslot1}>아무 펫의 청결도를 2회 올리세요.</Text>}
 
-{quest == "daily" && <Image style={styles.dailyslot2} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.dailyslot2} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
 {quest == "daily" && <Image style={styles.checkslot2} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
-{quest == "daily" &&   <Text style={styles.dailyinfoslot2}></Text>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot2}>아무 펫이나 1회 채우세요.</Text>}
 
-{quest == "daily" && <Image style={styles.dailyslot3} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.dailyslot3} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
 {quest == "daily" && <Image style={styles.checkslot3} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
 {quest == "daily" &&   <Text style={styles.dailyinfoslot3}></Text>}
 
-{quest == "daily" && <Image style={styles.dailyslot4} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
+{quest == "daily" && <Image style={styles.dailyslot4} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
 {quest == "daily" && <Image style={styles.checkslot4} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
 {quest == "daily" &&   <Text style={styles.dailyinfoslot4}></Text>}
 
@@ -769,6 +903,78 @@ function MainScreen({navigation}) {
   <Dialog.Actions>
   <Button disabled color={Colors.black} onPress={hideshopDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hideshopDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
+  </Dialog.Actions>
+</Dialog>
+
+
+<Dialog visible={shopvisible} onDismiss={hideshopDialog} style={styles.stageScene}>
+  <Dialog.Content>
+  <Image style={styles.stagebg} source={require('./assets/images/shop/shopbg.png')} resizeMode ="stretch"/>
+
+  <Image source={require('./assets/images/coin.png')} style={styles.shopcoinimage} resizeMode ="cover"/>
+  <Button disabled onPress={() => {}} style={styles.shopcoinnum}><Text style={styles.coinfont}>{coin}</Text></Button>
+  <Image source={require('./assets/images/shop/tabmenu.png')} style={styles.shoptabmenu} resizeMode ="cover"/>
+
+  <TouchableOpacity
+                style={styles.shoptab1}
+                onPress={setshoptabeat} activeOpacity={1}>
+        <Text style={styles.textcenter}>식사류</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.shoptab2}
+                onPress={setshoptabclean} activeOpacity={1}>
+        <Text style={styles.textcenter}>청결류</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.shoptab3}
+                onPress={setshoptabphil} activeOpacity={1}>
+        <Text style={styles.textcenter}>약품류</Text>
+        </TouchableOpacity>
+  <TouchableOpacity
+                style={styles.shoptab4}
+                onPress={setshoptabmoney} activeOpacity={1}>
+       <Text style={styles.textcenter}>재화</Text>
+        </TouchableOpacity>
+  <TouchableOpacity
+                style={styles.shoptab5}
+                onPress={setshoptabevent} activeOpacity={1}>
+        <Text style={styles.textcenter}>이벤트</Text>
+        </TouchableOpacity>
+
+<View style={{...styles.shoptab1_1, left : 23.5 + (shoptabnum-1)*73}}><Text style={styles.textcenter}>{shoptabname}</Text></View>
+
+{shoptabnum == 1 &&
+  <TouchableOpacity
+      style={styles.shopeatslot1}
+      onPress={hideshopDialog} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/appleslot.png')} resizeMode ="cover"/>
+  </TouchableOpacity>}
+
+  {shoptabnum == 1 &&
+  <TouchableOpacity
+      style={styles.shopeatslot2}
+      onPress={hideshopDialog} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/appleslot.png')} resizeMode ="cover"/>
+  </TouchableOpacity> }
+
+  {shoptabnum == 1 &&
+  <TouchableOpacity
+      style={styles.shopeatslot3}
+      onPress={hideshopDialog} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/appleslot.png')} resizeMode ="cover"/>
+  </TouchableOpacity> }
+
+  {shoptabnum == 1 &&
+  <TouchableOpacity
+      style={styles.shopeatslot4}
+      onPress={hideshopDialog} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/appleslot.png')} resizeMode ="cover"/>
+  </TouchableOpacity> }
+
+  </Dialog.Content>
+  <Dialog.Actions>
+    {/* <Button disabled color={Colors.black} onPress={hideshopDialog} style={styles.xbuttonbackground}></Button>
+    <Button color={Colors.black} onPress={hideshopDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button> */}
   </Dialog.Actions>
 </Dialog>
 
@@ -895,7 +1101,6 @@ function MainScreen({navigation}) {
 </Dialog>
 
 
-
 <Dialog visible={dictionaryvisible} onDismiss={hidedictionaryDialog} style={styles.dictionary}>
   <Dialog.Content>
 
@@ -904,29 +1109,34 @@ function MainScreen({navigation}) {
 
   <Image style={styles.dicpage1} source={require('./assets/images/dictionary/page1.png')} resizeMode ="stretch"/>
   <Image style={styles.dicpage2} source={require('./assets/images/dictionary/page2.png')} resizeMode ="stretch"/>
+  <Image style={styles.dicpage3} source={require('./assets/images/dictionary/page3.png')} resizeMode ="stretch"/>
 
   <TouchableOpacity
                 style={styles.dicslot1}
-                onPress={setdictionaryinfotrue} activeOpacity={1}>
+                onPress={() => setdictionaryinfotrue(1)} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>
+  </TouchableOpacity>
 
-        <TouchableOpacity
+  <TouchableOpacity
                 style={styles.dicslot2}
-                onPress={hidedictionaryDialog} activeOpacity={1}>
+                onPress={() => setdictionaryinfotrue(2)} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>
+  </TouchableOpacity>
   
-  <Image style={styles.dicslot3} source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>
+        <TouchableOpacity
+                style={styles.dicslot3}
+                onPress={hidedictionaryDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
+
   <Image style={styles.dicslot4} source={require('./assets/images/dictionary/dic4.png')} resizeMode ="stretch"/>
-
   <Image style={styles.dicslot5} source={require('./assets/images/dictionary/dic5.png')} resizeMode ="stretch"/>
-
   <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/>
 
   {dictionaryinfo && <Text style={styles.dicinfobg}></Text>}
   {dictionaryinfo && <TouchableOpacity style={styles.dicinfopet1} onPress={setdictionaryinfofalse} activeOpacity={1}>
-          <Image source={require('./assets/images/dictionary/pet1info.png')} resizeMode ="stretch"/>
+  {dictionarypetnum == 1 &&  <Image source={require('./assets/images/dictionary/pet1info.png')} resizeMode ="stretch"/> }
+  {dictionarypetnum == 2 &&  <Image source={require('./assets/images/dictionary/pet2info.png')} resizeMode ="stretch"/> }
         </TouchableOpacity>}
 
   </Dialog.Content>
@@ -945,24 +1155,18 @@ function MainScreen({navigation}) {
   </Dialog.Actions>
 </Dialog> */}
 
-<Modal
-          animationType="fade"
-          transparent={true}
-          visible={eatvisible}
-          contentContainerStyle={{backgroundColor : 'white', padding : 20}}
-          >
-  <View style={styles.eatmodal}>
-     <View style={styles.textcenter}>
+  <Dialog visible={eatvisible} dismissable={false} onDismiss={hideeatDialog} style={styles.eatmodal}>
+      <Dialog.Content>
 
-        <Image style={styles.eatfruit} source={require('./assets/images/eat/fruit.png')} resizeMode ="stretch"/>
+        {/* <Image style={styles.eatfruit} source={require('./assets/images/eat/fruit.png')} resizeMode ="stretch"/>
         <Image style={styles.eatmeat} source={require('./assets/images/eat/meat.png')} resizeMode ="stretch"/>
         <Image style={styles.eatetc} source={require('./assets/images/eat/etc.png')} resizeMode ="stretch"/>
 
         {eattabname == "과일" && <Text style={{ ...styles.eattabname, backgroundColor: "#FFCC18"}}>{eattabname}</Text>}
         {eattabname == "육류" && <Text style={{ ...styles.eattabname, backgroundColor: "#CA7222"}}>{eattabname}</Text>}
-        {eattabname == "그외" && <Text style={{ ...styles.eattabname, backgroundColor: "#6C1C1C"}}>{eattabname}</Text>}
+        {eattabname == "그외" && <Text style={{ ...styles.eattabname, backgroundColor: "#6C1C1C"}}>{eattabname}</Text>} */}
 
-        {(eattabname == "과일") ?
+        {/* {(eattabname == "과일") ?
         <Button disabled onPress={seteattabfruit} style={styles.eatfruitbutton}><Text style={styles.white}>과일</Text></Button> :
         <Button disabled color={Colors.black} onPress={seteattabfruit} style={styles.eatfruitbutton}><Text>과일</Text></Button>
         }
@@ -981,22 +1185,44 @@ function MainScreen({navigation}) {
         <Button disabled color={Colors.black} onPress={seteattabetc} style={styles.eatetcbutton}><Text>그외</Text></Button>
         }
         {eattabname != "그외" && <TouchableOpacity style={styles.eatetcbutton} 
-        onPress={seteattabetc} activeOpacity={1}><Text></Text></TouchableOpacity>}
+        onPress={seteattabetc} activeOpacity={1}><Text></Text></TouchableOpacity>} */}
 
+        <Image style={styles.eatbg} source={require('./assets/images/eat/eattabbg.png')} resizeMode ="stretch"/> 
+
+        <TouchableOpacity
+                style={styles.eatfruit}
+                onPress={seteattabfruit} activeOpacity={1}>
+        <Text style={styles.textcenter}>과일</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.eatmeat}
+                onPress={seteattabmeat} activeOpacity={1}>
+        <Text style={styles.textcenter}>육류</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.eatetc}
+                onPress={seteattabetc} activeOpacity={1}>
+        <Text style={styles.textcenter}>그외</Text>
+        </TouchableOpacity>
+
+        <View style={{...styles.eattab_1, left : 40 + (eattabnum-1)*70}}><Text style={styles.textcenter}>{eattabname}</Text></View>
+        
         {eattabname == "과일" && <Image style={styles.eatslot1} source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>}
         {eattabname == "과일" && <Image style={styles.eatslot2} source={require('./assets/images/eat/watermelonslot.png')} resizeMode ="stretch"/>}
-        {eattabname == "과일" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
-        {eattabname == "과일" && <Image style={styles.eatslot4} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+        {eattabname == "과일" &&         <TouchableOpacity
+                style={styles.eatslot3}
+                onPress={hideeatDialog} activeOpacity={1}>
+        <Image source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+        }
 
         {eattabname == "육류" && <Image style={styles.eatslot1} source={require('./assets/images/eat/beef.png')} resizeMode ="stretch"/>}
         {eattabname == "육류" && <Image style={styles.eatslot2} source={require('./assets/images/eat/chicken.png')} resizeMode ="stretch"/>}
         {eattabname == "육류" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
-        {eattabname == "육류" && <Image style={styles.eatslot4} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
 
         {eattabname == "그외" && <Image style={styles.eatslot1} source={require('./assets/images/eat/coldpill.png')} resizeMode ="stretch"/>}
         {eattabname == "그외" && <Image style={styles.eatslot2} source={require('./assets/images/eat/headachepill.png')} resizeMode ="stretch"/>}
         {eattabname == "그외" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
-        {eattabname == "그외" && <Image style={styles.eatslot4} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
 
         {/* <TouchableOpacity
                 style={styles.eatslot1button}
@@ -1004,20 +1230,19 @@ function MainScreen({navigation}) {
           <Image source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>
         </TouchableOpacity> */}
 
-        <Text></Text>
+        {/* <Text></Text>
         <TouchableOpacity
                 style={styles.eattabbackbutton}
                 onPress={hideeatDialog} activeOpacity={1}>
           <Text style={styles.textcenter}>X</Text>
-        </TouchableOpacity> 
+        </TouchableOpacity>  */}
 
         {/* <View style={styles.eatslot1button}>
         <Button color={Colors.black} onPress={hideeatDialog} style={styles.eatslot1button}></Button> 
         </View> */}
 
-     </View>
-  </View>
-</Modal>
+</Dialog.Content>
+</Dialog>
 
 {/* <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
@@ -1032,24 +1257,18 @@ function MainScreen({navigation}) {
   </Dialog.Actions>
 </Dialog> */}
 
-<Modal
-          animationType="fade"
-          transparent={true}
-          visible={cleanvisible}
-          contentContainerStyle={{backgroundColor : 'white', padding : 20}}
-          >
-  <View style={styles.eatmodal}>
-     <View style={styles.textcenter}>
+     <Dialog visible={cleanvisible} dismissable={false} onDismiss={hidecleanDialog} style={styles.eatmodal}>
+      <Dialog.Content>
 
-        <Image style={styles.eatfruit} source={require('./assets/images/clean/brush.png')} resizeMode ="stretch"/>
+        {/* <Image style={styles.eatfruit} source={require('./assets/images/clean/brush.png')} resizeMode ="stretch"/>
         <Image style={styles.eatmeat} source={require('./assets/images/clean/detergent.png')} resizeMode ="stretch"/>
         <Image style={styles.eatetc} source={require('./assets/images/clean/tub.png')} resizeMode ="stretch"/>
 
         {cleantabname == "솔" && <Text style={{ ...styles.eattabname, backgroundColor: "#AAFFF0"}}>{cleantabname}</Text>}
         {cleantabname == "세정제" && <Text style={{ ...styles.eattabname, backgroundColor: "#3DACEA"}}>{cleantabname}</Text>}
-        {cleantabname == "욕조" && <Text style={{ ...styles.eattabname, backgroundColor: "#25308E"}}>{cleantabname}</Text>}
+        {cleantabname == "욕조" && <Text style={{ ...styles.eattabname, backgroundColor: "#25308E"}}>{cleantabname}</Text>} */}
 
-        {(cleantabname == "솔") ?
+        {/* {(cleantabname == "솔") ?
         <Button disabled onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text style={styles.white}>솔</Text></Button> :
         <Button disabled color={Colors.black} onPress={setcleantabbrush} style={styles.eatfruitbutton}><Text>솔</Text></Button>
         }
@@ -1068,47 +1287,75 @@ function MainScreen({navigation}) {
         <Button disabled color={Colors.black} onPress={setcleantabtub} style={styles.eatetcbutton}><Text>욕조</Text></Button>
         }
         {cleantabname != "욕조" && <TouchableOpacity style={styles.eatetcbutton} 
-        onPress={setcleantabtub} activeOpacity={1}><Text></Text></TouchableOpacity>}
+        onPress={setcleantabtub} activeOpacity={1}><Text></Text></TouchableOpacity>} */}
+
+        <Image style={styles.eatbg} source={require('./assets/images/clean/cleantabbg.png')} resizeMode ="stretch"/> 
+
+        <TouchableOpacity
+          style={styles.eatfruit}
+          onPress={setcleantabbrush} activeOpacity={1}>
+        <Text style={styles.textcenter}>솔</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.eatmeat}
+          onPress={setcleantabdetergent} activeOpacity={1}>
+        <Text style={styles.textcenter}>세정제</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.eatetc}
+          onPress={setcleantabtub} activeOpacity={1}>
+        <Text style={styles.textcenter}>욕조</Text>
+        </TouchableOpacity>
+
+        <View style={{...styles.cleantab_1, left : 40 + (cleantabnum-1)*70}}><Text style={styles.textcenter}>{cleantabname}</Text></View>
 
         {cleantabname == "솔" && <Image style={styles.eatslot1} source={require('./assets/images/clean/brushslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "솔" && <Image style={styles.eatslot2} source={require('./assets/images/clean/brushslot2.png')} resizeMode ="stretch"/>}
-        {cleantabname == "솔" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
-        {cleantabname == "솔" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "솔" && <TouchableOpacity
+          style={styles.eatslot3}
+          onPress={hidecleanDialog} activeOpacity={1}>
+        <Image source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+        }
 
         {cleantabname == "세정제" && <Image style={styles.eatslot1} source={require('./assets/images/clean/detergentslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "세정제" && <Image style={styles.eatslot2} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
         {cleantabname == "세정제" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
-        {cleantabname == "세정제" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
 
         {cleantabname == "욕조" && <Image style={styles.eatslot1} source={require('./assets/images/clean/tubslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "욕조" && <Image style={styles.eatslot2} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
         {cleantabname == "욕조" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
-        {cleantabname == "욕조" && <Image style={styles.eatslot4} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
 
-        <Text></Text>
+        {/* <Text></Text>
         <TouchableOpacity
                 style={styles.eattabbackbutton}
                 onPress={hidecleanDialog} activeOpacity={1}>
           <Text style={styles.textcenter}>X</Text>
+        </TouchableOpacity>  */}
+
+        </Dialog.Content>
+</Dialog>
+
+<Dialog visible={funvisible} onDismiss={hidefunDialog} style={styles.stageScene}>
+  <Dialog.Content>
+  <Image style={styles.minigamebg} source={require('./assets/images/fun/funbg.png')} resizeMode ="stretch"/>
+
+  <Paragraph style={styles.minigamebg2}></Paragraph>
+  <Paragraph style={styles.minigameimage}><Text style={styles.minigamefont}>미니게임 이미지</Text></Paragraph>
+
+  <TouchableOpacity
+                style={styles.gamestartbutton}
+                onPress={showminigameDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/fun/gamestartbutton.png')} resizeMode ="stretch"/>
         </TouchableOpacity> 
 
-     </View>
-  </View>
-</Modal>
+        <TouchableOpacity
+                style={styles.minigamexbutton}
+                onPress={hidefunDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/fun/xbutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
 
-<Dialog visible={funvisible} onDismiss={hidefunDialog} style={styles.foodlist}>
-  <Dialog.Title style={styles.textcenter}>미니게임 이름</Dialog.Title>
-  <Dialog.Content>
-    <Paragraph style={styles.minigameimage}><Text style={styles.minigamefont}>미니게임 이미지</Text></Paragraph>
-    <Button disabled color={Colors.black} onPress={() => {}} style={styles.minigameinfo1}></Button>
-    <Button disabled color={Colors.black} onPress={() => {}} style={styles.minigameinfo2}></Button>
-    <Button disabled color={Colors.black} onPress={() => {}} style={styles.minigameinfo3}></Button>
-    <Button color={Colors.black} onPress={showminigameDialog} style={styles.gamestartbutton}><Text style={styles.textcenter}>게임 시작</Text></Button>
   </Dialog.Content>
-  <Dialog.Actions>
-  <Button disabled color={Colors.black} onPress={hidefunDialog} style={styles.xbuttonbackground}></Button>
-    <Button color={Colors.black} onPress={hidefunDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
-  </Dialog.Actions>
 </Dialog>
 
 <Dialog visible={minigamevisible} onDismiss={hideminigameDialog} style={styles.scoreboard}>
@@ -1550,7 +1797,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 175,
     height: 175,
-    top: 400+20,
+    top: 400-10,
     left : 100+30,
   },
 
@@ -1572,16 +1819,47 @@ const styles = StyleSheet.create({
   
   stage:{
     position: 'absolute',
-    left : 0+3,
-    top: 100+5,
-  },
-
-  statefont:{
-    fontSize: 8,
+    left : 10-0.5,
+    top: 10,
+    fontSize: 12,
     color: 'black',
-    fontWeight : 'bold',
   },
 
+  stageScene:{
+    position : 'absolute',
+    left : -24,
+    top : -48,
+    width : WINDOW_W,
+    height : WINDOW_H,
+  },
+
+  mainstage:{
+    position: 'absolute',
+    width : 50,
+    height: 50,
+    left : 10,
+    top: 100,
+  },
+
+  stagebg:{
+    left : -26,
+    top : -20,
+    width : WINDOW_W,
+    height : WINDOW_H,
+  },
+
+  stagenature:{
+    position : 'absolute',
+    left : 50,
+    top : 480,
+
+  },
+
+  stagespace:{
+    position : 'absolute',
+    left : 50,
+    top : 480+100,
+  },
 
   gamemoneybackground:{
     position: 'absolute',
@@ -1609,6 +1887,114 @@ const styles = StyleSheet.create({
     top: 20,
     textAlign: 'center',
     textAlignVertical: 'center',
+  },
+
+  shopcoinimage:{
+    position: 'absolute',
+    width : 20,
+    height: 20,
+    left : 96+50+30,
+    top: 40,
+  },
+
+  shopcoinnum:{
+    position: 'absolute',
+    width : 100,
+    height: 20,
+    left : 120+50+10,
+    top: 30,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+
+  shoptabmenu:{
+    position: 'absolute',
+    left : 23,
+    top: 100,
+  },
+
+  shoptab1:{
+    position: 'absolute',
+    width : 70,
+    height: 32,
+    left : 23+0.5,
+    top: 100,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  shoptab2:{
+    position: 'absolute',
+    width : 70,
+    height: 32,
+    left : 23+0.5+73,
+    top: 100,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  shoptab3:{
+    position: 'absolute',
+    width : 70,
+    height: 32,
+    left : 23+0.5+73+73,
+    top: 100,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  shoptab4:{
+    position: 'absolute',
+    width : 70,
+    height: 32,
+    left : 23+0.5+73+73+73,
+    top: 100,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  shoptab5:{
+    position: 'absolute',
+    width : 70,
+    height: 32,
+    left : 23+0.5+73+73+73+73,
+    top: 100,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  shoptab1_1:{
+    position: 'absolute',
+    width : 70,
+    height: 32,
+    top: 100,
+    borderRadius : 20,
+    justifyContent: 'center',
+    backgroundColor : '#8775BC'
+  },
+
+  shopeatslot1:{
+    position: 'absolute',
+    left : 70,
+    top: 180,
+  },
+
+  shopeatslot2:{
+    position: 'absolute',
+    left : 70,
+    top: 180+120,
+  },
+
+  shopeatslot3:{
+    position: 'absolute',
+    left : 70,
+    top: 180+120+120,
+  },
+
+  shopeatslot4:{
+    position: 'absolute',
+    left : 70,
+    top: 180+120+120+120,
   },
 
   coinfont:{
@@ -1741,13 +2127,8 @@ const styles = StyleSheet.create({
 
   bottommenu:{
     position: 'absolute',
-    width : WINDOW_W,
-    height: 100,
-    left : 0,
+    left : 30,
     bottom: 0,
-    borderTopLeftRadius : 20,
-    borderTopRightRadius : 20,
-    backgroundColor : 'lightgray',
   },
 
   eatbackground:{
@@ -1762,18 +2143,20 @@ const styles = StyleSheet.create({
 
   eatgauge:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 20-5,
-    bottom: 10,
+    left : 110,
+    bottom: 5,
+  },
+
+  eatgaugebg:{
+    position: 'absolute',
+    left : 110,
+    bottom: 5,
   },
 
   eatbutton:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 20-5,
-    bottom: 10,
+    left : 40,
+    bottom: 5,
   },
 
   eatbuttonfont:{
@@ -1791,20 +2174,22 @@ const styles = StyleSheet.create({
     backgroundColor : '#A9A8B8',
   },
 
+  cleangaugebg:{
+    position: 'absolute',
+    left : 110+80,
+    bottom: 5,
+  },
+
   cleangauge:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 120-5,
-    bottom: 10,
+    left : 110+80,
+    bottom: 5,
   },
 
   cleanbutton:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 120-5,
-    bottom: 10,
+    left : 40+ 85,
+    bottom: 5,
   },
 
   cleanbuttonfont:{
@@ -1822,20 +2207,22 @@ const styles = StyleSheet.create({
     backgroundColor : '#A9A8B8',
   },
 
+  fungaugebg:{
+    position: 'absolute',
+    left : 110+80+85,
+    bottom: 5,
+  },
+
   fungauge:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 210+5,
-    bottom: 10,
+    left : 110+80+85,
+    bottom: 5,
   },
 
   funbutton:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 210+5,
-    bottom: 10,
+    left : 40+85+85,
+    bottom: 5,
   },
 
   funbuttonfont:{
@@ -1853,20 +2240,22 @@ const styles = StyleSheet.create({
     backgroundColor : 'gray',
   },
 
+  sleepgaugebg:{
+    position: 'absolute',
+    left : 110+80+85+85,
+    bottom: 5,
+  },
+
   sleepgauge:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 310+5,
-    bottom: 10,
+    left : 110+80+85+85,
+    bottom: 5,
   },
 
   sleepbutton:{
     position: 'absolute',
-    width : 80,
-    height: 80,
-    left : 310+5,
-    bottom: 10,
+    left : 40+ 85+85+85,
+    bottom: 5,
   },
 
   sleepbuttonfont:{
@@ -1939,13 +2328,31 @@ const styles = StyleSheet.create({
     fontSize : 15,
   },
 
+  minigamebg:{
+    position: 'absolute',
+    width : WINDOW_W,
+    height: WINDOW_H,
+    left : 0,
+    top : 3,
+  },
+
+  minigamebg2 : {
+    position: 'absolute',
+    width : 300,
+    height: 500,
+    left : 55,
+    top : 90,
+    borderRadius : 20,
+    backgroundColor : '#EEEEEE',
+  },
+
   minigameimage:{
     position: 'absolute',
     width : 250,
-    height: 240,
-    left : 50,
-    top : 0,
-    backgroundColor : '#CFCFD7',
+    height: 300,
+    left : 80,
+    top : 120,
+    backgroundColor : '#C4C4C4',
     textAlign:'center',
     textAlignVertical: 'center',
     borderRadius: 20,
@@ -1955,41 +2362,17 @@ const styles = StyleSheet.create({
     fontSize : 15,
   },
 
-  minigameinfo1:{
-    position: 'absolute',
-    width : 200,
-    height: 5,
-    left : 75,
-    top : 270,
-    backgroundColor : 'gray',
-  },
-
-  minigameinfo2:{
-    position: 'absolute',
-    width : 200,
-    height: 5,
-    left : 75,
-    top : 300,
-    backgroundColor : 'gray',
-  },
-
-  minigameinfo3:{
-    position: 'absolute',
-    width : 200,
-    height: 5,
-    left : 75,
-    top : 330,
-    backgroundColor : 'gray',
-  },
 
   gamestartbutton:{
     position: 'absolute',
-    width : 120,
-    left : 120,
-    bottom : -380,
-    backgroundColor : '#CFCFD7',
-    textAlign:'center',
-    borderRadius: 10,
+    left : 130,
+    top : 520,
+  },
+
+  minigamexbutton:{
+    position: 'absolute',
+    left : 327,
+    top : 97,
   },
 
   scoreboard:{
@@ -2075,10 +2458,11 @@ const styles = StyleSheet.create({
   eatmodal:{
     position: 'absolute',
     width : 300,
-    height : 500,
-    left : 55,
-    top : 50,
-    backgroundColor : 'white',
+    height : 550,
+    left : 25,
+    top : 30,
+    backgroundColor : '#EEEEEE',
+    borderRadius : 20,
   },
 
   eattabname:{
@@ -2090,12 +2474,34 @@ const styles = StyleSheet.create({
     padding : 10,
   },
 
+  eattab_1 :{
+    position: 'absolute',
+    width : 80,
+    height : 25,
+    top : 40,
+    borderRadius : 20,
+    backgroundColor : '#FFCC18',
+    justifyContent: 'center',
+  },
+
+  cleantab_1 :{
+    position: 'absolute',
+    width : 80,
+    height : 25,
+    top : 40,
+    borderRadius : 20,
+    backgroundColor : '#35AFF3',
+    justifyContent: 'center',
+  },
+
   eatfruit :{
     position: 'absolute',
-    width : 100,
-    height : 50,
-    left : 0,
-    top : -10,
+    width : 80,
+    height : 25,
+    left : 40,
+    top : 40,
+    borderRadius : 20,
+    justifyContent: 'center'
   },
 
   eatfruitbutton :{
@@ -2108,10 +2514,12 @@ const styles = StyleSheet.create({
 
   eatmeat:{
     position: 'absolute',
-    width : 100,
-    height : 50,
-    left : 100,
-    top : -10,
+    width : 80,
+    height : 25,
+    left : 40+70,
+    top : 40,
+    borderRadius : 20,
+    justifyContent: 'center'
   },
 
   eatmeatbutton :{
@@ -2124,10 +2532,12 @@ const styles = StyleSheet.create({
 
   eatetc:{
     position: 'absolute',
-    width : 100,
-    height : 50,
-    left : 200,
-    top : -10,
+    width : 80,
+    height : 25,
+    left : 40+140,
+    top : 40,
+    borderRadius : 20,
+    justifyContent: 'center'
   },
 
   eatetcbutton :{
@@ -2156,21 +2566,17 @@ const styles = StyleSheet.create({
 
   eatslot2:{
     position: 'absolute',
-    top : 100+100,
+    top : 100+120,
     left : 15,
   },
 
   eatslot3:{
     position: 'absolute',
-    top : 100+100+100,
+    top : 100+120+120,
     left : 15,
   },
 
-  eatslot4:{
-    position: 'absolute',
-    top : 100+100+100+100,
-    left : 15,
-  },
+
 
   eattabbackbutton:{
     backgroundColor: Colors.blue50,
@@ -2387,8 +2793,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left : 30,
     width : 300,
-    height : 430,
-    backgroundColor: '#8E9AFF',
+    height : 430+30,
+    backgroundColor: '#00ff0000',
     borderRadius : 30,
   },
 
@@ -2595,7 +3001,7 @@ const styles = StyleSheet.create({
     width : 130+10,
     height : 30,
     left : 20-10,
-    top : -100-5+20,
+    top : -100-5+20+20,
   },
 
   questmenu1:{
@@ -2619,19 +3025,19 @@ const styles = StyleSheet.create({
     width : 130+10,
     height : 30,
     left : 150,
-    top : -100-5+20,
+    top : -100-5+20+20,
   },
 
   menu1num:{
     position: 'absolute',
     left : 75,
-    top : -95+20,
+    top : -95+20+20,
   },
 
   menu2num:{
     position: 'absolute',
     left : 215,
-    top : -95+20,
+    top : -95+20+20,
   },
 
   menubg1 : {
@@ -2639,14 +3045,22 @@ const styles = StyleSheet.create({
     width : 300,
     height : 400+30,
     left : 0,
-    bottom : -335-1,
+    bottom : -335-1-30,
+  },
+
+  eatbg:{
+    position: 'absolute',
+    width : 220,
+    height : 30,
+    left : 40,
+    top : 40,
   },
 
   menufont:{
     position: 'absolute',
     left : 132,
-    top : -50,
-    color : 'white',
+    top : -80+50,
+    color : 'black',
     fontSize : 20,
     paddingTop : 10,
   },
@@ -2827,7 +3241,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50,
+    bottom : -50-30+10,
   },
 
   menuquestbutton:{
@@ -2835,7 +3249,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50+5,
+    bottom : -50+5-30+10,
   },
 
   menushop :{
@@ -2843,7 +3257,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -130,
+    bottom : -130-30,
   },
 
   menushopbutton :{
@@ -2851,7 +3265,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -130+5,
+    bottom : -130+5-30,
   },
 
   menufurniture:{
@@ -2859,7 +3273,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -210,
+    bottom : -210-30-10,
   },
 
   menufurniturebutton:{
@@ -2867,7 +3281,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -210+5,
+    bottom : -210+5-30-10,
   },
 
   menusetting:{
@@ -2875,7 +3289,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -290,
+    bottom : -290-30-20,
   },
 
   menusettingbutton:{
@@ -2883,7 +3297,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -290+5,
+    bottom : -290+5-30-20,
   },
 
   menuachieve:{
@@ -2958,7 +3372,13 @@ const styles = StyleSheet.create({
 
   dicpage2:{
     position: 'absolute',
-    left : 240+70,
+    left : 240+50,
+    top : 32,
+  },
+  
+  dicpage3:{
+    position: 'absolute',
+    left : 240+50+50,
     top : 32,
   },
 
@@ -3010,7 +3430,7 @@ const styles = StyleSheet.create({
   dicinfopet1:{
     position: 'absolute',
     left : 20,
-    top : 80,
+    top : 20,
   },
 
   todayquest:{
@@ -3084,23 +3504,23 @@ const styles = StyleSheet.create({
     left : 47,
   },
 
-  shopcoinimage:{
-    position: 'absolute',
-    width : 20,
-    height: 20,
-    left : 10,
-    top: -55,
-  },
+  // shopcoinimage:{
+  //   position: 'absolute',
+  //   width : 20,
+  //   height: 20,
+  //   left : 10,
+  //   top: -55,
+  // },
 
-  shopcoinnum:{
-    position: 'absolute',
-    width : 80,
-    height : 30,
-    left : 5,
-    top: -60,
-    justifyContent: 'center',
-    backgroundColor: 'lightgray',
-  },
+  // shopcoinnum:{
+  //   position: 'absolute',
+  //   width : 80,
+  //   height : 30,
+  //   left : 5,
+  //   top: -60,
+  //   justifyContent: 'center',
+  //   backgroundColor: 'lightgray',
+  // },
 
   shopcoinfont:{
     fontSize: 10,
