@@ -6,42 +6,41 @@ import Animated, { Easing, useSharedValue, useDerivedValue, interpolateColors, w
 
 
 const Box = (props) => {
+    //console.log('Box', props);
     const x = useSharedValue(0);
     const y = useSharedValue(0);
     const color = useSharedValue("blue");
     const scale = useSharedValue(1);
     const [active, setActive] = useState(false);
-        
-    useEffect(() => {
-        activate(props.active);
-      }, [props.active]);
-    
-    useEffect(() => {
-       switch(props.action){
-           case "jump" : jump();
-           setTimeout(()=>{
-               props.cleanupAction();
-           }, 200);
-           break;
-       }
-    }, [props.action]);
 
+    useEffect( ()=> {
+        activate( props.active);
+    }, [props.active]);
+
+    useEffect( ()=> {
+        switch (props.action) {
+        case "jump": 
+            jump(); 
+            setTimeout( ()=> {
+                props.cleanupAction();
+            }, 200);
+            break;
+        }
+
+    }, [props.action]);
+        
     const jump = () => {
-            x.value = withTiming(x.value+20, {duration: 200, ease:Easing.linear});
-            y.value = repeat(withTiming(y.value -80, {duration:100}), 2, true);
-            //sequence(withTiming(y.value -80, {duration:100}), withTiming(y.value, {duration:100}));
-     }
+        x.value = withTiming(x.value + 10, {duration: 200, ease: Easing.linear});
+        y.value = repeat(withTiming(y.value-80, { duration: 100}), 2, true);
+        //sequence(withTiming(y.value-80, {duration:100}), withTiming(y.value, {duration:100}));
+    }
 
     const blink = () => { }
 
     const setColor = (c)=> color.value = c;
 
     const activate = (newActive=true)=> {
-        if (newActive) {
-            setColor("orange");
-        } else {
-            setColor("blue");
-        }
+        setColor(newActive ? "orange" : "blue");
         setActive(newActive);
     }
     
@@ -50,7 +49,6 @@ const Box = (props) => {
             ctx.startX = x.value;
             ctx.startY = y.value;
             ctx.dragged = false;
-            jump()
         },
         onActive: (event, ctx) => {
             if (ctx.dragged == false) {
@@ -67,13 +65,18 @@ const Box = (props) => {
         }
     });
 
-    const onTap = () => {}
+    const onTap = () => {
+        //jump();
+        props.activate(!active);
+    }
 
     const animatedStyle = useAnimatedStyle( ()=> {
         return {
             borderRadius: 5,
             elevation: 10,
             backgroundColor: color.value,
+            left: props.left,
+            top: props.top,
             transform: [ 
                 {translateX: x.value },
                 {translateY: y.value },
@@ -86,8 +89,8 @@ const Box = (props) => {
             <Animated.View style={[styles.box, animatedStyle]} >
                 <TouchableWithoutFeedback 
                     onPress = {onTap} >
-                    <Text style={styles.commandText} >
-                        test
+                    <Text style={styles.commandText} ellipsizeMode="tail">
+                        {props.name}
                     </Text>
                 </TouchableWithoutFeedback>
             </Animated.View>
@@ -96,57 +99,96 @@ const Box = (props) => {
 }
 
 const Boxes = (props) => {
-    const [box, setBox] = useState({
-        name : 'box1', left:0, right:0, height: 100, width:100, activate : false
-    });
+    const [boxes, setBoxes] = useState([{
+        name: 'box 1',
+        left: 0, top: 0, width: 100, height: 100, active: false
+    }, {
+        name: 'box 2',
+        left: 100, top: 100, width: 100, height: 100, active: false
+        }
+    ]); // react hook
 
     const intersect = ( x, y, w, h, x1, y1, w1, h1) => 
         y + h >= y1 && y1 + h1 >= y && x + w >= x1 && x1 + w1 >= x;
 
     const cleanupAction = () => {
-        setBox({ ...box, action : null });
+        let myBoxes = [ ...boxes ];
+        myBoxes.forEach( (box)=> {
+            if (box.active == true) 
+                box.action = null;            
+        });
+        setBoxes(myBoxes);
+    }
+
+    const add = ()=> {
+        let myBoxes = [...boxes];
+        myBoxes.push( {
+            name: `box ${Math.floor(Math.random()*100000)}`, 
+            left: Math.random()*300, top: Math.random()*600,
+            width: 100, height: 100, active: false
+        });
+        setBoxes(myBoxes);
+    }
+
+    const remove = () => {
+        let myBoxes = boxes.filter( (box) => box.active === false);
+        setBoxes(myBoxes);
     }
 
     const jump = ()=> {
-        setBox({...box, action : "jump"});
+        //console.log("Boxes jump called");
+        let myBoxes = [...boxes];
+        myBoxes.forEach( (box)=> {
+            if (box.active == true) 
+                box.action = "jump";            
+        });
+        setBoxes(myBoxes);
+    }
+    const blink = () => {}    
+
+    const activate = (name, newActive)=> {
+        let myBoxes = [ ...boxes ]; // spread operator ... 전개 연산자
+        myBoxes.forEach( (box)=> {
+            if (box.name == name) 
+                box.active = newActive;            
+        });
+        setBoxes(myBoxes);
     }
 
-    const blink = () => {}
-
-    const activate = (newActivate) => {
-        setBox({ ...box, activate : newActivate });
+    let boxesRender = [];
+    for (let i = 0; i < boxes.length; i++) {
+        let box = boxes[i];
+        boxesRender.push( <Box name={box.name} key={box.name}
+            left={box.left} top={box.top} 
+            width={box.width} height={box.height}
+            active={box.active} action={box.action}
+            cleanupAction={cleanupAction}
+            activate={(flag)=> activate(box.name, flag)}
+            />
+        );
     }
-    
-    let boxRender = null;
-    if(box != null){
-        boxRender = <Box name={box.name} key={box.name} left={box.left} right={box.right} width={box.width} 
-        height={box.height} activate={box.activate} action={box.action} />;
-    }
 
-    return( 
-    
+    return ( 
     <View key="boxContainer" style={styles.absoluteContainer} >
-        {
-            /* box 정보로부터 Box 콤포넌트 구축 */
-            boxRender
-        }
         <Text></Text>
         <View key="buttons" style={styles.menu} >
+            <Button onPress={add} >추가</Button>
+            <Button onPress={remove} >삭제</Button>
             <Button onPress={jump} >점프</Button>
             <Button onPress={blink} >깜박</Button>
-            <Button onPress={()=>console.log(box)} >박스 정보보기</Button>
-            <Button onPress={() => activate(!box.active)} >활성화</Button>
+            <Button onPress={()=>console.log(boxes)} >박스 정보보기</Button>
         </View>
-    </View>
-    )
+        { boxesRender }
+    </View>);
 }
 
 export class ReanimatedScreen3 extends React.Component {
     constructor(props) {
         super(props);
     }
-    
+
     render() {
+        
         return (
             <View style={styles.absoluteContainer}>
                 <View style={[styles.container, {backgroundColor: 'yellow'}]}>
@@ -170,7 +212,7 @@ const styles = StyleSheet.create({
         bottom: 0,
     },
     menu: {
-        height:30, 
+        height:36, 
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent: 'center'

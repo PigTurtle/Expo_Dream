@@ -30,6 +30,7 @@ import { MyModal } from './src/MyModal';
 import { ReanimatedScreen } from './src/ReanimatedBox';
 import { ReanimatedScreen2 } from './src/ReanimatedBox2';
 import { ReanimatedScreen3 } from './src/ReanimatedBox3';
+import { MovingPet } from './src/MainPetMove';
 
 import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
   useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
@@ -382,6 +383,14 @@ function MainScreen({navigation}) {
     setfurniturecheckVisible(false);
   }
 
+  const [furnitureslot1Visible, setfurnitureslot1Visible] = useState(false);
+  const showfurnitureslot1 = () => {
+    setfurnitureslot1Visible(true);
+    setfurniturecheckVisible(false);
+  }
+
+
+
   const [foodvisible, setfoodVisible] = useState(false);
   const showfoodDialog = () => setfoodVisible(true);
   const hidefoodDialog = () => {
@@ -472,9 +481,17 @@ function MainScreen({navigation}) {
   const setquestdaily = () => setquest("daily");
   const setquestattend = () => setquest("attend");
 
-  const [furniture, setfurniture] = useState("wall");
-  const setfurniturewall = () => setfurniture("wall");
-  const setfurniturefloor = () => setfurniture("floor");
+
+  const [furnituretabnum, setfurnituretabnum] = useState(1);
+  const [furniture, setfurniture] = useState("벽 가구");
+  const setfurniturewall = () => {
+    setfurnituretabnum(1);
+    setfurniture("벽 가구");
+  }
+  const setfurniturefloor = () => {
+    setfurnituretabnum(2);
+    setfurniture("바닥 가구");
+  }
 
   // const renderEatFruit = ({ item }) => {
   //   return (
@@ -489,11 +506,12 @@ function MainScreen({navigation}) {
     <View style={styles.container}>
     <Image source={require('./assets/images/main/main.png')} style={styles.main} resizeMode ="stretch"/>
 
-    {(lightvisible == true) ?
-        <DraggableBox /> : <Text></Text>
-    }
+    {lightvisible == true && <DraggableBox /> }
 
-    <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/>
+    {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} style={styles.furniturewallslot1} resizeMode ="stretch"/> }
+
+    <MovingPet />
+    {/* <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/> */}
     <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/>
 
     <TouchableOpacity
@@ -1042,10 +1060,9 @@ function MainScreen({navigation}) {
 </Dialog> */}
 
 <Dialog visible={furniturevisible} onDismiss={hidefurnitureDialog} style={styles.quest}>
-  <Dialog.Title style={styles.textcenter}>가구 목록</Dialog.Title>
   <Dialog.Content>
 
-  <TouchableOpacity
+  {/* <TouchableOpacity
                 style={styles.questmenu1}
                 onPress={setfurniturewall} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/tab1.png')} resizeMode ="stretch"/>
@@ -1062,19 +1079,42 @@ function MainScreen({navigation}) {
   {(furniture == "wall") ?
       <Text style={{...styles.furnituretitlefont, backgroundColor: "#F6C473"}}>벽 가구</Text> :
       <Text style={{...styles.furnituretitlefont, backgroundColor: "#50497F"}}>바닥 가구</Text>
-  }
+  } */}
 
-{furniture == "wall" &&   <TouchableOpacity
-                style={styles.dailyslot1}
+<Text style={styles.furnituretabbg}></Text>
+
+<TouchableOpacity
+                style={styles.furnituretab1}
+                onPress={setfurniturewall} activeOpacity={1}>
+        <Text style={styles.textcenter}>벽 가구</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.furnituretab2}
+                onPress={setfurniturefloor} activeOpacity={1}>
+        <Text style={styles.textcenter}>바닥 가구</Text>
+        </TouchableOpacity>
+
+<View style={{...styles.furnituretab, left : 50 + (furnituretabnum-1)*100}}><Text style={styles.textcenter}>{furniture}</Text></View>
+
+{furniture == "벽 가구" &&   <TouchableOpacity
+                style={styles.furnitureslot1}
                 onPress={showfurniturecheckDialog} activeOpacity={1}>
-          <Image source={require('./assets/images/furnitureposition/slot1.png')} resizeMode ="stretch"/>
+          <Image source={require('./assets/images/furnitureposition/wallplant1slot.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 
-{furniture == "wall" &&   <TouchableOpacity
+{furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/curtain1slot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
+{furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/curtain1slot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
+
+{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/footmat1slot.png')} style={styles.furnitureslot1} resizeMode ="stretch"/> }
+{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furmat1slot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
+{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furmat1slot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
+
+
+{/* {furniture == "wall" &&   <TouchableOpacity
                 style={styles.furniturexbutton}
                 onPress={hidefurnitureDialog} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/xbutton.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>}
+        </TouchableOpacity>} */}
 
 
   </Dialog.Content>
@@ -1089,7 +1129,7 @@ function MainScreen({navigation}) {
     <Button disabled color={Colors.black} onPress={showfurniture} style={styles.furnitureyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
     <TouchableOpacity
                 style={styles.furnitureyesbuttonbg}
-                onPress={showfurniture} activeOpacity={1}><Text></Text>
+                onPress={showfurnitureslot1} activeOpacity={1}><Text></Text>
     </TouchableOpacity>
 
     <Button disabled color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
@@ -1379,15 +1419,19 @@ function MainScreen({navigation}) {
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={sleepvisible} onDismiss={hidesleepDialog} style={{ backgroundColor: Colors.grey500 }}>
-  <Dialog.Title style={styles.textcenter}>잠자는 시간</Dialog.Title>
+<Dialog visible={sleepvisible} onDismiss={hidesleepDialog} style={styles.stageScene}>
   <Dialog.Content>
-    <Paragraph style={styles.textcenter}>피곤함 저하</Paragraph>
+  <Image style={styles.sleepbg} source={require('./assets/images/sleep/bg.png')} resizeMode ="stretch"/>
+  <Image style={styles.sleeppet} source={require('./assets/images/sleep/pet1.png')} resizeMode ="stretch"/>
+  <Image style={styles.sleeptime} source={require('./assets/images/sleep/sleeptime.png')} resizeMode ="stretch"/>
+  <Image style={styles.sleepbottombg} source={require('./assets/images/sleep/bottombg.png')} resizeMode ="stretch"/>
+  <Image style={styles.skipsleeptime} source={require('./assets/images/sleep/skipsleeptime.png')} resizeMode ="stretch"/>
+  <TouchableOpacity
+                style={styles.sleepusebutton}
+                onPress={hidesleepDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/sleep/usebutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
   </Dialog.Content>
-  <Dialog.Actions>
-  <Button disabled color={Colors.black} onPress={hidesleepDialog} style={styles.xbuttonbackground}></Button>
-    <Button color={Colors.black} onPress={hidesleepDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
-  </Dialog.Actions>
 </Dialog>
 
 
@@ -1791,6 +1835,12 @@ const styles = StyleSheet.create({
     left : 0,
     top: 350,
     backgroundColor : '#A9A8B8',
+  },
+
+  furniturewallslot1:{
+    position: 'absolute',
+    left : 0,
+    top: 0,
   },
 
   mainpetbg:{
@@ -2455,6 +2505,48 @@ const styles = StyleSheet.create({
   },
 
 
+  sleepbg:{
+    position: 'absolute',
+    width : WINDOW_W,
+    height: WINDOW_H,
+    left : -2,
+    top : 4,
+  },
+
+  sleeppet:{
+    position: 'absolute',
+    left : 112,
+    top : 400+10,
+  },
+
+  sleeptime:{
+    position: 'absolute',
+    left : 60,
+    top : 100,
+  },
+
+  sleepbottombg:{
+    position: 'absolute',
+    width : WINDOW_W,
+    left : 0,
+    top : 595,
+  },
+
+  skipsleeptime :{
+    position: 'absolute',
+    left : 170,
+    top : 610,
+  },
+
+  sleepusebutton :{
+    position: 'absolute',
+    left : 145,
+    top : 650,
+  },
+
+
+
+
   eatmodal:{
     position: 'absolute',
     width : 300,
@@ -2591,7 +2683,7 @@ const styles = StyleSheet.create({
 
 
   furniturecheck:{
-    backgroundColor: '#50497F',
+    backgroundColor: '#EEEEEE',
     position: 'absolute',
     left : 30,
     width : 300,
@@ -2693,7 +2785,7 @@ const styles = StyleSheet.create({
 
   furniturecheckfont:{
     fontSize : 15,
-    color : 'white',
+    color : 'black',
   },
 
   furnitureyesbutton:{
@@ -2701,9 +2793,11 @@ const styles = StyleSheet.create({
     width : 120,
     left : 20,
     bottom : -20,
-    backgroundColor : '#F6C473',
+    backgroundColor : '#FFFFFF',
     textAlign:'center',
     borderRadius: 10,
+    borderWidth : 1,
+    borderColor : '#665AAC',
   },
 
   furnitureyesbuttonbg:{
@@ -2719,9 +2813,11 @@ const styles = StyleSheet.create({
     width : 120,
     right : 20,
     bottom : -20,
-    backgroundColor : '#F1ECF5',
+    backgroundColor : '#FFFFFF',
     textAlign:'center',
     borderRadius: 10,
+    borderWidth : 1,
+    borderColor : '#665AAC',
   },
 
   furniturenobuttonbg:{
@@ -3097,6 +3193,67 @@ const styles = StyleSheet.create({
     left : 265,
     top : -30,
   },
+
+  furnituretabbg :{
+    position: 'absolute',
+    width : 200,
+    height: 32,
+    left : 50,
+    top: 50,
+    borderRadius : 20,
+    justifyContent: 'center',
+    borderWidth : 1,
+    borderColor : '#665AAC'
+  },
+
+  furnituretab1:{
+    position: 'absolute',
+    width : 100,
+    height: 32,
+    left : 50,
+    top: 50,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  furnituretab2:{
+    position: 'absolute',
+    width : 100,
+    height: 32,
+    left : 50+100,
+    top: 50,
+    borderRadius : 20,
+    justifyContent: 'center',
+  },
+
+  furnituretab:{
+    position: 'absolute',
+    width : 100,
+    height: 32,
+    top: 50,
+    borderRadius : 20,
+    justifyContent: 'center',
+    backgroundColor : '#665AAC'
+  },
+
+  furnitureslot1:{
+    position: 'absolute',
+    left : 20,
+    top : 120,
+  },
+
+  furnitureslot2:{
+    position: 'absolute',
+    left : 20,
+    top : 120+120,
+  },
+
+  furnitureslot3:{
+    position: 'absolute',
+    left : 20,
+    top : 120+120+120,
+  },
+
 
   attendbg:{
     position: 'absolute',
