@@ -3,7 +3,7 @@ import React, {useState, Component, useEffect}  from 'react';
 import { StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, FlatList, AppRegistry, Dimensions,
   TouchableHighlight, TouchableWithoutFeedback, Alert, } from 'react-native';
 import { DefaultTheme, Text, Button, RadioButton, TouchableRipple, ToggleButton, TextInput , Paragraph, Dialog, Portal, Appbar, 
-  ProgressBar, Colors, Provider as PaperProvider } from 'react-native-paper';
+  ProgressBar, Colors, PaperProvider } from 'react-native-paper';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -31,6 +31,7 @@ import { ReanimatedScreen } from './src/ReanimatedBox';
 import { ReanimatedScreen2 } from './src/ReanimatedBox2';
 import { ReanimatedScreen3 } from './src/ReanimatedBox3';
 import { MovingPet } from './src/MainPetMove';
+import { MovingChoicePet } from './src/PetchoiceMove';
 
 import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
   useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
@@ -156,29 +157,35 @@ return(
     <Button disabled onPress={() => {}} style={styles.petchoiceborder}></Button>
     } */}
 
-    {(buttonable == false) ?
+    {/* {(buttonable == false) ?
     <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet1bg} resizeMode ="stretch"/> :
     <Image source={require('./assets/images/petchoice/petbg2.png')} style={styles.pet1bg} resizeMode ="stretch"/>
-    }
+    } */}
 
     {/* <Image source={require('./assets/images/petchoice/pet1.png')} style={styles.pet1bg} resizeMode ="stretch"/>
     <Button onPress={isbottondown} style={styles.pet1}></Button> */}
 
-    <TouchableOpacity
+    {/* <TouchableOpacity
                 style={styles.pet1}
                 onPress={isbottondown} activeOpacity={1}>
           <Image source={require('./assets/images/petchoice/pet1.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>
-
+        </TouchableOpacity> */}
 
     {/* <TouchableOpacity onPress={isbottondown}>
     <Image style={styles.pet1} resizeMode ="stretch" source={require('./assets/images/petchoice/pet1.png')} />
     </TouchableOpacity> */}
 
-    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet2} resizeMode ="stretch"/>
+    {/* <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet2} resizeMode ="stretch"/>
     <Image source={require('./assets/images/petchoice/pet2.png')} style={styles.pet2} resizeMode ="stretch"/>
     <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet3} resizeMode ="stretch"/>
-    <Image source={require('./assets/images/petchoice/pet3.png')} style={styles.pet3} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/pet3.png')} style={styles.pet3} resizeMode ="stretch"/> */}
+
+    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet1bg} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet2} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet3} resizeMode ="stretch"/>
+
+    <MovingChoicePet />
+
     <Image source={require('./assets/images/petchoice/petinfo.png')} style={styles.petinfobg} resizeMode ="stretch"/>
     <Text style={styles.petchoiceinfo}>자연의 싱그러움이 느껴지는</Text> 
     <Text style={styles.petchoiceinfo2}> 미지의 알. </Text> 
@@ -189,6 +196,7 @@ return(
     <TouchableOpacity disabled style={styles.choicebutton} onPress={MoveToMainStack}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>:
     <TouchableOpacity style={styles.choicebutton} onPress={MoveToMainStack} activeOpacity={1}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>
     }
+
   </View>
 );
 }
@@ -380,16 +388,42 @@ function MainScreen({navigation}) {
     setlightVisible(true);
   }
   const hidefurniturecheckDialog = () => {
+    setfurnitureslot1Visible(false);
     setfurniturecheckVisible(false);
   }
 
   const [furnitureslot1Visible, setfurnitureslot1Visible] = useState(false);
-  const showfurnitureslot1 = () => {
+  const addfurnitureslot1 = () => {
+    let myfws = [ ...furniturewalls];
+    for(let i =0; i < myfws.length; i++){
+      if(myfws[i].active == false)
+      {
+      myfws[i].active = true;
+      break;
+      }
+    }
+
+    setfurniturewalls(myfws);
+
     setfurnitureslot1Visible(true);
     setfurniturecheckVisible(false);
   }
 
+  const removefurnitureslot1 = () => {
+    let myfws = [ ...furniturewalls];
+    for(let i =0; i < myfws.length; i++){
+      if(myfws[i].active == true)
+      {
+      myfws[i].active = false;
+      break;
+      }
+    }
 
+    setfurniturewalls(myfws);
+
+    setfurnitureslot1Visible(false);
+    setfurniturecheckVisible(false);
+  }
 
   const [foodvisible, setfoodVisible] = useState(false);
   const showfoodDialog = () => setfoodVisible(true);
@@ -502,15 +536,37 @@ function MainScreen({navigation}) {
   //   );
   //   }
   
+  const [furniturewalls, setfurniturewalls] = useState([{
+    key: 'slot1', left : 0, active : false,
+  }, {
+    key: 'slot2', left : 300, active : false,
+    },
+  ]);
+
+  let furniturewallsRender = [];
+  for (let i = 0; i < furniturewalls.length; i++) {
+      let fw = furniturewalls[i];
+
+      if(fw.active)
+      {
+      furniturewallsRender.push( 
+        <Image source={require('./assets/images/main/furniturewallslot1.png')} style={{...styles.furniturewallslot1, left : fw.left}} resizeMode ="stretch"/>
+      );
+      }
+  }
+
   return(
     <View style={styles.container}>
     <Image source={require('./assets/images/main/main.png')} style={styles.main} resizeMode ="stretch"/>
 
     {lightvisible == true && <DraggableBox /> }
 
-    {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} style={styles.furniturewallslot1} resizeMode ="stretch"/> }
-
-    <MovingPet />
+    {furniturewallsRender}
+    {/* {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
+    style={styles.furniturewallslot1} resizeMode ="stretch"/> }
+    {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
+    style={{...styles.furniturewallslot1, left : 300}} resizeMode ="stretch"/> } */}
+    <MovingPet /> 
     {/* <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/> */}
     <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/>
 
@@ -1120,7 +1176,7 @@ function MainScreen({navigation}) {
   </Dialog.Content>
 </Dialog>
 
-<Dialog visible={furniturecheckvisible} onDismiss={hidefurniturecheckDialog} style={styles.furniturecheck}>
+<Dialog visible={furniturecheckvisible} onDismiss={hidefurniturecheckDialog} style={styles.furniturecheck} >
   <Dialog.Content>
   <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'벽걸이 식물'</Text></Paragraph>
     <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>이 가구를 배치하시겠습니까?</Text></Paragraph>
@@ -1129,16 +1185,18 @@ function MainScreen({navigation}) {
     <Button disabled color={Colors.black} onPress={showfurniture} style={styles.furnitureyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
     <TouchableOpacity
                 style={styles.furnitureyesbuttonbg}
-                onPress={showfurnitureslot1} activeOpacity={1}><Text></Text>
+                onPress={addfurnitureslot1} activeOpacity={1}><Text></Text>
     </TouchableOpacity>
 
     <Button disabled color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
     <TouchableOpacity
                 style={styles.furniturenobuttonbg}
-                onPress={hidefurniturecheckDialog} activeOpacity={1}><Text></Text>
+                onPress={removefurnitureslot1} activeOpacity={1}><Text></Text>
     </TouchableOpacity>
   </Dialog.Actions>
 </Dialog>
+
+
 
 
 <Dialog visible={dictionaryvisible} onDismiss={hidedictionaryDialog} style={styles.dictionary}>
