@@ -1,7 +1,7 @@
 import React, { Component, useState, useRef, useEffect } from 'react';
 import { Dimensions, View, Image, StyleSheet, TouchableOpacity, Pressable, TouchableWithoutFeedback } from 'react-native';
 import { Modal, Text, Button, TouchableRipple } from 'react-native-paper';
-import { State, TapGestureHandler, PanGestureHandler, RotationGestureHandler } from 'react-native-gesture-handler';
+import { State, TapGestureHandler, PanGestureHandler, RotationGestureHandler, gestureHandlerRootHOC } from 'react-native-gesture-handler';
 import Animated, { Easing, useSharedValue, useDerivedValue, interpolateColors, withSpring, useAnimatedStyle, repeat, delay, useAnimatedGestureHandler, withTiming, sequence, EasingNode, cancelAnimation } from 'react-native-reanimated';
 
 
@@ -14,7 +14,6 @@ const Pet = (props) => {
     const ismove = useSharedValue(0);
     const rotate = useSharedValue(0);
     const [first, setFirst] = useState(true);
-    const [choice, setChoice] = useState(true);
 
     useEffect( ()=> {
         react(active);
@@ -49,14 +48,7 @@ const Pet = (props) => {
     });
 
     const onTap = () => {
-        console.log("choice : ", choice, "num : ", props.num);
-
-        if(choice)
-            props.onChoice(props.num);
-        else
-            props.onChoice(0);
-
-        setChoice(!choice);
+        props.onChoice(props.num);
 
         if(ismove.value == 0)
         {
@@ -107,42 +99,46 @@ const Pet = (props) => {
     );
 }
 
-function MovingChoicePets(props) {
+const MovingChoicePet =(props) => {
     const [currentpet, setCurrentpet] = useState(0);
     const [currentleft, setCurrentleft] = useState(0);
     const [currenttop, setCurrenttop] = useState(0);
 
     const setCurrentpetNum = (num) => {
-        setCurrentpet(num);
-        console.log(currentpet);
-        switch(currentpet)
+        // if(currentpet == num)
+        //     setCurrentpet(0);
+        // else
+        //     setCurrentpet(num);
+
+        // props.setpetNum(currentpet);
+
+        props.setpetNum(num);
+
+        switch(num)
         {
             case 1:
                 setCurrentleft(-250-7);
                 setCurrenttop(-250+2);
-
                 break;
             case 2:
                 setCurrentleft(-250-7-60);
                 setCurrenttop(-250+120-3);
-
                 break;
             case 3:
                 setCurrentleft(-250-7+60);
                 setCurrenttop(-250+120-3);
-
                 break;
-            default:
-                setCurrentleft(0);
-                setCurrenttop(0);
-
-                break;
+            // default:
+            //     setCurrentleft(0);
+            //     setCurrenttop(0);
+            //     break;
         }
+
     }
 
     return (        
         <View>
-             <Image source={require('../assets/images/petchoice/petbg2.png')} style={{...styles.petbg, left : currentleft, top : currenttop}} resizeMode ="cover"/>
+            <Image source={require('../assets/images/petchoice/petbg2.png')} style={{...styles.petbg, left : currentleft, top : currenttop}} resizeMode ="cover"/>
             <Pet num={1} left={-250} top={-250+5} onChoice={setCurrentpetNum}/>
             <Pet num={2} left={-305} top={-130+5} onChoice={setCurrentpetNum}/>
             <Pet num={3} left={-305+105} top={-150} onChoice={setCurrentpetNum}/>
@@ -150,25 +146,7 @@ function MovingChoicePets(props) {
     );
 }
 
-export class MovingChoicePet extends React.Component {
-    constructor(props) {
-        super(props);
-        
-        this.SetChoice = this.SetChoice.bind(this);
-    }
-
-    SetChoice(ischoice){
-        this.props.onChoice(ischoice);
-    }
-
-    render() {
-        return (
-            <View>
-                    <MovingChoicePets />
-            </View>
-        );
-    }
-}
+export default MovingChoicePet;
 
 const styles = StyleSheet.create({
     container: {

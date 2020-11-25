@@ -31,7 +31,10 @@ import { ReanimatedScreen } from './src/ReanimatedBox';
 import { ReanimatedScreen2 } from './src/ReanimatedBox2';
 import { ReanimatedScreen3 } from './src/ReanimatedBox3';
 import { MovingPet } from './src/MainPetMove';
-import { MovingChoicePet } from './src/PetchoiceMove';
+import MovingChoicePet from './src/PetchoiceMove';
+import Test from './src/mypractice';
+import JSTestScreen from'./src/JSTestScreen';
+import PetEatScreen from'./src/PetEatScreen';
 
 import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
   useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
@@ -145,8 +148,14 @@ function PetChoiceScreen({navigation}){
     setable(buttonable === false ? true : false);
   }
   const MoveToMainStack = () =>{
-    navigation.navigate("Main");
+    navigation.navigate("Main", {petnum : petNum});
   }
+
+  const [petNum, setpetNum] = useState(0);
+  const setChoicePetNum = (choicepetnum) => {
+    setpetNum(choicepetnum);
+  }
+
 return(
   <View style={styles.petchoicebackground}>
     <Image source={require('./assets/images/intro/intro.png')} style={styles.intro} resizeMode ="stretch"/>
@@ -184,7 +193,7 @@ return(
     <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet2} resizeMode ="stretch"/>
     <Image source={require('./assets/images/petchoice/petbg.png')} style={styles.pet3} resizeMode ="stretch"/>
 
-    <MovingChoicePet />
+    <MovingChoicePet setpetNum={setChoicePetNum}/>
 
     <Image source={require('./assets/images/petchoice/petinfo.png')} style={styles.petinfobg} resizeMode ="stretch"/>
     <Text style={styles.petchoiceinfo}>자연의 싱그러움이 느껴지는</Text> 
@@ -192,7 +201,7 @@ return(
     <Text style={styles.petchoiceinfo3}>육성 난이도 :  쉬움 </Text> 
 
     <Image source={require('./assets/images/intro/button.png')} style={styles.choicebuttonbg} resizeMode ="stretch"/>
-    {(buttonable == false) ?
+    {(petNum == 0) ?
     <TouchableOpacity disabled style={styles.choicebutton} onPress={MoveToMainStack}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>:
     <TouchableOpacity style={styles.choicebutton} onPress={MoveToMainStack} activeOpacity={1}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>
     }
@@ -276,14 +285,28 @@ const styles2 = StyleSheet.create({
   }
 });
 
-function MainScreen({navigation}) {
+function MainScreen({navigation, route}) {
   const [coin, setCoin] = useState(3000);
   const [jam, setJam] = useState(100);
   const [heart, setHeart] = useState(70);
+  const [petnum, setPetnum] = useState(route.params.petnum);
+  const [mainnum, setMainnum] = useState(1);
 
   const [stagevisible, setstageVisible] = useState(false);
   const showstageDialog = () => setstageVisible(true);
-  const hidestageDialog = () => setstageVisible(false);
+  const hidestageDialog = () => {
+  setstageVisible(false);
+  }
+
+  const pressstage1 = () => {
+    setMainnum(1);
+    setstageVisible(false);
+    }
+
+  const pressstage2 = () => {
+  setMainnum(2);
+  setstageVisible(false);
+  }
 
   const [shoptabnum, setshoptabnum] = useState(1);
   const [shoptabname, setshoptab] = useState("식사류");
@@ -372,6 +395,26 @@ function MainScreen({navigation}) {
     setcleantabbrush();
     setcleanVisible(true);
   }
+  const [eatCheckVisible, seteatCheckVisible] = useState(false);
+  const [eatCheckText, seteatCheckText] = useState("");
+  const showeatCheckDialog = (name) => 
+  {
+    seteatCheckText(name);
+    seteatCheckVisible(true);
+  }
+  const hideeatCheckDialog = () => 
+  {
+    seteatCheckText("");
+    seteatCheckVisible(false);
+  }
+
+  const [peteatscreenvisible, setpeteatscreen] = useState(false);
+  const showPetEatScreen = () =>{
+    setpeteatscreen(true);
+    seteatCheckVisible(false);
+  }
+  const hidePetEatScreen = () => setpeteatscreen(false);
+
   const hidecleanDialog = () => setcleanVisible(false);
   const [funvisible, setfunVisible] = useState(false);
   const showfunDialog = () => setfunVisible(true);
@@ -489,7 +532,7 @@ function MainScreen({navigation}) {
     setbuysuccessVisible(false);
     setitemcheckVisible(false);
   }
-
+  
   const [collectionvisible, setcollectionVisible] = useState(false);
   const showcollectionDialog = () => setcollectionVisible(true);
   const hidecollectionDialog = () => {
@@ -557,7 +600,9 @@ function MainScreen({navigation}) {
 
   return(
     <View style={styles.container}>
-    <Image source={require('./assets/images/main/main.png')} style={styles.main} resizeMode ="stretch"/>
+      
+    <Image source={require('./assets/images/main/main.gif')} style={styles.main} resizeMode ="stretch"/>
+    {mainnum == 2 && <Image source={require('./assets/images/main/main2.png')} style={styles.main} resizeMode ="stretch"/>}
 
     {lightvisible == true && <DraggableBox /> }
 
@@ -566,7 +611,7 @@ function MainScreen({navigation}) {
     style={styles.furniturewallslot1} resizeMode ="stretch"/> }
     {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
     style={{...styles.furniturewallslot1, left : 300}} resizeMode ="stretch"/> } */}
-    <MovingPet /> 
+    <MovingPet petnum={petnum} /> 
     {/* <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/> */}
     <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/>
 
@@ -682,13 +727,13 @@ function MainScreen({navigation}) {
 
   <TouchableOpacity
                 style={styles.stagenature}
-                onPress={hidestageDialog} activeOpacity={1}>
+                onPress={pressstage1} activeOpacity={1}>
           <Image source={require('./assets/images/main/stagenature.png')} resizeMode ="cover"/>
         </TouchableOpacity>
 
         <TouchableOpacity
                 style={styles.stagespace}
-                onPress={hidestageDialog} activeOpacity={1}>
+                onPress={pressstage2} activeOpacity={1}>
           <Image source={require('./assets/images/main/stagespace.png')} resizeMode ="cover"/>
         </TouchableOpacity>
 
@@ -1305,7 +1350,12 @@ function MainScreen({navigation}) {
 
         <View style={{...styles.eattab_1, left : 40 + (eattabnum-1)*70}}><Text style={styles.textcenter}>{eattabname}</Text></View>
         
-        {eattabname == "과일" && <Image style={styles.eatslot1} source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>}
+        {eattabname == "과일" &&         <TouchableOpacity
+                style={styles.eatslot1}
+                onPress={() => showeatCheckDialog("사과")} activeOpacity={1}>
+        <Image source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
+        }
         {eattabname == "과일" && <Image style={styles.eatslot2} source={require('./assets/images/eat/watermelonslot.png')} resizeMode ="stretch"/>}
         {eattabname == "과일" &&         <TouchableOpacity
                 style={styles.eatslot3}
@@ -1341,6 +1391,28 @@ function MainScreen({navigation}) {
 
 </Dialog.Content>
 </Dialog>
+
+<Dialog visible={eatCheckVisible} onDismiss={hideeatCheckDialog} style={styles.furniturecheck} >
+  <Dialog.Content>
+  <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'{eatCheckText}'</Text></Paragraph>
+    <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>이것을 먹이겠습니까?</Text></Paragraph>
+  </Dialog.Content>
+  <Dialog.Actions>
+    <TouchableOpacity
+                style={styles.eatcheckyes}
+                onPress={showPetEatScreen} activeOpacity={1}>
+        <Text style={styles.eatcheckyesfont}>네</Text>
+        </TouchableOpacity>
+
+    <TouchableOpacity
+                style={styles.eatcheckno}
+                onPress={hideeatCheckDialog} activeOpacity={1}>
+        <Text  style={styles.eatchecknofont}>아니오</Text>
+        </TouchableOpacity>
+  </Dialog.Actions>
+</Dialog>
+
+{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} eatinfo={eatCheckText} hidePetEatScreen={hidePetEatScreen} />}
 
 {/* <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
@@ -1479,8 +1551,13 @@ function MainScreen({navigation}) {
 
 <Dialog visible={sleepvisible} onDismiss={hidesleepDialog} style={styles.stageScene}>
   <Dialog.Content>
-  <Image style={styles.sleepbg} source={require('./assets/images/sleep/bg.png')} resizeMode ="stretch"/>
-  <Image style={styles.sleeppet} source={require('./assets/images/sleep/pet1.png')} resizeMode ="stretch"/>
+  {mainnum == 1 && <Image style={styles.sleepbg} source={require('./assets/images/sleep/bg.png')} resizeMode ="stretch"/> }
+  {mainnum == 2 && <Image style={styles.sleepbg} source={require('./assets/images/sleep/bg2.png')} resizeMode ="stretch"/> }
+
+  {petnum == 1 && <Image style={styles.sleeppet} source={require('./assets/images/sleep/pet1.png')} resizeMode ="stretch"/> }
+  {petnum == 2 && <Image style={styles.sleeppet} source={require('./assets/images/sleep/pet2.png')} resizeMode ="stretch"/> }
+  {petnum == 3 && <Image style={styles.sleeppet} source={require('./assets/images/sleep/pet3.png')} resizeMode ="stretch"/> }
+  
   <Image style={styles.sleeptime} source={require('./assets/images/sleep/sleeptime.png')} resizeMode ="stretch"/>
   <Image style={styles.sleepbottombg} source={require('./assets/images/sleep/bottombg.png')} resizeMode ="stretch"/>
   <Image style={styles.skipsleeptime} source={require('./assets/images/sleep/skipsleeptime.png')} resizeMode ="stretch"/>
@@ -1491,7 +1568,6 @@ function MainScreen({navigation}) {
         </TouchableOpacity> 
   </Dialog.Content>
 </Dialog>
-
 
 <Dialog visible={foodvisible} onDismiss={hidefoodDialog} style={{ backgroundColor: Colors.grey500 }}>
   <Dialog.Title style={styles.textcenter}>식사 완료</Dialog.Title>
@@ -2736,9 +2812,39 @@ const styles = StyleSheet.create({
     color : 'white',
   },
 
+  eatcheckyes : {
+    position: 'absolute',
+    width : 120,
+    height : 40,
+    left : 20,
+    bottom : -20,
+    backgroundColor : '#FFFFFF',
+    justifyContent : 'center',
+    borderRadius: 10,
+    borderWidth : 1,
+    borderColor : '#665AAC',
+  },
+  
+  eatcheckyesfont : {
+    textAlign : 'center'
+  },
 
+  eatcheckno : {
+    position: 'absolute',
+    width : 120,
+    height : 40,
+    right : 20,
+    bottom : -20,
+    backgroundColor : '#FFFFFF',
+    justifyContent : 'center',
+    borderRadius: 10,
+    borderWidth : 1,
+    borderColor : '#665AAC',
+  },
 
-
+  eatchecknofont : {
+    textAlign : 'center'
+  },
 
   furniturecheck:{
     backgroundColor: '#EEEEEE',

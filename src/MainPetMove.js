@@ -114,12 +114,29 @@ const Pet = (props) => {
             ]
         }
     });
+
+    let imagepath;
+    switch(props.petnum)
+    {
+        case 1:
+            imagepath = require('../assets/images/main/pet1.png');
+            break;
+        case 2:
+            imagepath = require('../assets/images/main/pet2.png');
+            break;
+        case 3:
+            imagepath = require('../assets/images/main/pet3.png');
+            break;
+        default:
+            break;
+    }
+
     return (
         <PanGestureHandler onGestureEvent={panHandler}>
         <Animated.View  style={[styles.mainpetbg, animatedStyle]} >
         <TouchableOpacity
                 onPress={onTap} activeOpacity={1}>
-          <Image source={require('../assets/images/main/pet1.1.png')} resizeMode ="cover"/>
+          <Image source={imagepath} resizeMode ="cover"/>
         </TouchableOpacity>
         </Animated.View>
         </PanGestureHandler>
@@ -135,7 +152,7 @@ export class MovingPet extends React.Component {
         
         return (
             <View>
-                <Pet />
+                <Pet petnum={this.props.petnum} />
             </View>
         );
     }
