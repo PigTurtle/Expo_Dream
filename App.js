@@ -292,8 +292,13 @@ function MainScreen({navigation, route}) {
   const [petnum, setPetnum] = useState(route.params.petnum);
   const [mainnum, setMainnum] = useState(1);
 
+  const [eatpercent, seteatpercent] = useState(50);
+  const [cleanpercent, setcleanpercent] = useState(100);
+  const [funpercent, setfunpercent] = useState(100);
+  const [sleeppercent, setsleeppercent] = useState(100);
+
   const [stagevisible, setstageVisible] = useState(false);
-  const showstageDialog = () => setstageVisible(true);
+  const showstageDialog = () => setfurniturecheck(false);
   const hidestageDialog = () => {
   setstageVisible(false);
   }
@@ -301,7 +306,7 @@ function MainScreen({navigation, route}) {
   const pressstage1 = () => {
     setMainnum(1);
     setstageVisible(false);
-    }
+  }
 
   const pressstage2 = () => {
   setMainnum(2);
@@ -413,7 +418,10 @@ function MainScreen({navigation, route}) {
     setpeteatscreen(true);
     seteatCheckVisible(false);
   }
-  const hidePetEatScreen = () => setpeteatscreen(false);
+  const hidePetEatScreen = (addeatpercent) => {
+    seteatpercent(eatpercent+addeatpercent > 100 ? 100 : eatpercent+addeatpercent);
+    setpeteatscreen(false);
+  }
 
   const hidecleanDialog = () => setcleanVisible(false);
   const [funvisible, setfunVisible] = useState(false);
@@ -423,8 +431,16 @@ function MainScreen({navigation, route}) {
   const showsleepDialog = () => setsleepVisible(true);
   const hidesleepDialog = () => setsleepVisible(false);
 
+  const [furniturename, setfurniturename] = useState("");
+  const [furnituretype, setfurnituretype] = useState(1);
+  const [furniturecheck, setfurniturecheck] = useState(false);
+
   const [furniturecheckvisible, setfurniturecheckVisible] = useState(false);
-  const showfurniturecheckDialog = () => setfurniturecheckVisible(true);
+  const showfurniturecheckDialog = (myfurniturename, myfurnituretype) => {
+    setfurnituretype(myfurnituretype);
+    setfurniturename(myfurniturename);
+    setfurniturecheckVisible(true);
+  }
   const showfurniture = () => {
     setfurnitureVisible(false);
     setfurniturecheckVisible(false);
@@ -435,8 +451,13 @@ function MainScreen({navigation, route}) {
     setfurniturecheckVisible(false);
   }
 
+  const returntofurnituredialog = () => {
+    setfurniturecheck(false);
+  }
+
   const [furnitureslot1Visible, setfurnitureslot1Visible] = useState(false);
   const addfurnitureslot1 = () => {
+    if(furnituretype == 1){
     let myfws = [ ...furniturewalls];
     for(let i =0; i < myfws.length; i++){
       if(myfws[i].active == false)
@@ -447,25 +468,54 @@ function MainScreen({navigation, route}) {
     }
 
     setfurniturewalls(myfws);
+    }
+    else{
+      let myfws = [ ...furniturefloors];
+      for(let i =0; i < myfws.length; i++){
+        if(myfws[i].active == false)
+        {
+        myfws[i].active = true;
+        break;
+        }
+      }
+  
+    setfurniturefloors(myfws);
+    }
 
     setfurnitureslot1Visible(true);
     setfurniturecheckVisible(false);
+    setfurniturecheck(true);
   }
 
   const removefurnitureslot1 = () => {
-    let myfws = [ ...furniturewalls];
-    for(let i =0; i < myfws.length; i++){
-      if(myfws[i].active == true)
-      {
-      myfws[i].active = false;
-      break;
+    if(furnituretype == 1){
+      let myfws = [ ...furniturewalls];
+      for(let i =0; i < myfws.length; i++){
+        if(myfws[i].active == true)
+        {
+        myfws[i].active = false;
+        break;
+        }
       }
-    }
-
-    setfurniturewalls(myfws);
-
-    setfurnitureslot1Visible(false);
-    setfurniturecheckVisible(false);
+  
+      setfurniturewalls(myfws);
+      }
+    else{
+      let myfws = [ ...furniturefloors];
+      for(let i =0; i < myfws.length; i++){
+        if(myfws[i].active == true)
+        {
+        myfws[i].active = false;
+        break;
+        }
+        }
+    
+      setfurniturefloors(myfws);
+      }
+  
+      setfurnitureslot1Visible(true);
+      setfurniturecheckVisible(false);
+      setfurniturecheck(true);
   }
 
   const [foodvisible, setfoodVisible] = useState(false);
@@ -578,8 +628,30 @@ function MainScreen({navigation, route}) {
   //     />
   //   );
   //   }
+
+  const removefurniture = (furnituretype, index) => {
+    if(furnituretype == 1)
+    {
+      let myfws = [ ...furniturewalls];
+      myfws[index].active = false;
+      setfurniturewalls(myfws);
+    }
+    else
+    {
+      let myfws = [ ...furniturefloors];
+      myfws[index].active = false;
+      setfurniturefloors(myfws);
+    }
+  }
   
   const [furniturewalls, setfurniturewalls] = useState([{
+    key: 'slot1', left : 0, active : false,
+  }, {
+    key: 'slot2', left : 300, active : false,
+    },
+  ]);
+
+  const [furniturefloors, setfurniturefloors] = useState([{
     key: 'slot1', left : 0, active : false,
   }, {
     key: 'slot2', left : 300, active : false,
@@ -593,9 +665,51 @@ function MainScreen({navigation, route}) {
       if(fw.active)
       {
       furniturewallsRender.push( 
-        <Image source={require('./assets/images/main/furniturewallslot1.png')} style={{...styles.furniturewallslot1, left : fw.left}} resizeMode ="stretch"/>
+        <Image source={require('./assets/images/main/furniturewallslot1.png')} style={{...styles.furniturewallslot, left : fw.left}} resizeMode ="stretch"/>
       );
       }
+  }
+
+  let furniturefloorsRender = [];
+  for (let i = 0; i < furniturefloors.length; i++) {
+      let fw = furniturefloors[i];
+
+      if(fw.active)
+      {
+        furniturefloorsRender.push( 
+        <Image source={require('./assets/images/main/furniturewallslot1.png')} style={{...styles.furniturefloorslot, left : fw.left}} resizeMode ="stretch"/>
+      );
+      }
+  }
+
+  let furtnitureremovebuttonRender = [];
+  for (let i = 0; i < furniturewalls.length; i++) {
+    let fw = furniturewalls[i];
+
+    if(fw.active)
+    {
+      furtnitureremovebuttonRender.push( 
+        <TouchableOpacity
+        style={{...styles.furniturewallremovebutton, left : 45 + fw.left, top : 200}}
+        onPress={() => removefurniture(1, i)} activeOpacity={1}>
+      <Image source={require('./assets/images/furnitureposition/xbutton.png')} resizeMode ="stretch"/>
+      </TouchableOpacity>
+    );
+    }
+  }
+  for (let i = 0; i < furniturefloors.length; i++) {
+    let fw = furniturefloors[i];
+
+    if(fw.active)
+    {
+      furtnitureremovebuttonRender.push( 
+        <TouchableOpacity
+        style={{...styles.furniturewallremovebutton, left : 45 + fw.left, bottom : 20}}
+        onPress={() => removefurniture(2, i)} activeOpacity={1}>
+      <Image source={require('./assets/images/furnitureposition/xbutton.png')} resizeMode ="stretch"/>
+      </TouchableOpacity>
+    );
+    }
   }
 
   return(
@@ -607,6 +721,7 @@ function MainScreen({navigation, route}) {
     {lightvisible == true && <DraggableBox /> }
 
     {furniturewallsRender}
+    {furniturefloorsRender}
     {/* {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
     style={styles.furniturewallslot1} resizeMode ="stretch"/> }
     {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
@@ -624,7 +739,7 @@ function MainScreen({navigation, route}) {
 
     <Button disabled onPress={() => {}} style={styles.gamemoneybackground}><Text ></Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartbackground}><Text ></Text></Button>
-    <Button disabled onPress={() => {}} style={styles.heartgaugeimage}><Text ></Text></Button>
+    <Button disabled onPress={() => {}} style={{...styles.heartgaugeimage, width : 291 * heart / 100}}><Text ></Text></Button>
     <Image source={require('./assets/images/coin.png')} style={styles.coinimage} resizeMode ="cover"/>
     <Image source={require('./assets/images/diamond.png')} style={styles.jamimage} resizeMode ="cover"/>
     <Image source={require('./assets/images/heart.png')} style={styles.heartimage} resizeMode ="cover"/>
@@ -655,7 +770,7 @@ function MainScreen({navigation, route}) {
   </TouchableOpacity> */}
 
 <Image source={require('./assets/images/main/gaugebg.png')} style={styles.eatgaugebg} resizeMode ="stretch"/>
-  <Image source={require('./assets/images/main/eatgauge.png')} style={styles.eatgauge} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/eatgauge.png')} style={{...styles.eatgauge, height : 68 * eatpercent/100}} resizeMode ="cover"/>
 
   <TouchableOpacity
                 style={styles.eatbutton}
@@ -673,7 +788,7 @@ function MainScreen({navigation, route}) {
   </TouchableOpacity> */}
 
   <Image source={require('./assets/images/main/gaugebg.png')} style={styles.cleangaugebg} resizeMode ="stretch"/>
-  <Image source={require('./assets/images/main/cleangauge.png')} style={styles.cleangauge} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/cleangauge.png')} style={{...styles.cleangauge, height : 68 * cleanpercent/100}} resizeMode ="cover"/>
 
   <TouchableOpacity
                 style={styles.cleanbutton}
@@ -690,7 +805,7 @@ function MainScreen({navigation, route}) {
   </TouchableOpacity> */}
 
 <Image source={require('./assets/images/main/gaugebg.png')} style={styles.fungaugebg} resizeMode ="stretch"/>
-  <Image source={require('./assets/images/main/funnygauge.png')} style={styles.fungauge} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/main/funnygauge.png')} style={{...styles.fungauge, height : 68 * funpercent/100}} resizeMode ="stretch"/>
 
 <TouchableOpacity
                 style={styles.funbutton}
@@ -707,7 +822,7 @@ function MainScreen({navigation, route}) {
   </TouchableOpacity> */}
 
 <Image source={require('./assets/images/main/gaugebg.png')} style={styles.sleepgaugebg} resizeMode ="stretch"/>
-  <Image source={require('./assets/images/main/sleepgauge.png')} style={styles.sleepgauge} resizeMode ="stretch"/>
+<Image source={require('./assets/images/main/sleepgauge.png')} style={{...styles.sleepgauge, height : 68 * sleeppercent/100}} resizeMode ="stretch"/>
 
 <TouchableOpacity
                 style={styles.sleepbutton}
@@ -1199,14 +1314,19 @@ function MainScreen({navigation, route}) {
 
 {furniture == "벽 가구" &&   <TouchableOpacity
                 style={styles.furnitureslot1}
-                onPress={showfurniturecheckDialog} activeOpacity={1}>
+                onPress={() => showfurniturecheckDialog("벽걸이 식물", 1)} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/wallplant1slot.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 
 {furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/curtain1slot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
 {furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/curtain1slot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
 
-{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/footmat1slot.png')} style={styles.furnitureslot1} resizeMode ="stretch"/> }
+{furniture == "바닥 가구" &&   <TouchableOpacity
+                style={styles.furnitureslot1}
+                onPress={() => showfurniturecheckDialog("규조토 매트", 2)} activeOpacity={1}>
+<Image source={require('./assets/images/furnitureposition/footmat1slot.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>}
+{/* {furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/footmat1slot.png')} style={styles.furnitureslot1} resizeMode ="stretch"/> } */}
 {furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furmat1slot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
 {furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furmat1slot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
 
@@ -1223,7 +1343,7 @@ function MainScreen({navigation, route}) {
 
 <Dialog visible={furniturecheckvisible} onDismiss={hidefurniturecheckDialog} style={styles.furniturecheck} >
   <Dialog.Content>
-  <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'벽걸이 식물'</Text></Paragraph>
+  <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'{furniturename}'</Text></Paragraph>
     <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>이 가구를 배치하시겠습니까?</Text></Paragraph>
   </Dialog.Content>
   <Dialog.Actions>
@@ -1236,13 +1356,27 @@ function MainScreen({navigation, route}) {
     <Button disabled color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
     <TouchableOpacity
                 style={styles.furniturenobuttonbg}
-                onPress={removefurnitureslot1} activeOpacity={1}><Text></Text>
+                onPress={() => setfurniturecheckVisible(false)} activeOpacity={1}><Text></Text>
     </TouchableOpacity>
   </Dialog.Actions>
 </Dialog>
 
+{/* 가구 추가 삭제 확인 화면 */}
 
+{furniturecheck && (mainnum == 1 ? <Image source={require('./assets/images/main/main.png')} style={styles.main} resizeMode ="stretch"/>
+: <Image source={require('./assets/images/main/main2.png')} style={styles.main} resizeMode ="stretch"/>)}
+{furniturecheck ? furniturewallsRender  : <Text></Text>}
+{furniturecheck ? furniturefloorsRender  : <Text></Text>}
+{furniturecheck ? furtnitureremovebuttonRender  : <Text></Text>}
+{furniturecheck && <MovingPet petnum={petnum} />  }
+{furniturecheck && 
+<TouchableOpacity
+                style={styles.returntofurnituredialogbg}
+                onPress={returntofurnituredialog} activeOpacity={1}>
+          <Text style={styles.returntofurnituredialog}>돌아가기</Text>
+</TouchableOpacity> }
 
+{/* 도감 화면 */}
 
 <Dialog visible={dictionaryvisible} onDismiss={hidedictionaryDialog} style={styles.dictionary}>
   <Dialog.Content>
@@ -1412,7 +1546,7 @@ function MainScreen({navigation, route}) {
   </Dialog.Actions>
 </Dialog>
 
-{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} eatinfo={eatCheckText} hidePetEatScreen={hidePetEatScreen} />}
+{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} eatinfo={eatCheckText} hidePetEatScreen={hidePetEatScreen} eatpercent={eatpercent} />}
 
 {/* <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
@@ -1971,10 +2105,21 @@ const styles = StyleSheet.create({
     backgroundColor : '#A9A8B8',
   },
 
-  furniturewallslot1:{
+  furniturewallslot:{
     position: 'absolute',
     left : 0,
     top: 0,
+  },
+
+  furniturefloorslot:{
+    position: 'absolute',
+    left : 0,
+    bottom: 50,
+  },
+
+  furniturewallremovebutton:{
+    position: 'absolute',
+    backgroundColor : 'white',
   },
 
   mainpetbg:{
@@ -2219,9 +2364,8 @@ const styles = StyleSheet.create({
 
   heartgaugeimage:{
     position: 'absolute',
-    width : 200,
     height: 20,
-    right : 120,
+    left : 91,
     top: 60,
     borderRadius: 25,
     backgroundColor : '#FF6969',
@@ -3004,6 +3148,21 @@ const styles = StyleSheet.create({
 
   nobuttonfont :{
     fontSize : 15,
+  },
+
+  returntofurnituredialogbg : {
+    position : 'absolute',
+    width : 120,
+    height : 50,
+    top : 600-8,
+    backgroundColor : 'white',
+    borderRadius : 30,
+    justifyContent: 'center',
+  },
+
+  returntofurnituredialog : {
+    textAlign: 'center',
+    textAlignVertical : 'center',
   },
 
   acheivelist:{

@@ -80,8 +80,9 @@ const PetEatScreen = (props) => {
     const [bottommenutext, setbottommenutext] = useState(props.eatinfo);
     const [bottomgauge, setbottomgauge] = useState(false);
     const [iseat, setiseat] = useState(false);
-    const [eatgauge, seteatgauge] = useState(50);
+    const [eatgauge, seteatgauge] = useState(props.eatpercent);
     const [out, setout] = useState(false);
+    const [addgauge, setaddgauge] = useState(30);
 
     const onTap = () => {
         setbottommenutext("포만감");
@@ -91,12 +92,12 @@ const PetEatScreen = (props) => {
 
     const IsEat = () => {
         setiseat(true);
-        seteatgauge(eatgauge + 30);
+        seteatgauge(eatgauge + addgauge > 100 ? 100 : eatgauge + addgauge);
         setTimeout(goout, 3000);
     }
 
     const goout = () => {
-        props.hidePetEatScreen();
+        props.hidePetEatScreen(addgauge);
     }
 
     // props.hidePetEatScreen();
@@ -155,11 +156,9 @@ const PetEatScreen = (props) => {
             <Image source={require('../assets/images/main/bottommenu.png')} style={styles.bottomtab} resizeMode ="cover"/>
             <Button disabled style={styles.bottommenutext}><Text>{bottommenutext}</Text></Button>
             {bottomgauge == true && <Image source={require('../assets/images/eat/eatgaugemax.png')} style={styles.eatgaugemax} resizeMode ="cover"/> }
-            {bottomgauge == true && <Image source={require('../assets/images/eat/eatgauge.png')} style={styles.eatgauge} resizeMode ="cover"/> }
+            {bottomgauge == true && <Image source={require('../assets/images/eat/eatgauge.png')} style={{...styles.eatgauge,  width : 339 * eatgauge/100}} resizeMode ="cover"/>  }
 
-            <Animated.View>
             {bottomgauge == true && <Button disabled style={styles.eatgaugetext}><Text>{eatgauge}%</Text></Button> }
-            </Animated.View>
 
             {iseat == false && <EatItem eatitem={props.eatinfo} ontap={onTap} touchcheck={touchcheck} /> } 
 
