@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, Component, useEffect}  from 'react';
 import { StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacity, FlatList, AppRegistry, Dimensions,
-  TouchableHighlight, TouchableWithoutFeedback, Alert, } from 'react-native';
+  TouchableHighlight, TouchableWithoutFeedback, Alert, LogBox} from 'react-native';
 import { DefaultTheme, Text, Button, RadioButton, TouchableRipple, ToggleButton, TextInput , Paragraph, Dialog, Portal, Appbar, 
   ProgressBar, Colors, PaperProvider } from 'react-native-paper';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
@@ -35,6 +35,8 @@ import MovingChoicePet from './src/PetchoiceMove';
 import Test from './src/mypractice';
 import JSTestScreen from'./src/JSTestScreen';
 import PetEatScreen from'./src/PetEatScreen';
+
+LogBox.ignoreAllLogs();
 
 import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
   useAnimatedGestureHandler, withTiming, sequence } from 'react-native-reanimated';
@@ -215,73 +217,391 @@ export default App;
 const FruitData = [
   {
     key : 1,
-    id: './assets/images/eat/appleslot.png',
-    title: "apple",
+    id: require('./assets/images/eat/appleslot.png'),
+    title: "사과",
   },
   {
     key : 2,
-    id: './assets/images/eat/watermelon.png',
-    title: "watermelon",
+    id: require('./assets/images/eat/watermelonslot.png'),
+    title: "수박",
   },
   {
     key : 3,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 4,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 5,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 6,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 7,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 8,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 9,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
   {
     key : 10,
-    id: './assets/images/eat/slotdefault.png',
+    id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
 ];
 
+const MeatData = [
+  {
+    key : 1,
+    id: require('./assets/images/eat/beef.png'),
+    title: "소고기",
+  },
+  {
+    key : 2,
+    id: require('./assets/images/eat/chicken.png'),
+    title: "닭고기",
+  },
+  {
+    key : 3,
+    id: require('./assets/images/eat/slotdefault.png'),
+    title: "default",
+  },
+  // {
+  //   key : 4,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 5,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 6,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 7,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 8,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 9,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 10,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+];
+
+const EtcData = [
+  {
+    key : 1,
+    id: require('./assets/images/eat/coldpill.png'),
+    title: "감기약",
+  },
+  {
+    key : 2,
+    id: require('./assets/images/eat/headachepill.png'),
+    title: "두통약",
+  },
+  {
+    key : 3,
+    id: require('./assets/images/eat/slotdefault.png'),
+    title: "default",
+  },
+  // {
+  //   key : 4,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 5,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 6,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 7,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 8,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 9,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 10,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+];
+
+const BrushData = [
+  {
+    key : 1,
+    id: require('./assets/images/clean/brushslot1.png'),
+    title: "거친 솔",
+  },
+  {
+    key : 2,
+    id: require('./assets/images/clean/brushslot2.png'),
+    title: "부드러운 솔",
+  },
+  {
+    key : 3,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 4,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 5,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 6,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 7,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 8,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 9,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 10,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+];
+
+const DetergentData = [
+  {
+    key : 1,
+    id: require('./assets/images/clean/detergentslot1.png'),
+    title: "손 세정제",
+  },
+  {
+    key : 2,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 3,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  // {
+  //   key : 4,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 5,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 6,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 7,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 8,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 9,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 10,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+];
+
+const TubData = [
+  {
+    key : 1,
+    id: require('./assets/images/clean/tubslot1.png'),
+    title: "작은 욕조",
+  },
+  {
+    key : 2,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  {
+    key : 3,
+    id: require('./assets/images/clean/slotdefault.png'),
+    title: "default",
+  },
+  // {
+  //   key : 4,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 5,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 6,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 7,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 8,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 9,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 10,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  // },
+];
+
+const ShopEatData = [
+  {
+    key : 1,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 2,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 3,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 4,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 5,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 6,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 7,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 8,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 9,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+  {
+    key : 10,
+    id: require('./assets/images/shop/appleslot.png'),
+    title: "사과",
+  },
+];
+
 const Item = ({item, onPress}) => (
+  <View style={styles2.item}>
   <TouchableOpacity
-  style={[styles.image]}
+  style={[styles2.image]}
   onPress={onPress} activeOpacity={1}>
-<Image source={{require : item.id}} resizeMode ="stretch"/>
-</TouchableOpacity>
+  <Image source={item.id} resizeMode ="stretch"/>
+  </TouchableOpacity>
+</View>
 );
 
 const styles2 = StyleSheet.create({
   item: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    padding: 0,
+    marginVertical: 15,
+    marginHorizontal: 0,
   },
   image:{
-    width : 100,
-    height : 100,
   }
 });
 
@@ -292,10 +612,21 @@ function MainScreen({navigation, route}) {
   const [petnum, setPetnum] = useState(route.params.petnum);
   const [mainnum, setMainnum] = useState(1);
 
-  const [eatpercent, seteatpercent] = useState(50);
-  const [cleanpercent, setcleanpercent] = useState(100);
+  const [eatpercent, seteatpercent] = useState(10);
+  const [cleanpercent, setcleanpercent] = useState(10);
   const [funpercent, setfunpercent] = useState(100);
   const [sleeppercent, setsleeppercent] = useState(100);
+
+  const [itemprice, setitemprice] = useState(10);
+  const [itemnum, setitemnum] = useState(1);
+
+  const itemnumdown = () => {
+    setitemnum(itemnum => itemnum -1 > 1 ? itemnum -1 : 1);
+  }
+
+  const itemnumup = () => {
+    setitemnum(itemnum => itemnum +1 > 10 ? 10 : itemnum+1);
+  }
 
   const [stagevisible, setstageVisible] = useState(false);
   const showstageDialog = () => setfurniturecheck(false);
@@ -370,40 +701,118 @@ function MainScreen({navigation, route}) {
   const [dictionaryinfo, setdictionaryinfo] = useState(false);
   const setdictionaryinfotrue = (petnum) => {
     setdictionarypetnum(petnum);
+    setdictionaryinfonum(1);
+    setpath();
     setdictionaryinfo(true);
   }
-  const setdictionaryinfofalse = () => setdictionaryinfo(false);
+  const setdictionaryinfofalse = () => {
+    setdictionaryinfonum(1);
+    setpath();
+    setdictionaryinfo(false);
+  }
+  
+  const [dictionaryinfonum, setdictionaryinfonum] = useState(1);
+  const dictionaryinfoNext = () => {
+    if(dictionaryinfonum > 3)
+      setdictionaryinfofalse();
+    else{
+      setdictionaryinfonum(dictionaryinfonum+1);
+      setpath();
+    }
+  }
+
+  const [dictionaryinfos, setdictionaryinfos] = useState([{
+    petnum: 1,
+    path : require('./assets/images/dictionary/pet1info1.png'),
+    path1 : require('./assets/images/dictionary/pet1info1.png'),
+    path2 : require('./assets/images/dictionary/pet1info2.png'),
+    path3 : require('./assets/images/dictionary/pet1info3.png')
+  }, {
+    petnum: 2, 
+    path : require('./assets/images/dictionary/pet2info1.png'),
+    path1 : require('./assets/images/dictionary/pet2info1.png'),
+    path2 : require('./assets/images/dictionary/pet2info2.png'),
+    path3 : require('./assets/images/dictionary/pet2info3.png')
+  }, {
+    petnum: 3, 
+    path : require('./assets/images/dictionary/pet3info1.png'),
+    path1 : require('./assets/images/dictionary/pet3info1.png'),
+    path2 : require('./assets/images/dictionary/pet3info2.png'),
+    path3 : require('./assets/images/dictionary/pet3info3.png')
+    } 
+  ]);
+
+  const setpath = () => {
+    let mydictionaryinfos = [... dictionaryinfos];
+
+    console.log(dictionaryinfonum);
+
+    switch(dictionaryinfonum)
+    {
+      case 1:
+        mydictionaryinfos[dictionarypetnum-1].path = mydictionaryinfos[dictionarypetnum-1].path1;
+        break;
+      case 2:
+        mydictionaryinfos[dictionarypetnum-1].path = mydictionaryinfos[dictionarypetnum-1].path2;
+        break;
+      case 3:
+        mydictionaryinfos[dictionarypetnum-1].path = mydictionaryinfos[dictionarypetnum-1].path3;
+        break;
+      default:
+        break;
+    }
+    
+    setdictionaryinfos(mydictionaryinfos);
+  }
 
   const [achievevisible, setachieveVisible] = useState(false);
   const showachieveDialog = () => setachieveVisible(true);
   const hideachieveDialog = () => setachieveVisible(false);
+  const [menuvisible, setmenuVisible] = useState(false);
+  const showmenuDialog = () => {
+    setmenu1();
+    setmenuVisible(true);
+  }
+  const hidemenuDialog = () => setmenuVisible(false);
+  const [furniturevisible, setfurnitureVisible] = useState(false);
+  const showfurnitureDialog = () => {
+    setfurniturewall();
+    setfurnitureVisible(true);
+  }
+  const hidefurnitureDialog = () => setfurnitureVisible(false);
+
+  const [dictionarynum, setdictionarynum] = useState(1);
+  const [dictionaryvisible, setdictionaryVisible] = useState(false);
+  const showdictionaryDialog = () => {
+    setdictionarynum(1);
+    setdictionaryVisible(true);
+  }
+  const hidedictionaryDialog = () => setdictionaryVisible(false);
+
   const [settingvisible, setsettingVisible] = useState(false);
   const showsettingDialog = () => {
-    setmenu1();
+    setsettingaccount();
     setsettingVisible(true);
   }
   const hidesettingDialog = () => setsettingVisible(false);
-  const [furniturevisible, setfurnitureVisible] = useState(false);
-  const showfurnitureDialog = () => setfurnitureVisible(true);
-  const hidefurnitureDialog = () => setfurnitureVisible(false);
-  const [dictionaryvisible, setdictionaryVisible] = useState(false);
-  const showdictionaryDialog = () => setdictionaryVisible(true);
-  const hidedictionaryDialog = () => setdictionaryVisible(false);
+
   const [eatvisible, seteatVisible] = useState(false);
   const showeatDialog = () => {
     seteattabfruit();
     seteatVisible(true);
   }
   const hideeatDialog = () => seteatVisible(false);
-  const [cleanvisible, setcleanVisible] = useState(false);
-  const showcleanDialog = () => {
-    setcleantabbrush();
-    setcleanVisible(true);
-  }
+
   const [eatCheckVisible, seteatCheckVisible] = useState(false);
   const [eatCheckText, seteatCheckText] = useState("");
   const showeatCheckDialog = (name) => 
   {
+    if(name == "default")
+    {
+      hideeatDialog();
+      return;
+    }
+
     seteatCheckText(name);
     seteatCheckVisible(true);
   }
@@ -423,10 +832,49 @@ function MainScreen({navigation, route}) {
     setpeteatscreen(false);
   }
 
+  const [cleanvisible, setcleanVisible] = useState(false);
+  const showcleanDialog = () => {
+    setcleantabbrush();
+    setcleanVisible(true);
+  }
   const hidecleanDialog = () => setcleanVisible(false);
+
+  const [cleanCheckVisible, setcleanCheckVisible] = useState(false);
+  const [cleanCheckText, setcleanCheckText] = useState("");
+  const showcleanCheckDialog = (name) => 
+  {
+    if(name == "default")
+    {
+      hidecleanDialog();
+      return;
+    }
+
+    setcleanCheckText(name);
+    setcleanCheckVisible(true);
+  }
+  const hidecleanCheckDialog = () => 
+  {
+    setcleanCheckText("");
+    setcleanCheckVisible(false);
+  }
+
+  const [petcleanscreenvisible, setpetcleanscreen] = useState(false);
+  const showPetCleanScreen = () =>{
+    setpetcleanscreen(true);
+    setcleanCheckVisible(false);
+  }
+  const hidePetCleanScreen = (addcleanpercent) => {
+    setcleanpercent(cleanpercent+addcleanpercent > 100 ? 100 : cleanpercent+addcleanpercent);
+    setpetcleanscreen(false);
+  }
+
+
+
   const [funvisible, setfunVisible] = useState(false);
   const showfunDialog = () => setfunVisible(true);
   const hidefunDialog = () => setfunVisible(false);
+
+
   const [sleepvisible, setsleepVisible] = useState(false);
   const showsleepDialog = () => setsleepVisible(true);
   const hidesleepDialog = () => setsleepVisible(false);
@@ -556,13 +1004,19 @@ function MainScreen({navigation, route}) {
   }
 
   const [questvisible, setquestVisible] = useState(false);
-  const showquestDialog = () => setquestVisible(true);
+  const showquestDialog = () => {
+    setquestdaily();
+    setquestVisible(true);
+  }
   const hidequestDialog = () => {
     setquestVisible(false);
   }
 
   const [shopvisible, setshopVisible] = useState(false);
-  const showshopDialog = () => setshopVisible(true);
+  const showshopDialog = () => {
+    setshoptabeat();
+    setshopVisible(true);
+  }
   const hideshopDialog = () => {
     setshopVisible(false);
   }
@@ -574,13 +1028,15 @@ function MainScreen({navigation, route}) {
   }
 
   const [buysuccessvisible, setbuysuccessVisible] = useState(false);
-  const showbuysuccessDialog = () => { 
+  const showbuysuccessDialog = (totalprice) => { 
     setbuysuccessVisible(true);
-    setCoin(coin => coin - 100);
+    setitemcheckVisible(false);
+    setCoin(coin => coin - totalprice);
   }
   const hidebuysuccessDialog = () => {
+    setitemprice(10);
+    setitemnum(1);
     setbuysuccessVisible(false);
-    setitemcheckVisible(false);
   }
   
   const [collectionvisible, setcollectionVisible] = useState(false);
@@ -620,14 +1076,49 @@ function MainScreen({navigation, route}) {
     setfurniture("바닥 가구");
   }
 
-  // const renderEatFruit = ({ item }) => {
-  //   return (
-  //     <Item
-  //       item={item}
-  //       onPress={hideeatDialog}
-  //     />
-  //   );
-  //   }
+  const [setting, setsetting] = useState("account");
+  const setsettingaccount = () => setsetting("account");
+  const setsettinggame = () => setsetting("game");
+  const [isquality, setquality] = useState(false);
+  const changequality = () => setquality(!isquality);
+  const [ispush, setpush] = useState(true);
+  const changepush = () => setpush(!ispush);
+
+
+  const renderEat = ({ item }) => {
+    return (
+      <Item
+        item={item}
+        onPress={() => showeatCheckDialog(item.title)}
+        //onPress={hideeatDialog}
+      />
+    );
+    }
+
+    const renderClean = ({ item }) => {
+      return (
+        <Item
+          item={item}
+          onPress={() => showcleanCheckDialog(item.title)}
+          //onPress={hideeatDialog}
+        />
+      );
+      }
+
+      const renderShop = ({ item }) => {
+        return (
+          <Item
+            item={item}
+            onPress={() => showshopCheckDialog(item.title)}
+            //onPress={hideeatDialog}
+          />
+        );
+        }
+
+  const showshopCheckDialog = (name) => {
+    showitemcheckDialog();
+    //hideshopDialog();
+  }     
 
   const removefurniture = (furnituretype, index) => {
     if(furnituretype == 1)
@@ -753,7 +1244,7 @@ function MainScreen({navigation, route}) {
 
     <TouchableOpacity
                 style={styles.menubg}
-                onPress={showsettingDialog} activeOpacity={1}>
+                onPress={showmenuDialog} activeOpacity={1}>
           <Image source={require('./assets/images/main/menu.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
 
@@ -830,11 +1321,6 @@ function MainScreen({navigation, route}) {
                   <Image source={require('./assets/images/main/sleep.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
 
-  {/* <FlatList
-        data={FruitData}
-        renderItem={renderEatFruit}
-        keyExtractor={(item) => item.key}
-      /> */}
 
 <Dialog visible={stagevisible} onDismiss={hidestageDialog} style={styles.stageScene}>
   <Dialog.Content>
@@ -857,7 +1343,9 @@ function MainScreen({navigation, route}) {
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.settinglist}>
+{/* 메뉴 화면 */}
+
+<Dialog visible={menuvisible} onDismiss={hidemenuDialog} style={styles.settinglist}>
   <Dialog.Title style={styles.textcenter}>메뉴</Dialog.Title>
   <Dialog.Content>
 
@@ -945,7 +1433,7 @@ function MainScreen({navigation, route}) {
      // <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
      <TouchableOpacity
      style={styles.menushopbutton}
-     onPress={() => {}} >
+     onPress={showsettingDialog} >
 </TouchableOpacity>
   }  
 
@@ -1000,6 +1488,8 @@ function MainScreen({navigation, route}) {
     <Button color={Colors.black} onPress={hideachieveDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
 </Dialog> */}
+
+{/* 업적 화면 */}
 
 <Dialog visible={achievevisible} onDismiss={hideachieveDialog} style={styles.achieve}>
   <Dialog.Content>
@@ -1059,7 +1549,7 @@ function MainScreen({navigation, route}) {
 </Dialog> */}
 
 
-
+{/* 퀘스트 화면 */}
 
 <Dialog visible={questvisible} onDismiss={hidequestDialog} style={styles.quest}>
   <Dialog.Title style={styles.textcenter}>퀘스트</Dialog.Title>
@@ -1113,7 +1603,7 @@ function MainScreen({navigation, route}) {
 
 
 
-
+{/* 퀘스트 보상 화면 */}
 
 <Dialog visible={questrewardvisible} onDismiss={hidequestrewardDialog} style={styles.questreward}>
   <Dialog.Title style={styles.textcenter}>퀘스트 보상</Dialog.Title>
@@ -1125,7 +1615,7 @@ function MainScreen({navigation, route}) {
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={shopvisible} onDismiss={hideshopDialog} style={styles.acheivelist}>
+{/* <Dialog visible={shopvisible} onDismiss={hideshopDialog} style={styles.acheivelist}>
   <Dialog.Title style={styles.todayquest}>상점</Dialog.Title>
   <Dialog.Content>
   <Button disabled onPress={() => {}} style={styles.shopcoinnum}><Text style={styles.shopcoinfont}>    {coin}</Text></Button>
@@ -1138,8 +1628,9 @@ function MainScreen({navigation, route}) {
   <Button disabled color={Colors.black} onPress={hideshopDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hideshopDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
-</Dialog>
+</Dialog> */}
 
+{/* 상점 화면 */}
 
 <Dialog visible={shopvisible} onDismiss={hideshopDialog} style={styles.stageScene}>
   <Dialog.Content>
@@ -1177,7 +1668,13 @@ function MainScreen({navigation, route}) {
 
 <View style={{...styles.shoptab1_1, left : 23.5 + (shoptabnum-1)*73}}><Text style={styles.textcenter}>{shoptabname}</Text></View>
 
-{shoptabnum == 1 &&
+<TouchableOpacity
+      style={styles.shopbackbutton}
+      onPress={hideshopDialog} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/backbutton.png')} resizeMode ="cover"/>
+  </TouchableOpacity> 
+
+{/* {shoptabnum == 1 &&
   <TouchableOpacity
       style={styles.shopeatslot1}
       onPress={hideshopDialog} activeOpacity={1}>
@@ -1203,7 +1700,22 @@ function MainScreen({navigation, route}) {
       style={styles.shopeatslot4}
       onPress={hideshopDialog} activeOpacity={1}>
     <Image source={require('./assets/images/shop/appleslot.png')} resizeMode ="cover"/>
-  </TouchableOpacity> }
+  </TouchableOpacity> } */}
+
+  {shoptabnum == 1 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 165, left : 70, width : 300, height : 480}}>
+        <View  >
+          <FlatList
+          data={ShopEatData}
+          renderItem={renderShop}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
 
   </Dialog.Content>
   <Dialog.Actions>
@@ -1212,31 +1724,47 @@ function MainScreen({navigation, route}) {
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={itemcheckvisible} onDismiss={hideitemcheckDialog} style={styles.itemcheck}>
-  <Dialog.Title></Dialog.Title>
+{/* 구매 확인 화면 */}
+
+<Dialog visible={itemcheckvisible} dismissable={false} onDismiss={hideitemcheckDialog} style={styles.itemcheck}>
   <Dialog.Content>
-  <Button disabled color={Colors.black} onPress={() => {}} style={styles.itemname}><Text style={styles.itemnamefont}>상품 이름</Text></Button>
-  <Button disabled color={Colors.black} onPress={() => {}} style={styles.itemimage}></Button>
-  <Button disabled color={Colors.black} onPress={() => {}} style={styles.iteminfo1}></Button>
-    <Button disabled color={Colors.black} onPress={() => {}} style={styles.iteminfo2}></Button>
+    <Image source={require('./assets/images/shop/appleinfo.png')} style={styles.itemimage} resizeMode ="stretch"/>
+    <Image source={require('./assets/images/shop/coin.png')} style={styles.itemcost} resizeMode ="stretch"/>
+    <Text style={styles.itemcosttext}>{itemprice * itemnum}</Text>
+    <Text style={styles.itemnumtext}>{itemnum}</Text>
+
+    <TouchableOpacity
+      style={styles.downbutton}
+      onPress={itemnumdown} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/downbutton.png')} resizeMode ="cover"/>
+  </TouchableOpacity> 
+  <TouchableOpacity
+      style={styles.upbutton}
+      onPress={itemnumup} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/upbutton.png')} resizeMode ="cover"/>
+  </TouchableOpacity> 
+
     <Paragraph style={styles.itemchecktext}><Text style={styles.yesbuttonfont}>구매 하시겠습니까?</Text></Paragraph>
   </Dialog.Content>
   <Dialog.Actions>
-    <Button color={Colors.black} onPress={showbuysuccessDialog} style={styles.itemyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
-    <Button color={Colors.black} onPress={hideitemcheckDialog} style={styles.itemnobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
+    <Button color={Colors.black} onPress={() =>showbuysuccessDialog(itemprice * itemnum)} style={styles.itemyesbutton}><Text style={styles.itemyesbuttonfont}>네</Text></Button>
+    <Button color={Colors.black} onPress={hideitemcheckDialog} style={styles.itemnobutton}><Text style={styles.itemnobuttonfont}>아니오</Text></Button>
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={buysuccessvisible} onDismiss={hidebuysuccessDialog} style={styles.buysuccess}>
-  <Dialog.Title style={styles.textcenter}>구매 성공!</Dialog.Title>
+{/* 구매 성공 화면 */}
+
+<Dialog visible={buysuccessvisible} dismissable={false} onDismiss={hidebuysuccessDialog} style={styles.buysuccess}>
   <Dialog.Content>
+    <Text style={styles.buysuccesstext1}>구매에 성공했습니다!</Text>
+    <Text style={styles.buysuccesstext2}>창고를 확인해주세요.</Text>
   </Dialog.Content>
   <Dialog.Actions>
     <Button color={Colors.black} onPress={hidebuysuccessDialog} style={styles.checkbutton}><Text style={styles.checkbuttonfont}>확인</Text></Button>
   </Dialog.Actions>
 </Dialog>
 
-<Dialog visible={collectionvisible} onDismiss={hidecollectionDialog} style={styles.collectionlist}>
+{/* <Dialog visible={collectionvisible} onDismiss={hidecollectionDialog} style={styles.collectionlist}>
   <Dialog.Title style={styles.collectiontitle}>수집품</Dialog.Title>
   <Dialog.Content>
   <Button disabled onPress={() => {}} style={styles.collectionbackground}><Text></Text></Button>
@@ -1260,7 +1788,7 @@ function MainScreen({navigation, route}) {
   <Button disabled color={Colors.black} onPress={hidepetinfoDialog} style={styles.petxbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hidepetinfoDialog} style={styles.petxbutton}><Text style={styles.petxbuttonfont}>X</Text></Button>
   </Dialog.Actions>
-</Dialog>
+</Dialog> */}
 
 {/* <Dialog visible={furniturevisible} onDismiss={hidefurnitureDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>가구 목록</Dialog.Title>
@@ -1274,6 +1802,8 @@ function MainScreen({navigation, route}) {
     <Button color={Colors.black} onPress={hidefurnitureDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
 </Dialog> */}
+
+{/* 가구 배치 화면 */}
 
 <Dialog visible={furniturevisible} onDismiss={hidefurnitureDialog} style={styles.quest}>
   <Dialog.Content>
@@ -1341,6 +1871,8 @@ function MainScreen({navigation, route}) {
   </Dialog.Content>
 </Dialog>
 
+{/* 가구 배치 확인 화면 */}
+
 <Dialog visible={furniturecheckvisible} onDismiss={hidefurniturecheckDialog} style={styles.furniturecheck} >
   <Dialog.Content>
   <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'{furniturename}'</Text></Paragraph>
@@ -1384,40 +1916,137 @@ function MainScreen({navigation, route}) {
   <Image style={styles.achievebg} source={require('./assets/images/dictionary/dictionarybg.png')} resizeMode ="stretch"/>
   <Text style={styles.dictionarytitlefont}>도감</Text>
 
-  <Image style={styles.dicpage1} source={require('./assets/images/dictionary/page1.png')} resizeMode ="stretch"/>
-  <Image style={styles.dicpage2} source={require('./assets/images/dictionary/page2.png')} resizeMode ="stretch"/>
-  <Image style={styles.dicpage3} source={require('./assets/images/dictionary/page3.png')} resizeMode ="stretch"/>
+  {(dictionarynum == 1) ? <Image style={styles.dicpage1} source={require('./assets/images/dictionary/page1.png')} resizeMode ="stretch"/>
+  : <TouchableOpacity
+  style={styles.dicpage1}
+  onPress={() => setdictionarynum(1)} activeOpacity={1}>
+<Image source={require('./assets/images/dictionary/page1.1.png')} resizeMode ="stretch"/>
+</TouchableOpacity>
+}
 
-  <TouchableOpacity
+{(dictionarynum == 2) ? <Image style={styles.dicpage2} source={require('./assets/images/dictionary/page2.png')} resizeMode ="stretch"/>
+  : <TouchableOpacity
+  style={styles.dicpage2}
+  onPress={() => setdictionarynum(2)} activeOpacity={1}>
+<Image source={require('./assets/images/dictionary/page2.1.png')} resizeMode ="stretch"/>
+</TouchableOpacity>
+}
+
+{(dictionarynum == 3) ? <Image style={styles.dicpage3} source={require('./assets/images/dictionary/page3.png')} resizeMode ="stretch"/>
+  :   <TouchableOpacity
+  style={styles.dicpage3}
+  onPress={() => setdictionarynum(3)} activeOpacity={1}>
+<Image source={require('./assets/images/dictionary/page3.1.png')} resizeMode ="stretch"/>
+</TouchableOpacity>
+}
+
+  {dictionarynum == 1 && <TouchableOpacity
                 style={styles.dicslot1}
                 onPress={() => setdictionaryinfotrue(1)} activeOpacity={1}>
-          <Image source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>
-  </TouchableOpacity>
+          <Image source={require('./assets/images/dictionary/pet1slot.png')} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+  {dictionarynum == 2 && <TouchableOpacity
+                style={styles.dicslot1}
+                onPress={() => setdictionaryinfotrue(3)} activeOpacity={1}>
+          <Image source={require('./assets/images/dictionary/pet3slot.png')} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+  {dictionarynum == 3 &&  <TouchableOpacity
+                style={styles.dicslot1}
+                onPress={() => setdictionaryinfotrue(2)} activeOpacity={1}>
+          <Image source={require('./assets/images/dictionary/pet2slot.png')} resizeMode ="stretch"/>
+  </TouchableOpacity> }
 
   <TouchableOpacity
                 style={styles.dicslot2}
-                onPress={() => setdictionaryinfotrue(2)} activeOpacity={1}>
+                onPress={hidedictionaryDialog} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
   
-        <TouchableOpacity
-                style={styles.dicslot3}
-                onPress={hidedictionaryDialog} activeOpacity={1}>
-          <Image source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>
-        </TouchableOpacity> 
-
+  {/* <Image style={styles.dicslot1} source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>  
+  <Image style={styles.dicslot2} source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>   */}
+  <Image style={styles.dicslot3} source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>  
   <Image style={styles.dicslot4} source={require('./assets/images/dictionary/dic4.png')} resizeMode ="stretch"/>
   <Image style={styles.dicslot5} source={require('./assets/images/dictionary/dic5.png')} resizeMode ="stretch"/>
   <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/>
 
-  {dictionaryinfo && <Text style={styles.dicinfobg}></Text>}
-  {dictionaryinfo && <TouchableOpacity style={styles.dicinfopet1} onPress={setdictionaryinfofalse} activeOpacity={1}>
-  {dictionarypetnum == 1 &&  <Image source={require('./assets/images/dictionary/pet1info.png')} resizeMode ="stretch"/> }
-  {dictionarypetnum == 2 &&  <Image source={require('./assets/images/dictionary/pet2info.png')} resizeMode ="stretch"/> }
-        </TouchableOpacity>}
+  {dictionaryinfo && <Text style={styles.dicinfobg1}></Text>}
+  {dictionaryinfo && <Text style={styles.dicinfobg2}></Text>}
+  {dictionaryinfo && <TouchableOpacity style={styles.dicinfopet} onPress={dictionaryinfoNext} activeOpacity={1}>
+  <Image source={dictionaryinfos[dictionarypetnum-1].path} resizeMode ="stretch"/> 
+  </TouchableOpacity>}
 
   </Dialog.Content>
 </Dialog>
+
+  {/* 설정 화면 */}
+
+  <Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.setting}>
+  <Dialog.Title style={styles.textcenter}>설정</Dialog.Title>
+  <Dialog.Content>
+
+  <TouchableOpacity
+                style={styles.questmenu1}
+                onPress={setsettingaccount} activeOpacity={1}>
+          <Image source={require('./assets/images/quest/tab1.png')} resizeMode ="stretch"/>
+          <Text style={styles.dailyreward}>계정 설정</Text>
+        </TouchableOpacity>
+
+  <TouchableOpacity
+                style={styles.questmenu2}
+                onPress={setsettinggame} activeOpacity={1}>
+  <Image source={require('./assets/images/quest/tab2.png')} resizeMode ="stretch"/>
+  <Text style={styles.attendancereward}>게임 설정</Text>
+        </TouchableOpacity>
+
+  {(setting == "account") ?
+      <Text style={{...styles.questtitlefont, backgroundColor: "#959FFF"}}>계정 설정</Text> :
+      <Text style={{...styles.questtitlefont, backgroundColor: "#3C3C94"}}>게임 설정</Text>
+  }
+
+{setting == "account" && <Image style={styles.settinggooglelogin} source={require('./assets/images/setting/googlelogin.png')} resizeMode ="stretch"/>}
+{setting == "account" && <Image style={styles.settingfacebooklogin} source={require('./assets/images/setting/facebooklogin.png')} resizeMode ="stretch"/>}
+{setting == "account" && <Image style={styles.settingdefaultlogin} source={require('./assets/images/setting/defaultlogin.png')} resizeMode ="stretch"/>}
+{/* {setting == "account" && <Image style={styles.settingcoupon} source={require('./assets/images/setting/coupon.png')} resizeMode ="stretch"/>}
+{setting == "account" && <Image style={styles.settingservicecenter} source={require('./assets/images/setting/servicecenter.png')} resizeMode ="stretch"/>} */}
+
+{setting != "account" &&   <Text style={styles.qualitytext}>고품질 효과</Text>}
+{setting != "account" &&  <TouchableOpacity
+                style={styles.qualitybutton}
+                onPress={changequality} activeOpacity={1}>
+                <Image source={require('./assets/images/setting/offbutton.png')} resizeMode ="stretch"/>
+</TouchableOpacity> }
+{setting != "account" && isquality && <TouchableOpacity
+                style={styles.qualitybutton}
+                onPress={changequality} activeOpacity={1}>
+                <Image source={require('./assets/images/setting/onbutton.png')} resizeMode ="stretch"/>
+</TouchableOpacity> }
+
+{setting != "account" &&   <Text style={styles.pushtext}>푸시알림</Text>}
+{setting != "account" &&  <TouchableOpacity
+                style={styles.pushbutton}
+                onPress={changepush} activeOpacity={1}>
+                <Image source={require('./assets/images/setting/onbutton.png')} resizeMode ="stretch"/>
+</TouchableOpacity> }
+{setting != "account" && !ispush && <TouchableOpacity
+                style={styles.pushbutton}
+                onPress={changepush} activeOpacity={1}>
+                <Image source={require('./assets/images/setting/offbutton.png')} resizeMode ="stretch"/>
+</TouchableOpacity> }
+
+{setting != "account" &&   <Text style={styles.soundtext}>사운드</Text>}
+{setting != "account" && <Image style={styles.soundbar} source={require('./assets/images/setting/soundbar.png')} resizeMode ="stretch"/>}
+{/* {setting != "account" && <Image style={styles.settingcoupon} source={require('./assets/images/setting/coupon.png')} resizeMode ="stretch"/>}
+{setting != "account" && <Image style={styles.settingservicecenter} source={require('./assets/images/setting/servicecenter.png')} resizeMode ="stretch"/>} */}
+
+<Image style={styles.settingcoupon} source={require('./assets/images/setting/coupon.png')} resizeMode ="stretch"/>
+<Image style={styles.settingservicecenter} source={require('./assets/images/setting/servicecenter.png')} resizeMode ="stretch"/>
+
+  </Dialog.Content>
+</Dialog>
+
+
 
     {/* <Dialog visible={eatvisible} onDismiss={hideeatDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>음식 목록</Dialog.Title>
@@ -1431,6 +2060,8 @@ function MainScreen({navigation, route}) {
     <Button color={Colors.black} onPress={hideeatDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
 </Dialog> */}
+
+  {/* 식사 화면 */}
 
   <Dialog visible={eatvisible} dismissable={false} onDismiss={hideeatDialog} style={styles.eatmodal}>
       <Dialog.Content>
@@ -1484,7 +2115,7 @@ function MainScreen({navigation, route}) {
 
         <View style={{...styles.eattab_1, left : 40 + (eattabnum-1)*70}}><Text style={styles.textcenter}>{eattabname}</Text></View>
         
-        {eattabname == "과일" &&         <TouchableOpacity
+        {/* {eattabname == "과일" &&         <TouchableOpacity
                 style={styles.eatslot1}
                 onPress={() => showeatCheckDialog("사과")} activeOpacity={1}>
         <Image source={require('./assets/images/eat/appleslot.png')} resizeMode ="stretch"/>
@@ -1496,15 +2127,60 @@ function MainScreen({navigation, route}) {
                 onPress={hideeatDialog} activeOpacity={1}>
         <Image source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
+        } */}
+
+        {eattabname == "과일" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 85, left : 15, width : 300, height : 430}}>
+        <View  >
+          <FlatList
+          data={FruitData}
+          renderItem={renderEat}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
         }
 
-        {eattabname == "육류" && <Image style={styles.eatslot1} source={require('./assets/images/eat/beef.png')} resizeMode ="stretch"/>}
+        {/* {eattabname == "육류" && <Image style={styles.eatslot1} source={require('./assets/images/eat/beef.png')} resizeMode ="stretch"/>}
         {eattabname == "육류" && <Image style={styles.eatslot2} source={require('./assets/images/eat/chicken.png')} resizeMode ="stretch"/>}
-        {eattabname == "육류" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+        {eattabname == "육류" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>} */}
 
-        {eattabname == "그외" && <Image style={styles.eatslot1} source={require('./assets/images/eat/coldpill.png')} resizeMode ="stretch"/>}
+        {eattabname == "육류" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 85, left : 15, width : 300, height : 430}}>
+        <View  >
+          <FlatList
+          data={MeatData}
+          renderItem={renderEat}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
+
+        {/* {eattabname == "그외" && <Image style={styles.eatslot1} source={require('./assets/images/eat/coldpill.png')} resizeMode ="stretch"/>}
         {eattabname == "그외" && <Image style={styles.eatslot2} source={require('./assets/images/eat/headachepill.png')} resizeMode ="stretch"/>}
-        {eattabname == "그외" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>}
+        {eattabname == "그외" && <Image style={styles.eatslot3} source={require('./assets/images/eat/slotdefault.png')} resizeMode ="stretch"/>} */}
+
+        {eattabname == "그외" && 
+                <ScrollView 
+                showsVerticalScrollIndicator={false}
+                style={{position : 'absolute', top : 85, left : 15, width : 300, height : 430}}>
+        <View >
+          <FlatList
+          data={EtcData}
+          renderItem={renderEat}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
 
         {/* <TouchableOpacity
                 style={styles.eatslot1button}
@@ -1526,6 +2202,8 @@ function MainScreen({navigation, route}) {
 </Dialog.Content>
 </Dialog>
 
+{/* 식사 확인 화면 */}
+
 <Dialog visible={eatCheckVisible} onDismiss={hideeatCheckDialog} style={styles.furniturecheck} >
   <Dialog.Content>
   <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'{eatCheckText}'</Text></Paragraph>
@@ -1546,7 +2224,9 @@ function MainScreen({navigation, route}) {
   </Dialog.Actions>
 </Dialog>
 
-{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} eatinfo={eatCheckText} hidePetEatScreen={hidePetEatScreen} eatpercent={eatpercent} />}
+{/* 먹이기 화면 */}
+
+{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={1} eatinfo={eatCheckText} hidePetEatScreen={hidePetEatScreen} eatpercent={eatpercent} />}
 
 {/* <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
@@ -1560,6 +2240,8 @@ function MainScreen({navigation, route}) {
     <Button color={Colors.black} onPress={hidecleanDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
 </Dialog> */}
+
+  {/* 청결 화면 */}
 
      <Dialog visible={cleanvisible} dismissable={false} onDismiss={hidecleanDialog} style={styles.eatmodal}>
       <Dialog.Content>
@@ -1613,22 +2295,67 @@ function MainScreen({navigation, route}) {
 
         <View style={{...styles.cleantab_1, left : 40 + (cleantabnum-1)*70}}><Text style={styles.textcenter}>{cleantabname}</Text></View>
 
-        {cleantabname == "솔" && <Image style={styles.eatslot1} source={require('./assets/images/clean/brushslot1.png')} resizeMode ="stretch"/>}
+        {/* {cleantabname == "솔" && <Image style={styles.eatslot1} source={require('./assets/images/clean/brushslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "솔" && <Image style={styles.eatslot2} source={require('./assets/images/clean/brushslot2.png')} resizeMode ="stretch"/>}
         {cleantabname == "솔" && <TouchableOpacity
           style={styles.eatslot3}
           onPress={hidecleanDialog} activeOpacity={1}>
         <Image source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
+        } */}
+
+        {cleantabname == "솔" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 85, left : 15, width : 300, height : 430}}>
+        <View  >
+          <FlatList
+          data={BrushData}
+          renderItem={renderClean}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
         }
 
-        {cleantabname == "세정제" && <Image style={styles.eatslot1} source={require('./assets/images/clean/detergentslot1.png')} resizeMode ="stretch"/>}
+        {/* {cleantabname == "세정제" && <Image style={styles.eatslot1} source={require('./assets/images/clean/detergentslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "세정제" && <Image style={styles.eatslot2} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
-        {cleantabname == "세정제" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "세정제" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>} */}
 
-        {cleantabname == "욕조" && <Image style={styles.eatslot1} source={require('./assets/images/clean/tubslot1.png')} resizeMode ="stretch"/>}
+        {cleantabname == "세정제" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 85, left : 15, width : 300, height : 430}}>
+        <View  >
+          <FlatList
+          data={DetergentData}
+          renderItem={renderClean}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
+
+        {/* {cleantabname == "욕조" && <Image style={styles.eatslot1} source={require('./assets/images/clean/tubslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "욕조" && <Image style={styles.eatslot2} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
-        {cleantabname == "욕조" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>}
+        {cleantabname == "욕조" && <Image style={styles.eatslot3} source={require('./assets/images/clean/slotdefault.png')} resizeMode ="stretch"/>} */}
+
+        {cleantabname == "욕조" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 85, left : 15, width : 300, height : 430}}>
+        <View  >
+          <FlatList
+          data={TubData}
+          renderItem={renderClean}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }        
 
         {/* <Text></Text>
         <TouchableOpacity
@@ -1639,6 +2366,35 @@ function MainScreen({navigation, route}) {
 
         </Dialog.Content>
 </Dialog>
+
+{/* 청결 확인 화면 */}
+
+<Dialog visible={cleanCheckVisible} onDismiss={hidecleanCheckDialog} style={styles.furniturecheck} >
+  <Dialog.Content>
+  <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>'{cleanCheckText}'</Text></Paragraph>
+    <Paragraph style={styles.textcenter}><Text style={styles.furniturecheckfont}>이것으로 씻기겠습니까?</Text></Paragraph>
+  </Dialog.Content>
+  <Dialog.Actions>
+    <TouchableOpacity
+                style={styles.eatcheckyes}
+                onPress={showPetCleanScreen} activeOpacity={1}>
+        <Text style={styles.eatcheckyesfont}>네</Text>
+        </TouchableOpacity>
+
+    <TouchableOpacity
+                style={styles.eatcheckno}
+                onPress={hidecleanCheckDialog} activeOpacity={1}>
+        <Text  style={styles.eatchecknofont}>아니오</Text>
+        </TouchableOpacity>
+  </Dialog.Actions>
+</Dialog>
+
+{/* 청소 화면 */}
+
+{petcleanscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={2} eatinfo={cleanCheckText} hidePetEatScreen={hidePetCleanScreen} eatpercent={cleanpercent} />}
+
+
+{/* 놀이 화면 */}
 
 <Dialog visible={funvisible} onDismiss={hidefunDialog} style={styles.stageScene}>
   <Dialog.Content>
@@ -1662,6 +2418,8 @@ function MainScreen({navigation, route}) {
   </Dialog.Content>
 </Dialog>
 
+{/* 놀이 결과 화면 */}
+
 <Dialog visible={minigamevisible} onDismiss={hideminigameDialog} style={styles.scoreboard}>
   <Dialog.Title></Dialog.Title>
   <Dialog.Content>
@@ -1673,6 +2431,8 @@ function MainScreen({navigation, route}) {
   </Dialog.Actions>
 </Dialog>
 
+{/* 보상 정보 화면 */}
+
 <Dialog visible={rewardvisible} onDismiss={hiderewardDialog} style={styles.reward}>
   <Dialog.Title style={styles.textcenter}>보상</Dialog.Title>
   <Dialog.Content>
@@ -1682,6 +2442,8 @@ function MainScreen({navigation, route}) {
   <Button color={Colors.black} onPress={hiderewardDialog} style={styles.rewardbutton}><Text style={styles.textcenter}>보상 받기</Text></Button>
   </Dialog.Actions>
 </Dialog>
+
+{/* 수면 화면 */}
 
 <Dialog visible={sleepvisible} onDismiss={hidesleepDialog} style={styles.stageScene}>
   <Dialog.Content>
@@ -1703,7 +2465,7 @@ function MainScreen({navigation, route}) {
   </Dialog.Content>
 </Dialog>
 
-<Dialog visible={foodvisible} onDismiss={hidefoodDialog} style={{ backgroundColor: Colors.grey500 }}>
+{/* <Dialog visible={foodvisible} onDismiss={hidefoodDialog} style={{ backgroundColor: Colors.grey500 }}>
   <Dialog.Title style={styles.textcenter}>식사 완료</Dialog.Title>
   <Dialog.Content>
     <Paragraph style={styles.textcenter}>포만감 상승</Paragraph>
@@ -1723,7 +2485,7 @@ function MainScreen({navigation, route}) {
   <Button disabled color={Colors.black} onPress={hidecleanlistDialog} style={styles.xbuttonbackground}></Button>
     <Button color={Colors.black} onPress={hidecleanlistDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
-</Dialog>
+</Dialog> */}
 
 </View>
   );
@@ -1754,6 +2516,14 @@ const styles = StyleSheet.create({
     // flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  absoluteContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 
   safeAreaContainer: {
@@ -2300,6 +3070,12 @@ const styles = StyleSheet.create({
     borderRadius : 20,
     justifyContent: 'center',
     backgroundColor : '#8775BC'
+  },
+
+  shopbackbutton:{
+    position: 'absolute',
+    top: 40,
+    right : 20,
   },
 
   shopeatslot1:{
@@ -2998,83 +3774,94 @@ const styles = StyleSheet.create({
     height : 150,
   },
 
-  itemname:{
-    position: 'absolute',
-    width : 80,
-    height : 25,
-    left : 110,
-    top : 120,
-    textAlign : 'center',
-    justifyContent : 'center',
-    backgroundColor : 'white',
-    borderRadius : 10,
-  },
-
-  itemnamefont:{
-    fontSize : 10,
-  },
 
   itemcheck:{
-    backgroundColor: Colors.grey500,
     position: 'absolute',
     left : 30,
+    top : 120,
     width : 300,
     height : 400,
+    borderRadius : 20,
+    backgroundColor : '#EEEEEE',
+    borderColor : '#8775BC',
+    borderWidth : 2,
   },
 
-  itemimage : {
+  itemimage :{
     position: 'absolute',
-    width : 150,
-    height : 150,
-    left : 75,
-    top : -40,
-    backgroundColor: 'darkgray',
-    borderColor : 'gray',
-    borderWidth : 5,
+    left : 40,
+    top : 10,
   },
 
-  iteminfo1 : {
+  itemcost :{
     position: 'absolute',
-    width : 175,
-    height: 5,
-    left : 65,
-    top : 170,
-    backgroundColor : 'gray',
+    left : 130-1,
+    top : 230,
+    width : 20,
+    height : 20,
   },
 
-  iteminfo2 : {
+  itemcosttext :{
     position: 'absolute',
-    width : 175,
-    height: 5,
-    left : 65,
-    top : 200,
-    backgroundColor : 'gray',
+    left : 150+1,
+    top : 230,
+  },
+
+  itemnumtext :{
+    position: 'absolute',
+    left : 150-5,
+    top : 250+10,
+  },
+
+  downbutton :{
+    position: 'absolute',
+    left : 150-15-10,
+    top : 250+15,
+  },
+
+  upbutton :{
+    position: 'absolute',
+    left : 150+15,
+    top : 250+15,
   },
 
   itemchecktext:{
     position: 'absolute',
     left : 90,
-    top : 230,
+    top : 300,
   },
 
   itemyesbutton:{
     position: 'absolute',
     width : 120,
+    height : 40,
     left : 20,
-    bottom : -270,
-    backgroundColor : '#CFCFD7',
-    textAlign:'center',
+    bottom : -310,
+    backgroundColor : '#4D3C9B',
+    justifyContent:'center',
     borderRadius: 10,
   },
 
   itemnobutton:{
     position: 'absolute',
     width : 120,
+    height : 40,
     right : 20,
-    bottom : -270,
-    backgroundColor : '#CFCFD7',
-    textAlign:'center',
+    bottom : -310,
+    backgroundColor : '#E7D3F6',
+    justifyContent:'center',
     borderRadius: 10,
+  },
+
+  itemyesbuttonfont:{
+    textAlign:'center',
+    fontSize : 15,
+    color : 'white'
+  },
+
+  itemnobuttonfont:{
+    textAlign:'center',
+    fontSize : 15,
   },
 
   yesbutton:{
@@ -3898,7 +4685,15 @@ const styles = StyleSheet.create({
     top : 180+150+150,
   },
 
-  dicinfobg:{
+  dicinfobg1:{
+    position: 'absolute',
+    left : 0,
+    top : 0,
+    width : WINDOW_W,
+    height : WINDOW_H,
+  },
+
+  dicinfobg2:{
     position: 'absolute',
     left : 0,
     top : 80,
@@ -3907,7 +4702,7 @@ const styles = StyleSheet.create({
     backgroundColor : '#F1ECF5',
   },
 
-  dicinfopet1:{
+  dicinfopet:{
     position: 'absolute',
     left : 20,
     top : 20,
@@ -4007,11 +4802,28 @@ const styles = StyleSheet.create({
   },
 
   buysuccess:{
-    backgroundColor: Colors.grey500,
+    backgroundColor: '#EEEEEE',
+    borderWidth : 2,
+    borderColor : '#625A92',
+    borderRadius : 20,
     position: 'absolute',
     left : 30,
     width : 300,
     height : 170,
+  },
+
+  buysuccesstext1:{
+    position: 'absolute',
+    left : 70,
+    top: 30-3,
+    fontSize : 15+3,
+  },
+
+  buysuccesstext2:{
+    position: 'absolute',
+    left : 70,
+    top: 50+2,
+    fontSize : 15+3,
   },
 
   checkbutton:{
@@ -4019,14 +4831,15 @@ const styles = StyleSheet.create({
     width : 120,
     height : 40,
     left : 90,
-    bottom: -20,
+    top: 50,
     justifyContent: 'center',
-    backgroundColor: 'lightgray',
+    backgroundColor: '#665AAC',
     borderRadius : 10,
   },
 
   checkbuttonfont:{
-    fontSize: 20,
+    fontSize: 15,
+    color : 'white'
   },
 
   collectionlist:{
@@ -4198,15 +5011,82 @@ const styles = StyleSheet.create({
 
 
 
+  setting : {
+    position: 'absolute',
+    left : 30,
+    width : 300,
+    height : 430+120,
+    backgroundColor: 'white',
+    borderRadius : 0,
+  },
 
+  settinggooglelogin: {
+    position: 'absolute',
+    left : 25,
+    top : 100,
+  },
 
+  settingfacebooklogin: {
+    position: 'absolute',
+    left : 25,
+    top : 160,
+  },
 
+  settingdefaultlogin: {
+    position: 'absolute',
+    left : 25,
+    top : 220,
+  },
 
+  settingcoupon: {
+    position: 'absolute',
+    left : 65-2,
+    top : 340,
+  },
 
+  settingservicecenter: {
+    position: 'absolute',
+    left : 65-2,
+    top : 400,
+  },
 
+  qualitytext : {
+    position: 'absolute',
+    left : 40-10,
+    top : 100+5,
+    fontSize : 15,
+  },
 
+  qualitybutton : {
+    position: 'absolute',
+    left : 150,
+    top : 100,
+  },
 
+  pushtext : {
+    position: 'absolute',
+    left : 40,
+    top : 180+5,
+    fontSize : 15,
+  },
 
+  pushbutton : {
+    position: 'absolute',
+    left : 150,
+    top : 180,
+  },
+
+  soundtext : {
+    position: 'absolute',
+    left : 40+5,
+    top : 280-5,
+    fontSize : 15,
+  },
+  soundbar : {
+    position: 'absolute',
+    left : 120,
+    top : 280,
+  },
 
 
 

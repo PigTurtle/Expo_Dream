@@ -95,7 +95,7 @@ const Pet = (props) => {
         if(ismove.value == 0)
         {
             setActive(!active);
-            ismove.value = withTiming(1, {duration : 100});
+            ismove.value = 1;
         }
     }
 

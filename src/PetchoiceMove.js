@@ -193,8 +193,6 @@ const styles = StyleSheet.create({
 
     pet:{
         position : 'absolute',
-        width : 175,
-        height: 175,
     },
 
     petbg:{

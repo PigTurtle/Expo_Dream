@@ -60,6 +60,33 @@ const EatItem = (props) => {
         case '사과':
             imagepath = require('../assets/images/eat/apple.png');
             break;
+        case '수박':
+            imagepath = require('../assets/images/eat/apple.png');
+            break;
+        case '소고기':
+            imagepath = require('../assets/images/eat/apple.png');
+            break;
+        case '닭고기':
+            imagepath = require('../assets/images/eat/apple.png');
+            break;
+        case '감기약':
+            imagepath = require('../assets/images/eat/apple.png');
+            break;
+        case '두통약':
+            imagepath = require('../assets/images/eat/apple.png');
+            break;
+        case '거친 솔':
+            imagepath = require('../assets/images/clean/brush1.png');
+            break;
+        case '부드러운 솔':
+            imagepath = require('../assets/images/clean/brush1.png');
+            break;
+        case '손 세정제':
+            imagepath = require('../assets/images/clean/brush1.png');
+            break;
+        case '작은 욕조':
+            imagepath = require('../assets/images/clean/brush1.png');
+            break;
         default:
             break;
     }
@@ -84,8 +111,21 @@ const PetEatScreen = (props) => {
     const [out, setout] = useState(false);
     const [addgauge, setaddgauge] = useState(30);
 
+    let menutext;
+    switch(props.type)
+    {
+        case 1:
+            menutext = "포만감";
+            break;
+        case 2:
+            menutext = "청결도";
+            break;
+        default:
+            break;
+    }
+
     const onTap = () => {
-        setbottommenutext("포만감");
+        setbottommenutext(menutext);
         setbottomgauge(true);
         //props.hidePetEatScreen();
     }
@@ -149,14 +189,30 @@ const PetEatScreen = (props) => {
             break;
     }
 
+    let gaugemaxpath;
+    let gaugepath;
+    switch(props.type)
+    {
+        case 1:
+            gaugemaxpath = require('../assets/images/eat/eatgaugemax.png');
+            gaugepath = require('../assets/images/eat/eatgauge.png');
+            break;
+        case 2:
+            gaugemaxpath = require('../assets/images/clean/cleangaugemax.png');
+            gaugepath = require('../assets/images/clean/cleangauge.png');
+            break;
+        default:
+            break;
+    }
+
     return (
-        <View>
+        <View style={{top : -30}}>
             <Image source={mainimagepath} style={styles.main} resizeMode ="cover"/>
             <Image source={petimagepath} style={styles.pet} resizeMode ="cover"/>
             <Image source={require('../assets/images/main/bottommenu.png')} style={styles.bottomtab} resizeMode ="cover"/>
             <Button disabled style={styles.bottommenutext}><Text>{bottommenutext}</Text></Button>
-            {bottomgauge == true && <Image source={require('../assets/images/eat/eatgaugemax.png')} style={styles.eatgaugemax} resizeMode ="cover"/> }
-            {bottomgauge == true && <Image source={require('../assets/images/eat/eatgauge.png')} style={{...styles.eatgauge,  width : 339 * eatgauge/100}} resizeMode ="cover"/>  }
+            {bottomgauge == true && <Image source={gaugemaxpath} style={styles.eatgaugemax} resizeMode ="cover"/> }
+            {bottomgauge == true && <Image source={gaugepath} style={{...styles.eatgauge,  width : 339 * eatgauge/100}} resizeMode ="cover"/>  }
 
             {bottomgauge == true && <Button disabled style={styles.eatgaugetext}><Text>{eatgauge}%</Text></Button> }
 
