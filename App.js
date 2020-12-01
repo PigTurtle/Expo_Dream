@@ -227,56 +227,56 @@ const FruitData = [
   },
   {
     key : 3,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
+    id: require('./assets/images/eat/pineappleslot.png'),
+    title: "파인애플",
   },
   {
     key : 4,
     id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
-  {
-    key : 5,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 6,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 7,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 8,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 9,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 10,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   key : 5,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 6,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 7,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 8,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 9,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
+  // {
+  //   key : 10,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
 ];
 
 const MeatData = [
   {
     key : 1,
-    id: require('./assets/images/eat/beef.png'),
-    title: "소고기",
+    id: require('./assets/images/eat/porkslot.png'),
+    title: "생 돼지고기",
   },
   {
     key : 2,
-    id: require('./assets/images/eat/chicken.png'),
-    title: "닭고기",
+    id: require('./assets/images/eat/beefslot.png'),
+    title: "생 소고기",
   },
   {
     key : 3,
@@ -323,19 +323,19 @@ const MeatData = [
 const EtcData = [
   {
     key : 1,
-    id: require('./assets/images/eat/coldpill.png'),
-    title: "감기약",
+    id: require('./assets/images/eat/unknownlumpslot.png'),
+    title: "미지의 덩어리",
   },
   {
     key : 2,
-    id: require('./assets/images/eat/headachepill.png'),
-    title: "두통약",
-  },
-  {
-    key : 3,
     id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
+  // {
+  //   key : 3,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  // },
   // {
   //   key : 4,
   //   id: require('./assets/images/eat/slotdefault.png'),
@@ -376,18 +376,18 @@ const EtcData = [
 const BrushData = [
   {
     key : 1,
-    id: require('./assets/images/clean/brushslot1.png'),
+    id: require('./assets/images/clean/roughbrush.png'),
     title: "거친 솔",
   },
   {
     key : 2,
-    id: require('./assets/images/clean/brushslot2.png'),
+    id: require('./assets/images/clean/softbrush.png'),
     title: "부드러운 솔",
   },
   {
     key : 3,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
+    id: require('./assets/images/clean/showerbrush.png'),
+    title: "욕실 브러쉬",
   },
   {
     key : 4,
@@ -429,24 +429,24 @@ const BrushData = [
 const DetergentData = [
   {
     key : 1,
-    id: require('./assets/images/clean/detergentslot1.png'),
-    title: "손 세정제",
+    id: require('./assets/images/clean/petshampoo.png'),
+    title: "펫 샴푸",
   },
   {
     key : 2,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
+    id: require('./assets/images/clean/orientalshampoo.png'),
+    title: "한방샴푸",
   },
   {
     key : 3,
+    id: require('./assets/images/clean/snowshampoo.png'),
+    title: "눈꽃샴푸",
+  },
+  {
+    key : 4,
     id: require('./assets/images/clean/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 4,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
   // {
   //   key : 5,
   //   id: require('./assets/images/clean/slotdefault.png'),
@@ -482,24 +482,24 @@ const DetergentData = [
 const TubData = [
   {
     key : 1,
-    id: require('./assets/images/clean/tubslot1.png'),
-    title: "작은 욕조",
+    id: require('./assets/images/clean/rubbertub.png'),
+    title: "고무 대야",
   },
   {
     key : 2,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
+    id: require('./assets/images/clean/movabletub.png'),
+    title: "이동식 욕조",
   },
   {
     key : 3,
+    id: require('./assets/images/clean/whitetub.png'),
+    title: "하얀 욕조",
+  },
+  {
+    key : 4,
     id: require('./assets/images/clean/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 4,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
   // {
   //   key : 5,
   //   id: require('./assets/images/clean/slotdefault.png'),
@@ -537,56 +537,276 @@ const ShopEatData = [
     key : 1,
     id: require('./assets/images/shop/appleslot.png'),
     title: "사과",
+    cost : 100,
+    idforeat: require('./assets/images/eat/appleslot.png'),
   },
   {
     key : 2,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    id: require('./assets/images/shop/watermelonslot.png'),
+    title: "수박",
+    cost : 100,
+    idforeat: require('./assets/images/eat/watermelonslot.png'),
   },
   {
     key : 3,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    id: require('./assets/images/shop/pineappleslot.png'),
+    title: "파인애플",
+    cost : 100,
+    idforeat: require('./assets/images/eat/pineappleslot.png'),
   },
   {
     key : 4,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    id: require('./assets/images/shop/porkslot.png'),
+    title: "생 돼지고기",
+    cost : 100,
+    idforeat: require('./assets/images/eat/porkslot.png'),
+  },
+];
+
+const ShopCleanData = [
+  {
+    key : 1,
+    id: require('./assets/images/shop/roughbrush.png'),
+    title: "거친 솔",
+    cost : 100,
+    idforclean: require('./assets/images/clean/roughbrush.png'),
   },
   {
-    key : 5,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    key : 2,
+    id: require('./assets/images/shop/softbrush.png'),
+    title: "부드러운 솔",
+    cost : 100,
+    idforclean: require('./assets/images/clean/softbrush.png'),
   },
   {
-    key : 6,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    key : 3,
+    id: require('./assets/images/shop/showerbrush.png'),
+    title: "욕실 브러쉬",
+    cost : 100,
+    idforclean: require('./assets/images/clean/showerbrush.png'),
   },
   {
-    key : 7,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    key : 4,
+    id: require('./assets/images/shop/petshampoo.png'),
+    title: "펫 샴푸",
+    cost : 100,
+    idforclean: require('./assets/images/clean/petshampoo.png'),
+  },
+];
+
+const ShopFurnitureData = [
+  {
+    key : 1,
+    id: require('./assets/images/shop/wallplantslot.png'),
+    title: "벽걸이 식물",
+    cost : 1000,
+    idforfurniture: require('./assets/images/furnitureposition/wallplantslot.png'),
   },
   {
-    key : 8,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    key : 2,
+    id: require('./assets/images/shop/thincurtainslot.png'),
+    title: "얇은 커튼",
+    cost : 1000,
+    idforfurniture: require('./assets/images/furnitureposition/thincurtainslot.png'),
   },
   {
-    key : 9,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    key : 3,
+    id: require('./assets/images/shop/wallclockslot.png'),
+    title: "벽걸이 시계",
+    cost : 500,
+    idforfurniture: require('./assets/images/furnitureposition/wallclockslot.png'),
   },
   {
-    key : 10,
-    id: require('./assets/images/shop/appleslot.png'),
-    title: "사과",
+    key : 4,
+    id: require('./assets/images/shop/europeancarpetslot.png'),
+    title: "북유럽풍 카페트",
+    cost : 2000,
+    idforfurniture: require('./assets/images/furnitureposition/europeancarpetslot.png'),
   },
+];
+
+const ShopCostData = [
+  {
+    key : 1,
+    id: require('./assets/images/shop/goldslot.png'),
+    title: "골드",
+    cost : 1,
+  },
+  {
+    key : 2,
+    id: require('./assets/images/shop/diamondslot.png'),
+    title: "다이아",
+    cost : 1000,
+  },
+  {
+    key : 3,
+    id: require('./assets/images/shop/heartboosterslot.png'),
+    title: "하트부스터",
+    cost : 3300,
+  },
+];
+
+const StoreEatData = [  
+  {
+  key : 1,
+  id: require('./assets/images/store/appleslot.png'),
+  title: "사과",
+},
+{
+  key : 2,
+  id: require('./assets/images/store/watermelonslot.png'),
+  title: "수박",
+},
+{
+  key : 3,
+  id: require('./assets/images/store/pineappleslot.png'),
+  title: "파인애플",
+},
+{
+  key : 4,
+  id: require('./assets/images/store/porkslot.png'),
+  title: "생 돼지고기",
+},
+{
+  key : 5,
+  id: require('./assets/images/store/beefslot.png'),
+  title: "생 소고기",
+},
+{
+  key : 6,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+{
+  key : 7,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+{
+  key : 8,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+{
+  key : 9,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+{
+  key : 10,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+{
+  key : 11,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+{
+  key : 12,
+  id: require('./assets/images/store/unknownlumpslot.png'),
+  title: "미지의 덩어리",
+},
+];
+
+const StoreCleanData = [  
+  {
+  key : 1,
+  id: require('./assets/images/store/roughbrushslot.png'),
+  title: "거친 솔",
+},
+{
+  key : 2,
+  id: require('./assets/images/store/softbrushslot.png'),
+  title: "부드러운 솔",
+},
+{
+  key : 3,
+  id: require('./assets/images/store/showerbrushslot.png'),
+  title: "욕실 브러쉬",
+},
+{
+  key : 4,
+  id: require('./assets/images/store/petshampooslot.png'),
+  title: "펫 샴푸",
+},
+{
+  key : 5,
+  id: require('./assets/images/store/orientalshampooslot.png'),
+  title: "한방샴푸",
+},
+{
+  key : 6,
+  id: require('./assets/images/store/snowshampooslot.png'),
+  title: "눈꽃샴푸",
+},
+{
+  key : 7,
+  id: require('./assets/images/store/rubbertubslot.png'),
+  title: "고무 대야",
+},
+{
+  key : 8,
+  id: require('./assets/images/store/movabletubslot.png'),
+  title: "이동식 욕조",
+},
+];
+
+const StoreFurnitureData = [  
+  {
+  key : 1,
+  id: require('./assets/images/store/wallplantslot.png'),
+  title: "벽걸이 식물",
+},
+{
+  key : 2,
+  id: require('./assets/images/store/thincurtainslot.png'),
+  title: "얇은 커튼",
+},
+{
+  key : 3,
+  id: require('./assets/images/store/wallclockslot.png'),
+  title: "벽걸이 시계",
+},
+{
+  key : 4,
+  id: require('./assets/images/store/europeancarpetslot.png'),
+  title: "북유럽풍 카페트",
+},
+{
+  key : 5,
+  id: require('./assets/images/store/unknownslot1.png'),
+  title: "unknown",
+},
+{
+  key : 6,
+  id: require('./assets/images/store/unknownslot2.png'),
+  title: "unknown",
+},
 ];
 
 const Item = ({item, onPress}) => (
   <View style={styles2.item}>
+  <TouchableOpacity
+  style={[styles2.image]}
+  onPress={onPress} activeOpacity={1}>
+  <Image source={item.id} resizeMode ="stretch"/>
+  </TouchableOpacity>
+</View>
+);
+
+const ShopItem = ({item, onPress}) => (
+  <View style={styles2.shopitem}>
+  <TouchableOpacity
+  style={[styles2.image]}
+  onPress={onPress} activeOpacity={1}>
+  <Image source={item.id} resizeMode ="stretch"/>
+  </TouchableOpacity>
+</View>
+);
+
+const StoreItem = ({item, onPress}) => (
+  <View style={styles2.storeitem}>
   <TouchableOpacity
   style={[styles2.image]}
   onPress={onPress} activeOpacity={1}>
@@ -600,6 +820,16 @@ const styles2 = StyleSheet.create({
     padding: 0,
     marginVertical: 15,
     marginHorizontal: 0,
+  },
+  shopitem: {
+    padding: 0,
+    marginVertical: 8,
+    marginHorizontal: 0,
+  },
+  storeitem: {
+    padding: 0,
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
   image:{
   }
@@ -617,8 +847,18 @@ function MainScreen({navigation, route}) {
   const [funpercent, setfunpercent] = useState(100);
   const [sleeppercent, setsleeppercent] = useState(100);
 
-  const [itemprice, setitemprice] = useState(10);
+  const [itemprice, setitemprice] = useState(0);
   const [itemnum, setitemnum] = useState(1);
+  const [todayitem, settodayitem] = useState("벽걸이 시계");
+
+  const [storeeatdata, setstoreeatdata] = useState([
+    {
+      key : 1,
+      id: require('./assets/images/eat/appleslot.png'),
+      title: "사과",
+      num : 1,
+    },
+  ]);
 
   const itemnumdown = () => {
     setitemnum(itemnum => itemnum -1 > 1 ? itemnum -1 : 1);
@@ -629,7 +869,7 @@ function MainScreen({navigation, route}) {
   }
 
   const [stagevisible, setstageVisible] = useState(false);
-  const showstageDialog = () => setfurniturecheck(false);
+  const showstageDialog = () => setstageVisible(true);
   const hidestageDialog = () => {
   setstageVisible(false);
   }
@@ -654,17 +894,32 @@ function MainScreen({navigation, route}) {
     setshoptab("청결류");
     setshoptabnum(2);
   }
-  const setshoptabphil = () => {
-    setshoptab("약품류");
+  const setshoptabfurniture = () => {
+    setshoptab("가구");
     setshoptabnum(3);
   }
   const setshoptabmoney = () => {
     setshoptab("재화");
     setshoptabnum(4);
   }
-  const setshoptabevent = () => {
-    setshoptab("이벤트");
-    setshoptabnum(5);
+
+  const [storetabnum, setstoretabnum] = useState(1);
+  const [storetabname, setstoretab] = useState("식사류");
+  const setstoretabeat = () => {
+    setstoretab("식사류");
+    setstoretabnum(1);
+  }
+  const setstoretabclean = () => {
+    setstoretab("청결류");
+    setstoretabnum(2);
+  }
+  const setstoretabfurniture = () => {
+    setstoretab("가구");
+    setstoretabnum(3);
+  }
+  const setstoretabmoney = () => {
+    setstoretab("재화");
+    setstoretabnum(4);
   }
 
   const [eattabnum, seteattabnum] = useState(1);
@@ -789,6 +1044,13 @@ function MainScreen({navigation, route}) {
   }
   const hidedictionaryDialog = () => setdictionaryVisible(false);
 
+  const [storevisible, setstoreVisible] = useState(false);
+  const showstoreDialog = () => {
+    setStoreData();
+    setstoreVisible(true);
+  }
+  const hidestoreDialog = () => setstoreVisible(false);
+
   const [settingvisible, setsettingVisible] = useState(false);
   const showsettingDialog = () => {
     setsettingaccount();
@@ -807,14 +1069,23 @@ function MainScreen({navigation, route}) {
   const [eatCheckText, seteatCheckText] = useState("");
   const showeatCheckDialog = (name) => 
   {
-    if(name == "default")
+    // if(name == "default")
+    // {
+    //   hideeatDialog();
+    //   return;
+    // }
+
+    // seteatCheckText(name);
+    // seteatCheckVisible(true);
+
+    if(name == "사과")
     {
-      hideeatDialog();
+      seteatCheckText(name);
+      seteatCheckVisible(true);
       return;
     }
 
-    seteatCheckText(name);
-    seteatCheckVisible(true);
+    hideeatDialog();
   }
   const hideeatCheckDialog = () => 
   {
@@ -843,14 +1114,23 @@ function MainScreen({navigation, route}) {
   const [cleanCheckText, setcleanCheckText] = useState("");
   const showcleanCheckDialog = (name) => 
   {
-    if(name == "default")
+    // if(name == "default")
+    // {
+    //   hidecleanDialog();
+    //   return;
+    // }
+
+    // setcleanCheckText(name);
+    // setcleanCheckVisible(true);
+
+    if(name == "거친 솔")
     {
-      hidecleanDialog();
+      setcleanCheckText(name);
+      setcleanCheckVisible(true);
       return;
     }
 
-    setcleanCheckText(name);
-    setcleanCheckVisible(true);
+    hidecleanDialog();
   }
   const hidecleanCheckDialog = () => 
   {
@@ -1034,8 +1314,10 @@ function MainScreen({navigation, route}) {
     setCoin(coin => coin - totalprice);
   }
   const hidebuysuccessDialog = () => {
-    setitemprice(10);
+    setitemprice(0);
     setitemnum(1);
+    
+    FruitData.push(item);
     setbuysuccessVisible(false);
   }
   
@@ -1083,7 +1365,11 @@ function MainScreen({navigation, route}) {
   const changequality = () => setquality(!isquality);
   const [ispush, setpush] = useState(true);
   const changepush = () => setpush(!ispush);
-
+  const [item, setitem] = useState({
+    key : 0,
+    id : require('./assets/images/eat/slotdefault.png'),
+    title: "default"
+  })
 
   const renderEat = ({ item }) => {
     return (
@@ -1107,18 +1393,57 @@ function MainScreen({navigation, route}) {
 
       const renderShop = ({ item }) => {
         return (
-          <Item
+          <ShopItem
             item={item}
-            onPress={() => showshopCheckDialog(item.title)}
+            onPress={() => showshopCheckDialog(item)}
             //onPress={hideeatDialog}
           />
         );
         }
 
-  const showshopCheckDialog = (name) => {
-    showitemcheckDialog();
+        const renderStore = ({ item }) => {
+          return (
+            <StoreItem
+              item={item}
+              onPress={() => {}}
+            />
+          );
+          }
+
+  const showshopCheckDialog = (myitem) => {
+    setitemprice(myitem.cost);
+
+    if(myitem.title == "사과")
+      showitemcheckDialog();
+
+    let tempitem = {key : FruitData.length,
+      id: myitem.idforeat,
+      title: myitem.title
+    };
+    setitem(tempitem);
+
     //hideshopDialog();
-  }     
+  } 
+  
+  const setStoreData = () => {
+    setStoreEatData();
+  }
+
+  const setStoreEatData = () => {
+    // let myeatdata = [... storeeatdata];
+
+    // for(let i=0; i < FruitData.length; i++)
+    // {
+    //   StoreEatData.push({key : myeatdata.length+1, id : require('./assets/images/eat/appleslot.png'), title : FruitData[i].title, num : 1});
+    // }
+
+    // storeeatdata(myeatdata);
+
+    // for(let i=0; i < StoreEatData.length; i++)
+    //   StoreEatData.pop();
+
+    // StoreEatData.push(storeeatdata);
+  }
 
   const removefurniture = (furnituretype, index) => {
     if(furnituretype == 1)
@@ -1321,22 +1646,35 @@ function MainScreen({navigation, route}) {
                   <Image source={require('./assets/images/main/sleep.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
 
+{/* 스테이지 선택 화면 */}
 
 <Dialog visible={stagevisible} onDismiss={hidestageDialog} style={styles.stageScene}>
   <Dialog.Content>
   <Image style={styles.stagebg} source={require('./assets/images/main/stage.png')} resizeMode ="stretch"/>
 
-  <TouchableOpacity
-                style={styles.stagenature}
+  {mainnum == 1 &&   <TouchableOpacity
+                style={styles.stage1}
                 onPress={pressstage1} activeOpacity={1}>
-          <Image source={require('./assets/images/main/stagenature.png')} resizeMode ="cover"/>
-        </TouchableOpacity>
+          <Image source={require('./assets/images/main/stage1.png')} resizeMode ="cover" />
+        </TouchableOpacity>}
 
-        <TouchableOpacity
-                style={styles.stagespace}
+        {mainnum != 1 &&   <TouchableOpacity
+                style={styles.stage1}
+                onPress={pressstage1} activeOpacity={1}>
+          <Image source={require('./assets/images/main/stage1.1.png')} resizeMode ="cover" />
+        </TouchableOpacity>}
+
+        {mainnum == 2 &&   <TouchableOpacity
+                style={styles.stage2}
                 onPress={pressstage2} activeOpacity={1}>
-          <Image source={require('./assets/images/main/stagespace.png')} resizeMode ="cover"/>
-        </TouchableOpacity>
+          <Image source={require('./assets/images/main/stage2.png')} resizeMode ="cover" />
+        </TouchableOpacity>}
+
+        {mainnum != 2 &&   <TouchableOpacity
+                style={styles.stage2}
+                onPress={pressstage2} activeOpacity={1}>
+          <Image source={require('./assets/images/main/stage2.1.png')} resizeMode ="cover" />
+        </TouchableOpacity>}
 
   </Dialog.Content>
   <Dialog.Actions>
@@ -1403,7 +1741,7 @@ function MainScreen({navigation, route}) {
      
   {(menu == true) ?
       <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menuquest} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
+      <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
   }   
 
   {(menu == true) ?
@@ -1414,32 +1752,32 @@ function MainScreen({navigation, route}) {
 </TouchableOpacity> :
      //<Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
      <TouchableOpacity
-     style={styles.menuquestbutton}
+     style={styles.menushopbutton}
      onPress={showshopDialog} >
 </TouchableOpacity>
   }  
 
   {(menu == true) ?
-      <Image style={styles.menushop} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menushop} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
+      <Image style={styles.menuachieve} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/> :
+      <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
   }   
 
   {(menu == true) ?
      //<Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button> 
      <TouchableOpacity
-     style={styles.menushopbutton}
+     style={styles.menuachievebutton}
      onPress={showachieveDialog} >
 </TouchableOpacity> :
      // <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
      <TouchableOpacity
-     style={styles.menushopbutton}
+     style={styles.menusettingbutton}
      onPress={showsettingDialog} >
 </TouchableOpacity>
   }  
 
   {(menu == true) ?
       <Image style={styles.menufurniture} source={require('./assets/images/menu/furnitureposition.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menufurniture} source={require('./assets/images/menu/dictionary.png')} resizeMode ="stretch"/>
+      <Image style={styles.menudictionary} source={require('./assets/images/menu/dictionary.png')} resizeMode ="stretch"/>
   }   
 
   {(menu == true) ?
@@ -1450,16 +1788,15 @@ function MainScreen({navigation, route}) {
 </TouchableOpacity> :
     // <Button color={Colors.black} onPress={showdictionaryDialog} style={styles.menufurniturebutton}><Text></Text></Button>
     <TouchableOpacity
-    style={styles.menufurniturebutton}
+    style={styles.menudictionarybutton}
     onPress={showdictionaryDialog} >
 </TouchableOpacity>
   }  
     
-  {menu == true && <Image style={styles.menusetting} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>}
-  {menu == true && // <Button color={Colors.black} onPress={() => {}} style={styles.menusettingbutton}><Text></Text></Button>
-  <TouchableOpacity
-  style={styles.menusettingbutton}
-  onPress={() => {}} >
+  {menu == true && <Image style={styles.menustore} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>}
+  {menu == true && <TouchableOpacity
+  style={styles.menustorebutton}
+  onPress={showstoreDialog} >
 </TouchableOpacity>
 }
 
@@ -1498,9 +1835,9 @@ function MainScreen({navigation, route}) {
 
   <Text style={styles.achievetitle}>ACHIEVEMENT</Text>
 
-  <Image style={styles.achieveslot1bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
+  {/* <Image style={styles.achieveslot1bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
   <Image style={styles.achieveslot1image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
-  {/* <Image style={styles.achieveslot1check} source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/> */}
+  <Image style={styles.achieveslot1check} source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/>
   <Text style={styles.slot1title}>집사로 간택되었습니...다?</Text>
   <Text style={styles.slot1info}>알을 선택하세요.</Text>
 
@@ -1522,10 +1859,18 @@ function MainScreen({navigation, route}) {
 
   <Image style={styles.achieveslot5bg} source={require('./assets/images/achieve/achieveslotbg.png')} resizeMode ="stretch"/>
   <Image style={styles.achieveslot5image} source={require('./assets/images/achieve/achieveimage.png')} resizeMode ="stretch"/>
-  <Image style={styles.achieveslot5check} source={require('./assets/images/achieve/defaultimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot5check} source={require('./assets/images/achieve/defaultimage.png')} resizeMode ="stretch"/> */}
 
-  <Image style={styles.achievebarbg} source={require('./assets/images/achieve/achievebarbg.png')} resizeMode ="stretch"/>
-  <Image style={styles.achievebar} source={require('./assets/images/achieve/achievebar.png')} resizeMode ="stretch"/>
+  {/* <Image style={styles.achievebarbg} source={require('./assets/images/achieve/achievebarbg.png')} resizeMode ="stretch"/>
+  <Image style={styles.achievebar} source={require('./assets/images/achieve/achievebar.png')} resizeMode ="stretch"/> */}
+
+  <Image style={styles.achieveslot1bg} source={require('./assets/images/achieve/achieveslot1.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot2bg} source={require('./assets/images/achieve/achieveslot2.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot3bg} source={require('./assets/images/achieve/achieveslot3.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot4bg} source={require('./assets/images/achieve/achieveslot4.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot2check} source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot3check} source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.achieveslot4check} source={require('./assets/images/achieve/checkimage.png')} resizeMode ="stretch"/>
 
   <TouchableOpacity
                 style={styles.achieveslot1check}
@@ -1590,13 +1935,22 @@ function MainScreen({navigation, route}) {
 {quest == "daily" && <Image style={styles.checkslot4} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
 {quest == "daily" &&   <Text style={styles.dailyinfoslot4}></Text>}
 
+{/*
 {quest != "daily" && <Image style={styles.attendbg} source={require('./assets/images/quest/attendbg.png')} resizeMode ="stretch"/>}
 
 {quest != "daily" && <Image style={styles.attendslot1} source={require('./assets/images/quest/checkbutton1.png')} resizeMode ="stretch"/>}
 {quest != "daily" && <Image style={styles.attendslot2} source={require('./assets/images/quest/checkbutton2.png')} resizeMode ="stretch"/>}
 {quest != "daily" && <Image style={styles.attendslot3} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
 {quest != "daily" && <Image style={styles.attendslot4} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
-{quest != "daily" && <Image style={styles.attendslot5} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
+{quest != "daily" && <Image style={styles.attendslot5} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>} */}
+
+{quest != "daily" && <Image style={styles.attend} source={require('./assets/images/quest/attend.png')} resizeMode ="stretch"/>}
+
+{quest != "daily" &&  <TouchableOpacity
+                style={styles.attendawardbutton}
+                onPress={hidequestDialog} activeOpacity={1}>
+  <Text style={styles.attendawardbuttontext}>보상받기</Text>
+</TouchableOpacity> }
 
   </Dialog.Content>
 </Dialog>
@@ -1652,21 +2006,16 @@ function MainScreen({navigation, route}) {
         </TouchableOpacity>
         <TouchableOpacity
                 style={styles.shoptab3}
-                onPress={setshoptabphil} activeOpacity={1}>
-        <Text style={styles.textcenter}>약품류</Text>
+                onPress={setshoptabfurniture} activeOpacity={1}>
+        <Text style={styles.textcenter}>가구</Text>
         </TouchableOpacity>
   <TouchableOpacity
                 style={styles.shoptab4}
                 onPress={setshoptabmoney} activeOpacity={1}>
        <Text style={styles.textcenter}>재화</Text>
         </TouchableOpacity>
-  <TouchableOpacity
-                style={styles.shoptab5}
-                onPress={setshoptabevent} activeOpacity={1}>
-        <Text style={styles.textcenter}>이벤트</Text>
-        </TouchableOpacity>
 
-<View style={{...styles.shoptab1_1, left : 23.5 + (shoptabnum-1)*73}}><Text style={styles.textcenter}>{shoptabname}</Text></View>
+<View style={{...styles.shoptab1_1, left : 23.5 + (shoptabnum-1)*(85+5/3)}}><Text style={styles.shoptabtext}>{shoptabname}</Text></View>
 
 <TouchableOpacity
       style={styles.shopbackbutton}
@@ -1705,7 +2054,7 @@ function MainScreen({navigation, route}) {
   {shoptabnum == 1 && 
         <ScrollView 
         showsVerticalScrollIndicator={false}
-        style={{position : 'absolute', top : 165, left : 70, width : 300, height : 480}}>
+        style={{position : 'absolute', top : 150, left : 70, width : 300, height : 480, marginTop: 0}}>
         <View  >
           <FlatList
           data={ShopEatData}
@@ -1717,6 +2066,61 @@ function MainScreen({navigation, route}) {
         </ScrollView>
         }
 
+{shoptabnum == 2 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 70, width : 300, height : 480, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={ShopCleanData}
+          renderItem={renderShop}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
+        
+  {shoptabnum == 3 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 70, width : 300, height : 480, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={ShopFurnitureData}
+          renderItem={renderShop}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
+        
+  {shoptabnum == 4 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 70, width : 300, height : 480, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={ShopCostData}
+          renderItem={renderShop}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
+
+
+    <Image style={styles.shopnpc} source={require('./assets/images/shop/shopnpc.png')} resizeMode ="cover"/>
+    
+    <TouchableOpacity style={styles.shopnpctext1} activeOpacity={1}><Text style={styles.shopnpctextfont}>오늘의 할인 물품은</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpctext2} activeOpacity={1}><Text style={styles.shopnpctextfont2}>"{todayitem}"</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpctext3} activeOpacity={1}><Text style={styles.shopnpctextfont}>라고</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpctext4} activeOpacity={1}><Text style={styles.shopnpctextfont}>놓치면 후회할걸?</Text></TouchableOpacity>
+
+    <TouchableOpacity style={styles.shopnpcbutton} onPress={hideshopDialog} activeOpacity={1}><Text style={styles.shopnpcbuttonfont}>바로가기</Text></TouchableOpacity>
+    
   </Dialog.Content>
   <Dialog.Actions>
     {/* <Button disabled color={Colors.black} onPress={hideshopDialog} style={styles.xbuttonbackground}></Button>
@@ -1845,20 +2249,20 @@ function MainScreen({navigation, route}) {
 {furniture == "벽 가구" &&   <TouchableOpacity
                 style={styles.furnitureslot1}
                 onPress={() => showfurniturecheckDialog("벽걸이 식물", 1)} activeOpacity={1}>
-          <Image source={require('./assets/images/furnitureposition/wallplant1slot.png')} resizeMode ="stretch"/>
+          <Image source={require('./assets/images/furnitureposition/wallplantslot.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 
-{furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/curtain1slot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
-{furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/curtain1slot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
+{furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/thincurtainslot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
+{furniture == "벽 가구" &&  <Image source={require('./assets/images/furnitureposition/wallclockslot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
 
 {furniture == "바닥 가구" &&   <TouchableOpacity
                 style={styles.furnitureslot1}
                 onPress={() => showfurniturecheckDialog("규조토 매트", 2)} activeOpacity={1}>
-<Image source={require('./assets/images/furnitureposition/footmat1slot.png')} resizeMode ="stretch"/>
+<Image source={require('./assets/images/furnitureposition/footmatslot.png')} resizeMode ="stretch"/>
         </TouchableOpacity>}
 {/* {furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/footmat1slot.png')} style={styles.furnitureslot1} resizeMode ="stretch"/> } */}
-{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furmat1slot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
-{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furmat1slot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
+{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furrugslot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
+{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/europeancarpetslot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
 
 
 {/* {furniture == "wall" &&   <TouchableOpacity
@@ -1963,6 +2367,10 @@ function MainScreen({navigation, route}) {
                 onPress={hidedictionaryDialog} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
+
+  {dictionarynum == 1 && 
+          <Image style={styles.dicslot2} source={require('./assets/images/dictionary/pet1slot2.png')} resizeMode ="stretch"/>
+  }
   
   {/* <Image style={styles.dicslot1} source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>  
   <Image style={styles.dicslot2} source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>   */}
@@ -1970,6 +2378,7 @@ function MainScreen({navigation, route}) {
   <Image style={styles.dicslot4} source={require('./assets/images/dictionary/dic4.png')} resizeMode ="stretch"/>
   <Image style={styles.dicslot5} source={require('./assets/images/dictionary/dic5.png')} resizeMode ="stretch"/>
   <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/>
+
 
   {dictionaryinfo && <Text style={styles.dicinfobg1}></Text>}
   {dictionaryinfo && <Text style={styles.dicinfobg2}></Text>}
@@ -2047,6 +2456,120 @@ function MainScreen({navigation, route}) {
 </Dialog>
 
 
+{/* 창고 화면 */}
+
+<Dialog visible={storevisible} onDismiss={hidestoreDialog} style={styles.stageScene}>
+  <Dialog.Content>
+  <Image style={styles.stagebg} source={require('./assets/images/shop/shopbg.png')} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/store/topbarbg.png')} style={styles.storetopbarbg} resizeMode ="stretch"/>
+  <Image source={require('./assets/images/coin.png')} style={styles.storecoinimage} resizeMode ="cover"/>
+  <Button disabled onPress={() => {}} style={styles.storecoinnum}><Text style={styles.coinfont}>{coin}</Text></Button>
+  <Image source={require('./assets/images/diamond.png')} style={styles.storejamimage} resizeMode ="cover"/>
+  <Button disabled onPress={() => {}} style={styles.storejamnum}><Text style={styles.coinfont}>{jam}</Text></Button>
+
+  <Image source={require('./assets/images/shop/tabmenu.png')} style={styles.shoptabmenu} resizeMode ="cover"/>
+
+  <TouchableOpacity
+                style={styles.shoptab1}
+                onPress={setstoretabeat} activeOpacity={1}>
+        <Text style={styles.textcenter}>식사류</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.shoptab2}
+                onPress={setstoretabclean} activeOpacity={1}>
+        <Text style={styles.textcenter}>청결류</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.shoptab3}
+                onPress={setstoretabfurniture} activeOpacity={1}>
+        <Text style={styles.textcenter}>가구</Text>
+        </TouchableOpacity>
+  <TouchableOpacity
+                style={styles.shoptab4}
+                onPress={setstoretabmoney} activeOpacity={1}>
+       <Text style={styles.textcenter}>재화</Text>
+        </TouchableOpacity>
+
+<View style={{...styles.shoptab1_1, left : 23.5 + (storetabnum-1)*(85+5/3)}}><Text style={styles.shoptabtext}>{storetabname}</Text></View>
+
+<TouchableOpacity
+      style={styles.shopbackbutton}
+      onPress={hidestoreDialog} activeOpacity={1}>
+    <Image source={require('./assets/images/shop/backbutton.png')} resizeMode ="cover"/>
+  </TouchableOpacity> 
+
+  {storetabnum == 1 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 20, width : 400, height : 360, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={StoreEatData}
+          renderItem={renderStore}
+          keyExtractor={(item) => item.key}
+          numColumns={3}
+          />
+        </View >
+        </ScrollView>
+        }
+
+{storetabnum == 2 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 20, width : 400, height : 360, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={StoreCleanData}
+          renderItem={renderStore}
+          keyExtractor={(item) => item.key}
+          numColumns={3}
+          />
+        </View >
+        </ScrollView>
+        }
+        
+  {storetabnum == 3 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 20, width : 400, height : 360, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={StoreFurnitureData}
+          renderItem={renderStore}
+          keyExtractor={(item) => item.key}
+          numColumns={3}
+          />
+        </View >
+        </ScrollView>
+        }
+        
+  {storetabnum == 4 && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 150, left : 70, width : 300, height : 480, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={ShopCostData}
+          renderItem={renderShop}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+        }
+
+
+    <Image style={styles.shopnpc} source={require('./assets/images/shop/shopnpc.png')} resizeMode ="cover"/>
+    
+    <TouchableOpacity style={styles.shopnpctext1} activeOpacity={1}><Text style={styles.shopnpctextfont}>오늘의 할인 물품은</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpctext2} activeOpacity={1}><Text style={styles.shopnpctextfont2}>"{todayitem}"</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpctext3} activeOpacity={1}><Text style={styles.shopnpctextfont}>라고</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpctext4} activeOpacity={1}><Text style={styles.shopnpctextfont}>놓치면 후회할걸?</Text></TouchableOpacity>
+
+    <TouchableOpacity style={styles.shopnpcbutton} onPress={hideshopDialog} activeOpacity={1}><Text style={styles.shopnpcbuttonfont}>바로가기</Text></TouchableOpacity>
+    
+  </Dialog.Content>
+</Dialog>
 
     {/* <Dialog visible={eatvisible} onDismiss={hideeatDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>음식 목록</Dialog.Title>
@@ -2947,14 +3470,14 @@ const styles = StyleSheet.create({
     height : WINDOW_H,
   },
 
-  stagenature:{
+  stage1:{
     position : 'absolute',
     left : 50,
     top : 480,
 
   },
 
-  stagespace:{
+  stage2:{
     position : 'absolute',
     left : 50,
     top : 480+100,
@@ -2992,16 +3515,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 20,
     height: 20,
-    left : 96+50+30,
-    top: 40,
+    left : 96+50+30+5,
+    top: 50,
   },
 
   shopcoinnum:{
     position: 'absolute',
     width : 100,
     height: 20,
-    left : 120+50+10,
-    top: 30,
+    left : 120+50+5,
+    top: 40+1.5,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -3014,7 +3537,7 @@ const styles = StyleSheet.create({
 
   shoptab1:{
     position: 'absolute',
-    width : 70,
+    width : 100,
     height: 32,
     left : 23+0.5,
     top: 100,
@@ -3024,9 +3547,9 @@ const styles = StyleSheet.create({
 
   shoptab2:{
     position: 'absolute',
-    width : 70,
+    width : 100,
     height: 32,
-    left : 23+0.5+73,
+    left : 23+0.5+85+5/3,
     top: 100,
     borderRadius : 20,
     justifyContent: 'center',
@@ -3034,9 +3557,9 @@ const styles = StyleSheet.create({
 
   shoptab3:{
     position: 'absolute',
-    width : 70,
+    width : 100,
     height: 32,
-    left : 23+0.5+73+73,
+    left : 23+0.5+85+5/3+85+5/3,
     top: 100,
     borderRadius : 20,
     justifyContent: 'center',
@@ -3044,32 +3567,28 @@ const styles = StyleSheet.create({
 
   shoptab4:{
     position: 'absolute',
-    width : 70,
+    width : 100,
     height: 32,
-    left : 23+0.5+73+73+73,
+    left : 23+0.5+85+85+85+5,
     top: 100,
     borderRadius : 20,
     justifyContent: 'center',
   },
 
-  shoptab5:{
-    position: 'absolute',
-    width : 70,
-    height: 32,
-    left : 23+0.5+73+73+73+73,
-    top: 100,
-    borderRadius : 20,
-    justifyContent: 'center',
-  },
 
   shoptab1_1:{
     position: 'absolute',
-    width : 70,
+    width : 100,
     height: 32,
     top: 100,
     borderRadius : 20,
     justifyContent: 'center',
     backgroundColor : '#8775BC'
+  },
+
+  shoptabtext:{
+    textAlign : 'center',
+    color : 'white',
   },
 
   shopbackbutton:{
@@ -3100,6 +3619,69 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left : 70,
     top: 180+120+120+120,
+  },
+
+  shopnpc :{
+    position: 'absolute',
+    left : 100,
+    top: 580,
+  },
+
+  shopnpctext1:{
+    position: 'absolute',
+    left : 140,
+    top: 600-10,
+    justifyContent : 'center',
+  },
+
+  shopnpctext2:{
+    position: 'absolute',
+    left : 100-20+2,
+    top: 600-10+10+2,
+    width : 120,
+    justifyContent : 'center',
+  },
+  
+  shopnpctext3:{
+    position: 'absolute',
+    left : 140+65,
+    top: 600-10+10+3,
+    justifyContent : 'center',
+  },
+
+  shopnpctext4:{
+    position: 'absolute',
+    left : 140+2,
+    top: 600-10+10+10+5,
+    justifyContent : 'center',
+  },
+
+  shopnpctextfont:{
+    textAlign : 'center',
+    fontSize : 11,
+  },
+
+  shopnpctextfont2:{
+    textAlign : 'right',
+    fontSize : 12,
+    fontWeight : 'bold',
+  },
+
+  shopnpcbutton : {
+    position: 'absolute',
+    left : 160,
+    top: 635-2,
+    width : 48,
+    height : 12,
+    justifyContent : 'center',
+    backgroundColor : '#695FE3',
+    borderRadius : 15,
+  },
+
+  shopnpcbuttonfont : {
+    textAlign : 'center',
+    color : 'white',
+    fontSize : 10,
   },
 
   coinfont:{
@@ -3144,7 +3726,7 @@ const styles = StyleSheet.create({
     left : 91,
     top: 60,
     borderRadius: 25,
-    backgroundColor : '#FF6969',
+    backgroundColor : '#FF9AB2',
   },
 
   heartimage:{
@@ -3231,8 +3813,9 @@ const styles = StyleSheet.create({
 
   bottommenu:{
     position: 'absolute',
-    left : 30,
+    left : 15,
     bottom: 0,
+    width : 400-3,
   },
 
   eatbackground:{
@@ -3247,19 +3830,19 @@ const styles = StyleSheet.create({
 
   eatgauge:{
     position: 'absolute',
-    left : 110,
+    left : 100,
     bottom: 5,
   },
 
   eatgaugebg:{
     position: 'absolute',
-    left : 110,
+    left : 100,
     bottom: 5,
   },
 
   eatbutton:{
     position: 'absolute',
-    left : 40,
+    left : 30,
     bottom: 5,
   },
 
@@ -3313,19 +3896,19 @@ const styles = StyleSheet.create({
 
   fungaugebg:{
     position: 'absolute',
-    left : 110+80+85,
+    left : 110+80+85+5,
     bottom: 5,
   },
 
   fungauge:{
     position: 'absolute',
-    left : 110+80+85,
+    left : 110+80+85+5,
     bottom: 5,
   },
 
   funbutton:{
     position: 'absolute',
-    left : 40+85+85,
+    left : 40+85+85+5,
     bottom: 5,
   },
 
@@ -3346,19 +3929,19 @@ const styles = StyleSheet.create({
 
   sleepgaugebg:{
     position: 'absolute',
-    left : 110+80+85+85,
+    left : 110+80+85+85+10+2,
     bottom: 5,
   },
 
   sleepgauge:{
     position: 'absolute',
-    left : 110+80+85+85,
+    left : 110+80+85+85+10+2,
     bottom: 5,
   },
 
   sleepbutton:{
     position: 'absolute',
-    left : 40+ 85+85+85,
+    left : 40+ 85+85+85+10,
     bottom: 5,
   },
 
@@ -4048,7 +4631,7 @@ const styles = StyleSheet.create({
     width : 310,
     height : 75,
     left : 50,
-    top : 150+100,
+    top : 150+130,
   },
 
   achieveslot3bg:{
@@ -4056,7 +4639,7 @@ const styles = StyleSheet.create({
     width : 310,
     height : 75,
     left : 50,
-    top : 150+100+100,
+    top : 150+130+130,
   },
 
   achieveslot4bg:{
@@ -4064,7 +4647,7 @@ const styles = StyleSheet.create({
     width : 310,
     height : 75,
     left : 50,
-    top : 150+100+100+100,
+    top : 150+130+130+130,
   },
 
   achieveslot5bg:{
@@ -4117,32 +4700,32 @@ const styles = StyleSheet.create({
 
   achieveslot1check:{
     position: 'absolute',
-    left : 300,
-    top : 165,
+    left : 300+15,
+    top : 172,
   },
 
   achieveslot2check:{
     position: 'absolute',
-    left : 300,
-    top : 165+100,
+    left : 300+15,
+    top : 172+130,
   },
 
   achieveslot3check:{
     position: 'absolute',
-    left : 300,
-    top : 165+100+100,
+    left : 300+15,
+    top : 172+130+130,
   },
 
   achieveslot4check:{
     position: 'absolute',
-    left : 300,
-    top : 165+100+100+100,
+    left : 300+15,
+    top : 172+130+130+130,
   },
 
   achieveslot5check:{
     position: 'absolute',
     left : 300,
-    top : 165+100+100+100+100,
+    top : 172+100+100+100+100,
   },
 
   achievebarbg:{
@@ -4373,6 +4956,28 @@ const styles = StyleSheet.create({
     top : 50,
   },
 
+  attend:{
+    position: 'absolute',
+    left : 0,
+    top : 20,
+  },
+
+  attendawardbutton : {
+    position: 'absolute',
+    left : 100,
+    top : 420,
+    width : 100,
+    height : 30,
+    backgroundColor : '#695FE3',
+    justifyContent : 'center',
+    borderRadius : 15,
+  },
+
+  attendawardbuttontext:{
+    color : 'white',
+    textAlign : 'center',
+  },
+
   dailyslot1:{
     position: 'absolute',
     left : 20,
@@ -4508,7 +5113,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50-30+10,
+    bottom : -70,
   },
 
   menuquestbutton:{
@@ -4516,55 +5121,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50+5-30+10,
-  },
-
-  menushop :{
-    position: 'absolute',
-    width : 200,
-    height : 70,
-    left : 50,
-    bottom : -130-30,
-  },
-
-  menushopbutton :{
-    position: 'absolute',
-    width : 200,
-    height : 70,
-    left : 50,
-    bottom : -130+5-30,
-  },
-
-  menufurniture:{
-    position: 'absolute',
-    width : 200,
-    height : 70,
-    left : 50,
-    bottom : -210-30-10,
-  },
-
-  menufurniturebutton:{
-    position: 'absolute',
-    width : 200,
-    height : 70,
-    left : 50,
-    bottom : -210+5-30-10,
-  },
-
-  menusetting:{
-    position: 'absolute',
-    width : 200,
-    height : 70,
-    left : 50,
-    bottom : -290-30-20,
-  },
-
-  menusettingbutton:{
-    position: 'absolute',
-    width : 200,
-    height : 70,
-    left : 50,
-    bottom : -290+5-30-20,
+    bottom : -70+5,
   },
 
   menuachieve:{
@@ -4572,7 +5129,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50,
+    bottom : -160,
   },
 
   menuachievebutton:{
@@ -4580,7 +5137,23 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -50-10,
+    bottom : -160+5,
+  },
+
+  menufurniture:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -250,
+  },
+
+  menufurniturebutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -250+5,
   },
 
   menustore :{
@@ -4588,7 +5161,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -130,
+    bottom : -340,
   },
 
   menustorebutton :{
@@ -4596,7 +5169,39 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -130-10,
+    bottom : -340+5,
+  },
+
+  menushop :{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -100,
+  },
+
+  menushopbutton :{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -100+5,
+  },
+
+  menusetting:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -200,
+  },
+
+  menusettingbutton:{
+    position: 'absolute',
+    width : 200,
+    height : 70,
+    left : 50,
+    bottom : -200+5,
   },
 
   menudictionary:{
@@ -4604,7 +5209,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -210,
+    bottom : -300,
   },
 
   menudictionarybutton:{
@@ -4612,8 +5217,10 @@ const styles = StyleSheet.create({
     width : 200,
     height : 70,
     left : 50,
-    bottom : -210-10,
+    bottom : -300+5,
   },
+
+
 
 
   dictionary: {
@@ -5109,8 +5716,48 @@ const styles = StyleSheet.create({
 
 
 
+  storetopbarbg:{
+    position: 'absolute',
+    left: 65-2,
+    top: 45+2.5,
+    height : 36,
+  },
 
+  storecoinimage:{
+    position: 'absolute',
+    width : 20,
+    height: 20+0.5,
+    left : 72,
+    top: 50,
+  },
 
+  storecoinnum:{
+    position: 'absolute',
+    width : 100,
+    height: 20,
+    left : 100-10,
+    top: 40+1.5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+
+  storejamimage:{
+    position: 'absolute',
+    width : 20,
+    height: 20+0.5,
+    left : 72+150,
+    top: 50+1,
+  },
+
+  storejamnum:{
+    position: 'absolute',
+    width : 100,
+    height: 20,
+    left : 100-10+150-5,
+    top: 40+1.5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
 
 
 
