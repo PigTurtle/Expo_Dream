@@ -54,42 +54,7 @@ const EatItem = (props) => {
         }
     });
 
-    let imagepath;
-    switch(props.eatitem)
-    {
-        case '사과':
-            imagepath = require('../assets/images/eat/apple.png');
-            break;
-        case '수박':
-            imagepath = require('../assets/images/eat/apple.png');
-            break;
-        case '소고기':
-            imagepath = require('../assets/images/eat/apple.png');
-            break;
-        case '닭고기':
-            imagepath = require('../assets/images/eat/apple.png');
-            break;
-        case '감기약':
-            imagepath = require('../assets/images/eat/apple.png');
-            break;
-        case '두통약':
-            imagepath = require('../assets/images/eat/apple.png');
-            break;
-        case '거친 솔':
-            imagepath = require('../assets/images/clean/brush1.png');
-            break;
-        case '부드러운 솔':
-            imagepath = require('../assets/images/clean/brush1.png');
-            break;
-        case '손 세정제':
-            imagepath = require('../assets/images/clean/brush1.png');
-            break;
-        case '작은 욕조':
-            imagepath = require('../assets/images/clean/brush1.png');
-            break;
-        default:
-            break;
-    }
+    let imagepath = props.imagepath;
 
     return (
         <PanGestureHandler onGestureEvent={panHandler}>
@@ -216,7 +181,7 @@ const PetEatScreen = (props) => {
 
             {bottomgauge == true && <Button disabled style={styles.eatgaugetext}><Text>{eatgauge}%</Text></Button> }
 
-            {iseat == false && <EatItem eatitem={props.eatinfo} ontap={onTap} touchcheck={touchcheck} /> } 
+            {iseat == false && <EatItem imagepath={props.imagepath} ontap={onTap} touchcheck={touchcheck} /> } 
 
             {iseat == true && <TouchableOpacity onPress={goout} activeOpacity={1} style={styles.gooutbg}><Text></Text></TouchableOpacity>}
         </View>

@@ -4,7 +4,7 @@ import { StyleSheet, Modal, View, SafeAreaView, Image, Platform, TouchableOpacit
   TouchableHighlight, TouchableWithoutFeedback, Alert, LogBox} from 'react-native';
 import { DefaultTheme, Text, Button, RadioButton, TouchableRipple, ToggleButton, TextInput , Paragraph, Dialog, Portal, Appbar, 
   ProgressBar, Colors, PaperProvider } from 'react-native-paper';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import { NavigationContainer, DrawerActions, useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem,
@@ -216,211 +216,107 @@ export default App;
 
 const FruitData = [
   {
+    type : 11,
     key : 1,
     id: require('./assets/images/eat/appleslot.png'),
     title: "사과",
+    idforstore: require('./assets/images/store/appleslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 11,
     key : 2,
     id: require('./assets/images/eat/watermelonslot.png'),
     title: "수박",
+    idforstore : require('./assets/images/store/watermelonslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 11,
     key : 3,
     id: require('./assets/images/eat/pineappleslot.png'),
     title: "파인애플",
+    idforstore: require('./assets/images/store/pineappleslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 0,
     key : 4,
     id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 5,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 6,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 7,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 8,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 9,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 10,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
 ];
 
 const MeatData = [
   {
+    type : 12,
     key : 1,
     id: require('./assets/images/eat/porkslot.png'),
     title: "생 돼지고기",
+    idforstore: require('./assets/images/store/porkslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 12,
     key : 2,
     id: require('./assets/images/eat/beefslot.png'),
     title: "생 소고기",
+    idforstore: require('./assets/images/store/beefslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 0,
     key : 3,
     id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 4,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 5,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 6,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 7,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 8,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 9,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 10,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
 ];
 
 const EtcData = [
   {
+    type : 13,
     key : 1,
     id: require('./assets/images/eat/unknownlumpslot.png'),
     title: "미지의 덩어리",
+    idforstore: require('./assets/images/store/unknownlumpslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 0,
     key : 2,
     id: require('./assets/images/eat/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 3,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 4,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 5,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 6,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 7,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 8,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 9,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 10,
-  //   id: require('./assets/images/eat/slotdefault.png'),
-  //   title: "default",
-  // },
 ];
 
 const BrushData = [
   {
+    type : 21,
     key : 1,
     id: require('./assets/images/clean/roughbrush.png'),
     title: "거친 솔",
+    idforstore: require('./assets/images/store/roughbrushslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 21,
     key : 2,
     id: require('./assets/images/clean/softbrush.png'),
     title: "부드러운 솔",
+    idforstore: require('./assets/images/store/softbrushslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 21,
     key : 3,
     id: require('./assets/images/clean/showerbrush.png'),
     title: "욕실 브러쉬",
+    idforstore: require('./assets/images/store/showerbrushslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 0,
     key : 4,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 5,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 6,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 7,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 8,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 9,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
-  {
-    key : 10,
     id: require('./assets/images/clean/slotdefault.png'),
     title: "default",
   },
@@ -428,217 +324,266 @@ const BrushData = [
 
 const DetergentData = [
   {
+    type : 22,
     key : 1,
     id: require('./assets/images/clean/petshampoo.png'),
     title: "펫 샴푸",
+    idforstore: require('./assets/images/store/petshampooslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 22,
     key : 2,
     id: require('./assets/images/clean/orientalshampoo.png'),
     title: "한방샴푸",
+    idforstore: require('./assets/images/store/orientalshampooslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 22,
     key : 3,
     id: require('./assets/images/clean/snowshampoo.png'),
     title: "눈꽃샴푸",
+    idforstore: require('./assets/images/store/snowshampooslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 0,
     key : 4,
     id: require('./assets/images/clean/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 5,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 6,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 7,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 8,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 9,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 10,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
 ];
 
 const TubData = [
   {
+    type : 23,
     key : 1,
     id: require('./assets/images/clean/rubbertub.png'),
     title: "고무 대야",
+    idforstore: require('./assets/images/store/rubbertubslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 23,
     key : 2,
     id: require('./assets/images/clean/movabletub.png'),
     title: "이동식 욕조",
+    idforstore: require('./assets/images/store/movabletubslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 0,
     key : 3,
     id: require('./assets/images/clean/whitetub.png'),
-    title: "하얀 욕조",
+    title: "default", // "하얀 욕조", 아직 창고 이미지 없음
   },
   {
+    type : 0,
     key : 4,
     id: require('./assets/images/clean/slotdefault.png'),
     title: "default",
   },
-  // {
-  //   key : 5,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 6,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 7,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 8,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 9,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
-  // {
-  //   key : 10,
-  //   id: require('./assets/images/clean/slotdefault.png'),
-  //   title: "default",
-  // },
+];
+
+const WallFData = [
+  {
+    type : 31,
+    key : 1,
+    id: require('./assets/images/furnitureposition/wallplantslot.png'),
+    title: "벽걸이 식물",
+    idforstore: require('./assets/images/store/wallplantslot.png'),
+    idformain : require('./assets/images/furnitureposition/wallplant.png'),
+  },
+  {
+    type : 31,
+    key : 2,
+    id: require('./assets/images/furnitureposition/thincurtainslot.png'),
+    title: "얇은 커튼",
+    idforstore: require('./assets/images/store/thincurtainslot.png'),
+    idformain : require('./assets/images/store/thincurtainslot.png'),
+  },
+  {
+    type : 31,
+    key : 3,
+    id : require('./assets/images/furnitureposition/wallclockslot.png'),
+    title: "벽걸이 시계",
+    idforstore: require('./assets/images/store/wallclockslot.png'),
+    idformain : require('./assets/images/store/wallclockslot.png'),
+  },
+];
+
+const FloorFData = [
+  {
+    type : 32,
+    key : 1,
+    id: require('./assets/images/furnitureposition/footmatslot.png'),
+    title: "규조토 매트",
+    idforstore: require('./assets/images/store/footmatslot.png'),
+    idformain: require('./assets/images/store/footmatslot.png'),
+  },
+  {   
+    type : 32,
+    key : 2,
+    id: require('./assets/images/furnitureposition/furrugslot.png'),
+    title: "털 러그",
+    idforstore: require('./assets/images/store/furrugslot.png'),
+    idformain: require('./assets/images/store/furrugslot.png'),
+  },
+  {
+    type : 32,
+    key : 3,
+    id: require('./assets/images/furnitureposition/europeancarpetslot.png'),
+    title: "북유럽풍 카페트",
+    idforstore: require('./assets/images/store/europeancarpetslot.png'),
+    idformain: require('./assets/images/store/europeancarpetslot.png'),
+  },
 ];
 
 const ShopEatData = [
   {
+    type : 11,
     key : 1,
     id: require('./assets/images/shop/appleslot.png'),
     title: "사과",
     cost : 100,
-    idforeat: require('./assets/images/eat/appleslot.png'),
+    idforeatslot: require('./assets/images/eat/appleslot.png'),
+    idforstore: require('./assets/images/store/appleslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 11,
     key : 2,
     id: require('./assets/images/shop/watermelonslot.png'),
     title: "수박",
     cost : 100,
-    idforeat: require('./assets/images/eat/watermelonslot.png'),
+    idforeatslot: require('./assets/images/eat/watermelonslot.png'),
+    idforstore : require('./assets/images/store/watermelonslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 11,
     key : 3,
     id: require('./assets/images/shop/pineappleslot.png'),
     title: "파인애플",
     cost : 100,
-    idforeat: require('./assets/images/eat/pineappleslot.png'),
+    idforeatslot: require('./assets/images/eat/pineappleslot.png'),
+    idforstore: require('./assets/images/store/pineappleslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
   {
+    type : 12,
     key : 4,
     id: require('./assets/images/shop/porkslot.png'),
     title: "생 돼지고기",
     cost : 100,
-    idforeat: require('./assets/images/eat/porkslot.png'),
+    idforeatslot: require('./assets/images/eat/porkslot.png'),
+    idforstore: require('./assets/images/store/porkslot.png'),
+    idforeat : require('./assets/images/eat/apple.png'),
   },
 ];
 
 const ShopCleanData = [
   {
+    type : 21,
     key : 1,
     id: require('./assets/images/shop/roughbrush.png'),
     title: "거친 솔",
     cost : 100,
-    idforclean: require('./assets/images/clean/roughbrush.png'),
+    idforcleanslot: require('./assets/images/clean/roughbrush.png'),
+    idforstore: require('./assets/images/store/roughbrushslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 21,
     key : 2,
     id: require('./assets/images/shop/softbrush.png'),
     title: "부드러운 솔",
     cost : 100,
-    idforclean: require('./assets/images/clean/softbrush.png'),
+    idforcleanslot: require('./assets/images/clean/softbrush.png'),
+    idforstore: require('./assets/images/store/softbrushslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 21,
     key : 3,
     id: require('./assets/images/shop/showerbrush.png'),
     title: "욕실 브러쉬",
     cost : 100,
-    idforclean: require('./assets/images/clean/showerbrush.png'),
+    idforcleanslot: require('./assets/images/clean/showerbrush.png'),
+    idforstore: require('./assets/images/store/showerbrushslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
   {
+    type : 22,
     key : 4,
     id: require('./assets/images/shop/petshampoo.png'),
     title: "펫 샴푸",
     cost : 100,
-    idforclean: require('./assets/images/clean/petshampoo.png'),
+    idforcleanslot: require('./assets/images/clean/petshampoo.png'),
+    idforstore: require('./assets/images/store/petshampooslot.png'),
+    idforclean : require('./assets/images/clean/brush1.png'),
   },
 ];
 
 const ShopFurnitureData = [
   {
-    key : 1,
+    type : 31,
     id: require('./assets/images/shop/wallplantslot.png'),
     title: "벽걸이 식물",
     cost : 1000,
     idforfurniture: require('./assets/images/furnitureposition/wallplantslot.png'),
+    idforstore: require('./assets/images/store/wallplantslot.png'),
+    idformain: require('./assets/images/store/wallplantslot.png'),
   },
   {
-    key : 2,
+    type : 31,
     id: require('./assets/images/shop/thincurtainslot.png'),
     title: "얇은 커튼",
     cost : 1000,
     idforfurniture: require('./assets/images/furnitureposition/thincurtainslot.png'),
+    idforstore: require('./assets/images/store/thincurtainslot.png'),
+    idformain: require('./assets/images/store/thincurtainslot.png'), 
   },
   {
+    type : 31,
     key : 3,
     id: require('./assets/images/shop/wallclockslot.png'),
     title: "벽걸이 시계",
     cost : 500,
     idforfurniture: require('./assets/images/furnitureposition/wallclockslot.png'),
+    idforstore: require('./assets/images/store/wallclockslot.png'),
+    idformain: require('./assets/images/store/wallclockslot.png'),
   },
   {
+    type : 32,
     key : 4,
     id: require('./assets/images/shop/europeancarpetslot.png'),
     title: "북유럽풍 카페트",
     cost : 2000,
     idforfurniture: require('./assets/images/furnitureposition/europeancarpetslot.png'),
+    idforstore: require('./assets/images/store/europeancarpetslot.png'),
+    idformain : require('./assets/images/store/europeancarpetslot.png'),
   },
 ];
 
 const ShopCostData = [
   {
+    type : 0,
     key : 1,
     id: require('./assets/images/shop/goldslot.png'),
     title: "골드",
     cost : 1,
   },
   {
+    type : 0,
     key : 2,
     id: require('./assets/images/shop/diamondslot.png'),
     title: "다이아",
     cost : 1000,
   },
   {
+    type : 0,
     key : 3,
     id: require('./assets/images/shop/heartboosterslot.png'),
     title: "하트부스터",
@@ -646,144 +591,11 @@ const ShopCostData = [
   },
 ];
 
-const StoreEatData = [  
-  {
-  key : 1,
-  id: require('./assets/images/store/appleslot.png'),
-  title: "사과",
-},
-{
-  key : 2,
-  id: require('./assets/images/store/watermelonslot.png'),
-  title: "수박",
-},
-{
-  key : 3,
-  id: require('./assets/images/store/pineappleslot.png'),
-  title: "파인애플",
-},
-{
-  key : 4,
-  id: require('./assets/images/store/porkslot.png'),
-  title: "생 돼지고기",
-},
-{
-  key : 5,
-  id: require('./assets/images/store/beefslot.png'),
-  title: "생 소고기",
-},
-{
-  key : 6,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-{
-  key : 7,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-{
-  key : 8,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-{
-  key : 9,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-{
-  key : 10,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-{
-  key : 11,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-{
-  key : 12,
-  id: require('./assets/images/store/unknownlumpslot.png'),
-  title: "미지의 덩어리",
-},
-];
+const StoreEatData = [];
 
-const StoreCleanData = [  
-  {
-  key : 1,
-  id: require('./assets/images/store/roughbrushslot.png'),
-  title: "거친 솔",
-},
-{
-  key : 2,
-  id: require('./assets/images/store/softbrushslot.png'),
-  title: "부드러운 솔",
-},
-{
-  key : 3,
-  id: require('./assets/images/store/showerbrushslot.png'),
-  title: "욕실 브러쉬",
-},
-{
-  key : 4,
-  id: require('./assets/images/store/petshampooslot.png'),
-  title: "펫 샴푸",
-},
-{
-  key : 5,
-  id: require('./assets/images/store/orientalshampooslot.png'),
-  title: "한방샴푸",
-},
-{
-  key : 6,
-  id: require('./assets/images/store/snowshampooslot.png'),
-  title: "눈꽃샴푸",
-},
-{
-  key : 7,
-  id: require('./assets/images/store/rubbertubslot.png'),
-  title: "고무 대야",
-},
-{
-  key : 8,
-  id: require('./assets/images/store/movabletubslot.png'),
-  title: "이동식 욕조",
-},
-];
+const StoreCleanData = [];
 
-const StoreFurnitureData = [  
-  {
-  key : 1,
-  id: require('./assets/images/store/wallplantslot.png'),
-  title: "벽걸이 식물",
-},
-{
-  key : 2,
-  id: require('./assets/images/store/thincurtainslot.png'),
-  title: "얇은 커튼",
-},
-{
-  key : 3,
-  id: require('./assets/images/store/wallclockslot.png'),
-  title: "벽걸이 시계",
-},
-{
-  key : 4,
-  id: require('./assets/images/store/europeancarpetslot.png'),
-  title: "북유럽풍 카페트",
-},
-{
-  key : 5,
-  id: require('./assets/images/store/unknownslot1.png'),
-  title: "unknown",
-},
-{
-  key : 6,
-  id: require('./assets/images/store/unknownslot2.png'),
-  title: "unknown",
-},
-];
+const StoreFurnitureData = [];
 
 const Item = ({item, onPress}) => (
   <View style={styles2.item}>
@@ -851,14 +663,8 @@ function MainScreen({navigation, route}) {
   const [itemnum, setitemnum] = useState(1);
   const [todayitem, settodayitem] = useState("벽걸이 시계");
 
-  const [storeeatdata, setstoreeatdata] = useState([
-    {
-      key : 1,
-      id: require('./assets/images/eat/appleslot.png'),
-      title: "사과",
-      num : 1,
-    },
-  ]);
+  const [tutorial1visible, settutorial1visible] = useState(true);
+  const [tutorial2visible, settutorial2visible] = useState(true);
 
   const itemnumdown = () => {
     setitemnum(itemnum => itemnum -1 > 1 ? itemnum -1 : 1);
@@ -1046,10 +852,14 @@ function MainScreen({navigation, route}) {
 
   const [storevisible, setstoreVisible] = useState(false);
   const showstoreDialog = () => {
+    setstoretabeat();
     setStoreData();
     setstoreVisible(true);
   }
-  const hidestoreDialog = () => setstoreVisible(false);
+  const hidestoreDialog = () => 
+  {
+    setstoreVisible(false);
+  }
 
   const [settingvisible, setsettingVisible] = useState(false);
   const showsettingDialog = () => {
@@ -1067,7 +877,11 @@ function MainScreen({navigation, route}) {
 
   const [eatCheckVisible, seteatCheckVisible] = useState(false);
   const [eatCheckText, seteatCheckText] = useState("");
-  const showeatCheckDialog = (name) => 
+  const [imagepath, setimagepath] = useState();
+  const [key, setkey] = useState(0);
+  const [itemtype, setitemtype] = useState(0);
+
+  const showeatCheckDialog = (mytype, mykey, name, myimagepath) => 
   {
     // if(name == "default")
     // {
@@ -1078,10 +892,13 @@ function MainScreen({navigation, route}) {
     // seteatCheckText(name);
     // seteatCheckVisible(true);
 
-    if(name == "사과")
+    if(name != "default")
     {
       seteatCheckText(name);
       seteatCheckVisible(true);
+      setimagepath(myimagepath);
+      setkey(mykey);
+      setitemtype(mytype);
       return;
     }
 
@@ -1093,8 +910,27 @@ function MainScreen({navigation, route}) {
     seteatCheckVisible(false);
   }
 
+  const  RemoveEatData = () => {
+    if(itemtype == 11)
+    {
+      let temp = FruitData.findIndex(myitem => myitem.key == key);
+      FruitData.splice(temp, 1);
+    }
+    if(itemtype == 12)
+    {
+      let temp = MeatData.findIndex(myitem => myitem.key == key);
+      MeatData.splice(temp, 1);
+    }
+    if(itemtype == 13)
+    {
+      let temp = EtcData.findIndex(myitem => myitem.key == key);
+      EtcData.splice(temp, 1);
+    }
+  }
+
   const [peteatscreenvisible, setpeteatscreen] = useState(false);
   const showPetEatScreen = () =>{
+    RemoveEatData();
     setpeteatscreen(true);
     seteatCheckVisible(false);
   }
@@ -1112,7 +948,7 @@ function MainScreen({navigation, route}) {
 
   const [cleanCheckVisible, setcleanCheckVisible] = useState(false);
   const [cleanCheckText, setcleanCheckText] = useState("");
-  const showcleanCheckDialog = (name) => 
+  const showcleanCheckDialog = (mytype, mykey, name, myimagepath) => 
   {
     // if(name == "default")
     // {
@@ -1123,10 +959,13 @@ function MainScreen({navigation, route}) {
     // setcleanCheckText(name);
     // setcleanCheckVisible(true);
 
-    if(name == "거친 솔")
+    if(name != "default")
     {
       setcleanCheckText(name);
       setcleanCheckVisible(true);
+      setimagepath(myimagepath);
+      setkey(mykey);
+      setitemtype(mytype);
       return;
     }
 
@@ -1138,8 +977,27 @@ function MainScreen({navigation, route}) {
     setcleanCheckVisible(false);
   }
 
+  const  RemoveCleanData = () => {
+    if(itemtype == 21)
+    {
+      let temp = BrushData.findIndex(myitem => myitem.key == key);
+      BrushData.splice(temp, 1);
+    }
+    if(itemtype == 22)
+    {
+      let temp = DetergentData.findIndex(myitem => myitem.key == key);
+      DetergentData.splice(temp, 1);
+    }
+    if(itemtype == 23)
+    {
+      let temp = TubData.findIndex(myitem => myitem.key == key);
+      TubData.splice(temp, 1);
+    }
+  }
+
   const [petcleanscreenvisible, setpetcleanscreen] = useState(false);
   const showPetCleanScreen = () =>{
+    RemoveCleanData();
     setpetcleanscreen(true);
     setcleanCheckVisible(false);
   }
@@ -1147,8 +1005,6 @@ function MainScreen({navigation, route}) {
     setcleanpercent(cleanpercent+addcleanpercent > 100 ? 100 : cleanpercent+addcleanpercent);
     setpetcleanscreen(false);
   }
-
-
 
   const [funvisible, setfunVisible] = useState(false);
   const showfunDialog = () => setfunVisible(true);
@@ -1161,12 +1017,15 @@ function MainScreen({navigation, route}) {
 
   const [furniturename, setfurniturename] = useState("");
   const [furnituretype, setfurnituretype] = useState(1);
+  const [furnitureid, setfurnitureid] = useState("");
   const [furniturecheck, setfurniturecheck] = useState(false);
 
   const [furniturecheckvisible, setfurniturecheckVisible] = useState(false);
-  const showfurniturecheckDialog = (myfurniturename, myfurnituretype) => {
+  const showfurniturecheckDialog = (myfurnituretype, myfurniturename, myfurnitureid) => {
+    setisaddfurniture(false);
     setfurnituretype(myfurnituretype);
     setfurniturename(myfurniturename);
+    setfurnitureid(myfurnitureid);
     setfurniturecheckVisible(true);
   }
   const showfurniture = () => {
@@ -1175,7 +1034,8 @@ function MainScreen({navigation, route}) {
     setlightVisible(true);
   }
   const hidefurniturecheckDialog = () => {
-    setfurnitureslot1Visible(false);
+    setisaddfurniture(true);
+    setfurnitureslotVisible(false);
     setfurniturecheckVisible(false);
   }
 
@@ -1183,13 +1043,20 @@ function MainScreen({navigation, route}) {
     setfurniturecheck(false);
   }
 
-  const [furnitureslot1Visible, setfurnitureslot1Visible] = useState(false);
-  const addfurnitureslot1 = () => {
-    if(furnituretype == 1){
+  const [furnitureslotVisible, setfurnitureslotVisible] = useState(false);
+  const [isaddfurniture, setisaddfurniture] = useState(false);
+  const addfurnitureslot = () => {
+    if(isaddfurniture)
+      return;
+    
+    setisaddfurniture(true);
+
+    if(furnituretype == 31){
     let myfws = [ ...furniturewalls];
     for(let i =0; i < myfws.length; i++){
       if(myfws[i].active == false)
       {
+      myfws[i].imagepath = furnitureid;
       myfws[i].active = true;
       break;
       }
@@ -1202,6 +1069,7 @@ function MainScreen({navigation, route}) {
       for(let i =0; i < myfws.length; i++){
         if(myfws[i].active == false)
         {
+        myfws[i].imagepath = furnitureid;
         myfws[i].active = true;
         break;
         }
@@ -1210,41 +1078,41 @@ function MainScreen({navigation, route}) {
     setfurniturefloors(myfws);
     }
 
-    setfurnitureslot1Visible(true);
+    setfurnitureslotVisible(true);
     setfurniturecheckVisible(false);
     setfurniturecheck(true);
   }
 
-  const removefurnitureslot1 = () => {
-    if(furnituretype == 1){
-      let myfws = [ ...furniturewalls];
-      for(let i =0; i < myfws.length; i++){
-        if(myfws[i].active == true)
-        {
-        myfws[i].active = false;
-        break;
-        }
-      }
+  // const removefurnitureslot1 = () => {
+  //   if(furnituretype == 1){
+  //     let myfws = [ ...furniturewalls];
+  //     for(let i =0; i < myfws.length; i++){
+  //       if(myfws[i].active == true)
+  //       {
+  //       myfws[i].active = false;
+  //       break;
+  //       }
+  //     }
   
-      setfurniturewalls(myfws);
-      }
-    else{
-      let myfws = [ ...furniturefloors];
-      for(let i =0; i < myfws.length; i++){
-        if(myfws[i].active == true)
-        {
-        myfws[i].active = false;
-        break;
-        }
-        }
+  //     setfurniturewalls(myfws);
+  //     }
+  //   else{
+  //     let myfws = [ ...furniturefloors];
+  //     for(let i =0; i < myfws.length; i++){
+  //       if(myfws[i].active == true)
+  //       {
+  //       myfws[i].active = false;
+  //       break;
+  //       }
+  //       }
     
-      setfurniturefloors(myfws);
-      }
+  //     setfurniturefloors(myfws);
+  //     }
   
-      setfurnitureslot1Visible(true);
-      setfurniturecheckVisible(false);
-      setfurniturecheck(true);
-  }
+  //     setfurnitureslotVisible(true);
+  //     setfurniturecheckVisible(false);
+  //     setfurniturecheck(true);
+  // }
 
   const [foodvisible, setfoodVisible] = useState(false);
   const showfoodDialog = () => setfoodVisible(true);
@@ -1317,8 +1185,49 @@ function MainScreen({navigation, route}) {
     setitemprice(0);
     setitemnum(1);
     
-    FruitData.push(item);
+    PushItem();
     setbuysuccessVisible(false);
+  }
+
+  const PushItem = () => {
+    switch(type){
+      case 11:
+        setfruitdatanum(fruitdatanum => fruitdatanum+1);
+        FruitData.push(item);
+        break;
+      case 12:
+        setmeatdatanum(meatdatanum => meatdatanum+1);
+        MeatData.push(item);
+        break;
+      case 13:
+        setetcdatanum(etcdatanum => etcdatanum+1);
+        EtcData.push(item);
+        break;
+      case 21:
+        setbrushdatanum(brushdatanum => brushdatanum+1);
+        BrushData.push(item);
+        break;
+      case 22:
+        setdetergentdatanum(detergentdatanum => detergentdatanum+1);
+        DetergentData.push(item);
+        break;
+      case 23:
+        settubdatanum(tubdatanum => tubdatanum+1);
+        TubData.push(item);
+        break;      
+      case 31:
+        setwallfdatanum(wallfdatanum => wallfdatanum+1);
+        WallFData.push(item);
+        break;
+      case 32:
+        setfloorfdatanum(floorfdatanum => floorfdatanum+1);
+        FloorFData.push(item);
+        break;
+      case 0:
+        break;
+      default:
+        break;
+    }
   }
   
   const [collectionvisible, setcollectionVisible] = useState(false);
@@ -1375,7 +1284,7 @@ function MainScreen({navigation, route}) {
     return (
       <Item
         item={item}
-        onPress={() => showeatCheckDialog(item.title)}
+        onPress={() => showeatCheckDialog(item.type, item.key, item.title, item.idforeat)}
         //onPress={hideeatDialog}
       />
     );
@@ -1385,11 +1294,21 @@ function MainScreen({navigation, route}) {
       return (
         <Item
           item={item}
-          onPress={() => showcleanCheckDialog(item.title)}
+          onPress={() => showcleanCheckDialog(item.type, item.key, item.title, item.idforclean)}
           //onPress={hideeatDialog}
         />
       );
       }
+
+      const renderFurniture = ({ item }) => {
+        return (
+          <Item
+            item={item}
+            onPress={() => showfurniturecheckDialog(item.type, item.title, item.idformain)}
+            //onPress={hideeatDialog}
+          />
+        );
+        }
 
       const renderShop = ({ item }) => {
         return (
@@ -1410,40 +1329,192 @@ function MainScreen({navigation, route}) {
           );
           }
 
+  const [type, settype] = useState(0);
+  const [fruitdatanum, setfruitdatanum] = useState(FruitData.length);
+  const [meatdatanum, setmeatdatanum] = useState(MeatData.length);
+  const [etcdatanum, setetcdatanum] = useState(EtcData.length);
+  const [brushdatanum, setbrushdatanum] = useState(BrushData.length);
+  const [detergentdatanum, setdetergentdatanum] = useState(DetergentData.length);
+  const [tubdatanum, settubdatanum] = useState(TubData.length);
+  const [wallfdatanum, setwallfdatanum] = useState(WallFData.length);
+  const [floorfdatanum, setfloorfdatanum] = useState(FloorFData.length);
+
   const showshopCheckDialog = (myitem) => {
+    if(myitem.type == 0)
+      return;
+
     setitemprice(myitem.cost);
+    settype(myitem.type);
+    showitemcheckDialog();
 
-    if(myitem.title == "사과")
-      showitemcheckDialog();
+    switch(myitem.type){
+      case 11:
+        let tempfruititem = {type : myitem.type,
+          key : fruitdatanum+1,
+          id: myitem.idforeatslot,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idforeat : myitem.idforeat,
+        };
+        setitem(tempfruititem);
+        break;
+      case 12:
+        let tempmeatitem = {type : myitem.type,
+          key : meatdatanum+1,
+          id: myitem.idforeatslot,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idforeat : myitem.idforeat,
+        };
+        setitem(tempmeatitem);
+        break;
+      case 13:
+        let tempetcitem = {type : myitem.type,
+          key : etcdatanum+1,
+          id: myitem.idforeatslot,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idforeat : myitem.idforeat,
+        };
+        setitem(tempetcitem);
+        break;
+      case 21:
+        let tempbrushitem = {type : myitem.type,
+          key : brushdatanum+1,
+          id: myitem.idforcleanslot,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idforclean : myitem.idforclean,
+        };
+        setitem(tempbrushitem);
+        break;
+      case 22:
+        let tempdetergentitem = {type : myitem.type,
+          key : detergentdatanum+1,
+          id: myitem.idforcleanslot,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idforclean : myitem.idforclean,
+        };
+        setitem(tempdetergentitem);
+        break;
+      case 23:
+        let temptubitem = {type : myitem.type,
+          key : tubdatanum+1,
+          id: myitem.idforcleanslot,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idforclean : myitem.idforclean,
+        };
+        setitem(temptubitem);
+        break;      
+      case 31:
+        let tempwallfitem = {type : myitem.type,
+          key : wallfdatanum+1,
+          id: myitem.idforfurniture,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idformain : myitem.idformain,
+        };
+        setitem(tempwallfitem);
+        break;
+      case 32:
+        let tempfloorfitem = {type : myitem.type,
+          key : floorfdatanum+1,
+          id: myitem.idforfurniture,
+          title: myitem.title,
+          idforstore : myitem.idforstore,
+          idformain : myitem.idformain,
+        };
+        setitem(tempfloorfitem);
+        break;
+      case 0:
+        break;
+      default:
+        break;
+      }
 
-    let tempitem = {key : FruitData.length,
-      id: myitem.idforeat,
-      title: myitem.title
-    };
-    setitem(tempitem);
-
-    //hideshopDialog();
+        //hideshopDialog();
   } 
   
   const setStoreData = () => {
     setStoreEatData();
+    setStoreCleanData();
+    setStoreFurnitureData();
   }
 
   const setStoreEatData = () => {
-    // let myeatdata = [... storeeatdata];
+    let myeatdatalength = StoreEatData.length;
 
-    // for(let i=0; i < FruitData.length; i++)
-    // {
-    //   StoreEatData.push({key : myeatdata.length+1, id : require('./assets/images/eat/appleslot.png'), title : FruitData[i].title, num : 1});
-    // }
+    for(let i=0; i < myeatdatalength; i++)
+    {
+      StoreEatData.pop();
+    }
 
-    // storeeatdata(myeatdata);
+    for(let i=0; i < FruitData.length; i++)
+    {
+      if(FruitData[i].type != 0)
+        StoreEatData.push({key : StoreEatData.length+1, id : FruitData[i].idforstore, title : FruitData[i].title, num : 1});
+    }
 
-    // for(let i=0; i < StoreEatData.length; i++)
-    //   StoreEatData.pop();
+    for(let i=0; i < MeatData.length; i++)
+    {
+      if(MeatData[i].type != 0)
+        StoreEatData.push({key : StoreEatData.length+1, id : MeatData[i].idforstore, title : MeatData[i].title, num : 1});
+    }
 
-    // StoreEatData.push(storeeatdata);
+    for(let i=0; i < EtcData.length; i++)
+    {
+      if(EtcData[i].type != 0)
+        StoreEatData.push({key : StoreEatData.length+1, id : EtcData[i].idforstore, title : EtcData[i].title, num : 1});
+    }
   }
+
+    const setStoreCleanData = () => {
+      let mycleandatalength = StoreCleanData.length;
+  
+      for(let i=0; i < mycleandatalength; i++)
+      {
+        StoreCleanData.pop();
+      }
+  
+      for(let i=0; i < BrushData.length; i++)
+      {
+        if(BrushData[i].type != 0)
+          StoreCleanData.push({key : StoreCleanData.length+1, id : BrushData[i].idforstore, title : BrushData[i].title, num : 1});
+      }
+  
+      for(let i=0; i < DetergentData.length; i++)
+      {
+        if(DetergentData[i].type != 0)
+          StoreCleanData.push({key : StoreCleanData.length+1, id : DetergentData[i].idforstore, title : DetergentData[i].title, num : 1});
+      }
+  
+      for(let i=0; i < TubData.length; i++)
+      {
+        if(TubData[i].type != 0)
+          StoreCleanData.push({key : StoreCleanData.length+1, id : TubData[i].idforstore, title : TubData[i].title, num : 1});
+      }
+    }
+
+    const setStoreFurnitureData = () => {
+      let myfurnituredatalength = StoreFurnitureData.length;
+  
+      for(let i=0; i < myfurnituredatalength; i++)
+      {
+        StoreFurnitureData.pop();
+      }
+  
+      for(let i=0; i < WallFData.length; i++)
+      {
+        StoreFurnitureData.push({key : StoreFurnitureData.length+1, id : WallFData[i].idforstore, title : WallFData[i].title, num : 1});
+      }
+  
+      for(let i=0; i < FloorFData.length; i++)
+      {
+        StoreFurnitureData.push({key : StoreFurnitureData.length+1, id : FloorFData[i].idforstore, title : FloorFData[i].title, num : 1});
+      }
+    }
 
   const removefurniture = (furnituretype, index) => {
     if(furnituretype == 1)
@@ -1461,16 +1532,16 @@ function MainScreen({navigation, route}) {
   }
   
   const [furniturewalls, setfurniturewalls] = useState([{
-    key: 'slot1', left : 0, active : false,
+    key: 'slot1', left : 0, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
   }, {
-    key: 'slot2', left : 300, active : false,
-    },
+    key: 'slot2', left : 300, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
+    }, 
   ]);
 
   const [furniturefloors, setfurniturefloors] = useState([{
-    key: 'slot1', left : 0, active : false,
+    key: 'slot1', left : 0, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
   }, {
-    key: 'slot2', left : 300, active : false,
+    key: 'slot2', left : 300, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
     },
   ]);
 
@@ -1481,7 +1552,7 @@ function MainScreen({navigation, route}) {
       if(fw.active)
       {
       furniturewallsRender.push( 
-        <Image source={require('./assets/images/main/furniturewallslot1.png')} style={{...styles.furniturewallslot, left : fw.left}} resizeMode ="stretch"/>
+        <Image source={fw.imagepath} style={{...styles.furniturewallslot, left : fw.left}} resizeMode ="stretch"/>
       );
       }
   }
@@ -1493,7 +1564,7 @@ function MainScreen({navigation, route}) {
       if(fw.active)
       {
         furniturefloorsRender.push( 
-        <Image source={require('./assets/images/main/furniturewallslot1.png')} style={{...styles.furniturefloorslot, left : fw.left}} resizeMode ="stretch"/>
+        <Image source={fw.imagepath} style={{...styles.furniturefloorslot, left : fw.left}} resizeMode ="stretch"/>
       );
       }
   }
@@ -1538,9 +1609,10 @@ function MainScreen({navigation, route}) {
 
     {furniturewallsRender}
     {furniturefloorsRender}
-    {/* {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
+
+    {/* {furnitureslotVisible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
     style={styles.furniturewallslot1} resizeMode ="stretch"/> }
-    {furnitureslot1Visible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
+    {furnitureslotVisible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
     style={{...styles.furniturewallslot1, left : 300}} resizeMode ="stretch"/> } */}
     <MovingPet petnum={petnum} /> 
     {/* <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/> */}
@@ -1645,6 +1717,17 @@ function MainScreen({navigation, route}) {
                 onPress={showsleepDialog} activeOpacity={1}>
                   <Image source={require('./assets/images/main/sleep.png')} resizeMode ="stretch"/>
   </TouchableOpacity>
+
+{tutorial2visible && <TouchableOpacity
+                style={styles.tutorial}
+                onPress={() =>settutorial2visible(false)} activeOpacity={1}>
+                  <Image style={styles.tutorialimage} source={require('./assets/images/main/tutorial2.png')} resizeMode ="stretch"/>
+</TouchableOpacity> }
+{tutorial1visible && <TouchableOpacity
+                style={styles.tutorial}
+                onPress={() => settutorial1visible(false)} activeOpacity={1}>
+                  <Image  style={styles.tutorialimage} source={require('./assets/images/main/tutorial1.png')} resizeMode ="stretch"/>
+</TouchableOpacity> }
 
 {/* 스테이지 선택 화면 */}
 
@@ -2246,7 +2329,7 @@ function MainScreen({navigation, route}) {
 
 <View style={{...styles.furnituretab, left : 50 + (furnituretabnum-1)*100}}><Text style={styles.textcenter}>{furniture}</Text></View>
 
-{furniture == "벽 가구" &&   <TouchableOpacity
+{/* {furniture == "벽 가구" &&   <TouchableOpacity
                 style={styles.furnitureslot1}
                 onPress={() => showfurniturecheckDialog("벽걸이 식물", 1)} activeOpacity={1}>
           <Image source={require('./assets/images/furnitureposition/wallplantslot.png')} resizeMode ="stretch"/>
@@ -2259,10 +2342,10 @@ function MainScreen({navigation, route}) {
                 style={styles.furnitureslot1}
                 onPress={() => showfurniturecheckDialog("규조토 매트", 2)} activeOpacity={1}>
 <Image source={require('./assets/images/furnitureposition/footmatslot.png')} resizeMode ="stretch"/>
-        </TouchableOpacity>}
+        </TouchableOpacity>} */}
 {/* {furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/footmat1slot.png')} style={styles.furnitureslot1} resizeMode ="stretch"/> } */}
-{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furrugslot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
-{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/europeancarpetslot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> }
+{/* {furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/furrugslot.png')} style={styles.furnitureslot2} resizeMode ="stretch"/> }
+{furniture == "바닥 가구" &&  <Image source={require('./assets/images/furnitureposition/europeancarpetslot.png')} style={styles.furnitureslot3} resizeMode ="stretch"/> } */}
 
 
 {/* {furniture == "wall" &&   <TouchableOpacity
@@ -2271,6 +2354,35 @@ function MainScreen({navigation, route}) {
           <Image source={require('./assets/images/furnitureposition/xbutton.png')} resizeMode ="stretch"/>
         </TouchableOpacity>} */}
 
+{furniture == "벽 가구" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 110, left : 15, width : 300, height : 400, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={WallFData}
+          renderItem={renderFurniture}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+}
+
+{furniture == "바닥 가구" && 
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={{position : 'absolute', top : 110, left : 15, width : 300, height : 400, marginTop: 0}}>
+        <View  >
+          <FlatList
+          data={FloorFData}
+          renderItem={renderFurniture}
+          keyExtractor={(item) => item.key}
+          numColumns={1}
+          />
+        </View >
+        </ScrollView>
+}
 
   </Dialog.Content>
 </Dialog>
@@ -2286,7 +2398,7 @@ function MainScreen({navigation, route}) {
     <Button disabled color={Colors.black} onPress={showfurniture} style={styles.furnitureyesbutton}><Text style={styles.yesbuttonfont}>네</Text></Button>
     <TouchableOpacity
                 style={styles.furnitureyesbuttonbg}
-                onPress={addfurnitureslot1} activeOpacity={1}><Text></Text>
+                onPress={addfurnitureslot} activeOpacity={1}><Text></Text>
     </TouchableOpacity>
 
     <Button disabled color={Colors.black} onPress={hidefurniturecheckDialog} style={styles.furniturenobutton}><Text style={styles.nobuttonfont}>아니오</Text></Button>
@@ -2749,7 +2861,7 @@ function MainScreen({navigation, route}) {
 
 {/* 먹이기 화면 */}
 
-{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={1} eatinfo={eatCheckText} hidePetEatScreen={hidePetEatScreen} eatpercent={eatpercent} />}
+{peteatscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={1} eatinfo={eatCheckText} imagepath={imagepath} hidePetEatScreen={hidePetEatScreen} eatpercent={eatpercent} />}
 
 {/* <Dialog visible={cleanvisible} onDismiss={hidecleanDialog} style={styles.foodlist}>
   <Dialog.Title style={styles.textcenter}>청결용품 목록</Dialog.Title>
@@ -2914,7 +3026,7 @@ function MainScreen({navigation, route}) {
 
 {/* 청소 화면 */}
 
-{petcleanscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={2} eatinfo={cleanCheckText} hidePetEatScreen={hidePetCleanScreen} eatpercent={cleanpercent} />}
+{petcleanscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={2} eatinfo={cleanCheckText} imagepath={imagepath} hidePetEatScreen={hidePetCleanScreen} eatpercent={cleanpercent} />}
 
 
 {/* 놀이 화면 */}
@@ -3948,6 +4060,17 @@ const styles = StyleSheet.create({
   sleepbuttonfont:{
     fontSize: 15,
     color: 'black',
+  },
+
+  tutorial : {
+    position: 'absolute',
+    left : 0,
+    top : 0,
+  },
+
+  tutorialimage : {
+    width : WINDOW_W,
+    height : WINDOW_H,
   },
 
   textcenter:{
