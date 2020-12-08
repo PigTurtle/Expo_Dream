@@ -1,4 +1,5 @@
 import React, { Component, useState, useRef, useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { Dimensions, View, Image, StyleSheet, TouchableOpacity, Pressable, TouchableWithoutFeedback } from 'react-native';
 import { Modal, Text, Button, TouchableRipple, Paragraph } from 'react-native-paper';
 import { State, TapGestureHandler, PanGestureHandler, RotationGestureHandler } from 'react-native-gesture-handler';
@@ -184,6 +185,8 @@ const PetEatScreen = (props) => {
             {iseat == false && <EatItem imagepath={props.imagepath} ontap={onTap} touchcheck={touchcheck} /> } 
 
             {iseat == true && <TouchableOpacity onPress={goout} activeOpacity={1} style={styles.gooutbg}><Text></Text></TouchableOpacity>}
+
+            <StatusBar hidden={true} />
         </View>
     );
 }

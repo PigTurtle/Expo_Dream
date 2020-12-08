@@ -114,6 +114,8 @@ return(
           화면을 터치해 주세요. </Text></View>
     <TouchableOpacity style={styles.titlebuttonbg} onPress={MoveToIntro} activeOpacity={1}></TouchableOpacity>
     {/* <ReanimatedScreen3></ReanimatedScreen3> */}
+
+    <StatusBar hidden={true} />
   </View>
 );
 }
@@ -140,6 +142,8 @@ return(
 
     <Image source={require('./assets/images/intro/button.png')} style={styles.introbuttonbg} resizeMode ="stretch"/>
     <TouchableOpacity style={styles.introbutton} onPress={MoveToPetChoice} activeOpacity={1}><Text style={styles.introbuttonfont}>Skip ></Text></TouchableOpacity>
+
+    <StatusBar hidden={true} />
   </View>
 );
 }
@@ -208,6 +212,8 @@ return(
     <TouchableOpacity style={styles.choicebutton} onPress={MoveToMainStack} activeOpacity={1}><Text style={styles.petchoicebuttonfont}>선택하기</Text></TouchableOpacity>
     }
 
+  <StatusBar hidden={true} />
+
   </View>
 );
 }
@@ -222,6 +228,7 @@ const FruitData = [
     title: "사과",
     idforstore: require('./assets/images/store/appleslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
+    count : 1,
   },
   {
     type : 11,
@@ -230,6 +237,7 @@ const FruitData = [
     title: "수박",
     idforstore : require('./assets/images/store/watermelonslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
+    count : 1,
   },
   {
     type : 11,
@@ -238,13 +246,15 @@ const FruitData = [
     title: "파인애플",
     idforstore: require('./assets/images/store/pineappleslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
+    count : 1,
   },
-  {
-    type : 0,
-    key : 4,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   type : 0,
+  //   key : 4,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  //   count : 0,
+  // },
 ];
 
 const MeatData = [
@@ -255,6 +265,7 @@ const MeatData = [
     title: "생 돼지고기",
     idforstore: require('./assets/images/store/porkslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
+    count : 1,
   },
   {
     type : 12,
@@ -263,13 +274,15 @@ const MeatData = [
     title: "생 소고기",
     idforstore: require('./assets/images/store/beefslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
+    count : 1,
   },
-  {
-    type : 0,
-    key : 3,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   type : 0,
+  //   key : 3,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  //   count : 0,
+  // },
 ];
 
 const EtcData = [
@@ -280,13 +293,15 @@ const EtcData = [
     title: "미지의 덩어리",
     idforstore: require('./assets/images/store/unknownlumpslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
+    count : 1,
   },
-  {
-    type : 0,
-    key : 2,
-    id: require('./assets/images/eat/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   type : 0,
+  //   key : 2,
+  //   id: require('./assets/images/eat/slotdefault.png'),
+  //   title: "default",
+  //   count : 0,
+  // },
 ];
 
 const BrushData = [
@@ -297,6 +312,7 @@ const BrushData = [
     title: "거친 솔",
     idforstore: require('./assets/images/store/roughbrushslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
   {
     type : 21,
@@ -305,6 +321,7 @@ const BrushData = [
     title: "부드러운 솔",
     idforstore: require('./assets/images/store/softbrushslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
   {
     type : 21,
@@ -313,13 +330,15 @@ const BrushData = [
     title: "욕실 브러쉬",
     idforstore: require('./assets/images/store/showerbrushslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
-  {
-    type : 0,
-    key : 4,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   type : 0,
+  //   key : 4,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  //   count : 0,
+  // },
 ];
 
 const DetergentData = [
@@ -330,6 +349,7 @@ const DetergentData = [
     title: "펫 샴푸",
     idforstore: require('./assets/images/store/petshampooslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
   {
     type : 22,
@@ -338,6 +358,7 @@ const DetergentData = [
     title: "한방샴푸",
     idforstore: require('./assets/images/store/orientalshampooslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
   {
     type : 22,
@@ -346,13 +367,15 @@ const DetergentData = [
     title: "눈꽃샴푸",
     idforstore: require('./assets/images/store/snowshampooslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
-  {
-    type : 0,
-    key : 4,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   type : 0,
+  //   key : 4,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  //   count : 0,
+  // },
 ];
 
 const TubData = [
@@ -363,6 +386,7 @@ const TubData = [
     title: "고무 대야",
     idforstore: require('./assets/images/store/rubbertubslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
   {
     type : 23,
@@ -371,19 +395,22 @@ const TubData = [
     title: "이동식 욕조",
     idforstore: require('./assets/images/store/movabletubslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
+    count : 1,
   },
-  {
-    type : 0,
-    key : 3,
-    id: require('./assets/images/clean/whitetub.png'),
-    title: "default", // "하얀 욕조", 아직 창고 이미지 없음
-  },
-  {
-    type : 0,
-    key : 4,
-    id: require('./assets/images/clean/slotdefault.png'),
-    title: "default",
-  },
+  // {
+  //   type : 0,
+  //   key : 3,
+  //   id: require('./assets/images/clean/whitetub.png'),
+  //   title: "default", // "하얀 욕조", 아직 창고 이미지 없음
+  //   count : 0,
+  // },
+  // {
+  //   type : 0,
+  //   key : 3,
+  //   id: require('./assets/images/clean/slotdefault.png'),
+  //   title: "default",
+  //   count : 0,
+  // },
 ];
 
 const WallFData = [
@@ -394,6 +421,7 @@ const WallFData = [
     title: "벽걸이 식물",
     idforstore: require('./assets/images/store/wallplantslot.png'),
     idformain : require('./assets/images/furnitureposition/wallplant.png'),
+    count : 1,
   },
   {
     type : 31,
@@ -402,6 +430,7 @@ const WallFData = [
     title: "얇은 커튼",
     idforstore: require('./assets/images/store/thincurtainslot.png'),
     idformain : require('./assets/images/store/thincurtainslot.png'),
+    count : 1,
   },
   {
     type : 31,
@@ -410,6 +439,7 @@ const WallFData = [
     title: "벽걸이 시계",
     idforstore: require('./assets/images/store/wallclockslot.png'),
     idformain : require('./assets/images/store/wallclockslot.png'),
+    count : 1,
   },
 ];
 
@@ -421,6 +451,7 @@ const FloorFData = [
     title: "규조토 매트",
     idforstore: require('./assets/images/store/footmatslot.png'),
     idformain: require('./assets/images/store/footmatslot.png'),
+    count : 1,
   },
   {   
     type : 32,
@@ -429,6 +460,7 @@ const FloorFData = [
     title: "털 러그",
     idforstore: require('./assets/images/store/furrugslot.png'),
     idformain: require('./assets/images/store/furrugslot.png'),
+    count : 1,
   },
   {
     type : 32,
@@ -437,6 +469,7 @@ const FloorFData = [
     title: "북유럽풍 카페트",
     idforstore: require('./assets/images/store/europeancarpetslot.png'),
     idformain: require('./assets/images/store/europeancarpetslot.png'),
+    count : 1,
   },
 ];
 
@@ -447,6 +480,7 @@ const ShopEatData = [
     id: require('./assets/images/shop/appleslot.png'),
     title: "사과",
     cost : 100,
+    idforshop: require('./assets/images/shop/appleinfo.png'),
     idforeatslot: require('./assets/images/eat/appleslot.png'),
     idforstore: require('./assets/images/store/appleslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
@@ -457,6 +491,7 @@ const ShopEatData = [
     id: require('./assets/images/shop/watermelonslot.png'),
     title: "수박",
     cost : 100,
+    idforshop: require('./assets/images/shop/watermeloninfo.png'),
     idforeatslot: require('./assets/images/eat/watermelonslot.png'),
     idforstore : require('./assets/images/store/watermelonslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
@@ -467,6 +502,7 @@ const ShopEatData = [
     id: require('./assets/images/shop/pineappleslot.png'),
     title: "파인애플",
     cost : 100,
+    idforshop: require('./assets/images/shop/pineappleinfo.png'),
     idforeatslot: require('./assets/images/eat/pineappleslot.png'),
     idforstore: require('./assets/images/store/pineappleslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
@@ -477,6 +513,7 @@ const ShopEatData = [
     id: require('./assets/images/shop/porkslot.png'),
     title: "생 돼지고기",
     cost : 100,
+    idforshop: require('./assets/images/shop/porkinfo.png'),
     idforeatslot: require('./assets/images/eat/porkslot.png'),
     idforstore: require('./assets/images/store/porkslot.png'),
     idforeat : require('./assets/images/eat/apple.png'),
@@ -489,7 +526,8 @@ const ShopCleanData = [
     key : 1,
     id: require('./assets/images/shop/roughbrush.png'),
     title: "거친 솔",
-    cost : 100,
+    cost : 10,
+    idforshop: require('./assets/images/shop/roughbrushinfo.png'),
     idforcleanslot: require('./assets/images/clean/roughbrush.png'),
     idforstore: require('./assets/images/store/roughbrushslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
@@ -500,6 +538,7 @@ const ShopCleanData = [
     id: require('./assets/images/shop/softbrush.png'),
     title: "부드러운 솔",
     cost : 100,
+    idforshop: require('./assets/images/shop/softbrushinfo.png'),
     idforcleanslot: require('./assets/images/clean/softbrush.png'),
     idforstore: require('./assets/images/store/softbrushslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
@@ -510,6 +549,7 @@ const ShopCleanData = [
     id: require('./assets/images/shop/showerbrush.png'),
     title: "욕실 브러쉬",
     cost : 100,
+    idforshop: require('./assets/images/shop/showerbrushinfo.png'),
     idforcleanslot: require('./assets/images/clean/showerbrush.png'),
     idforstore: require('./assets/images/store/showerbrushslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
@@ -520,6 +560,7 @@ const ShopCleanData = [
     id: require('./assets/images/shop/petshampoo.png'),
     title: "펫 샴푸",
     cost : 100,
+    idforshop: require('./assets/images/shop/petshampooinfo.png'),
     idforcleanslot: require('./assets/images/clean/petshampoo.png'),
     idforstore: require('./assets/images/store/petshampooslot.png'),
     idforclean : require('./assets/images/clean/brush1.png'),
@@ -532,6 +573,7 @@ const ShopFurnitureData = [
     id: require('./assets/images/shop/wallplantslot.png'),
     title: "벽걸이 식물",
     cost : 1000,
+    idforshop: require('./assets/images/shop/wallplantinfo.png'),
     idforfurniture: require('./assets/images/furnitureposition/wallplantslot.png'),
     idforstore: require('./assets/images/store/wallplantslot.png'),
     idformain: require('./assets/images/store/wallplantslot.png'),
@@ -541,6 +583,7 @@ const ShopFurnitureData = [
     id: require('./assets/images/shop/thincurtainslot.png'),
     title: "얇은 커튼",
     cost : 1000,
+    idforshop: require('./assets/images/shop/thincurtaininfo.png'),
     idforfurniture: require('./assets/images/furnitureposition/thincurtainslot.png'),
     idforstore: require('./assets/images/store/thincurtainslot.png'),
     idformain: require('./assets/images/store/thincurtainslot.png'), 
@@ -551,6 +594,7 @@ const ShopFurnitureData = [
     id: require('./assets/images/shop/wallclockslot.png'),
     title: "벽걸이 시계",
     cost : 500,
+    idforshop: require('./assets/images/shop/wallclockinfo.png'),
     idforfurniture: require('./assets/images/furnitureposition/wallclockslot.png'),
     idforstore: require('./assets/images/store/wallclockslot.png'),
     idformain: require('./assets/images/store/wallclockslot.png'),
@@ -561,6 +605,7 @@ const ShopFurnitureData = [
     id: require('./assets/images/shop/europeancarpetslot.png'),
     title: "북유럽풍 카페트",
     cost : 2000,
+    idforshop: require('./assets/images/shop/europeancarpetinfo.png'),
     idforfurniture: require('./assets/images/furnitureposition/europeancarpetslot.png'),
     idforstore: require('./assets/images/store/europeancarpetslot.png'),
     idformain : require('./assets/images/store/europeancarpetslot.png'),
@@ -569,25 +614,28 @@ const ShopFurnitureData = [
 
 const ShopCostData = [
   {
-    type : 0,
+    type : 100,
     key : 1,
     id: require('./assets/images/shop/goldslot.png'),
     title: "골드",
     cost : 1,
+    idforshop: require('./assets/images/shop/goldinfo.png'),
   },
   {
-    type : 0,
+    type : 100,
     key : 2,
     id: require('./assets/images/shop/diamondslot.png'),
     title: "다이아",
     cost : 1000,
+    idforshop: require('./assets/images/shop/diamondinfo.png'),
   },
   {
-    type : 0,
+    type : 100,
     key : 3,
     id: require('./assets/images/shop/heartboosterslot.png'),
     title: "하트부스터",
     cost : 3300,
+    idforshop: require('./assets/images/shop/heartinfo.png'),
   },
 ];
 
@@ -597,12 +645,35 @@ const StoreCleanData = [];
 
 const StoreFurnitureData = [];
 
-const Item = ({item, onPress}) => (
+const EatItem = ({item, onPress}) => (
   <View style={styles2.item}>
   <TouchableOpacity
   style={[styles2.image]}
   onPress={onPress} activeOpacity={1}>
   <Image source={item.id} resizeMode ="stretch"/>
+<Text style={styles2.itemcount}>보유량 : {item.count}개</Text>
+  </TouchableOpacity>
+</View>
+);
+
+const CleanItem = ({item, onPress}) => (
+  <View style={styles2.item}>
+  <TouchableOpacity
+  style={[styles2.image]}
+  onPress={onPress} activeOpacity={1}>
+  <Image source={item.id} resizeMode ="stretch"/>
+<Text style={styles2.leftcount}>남은 횟수 : {item.count}회</Text>
+  </TouchableOpacity>
+</View>
+);
+
+const FurnitureItem = ({item, onPress}) => (
+  <View style={styles2.item}>
+  <TouchableOpacity
+  style={[styles2.image]}
+  onPress={onPress} activeOpacity={1}>
+  <Image source={item.id} resizeMode ="stretch"/>
+{/* <Text style={styles2.itemcount}>보유량 : {item.count}개</Text> */}
   </TouchableOpacity>
 </View>
 );
@@ -644,7 +715,21 @@ const styles2 = StyleSheet.create({
     marginHorizontal: 10,
   },
   image:{
-  }
+  },
+  itemcount : {
+    position : 'absolute',
+    top : 12,
+    left : 200,
+    color : '#6D6060',
+    fontSize : 9.5,
+  },
+  leftcount : {
+    position : 'absolute',
+    top : 10-2,
+    left : 190,
+    color : '#6D6060',
+    fontSize : 9.5,
+  },
 });
 
 function MainScreen({navigation, route}) {
@@ -662,6 +747,7 @@ function MainScreen({navigation, route}) {
   const [itemprice, setitemprice] = useState(0);
   const [itemnum, setitemnum] = useState(1);
   const [todayitem, settodayitem] = useState("벽걸이 시계");
+  const [todayitemtab, settodayitemtab] = useState(3);
 
   const [tutorial1visible, settutorial1visible] = useState(true);
   const [tutorial2visible, settutorial2visible] = useState(true);
@@ -707,6 +793,26 @@ function MainScreen({navigation, route}) {
   const setshoptabmoney = () => {
     setshoptab("재화");
     setshoptabnum(4);
+  }
+
+  const setshoptodaytab = () => {
+    switch(todayitemtab)
+    {
+      case 1:
+        setshoptabeat();
+        break;
+      case 2:
+        setshoptabclean();
+        break;
+      case 3:
+        setshoptabfurniture();
+        break;
+      case 4:
+        setshoptabmoney();
+        break;
+      default:
+        break;
+    }
   }
 
   const [storetabnum, setstoretabnum] = useState(1);
@@ -760,9 +866,11 @@ function MainScreen({navigation, route}) {
 
   const [dictionarypetnum, setdictionarypetnum] = useState(1);
   const [dictionaryinfo, setdictionaryinfo] = useState(false);
+  const [dictionaryinfonum, setdictionaryinfonum] = useState(1);
+
   const setdictionaryinfotrue = (petnum) => {
     setdictionarypetnum(petnum);
-    setdictionaryinfonum(1);
+    setdictionaryinfonum(2);
     setpath();
     setdictionaryinfo(true);
   }
@@ -771,14 +879,16 @@ function MainScreen({navigation, route}) {
     setpath();
     setdictionaryinfo(false);
   }
-  
-  const [dictionaryinfonum, setdictionaryinfonum] = useState(1);
+
   const dictionaryinfoNext = () => {
+    setdictionaryinfonum(dictionaryinfonum+1);
+    
     if(dictionaryinfonum > 3)
       setdictionaryinfofalse();
     else{
-      setdictionaryinfonum(dictionaryinfonum+1);
       setpath();
+
+      console.log("click", dictionaryinfonum);
     }
   }
 
@@ -805,8 +915,6 @@ function MainScreen({navigation, route}) {
 
   const setpath = () => {
     let mydictionaryinfos = [... dictionaryinfos];
-
-    console.log(dictionaryinfonum);
 
     switch(dictionaryinfonum)
     {
@@ -847,6 +955,7 @@ function MainScreen({navigation, route}) {
   const showdictionaryDialog = () => {
     setdictionarynum(1);
     setdictionaryVisible(true);
+    setdictionaryinfo(false);
   }
   const hidedictionaryDialog = () => setdictionaryVisible(false);
 
@@ -914,17 +1023,29 @@ function MainScreen({navigation, route}) {
     if(itemtype == 11)
     {
       let temp = FruitData.findIndex(myitem => myitem.key == key);
-      FruitData.splice(temp, 1);
+
+      FruitData[temp].count -= 1;
+      
+      if(FruitData[temp].count <= 0)
+        FruitData.splice(temp, 1);
     }
     if(itemtype == 12)
     {
       let temp = MeatData.findIndex(myitem => myitem.key == key);
-      MeatData.splice(temp, 1);
+
+      MeatData[temp].count -= 1;
+      
+      if(MeatData[temp].count <= 0)
+        MeatData.splice(temp, 1);
     }
     if(itemtype == 13)
     {
       let temp = EtcData.findIndex(myitem => myitem.key == key);
-      EtcData.splice(temp, 1);
+      
+      EtcData[temp].count -= 1;
+      
+      if(EtcData[temp].count <= 0)
+        EtcData.splice(temp, 1);
     }
   }
 
@@ -981,17 +1102,29 @@ function MainScreen({navigation, route}) {
     if(itemtype == 21)
     {
       let temp = BrushData.findIndex(myitem => myitem.key == key);
-      BrushData.splice(temp, 1);
+
+      BrushData[temp].count -= 1;
+      
+      if(BrushData[temp].count <= 0)
+        BrushData.splice(temp, 1);
     }
     if(itemtype == 22)
     {
       let temp = DetergentData.findIndex(myitem => myitem.key == key);
-      DetergentData.splice(temp, 1);
+
+      DetergentData[temp].count -= 1;
+      
+      if(DetergentData[temp].count <= 0)
+        DetergentData.splice(temp, 1);
     }
     if(itemtype == 23)
     {
       let temp = TubData.findIndex(myitem => myitem.key == key);
-      TubData.splice(temp, 1);
+
+      TubData[temp].count -= 1;
+      
+      if(TubData[temp].count <= 0)
+        TubData.splice(temp, 1);
     }
   }
 
@@ -1127,19 +1260,21 @@ function MainScreen({navigation, route}) {
     setcleanlistVisible(false);
   }
 
-  const [minigamevisible, setminigameVisible] = useState(false);
-  const showminigameDialog = () => setminigameVisible(true);
-  const hideminigameDialog = () => {
-    setfunVisible(false);
-    setminigameVisible(false);
-  }
-
   const [rewardvisible, setrewardVisible] = useState(false);
   const showrewardDialog = () => setrewardVisible(true);
   const hiderewardDialog = () => {
     setfunVisible(false);
-    setminigameVisible(false);
     setrewardVisible(false);
+  }
+
+  const [rewardcheckvisible, setrewardcheckVisible] = useState(false);
+  const showrewardcheckDialog = () => {
+    setrewardVisible(false);
+    setrewardcheckVisible(true);
+  }
+  const hiderewardcheckDialog = () => {
+    setfunVisible(false);
+    setrewardcheckVisible(false);
     setCoin(coin => coin + 100);
   }
 
@@ -1173,10 +1308,23 @@ function MainScreen({navigation, route}) {
   const showitemcheckDialog = () => setitemcheckVisible(true);
   const hideitemcheckDialog = () => {
     setitemcheckVisible(false);
+    setitemnum(1);
   }
 
   const [buysuccessvisible, setbuysuccessVisible] = useState(false);
-  const showbuysuccessDialog = (totalprice) => { 
+  const [buyfailvisible, setbuyfailVisible] = useState(false);
+  const showbuysuccessDialog = (totalprice, mycount) => { 
+    if(coin - totalprice < 0)
+    {
+      showbuyfailDialog();
+      setitemcheckVisible(false);
+      return;
+    }
+
+    let tempitem = {...item};
+    tempitem.count = mycount;
+    setitem(tempitem);
+
     setbuysuccessVisible(true);
     setitemcheckVisible(false);
     setCoin(coin => coin - totalprice);
@@ -1189,31 +1337,184 @@ function MainScreen({navigation, route}) {
     setbuysuccessVisible(false);
   }
 
+  const showbuyfailDialog = () => setbuyfailVisible(true);
+  const hidebuyfailDialog = () => setbuyfailVisible(false);
+
   const PushItem = () => {
     switch(type){
       case 11:
         setfruitdatanum(fruitdatanum => fruitdatanum+1);
-        FruitData.push(item);
+
+        for(let i=0; i < FruitData.length; i++)
+        {
+          let fruit = FruitData[i];
+
+          if(item.title == fruit.title)
+          {
+            let itemcount = item.count + fruit.count;
+
+            if(itemcount > 10)
+            {
+              item.count = itemcount - 10;
+              FruitData[i].count = 10;
+            }
+            else
+            {
+              item.count = 0;
+              FruitData[i].count = itemcount;
+            }
+
+            break;
+          }
+        }
+
+        if(item.count != 0)
+          FruitData.push(item);
         break;
       case 12:
         setmeatdatanum(meatdatanum => meatdatanum+1);
-        MeatData.push(item);
+
+        for(let i=0; i < MeatData.length; i++)
+        {
+          let meat = MeatData[i];
+
+          if(item.title == meat.title)
+          {
+            let itemcount = item.count + meat.count;
+
+            if(itemcount > 10)
+            {
+              item.count = itemcount - 10;
+              MeatData[i].count = 10;
+            }
+            else
+            {
+              item.count = 0;
+              MeatData[i].count = itemcount;
+            }
+
+            break;
+          }
+        }
+
+        if(item.count != 0)
+          MeatData.push(item);
         break;
       case 13:
         setetcdatanum(etcdatanum => etcdatanum+1);
-        EtcData.push(item);
+
+        for(let i=0; i < EtcData.length; i++)
+        {
+          let etc = EtcData[i];
+
+          if(item.title == etc.title)
+          {
+            let itemcount = item.count + etc.count;
+
+            if(itemcount > 10)
+            {
+              item.count = itemcount - 10;
+              EtcData[i].count = 10;
+            }
+            else
+            {
+              item.count = 0;
+              EtcData[i].count = itemcount;
+            }
+
+            break;
+          }
+        }
+
+        if(item.count != 0)
+          EtcData.push(item);
         break;
       case 21:
         setbrushdatanum(brushdatanum => brushdatanum+1);
-        BrushData.push(item);
+
+        for(let i=0; i < BrushData.length; i++)
+        {
+          let brush = BrushData[i];
+
+          if(item.title == brush.title)
+          {
+            let itemcount = item.count + brush.count;
+
+            if(itemcount > 10)
+            {
+              item.count = itemcount - 10;
+              BrushData[i].count = 10;
+            }
+            else
+            {
+              item.count = 0;
+              BrushData[i].count = itemcount;
+            }
+
+            break;
+          }
+        }
+
+        if(item.count != 0)
+          BrushData.push(item);
         break;
       case 22:
         setdetergentdatanum(detergentdatanum => detergentdatanum+1);
-        DetergentData.push(item);
+
+        for(let i=0; i < DetergentData.length; i++)
+        {
+          let detergent = DetergentData[i];
+
+          if(item.title == detergent.title)
+          {
+            let itemcount = item.count + detergent.count;
+
+            if(itemcount > 10)
+            {
+              item.count = itemcount - 10;
+              DetergentData[i].count = 10;
+            }
+            else
+            {
+              item.count = 0;
+              DetergentData[i].count = itemcount;
+            }
+
+            break;
+          }
+        }
+
+        if(item.count != 0)
+          DetergentData.push(item);
         break;
       case 23:
         settubdatanum(tubdatanum => tubdatanum+1);
-        TubData.push(item);
+
+        for(let i=0; i < TubData.length; i++)
+        {
+          let tub = TubData[i];
+
+          if(item.title == tub.title)
+          {
+            let itemcount = item.count + tub.count;
+
+            if(itemcount > 10)
+            {
+              item.count = itemcount - 10;
+              TubData[i].count = 10;
+            }
+            else
+            {
+              item.count = 0;
+              TubData[i].count = itemcount;
+            }
+
+            break;
+          }
+        }
+
+        if(item.count != 0)
+          TubData.push(item);
         break;      
       case 31:
         setwallfdatanum(wallfdatanum => wallfdatanum+1);
@@ -1282,7 +1583,7 @@ function MainScreen({navigation, route}) {
 
   const renderEat = ({ item }) => {
     return (
-      <Item
+      <EatItem
         item={item}
         onPress={() => showeatCheckDialog(item.type, item.key, item.title, item.idforeat)}
         //onPress={hideeatDialog}
@@ -1292,7 +1593,7 @@ function MainScreen({navigation, route}) {
 
     const renderClean = ({ item }) => {
       return (
-        <Item
+        <CleanItem
           item={item}
           onPress={() => showcleanCheckDialog(item.type, item.key, item.title, item.idforclean)}
           //onPress={hideeatDialog}
@@ -1302,7 +1603,7 @@ function MainScreen({navigation, route}) {
 
       const renderFurniture = ({ item }) => {
         return (
-          <Item
+          <FurnitureItem
             item={item}
             onPress={() => showfurniturecheckDialog(item.type, item.title, item.idformain)}
             //onPress={hideeatDialog}
@@ -1338,11 +1639,13 @@ function MainScreen({navigation, route}) {
   const [tubdatanum, settubdatanum] = useState(TubData.length);
   const [wallfdatanum, setwallfdatanum] = useState(WallFData.length);
   const [floorfdatanum, setfloorfdatanum] = useState(FloorFData.length);
+  const [itemimagepath, setitemimagepath] = useState(require('./assets/images/shop/appleinfo.png'));
 
   const showshopCheckDialog = (myitem) => {
     if(myitem.type == 0)
       return;
 
+    setitemimagepath(myitem.idforshop);
     setitemprice(myitem.cost);
     settype(myitem.type);
     showitemcheckDialog();
@@ -1355,6 +1658,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idforeat : myitem.idforeat,
+          count : 1,
         };
         setitem(tempfruititem);
         break;
@@ -1365,6 +1669,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idforeat : myitem.idforeat,
+          count : 1,
         };
         setitem(tempmeatitem);
         break;
@@ -1375,6 +1680,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idforeat : myitem.idforeat,
+          count : 1,
         };
         setitem(tempetcitem);
         break;
@@ -1385,6 +1691,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idforclean : myitem.idforclean,
+          count : 1,
         };
         setitem(tempbrushitem);
         break;
@@ -1395,6 +1702,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idforclean : myitem.idforclean,
+          count : 1,
         };
         setitem(tempdetergentitem);
         break;
@@ -1405,6 +1713,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idforclean : myitem.idforclean,
+          count : 1,
         };
         setitem(temptubitem);
         break;      
@@ -1415,6 +1724,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idformain : myitem.idformain,
+          count : 1,
         };
         setitem(tempwallfitem);
         break;
@@ -1425,6 +1735,7 @@ function MainScreen({navigation, route}) {
           title: myitem.title,
           idforstore : myitem.idforstore,
           idformain : myitem.idformain,
+          count : 1,
         };
         setitem(tempfloorfitem);
         break;
@@ -1599,13 +1910,15 @@ function MainScreen({navigation, route}) {
     }
   }
 
+  const [rewardtext, setrewardtext] = useState("5000G");
+
   return(
     <View style={styles.container}>
       
     <Image source={require('./assets/images/main/main.gif')} style={styles.main} resizeMode ="stretch"/>
     {mainnum == 2 && <Image source={require('./assets/images/main/main2.png')} style={styles.main} resizeMode ="stretch"/>}
 
-    {lightvisible == true && <DraggableBox /> }
+    {/* {lightvisible == true && <DraggableBox /> } */}
 
     {furniturewallsRender}
     {furniturefloorsRender}
@@ -2202,7 +2515,7 @@ function MainScreen({navigation, route}) {
     <TouchableOpacity style={styles.shopnpctext3} activeOpacity={1}><Text style={styles.shopnpctextfont}>라고</Text></TouchableOpacity>
     <TouchableOpacity style={styles.shopnpctext4} activeOpacity={1}><Text style={styles.shopnpctextfont}>놓치면 후회할걸?</Text></TouchableOpacity>
 
-    <TouchableOpacity style={styles.shopnpcbutton} onPress={hideshopDialog} activeOpacity={1}><Text style={styles.shopnpcbuttonfont}>바로가기</Text></TouchableOpacity>
+    <TouchableOpacity style={styles.shopnpcbutton} onPress={setshoptodaytab} activeOpacity={1}><Text style={styles.shopnpcbuttonfont}>바로가기</Text></TouchableOpacity>
     
   </Dialog.Content>
   <Dialog.Actions>
@@ -2215,28 +2528,34 @@ function MainScreen({navigation, route}) {
 
 <Dialog visible={itemcheckvisible} dismissable={false} onDismiss={hideitemcheckDialog} style={styles.itemcheck}>
   <Dialog.Content>
-    <Image source={require('./assets/images/shop/appleinfo.png')} style={styles.itemimage} resizeMode ="stretch"/>
+    <Image source={itemimagepath} style={styles.itemimage} resizeMode ="stretch"/>
     <Image source={require('./assets/images/shop/coin.png')} style={styles.itemcost} resizeMode ="stretch"/>
     <Text style={styles.itemcosttext}>{itemprice * itemnum}</Text>
     <Text style={styles.itemnumtext}>{itemnum}</Text>
 
+    {shoptabnum < 3 && 
     <TouchableOpacity
       style={styles.downbutton}
       onPress={itemnumdown} activeOpacity={1}>
     <Image source={require('./assets/images/shop/downbutton.png')} resizeMode ="cover"/>
   </TouchableOpacity> 
+}
+{shoptabnum < 3 && 
   <TouchableOpacity
       style={styles.upbutton}
       onPress={itemnumup} activeOpacity={1}>
     <Image source={require('./assets/images/shop/upbutton.png')} resizeMode ="cover"/>
-  </TouchableOpacity> 
+  </TouchableOpacity>  
+}
 
     <Paragraph style={styles.itemchecktext}><Text style={styles.yesbuttonfont}>구매 하시겠습니까?</Text></Paragraph>
+
+    <TouchableOpacity style={styles.itemyesbutton} onPress={() =>showbuysuccessDialog(itemprice * itemnum, itemnum)} activeOpacity={1}>
+      <Text style={styles.itemyesbuttonfont}>네</Text></TouchableOpacity> 
+    <TouchableOpacity style={styles.itemnobutton} onPress={hideitemcheckDialog} activeOpacity={1}>
+      <Text style={styles.itemnobuttonfont}>아니오</Text></TouchableOpacity> 
+
   </Dialog.Content>
-  <Dialog.Actions>
-    <Button color={Colors.black} onPress={() =>showbuysuccessDialog(itemprice * itemnum)} style={styles.itemyesbutton}><Text style={styles.itemyesbuttonfont}>네</Text></Button>
-    <Button color={Colors.black} onPress={hideitemcheckDialog} style={styles.itemnobutton}><Text style={styles.itemnobuttonfont}>아니오</Text></Button>
-  </Dialog.Actions>
 </Dialog>
 
 {/* 구매 성공 화면 */}
@@ -2245,10 +2564,22 @@ function MainScreen({navigation, route}) {
   <Dialog.Content>
     <Text style={styles.buysuccesstext1}>구매에 성공했습니다!</Text>
     <Text style={styles.buysuccesstext2}>창고를 확인해주세요.</Text>
+
+    <TouchableOpacity style={styles.checkbutton} onPress={hidebuysuccessDialog} activeOpacity={1}>
+      <Text style={styles.checkbuttonfont}>확인</Text></TouchableOpacity> 
   </Dialog.Content>
-  <Dialog.Actions>
-    <Button color={Colors.black} onPress={hidebuysuccessDialog} style={styles.checkbutton}><Text style={styles.checkbuttonfont}>확인</Text></Button>
-  </Dialog.Actions>
+</Dialog>
+
+{/* 구매 실패 화면 */}
+
+<Dialog visible={buyfailvisible} dismissable={false} onDismiss={hidebuyfailDialog} style={styles.buysuccess}>
+  <Dialog.Content>
+    <Text style={styles.buysuccesstext1}>구매에 실패했습니다!</Text>
+    <Text style={styles.buysuccesstext2}>골드를 확인해주세요.</Text>
+
+    <TouchableOpacity style={styles.checkbutton} onPress={hidebuyfailDialog} activeOpacity={1}>
+      <Text style={styles.checkbuttonfont}>확인</Text></TouchableOpacity> 
+  </Dialog.Content>
 </Dialog>
 
 {/* <Dialog visible={collectionvisible} onDismiss={hidecollectionDialog} style={styles.collectionlist}>
@@ -2749,6 +3080,12 @@ function MainScreen({navigation, route}) {
         </TouchableOpacity>
 
         <View style={{...styles.eattab_1, left : 40 + (eattabnum-1)*70}}><Text style={styles.textcenter}>{eattabname}</Text></View>
+
+        <TouchableOpacity
+                style={styles.eatxbutton}
+                onPress={hideeatDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/fun/xbutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
         
         {/* {eattabname == "과일" &&         <TouchableOpacity
                 style={styles.eatslot1}
@@ -2930,6 +3267,12 @@ function MainScreen({navigation, route}) {
 
         <View style={{...styles.cleantab_1, left : 40 + (cleantabnum-1)*70}}><Text style={styles.textcenter}>{cleantabname}</Text></View>
 
+        <TouchableOpacity
+                style={styles.eatxbutton}
+                onPress={hidecleanDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/fun/xbutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
+
         {/* {cleantabname == "솔" && <Image style={styles.eatslot1} source={require('./assets/images/clean/brushslot1.png')} resizeMode ="stretch"/>}
         {cleantabname == "솔" && <Image style={styles.eatslot2} source={require('./assets/images/clean/brushslot2.png')} resizeMode ="stretch"/>}
         {cleantabname == "솔" && <TouchableOpacity
@@ -3028,19 +3371,21 @@ function MainScreen({navigation, route}) {
 
 {petcleanscreenvisible == true && <PetEatScreen mainnum={mainnum} petnum={petnum} type={2} eatinfo={cleanCheckText} imagepath={imagepath} hidePetEatScreen={hidePetCleanScreen} eatpercent={cleanpercent} />}
 
-
 {/* 놀이 화면 */}
 
 <Dialog visible={funvisible} onDismiss={hidefunDialog} style={styles.stageScene}>
   <Dialog.Content>
   <Image style={styles.minigamebg} source={require('./assets/images/fun/funbg.png')} resizeMode ="stretch"/>
 
-  <Paragraph style={styles.minigamebg2}></Paragraph>
-  <Paragraph style={styles.minigameimage}><Text style={styles.minigamefont}>미니게임 이미지</Text></Paragraph>
+  {/* <Paragraph style={styles.minigamebg2}></Paragraph>
+  <Paragraph style={styles.minigameimage}><Text style={styles.minigamefont}>미니게임 이미지</Text></Paragraph> */}
+
+  <Image style={styles.minigameimage} source={require('./assets/images/fun/gameimage.png')} resizeMode ="stretch"/>
+  <Image style={styles.minigameinfo} source={require('./assets/images/fun/gameinfo.png')} resizeMode ="stretch"/>
 
   <TouchableOpacity
                 style={styles.gamestartbutton}
-                onPress={showminigameDialog} activeOpacity={1}>
+                onPress={showrewardDialog} activeOpacity={1}>
           <Image source={require('./assets/images/fun/gamestartbutton.png')} resizeMode ="stretch"/>
         </TouchableOpacity> 
 
@@ -3053,29 +3398,40 @@ function MainScreen({navigation, route}) {
   </Dialog.Content>
 </Dialog>
 
-{/* 놀이 결과 화면 */}
+{/* 미니게임 화면 */}
 
-<Dialog visible={minigamevisible} onDismiss={hideminigameDialog} style={styles.scoreboard}>
-  <Dialog.Title></Dialog.Title>
+
+
+{/* 보상 획득 화면 */}
+
+<Dialog dismissable={false} visible={rewardvisible} onDismiss={hiderewardDialog} style={styles.reward}>
   <Dialog.Content>
-  <Button disabled color={Colors.black} onPress={() => {}} style={styles.scoretitle}><Text style={styles.textcenter}>점수판</Text></Button>
-  <Button disabled color={Colors.black} onPress={() => {}} style={styles.scoreboardinfo}><Text style={styles.textcenter}>점수판 내용</Text></Button>
-  <Button color={Colors.black} onPress={showrewardDialog} style={styles.gotorewardbutton}><Text style={styles.textcenter}>보상 받기</Text></Button>
+  <Button disabled color={Colors.black} onPress={() => {}} style={styles.rewardinfo} />
+  <Image style={styles.rewardimage} source={require('./assets/images/fun/coin.png')} resizeMode ="stretch"/>
+
+  <Paragraph style={styles.rewardtext}><Text>{rewardtext}를 획득했습니다!</Text></Paragraph>
+
+  <TouchableOpacity
+                style={styles.rewardbutton}
+                onPress={showrewardcheckDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/fun/rewardbutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
+
   </Dialog.Content>
-  <Dialog.Actions>
-  </Dialog.Actions>
 </Dialog>
 
-{/* 보상 정보 화면 */}
+{/* 보상 획득 성공 화면 */}
 
-<Dialog visible={rewardvisible} onDismiss={hiderewardDialog} style={styles.reward}>
-  <Dialog.Title style={styles.textcenter}>보상</Dialog.Title>
+<Dialog dismissable={false} visible={rewardcheckvisible} onDismiss={hiderewardcheckDialog} style={styles.rewardcheck}>
   <Dialog.Content>
-  <Button disabled color={Colors.black} onPress={() => {}} style={styles.rewardinfo}><Text style={styles.textcenter}>보상 정보</Text></Button>
+  <Text style={styles.rewardcheckinfo}>보상을 받았습니다!{`\n`}창고를 확인해주세요.</Text>
+
+  <TouchableOpacity
+                style={styles.rewardcheckbutton}
+                onPress={hiderewardcheckDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/fun/checkbutton.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> 
   </Dialog.Content>
-  <Dialog.Actions>
-  <Button color={Colors.black} onPress={hiderewardDialog} style={styles.rewardbutton}><Text style={styles.textcenter}>보상 받기</Text></Button>
-  </Dialog.Actions>
 </Dialog>
 
 {/* 수면 화면 */}
@@ -3121,6 +3477,8 @@ function MainScreen({navigation, route}) {
     <Button color={Colors.black} onPress={hidecleanlistDialog} style={styles.xbutton}><Text style={styles.xbuttonfont}>X</Text></Button>
   </Dialog.Actions>
 </Dialog> */}
+
+<StatusBar hidden={true} />
 
 </View>
   );
@@ -3540,7 +3898,7 @@ const styles = StyleSheet.create({
     width : 60,
     height: 60,
     left : 25,
-    top: 30 -2,
+    top: 30 -2-10,
   },
 
   stagebg:{
@@ -3572,7 +3930,7 @@ const styles = StyleSheet.create({
     width : 50,
     height: 50,
     left : 10,
-    top: 100,
+    top: 100-10,
   },
 
   stagebg:{
@@ -3600,7 +3958,7 @@ const styles = StyleSheet.create({
     width : 290,
     height: 20,
     right : 30,
-    top: 30,
+    top: 30-10,
     borderRadius: 25,
     backgroundColor : 'white',
   },
@@ -3610,7 +3968,7 @@ const styles = StyleSheet.create({
     width : 20,
     height: 20,
     left : 96,
-    top: 30,
+    top: 30-10,
   },
 
   coinnum:{
@@ -3618,7 +3976,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 120,
-    top: 20,
+    top: 20-10,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -3805,7 +4163,7 @@ const styles = StyleSheet.create({
     width : 20,
     height: 20,
     left : 236,
-    top: 30,
+    top: 30-10,
   },
 
   jamnum:{
@@ -3813,7 +4171,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 260,
-    top: 20,
+    top: 20-10,
     textAlign: 'center',
     textAlignVertical: 'center',
    },
@@ -3827,7 +4185,7 @@ const styles = StyleSheet.create({
     width : 290,
     height: 20,
     right : 30,
-    top: 60,
+    top: 60-10,
     borderRadius: 25,
     backgroundColor : 'white',
   },
@@ -3836,7 +4194,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 20,
     left : 91,
-    top: 60,
+    top: 60-10,
     borderRadius: 25,
     backgroundColor : '#FF9AB2',
   },
@@ -3846,7 +4204,7 @@ const styles = StyleSheet.create({
     width : 15,
     height: 15,
     left : 100,
-    top: 64,
+    top: 64-10,
   },
 
   heartgauge:{
@@ -3854,7 +4212,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 190,
-    top: 50,
+    top: 50-10,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -3893,7 +4251,7 @@ const styles = StyleSheet.create({
     width : 50,
     height: 50,
     right : 10,
-    top: 100,
+    top: 100-10,
   },
 
   menubutton:{
@@ -4158,14 +4516,18 @@ const styles = StyleSheet.create({
 
   minigameimage:{
     position: 'absolute',
-    width : 250,
-    height: 300,
+    width : 208*1.2,
+    height : 255*1.2,
     left : 80,
-    top : 120,
-    backgroundColor : '#C4C4C4',
-    textAlign:'center',
-    textAlignVertical: 'center',
-    borderRadius: 20,
+    top : 120-40,
+  },
+
+  minigameinfo:{
+    position: 'absolute',
+    width : WINDOW_W,
+    height : 223*WINDOW_W/375,
+    left : 0,
+    top : 500-40,
   },
 
   minigamefont:{
@@ -4175,14 +4537,14 @@ const styles = StyleSheet.create({
 
   gamestartbutton:{
     position: 'absolute',
-    left : 130,
-    top : 520,
+    left : 130+2,
+    top : 550+50+15,
   },
 
   minigamexbutton:{
     position: 'absolute',
-    left : 327,
-    top : 97,
+    left : 200,
+    top : 100,
   },
 
   scoreboard:{
@@ -4227,18 +4589,6 @@ const styles = StyleSheet.create({
     backgroundColor : '#CFCFD7',
     justifyContent: 'center',
     borderRadius: 10,
-  },
-
-  rewardinfo :{
-    position: 'absolute',
-    width : 150,
-    height : 150,
-    left : 50,
-    top : 0,
-    textAlign : 'center',
-    justifyContent : 'center',
-    backgroundColor: '#CFCFD7',
-    borderRadius : 100,
   },
 
   questrewardinfo :{
@@ -4311,8 +4661,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 300,
     height : 550,
-    left : 25,
-    top : 30,
+    left : 25+5,
+    top : 30-10,
     backgroundColor : '#EEEEEE',
     borderRadius : 20,
   },
@@ -4334,6 +4684,12 @@ const styles = StyleSheet.create({
     borderRadius : 20,
     backgroundColor : '#FFCC18',
     justifyContent: 'center',
+  },
+
+  eatxbutton:{
+    position: 'absolute',
+    right : 10,
+    top : 10,
   },
 
   cleantab_1 :{
@@ -4495,13 +4851,13 @@ const styles = StyleSheet.create({
 
   itemimage :{
     position: 'absolute',
-    left : 40,
-    top : 10,
+    left : 0,
+    top : 0,
   },
 
   itemcost :{
     position: 'absolute',
-    left : 130-1,
+    left : 130-1-5,
     top : 230,
     width : 20,
     height : 20,
@@ -4509,7 +4865,7 @@ const styles = StyleSheet.create({
 
   itemcosttext :{
     position: 'absolute',
-    left : 150+1,
+    left : 150+1-5,
     top : 230,
   },
 
@@ -4542,7 +4898,7 @@ const styles = StyleSheet.create({
     width : 120,
     height : 40,
     left : 20,
-    bottom : -310,
+    bottom : -325,
     backgroundColor : '#4D3C9B',
     justifyContent:'center',
     borderRadius: 10,
@@ -4553,7 +4909,7 @@ const styles = StyleSheet.create({
     width : 120,
     height : 40,
     right : 20,
-    bottom : -310,
+    bottom : -325,
     backgroundColor : '#E7D3F6',
     justifyContent:'center',
     borderRadius: 10,
@@ -4704,6 +5060,7 @@ const styles = StyleSheet.create({
   settinglist:{
     position: 'absolute',
     left : 30,
+    top : 65,
     width : 300,
     height : 430+30,
     backgroundColor: '#00ff0000',
@@ -5481,25 +5838,76 @@ const styles = StyleSheet.create({
     fontSize : 15,
   },
 
+  reward:{
+    position: 'absolute',
+    backgroundColor: '#FFFFFF',
+    width : 264,
+    height : 434,
+    left : 50-2,
+    borderRadius : 20,
+  },
+
+  rewardinfo :{
+    position: 'absolute',
+    width : 150,
+    height : 150,
+    left : 50+5,
+    top : 50,
+    textAlign : 'center',
+    justifyContent : 'center',
+    backgroundColor: '#DDDDDD',
+    borderRadius : 100,
+  },
+
+  rewardimage:{
+    position: 'absolute',
+    left : 80+5,
+    top : 80,
+  },
+
+  rewardtext:{
+    position: 'absolute',
+    left : 0,
+    top : 250,
+    width : 264,
+    textAlign : 'center',
+    justifyContent : 'center',
+    fontSize : 18,
+  },
+
   rewardbutton:{
     position: 'absolute',
     width : 120,
     height : 40,
-    left : 65,
-    bottom : -220,
+    left : 68,
+    top : 335,
     backgroundColor : '#CFCFD7',
     justifyContent: 'center',
     borderRadius: 10,
   },
 
-  reward:{
+  rewardcheck:{
     position: 'absolute',
-    backgroundColor: Colors.grey500,
-    width : 250,
-    height : 400,
-    left : 47,
+    backgroundColor: '#FFFFFF',
+    width : 299,
+    height : 163,
+    left : 31,
   },
 
+  rewardcheckinfo :{
+    position: 'absolute',
+    left : 70-2,
+    top : 30-5,
+    textAlign : 'center',
+    justifyContent : 'center',
+    fontSize : 18,
+  },
+
+  rewardcheckbutton:{
+    position: 'absolute',
+    left : 90-2,
+    top : 100-5,
+  },
   
   questreward:{
     position: 'absolute',
@@ -5561,7 +5969,7 @@ const styles = StyleSheet.create({
     width : 120,
     height : 40,
     left : 90,
-    top: 50,
+    top: 100,
     justifyContent: 'center',
     backgroundColor: '#665AAC',
     borderRadius : 10,
@@ -5569,7 +5977,8 @@ const styles = StyleSheet.create({
 
   checkbuttonfont:{
     fontSize: 15,
-    color : 'white'
+    color : 'white',
+    textAlign : 'center'
   },
 
   collectionlist:{
