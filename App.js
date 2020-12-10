@@ -36,6 +36,8 @@ import Test from './src/mypractice';
 import JSTestScreen from'./src/JSTestScreen';
 import PetEatScreen from'./src/PetEatScreen';
 
+import * as Progress from 'react-native-progress';
+
 LogBox.ignoreAllLogs();
 
 import Animated, { Easing, useSharedValue, withSpring, useAnimatedStyle, repeat, delay, 
@@ -124,9 +126,31 @@ function IntroScreen({navigation}){
   const MoveToPetChoice = () =>{
     navigation.navigate("PetChoice");
   }
+  const pressbutton = (num) => {
+    switch(num)
+    {
+      case 1:
+        setintro1(false);
+        break;
+      case 2:
+        setintro2(false);
+        break;
+      case 3:
+        setintro3(false);
+        break;
+      default:
+        break;
+    }
+  }
+
+  const [intro1, setintro1] = useState(true);
+  const [intro2, setintro2] = useState(true);
+  const [intro3, setintro3] = useState(true);
+  const [intro4, setintro4] = useState(true);
+
 return(
   <View style={styles.introbackground}>
-    <Image source={require('./assets/images/intro/intro.png')} style={styles.intro} resizeMode ="stretch"/>
+    {/* <Image source={require('./assets/images/intro/intro.png')} style={styles.intro} resizeMode ="stretch"/>
     <Image source={require('./assets/images/intro/prologuebg.png')} style={styles.prologuebg} resizeMode ="stretch"/>
 
     <Text style={styles.prologuefont}>프롤로그</Text>
@@ -141,9 +165,33 @@ return(
     <Text style={styles.prologueinfofont}>꿈속에 나오던 미지의 공간 ...</Text>
 
     <Image source={require('./assets/images/intro/button.png')} style={styles.introbuttonbg} resizeMode ="stretch"/>
-    <TouchableOpacity style={styles.introbutton} onPress={MoveToPetChoice} activeOpacity={1}><Text style={styles.introbuttonfont}>Skip ></Text></TouchableOpacity>
+    <TouchableOpacity style={styles.introbutton} onPress={MoveToPetChoice} activeOpacity={1}><Text style={styles.introbuttonfont}>Skip ></Text></TouchableOpacity> */}
 
-    <StatusBar hidden={true} />
+  {intro4 && <TouchableOpacity
+  style={styles.intro2}
+  onPress={MoveToPetChoice} activeOpacity={1}>
+  <Image source={require('./assets/images/intro/intro4.png')}  style={styles.intro2} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+  {intro3 && <TouchableOpacity
+  style={styles.intro2}
+  onPress={() => pressbutton(3)} activeOpacity={1}>
+  <Image source={require('./assets/images/intro/intro3.png')} style={styles.intro2} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+  {intro2 && <TouchableOpacity
+  style={styles.intro2}
+  onPress={() => pressbutton(2)} activeOpacity={1}>
+  <Image source={require('./assets/images/intro/intro2.png')} style={styles.intro2} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+  {intro1 && <TouchableOpacity
+  style={styles.intro2}
+  onPress={() => pressbutton(1)} activeOpacity={1}>
+  <Image source={require('./assets/images/intro/intro1.png')} style={styles.intro2} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+  <StatusBar hidden={true} />
   </View>
 );
 }
@@ -236,7 +284,7 @@ const FruitData = [
     id: require('./assets/images/eat/watermelonslot.png'),
     title: "수박",
     idforstore : require('./assets/images/store/watermelonslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/watermelon.png'),
     count : 1,
   },
   {
@@ -245,7 +293,7 @@ const FruitData = [
     id: require('./assets/images/eat/pineappleslot.png'),
     title: "파인애플",
     idforstore: require('./assets/images/store/pineappleslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/pineapple.png'),
     count : 1,
   },
   // {
@@ -264,7 +312,7 @@ const MeatData = [
     id: require('./assets/images/eat/porkslot.png'),
     title: "생 돼지고기",
     idforstore: require('./assets/images/store/porkslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/pork.png'),
     count : 1,
   },
   {
@@ -273,7 +321,7 @@ const MeatData = [
     id: require('./assets/images/eat/beefslot.png'),
     title: "생 소고기",
     idforstore: require('./assets/images/store/beefslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/beef.png'),
     count : 1,
   },
   // {
@@ -292,7 +340,7 @@ const EtcData = [
     id: require('./assets/images/eat/unknownlumpslot.png'),
     title: "미지의 덩어리",
     idforstore: require('./assets/images/store/unknownlumpslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/unknownlump.png'),
     count : 1,
   },
   // {
@@ -308,28 +356,28 @@ const BrushData = [
   {
     type : 21,
     key : 1,
-    id: require('./assets/images/clean/roughbrush.png'),
+    id: require('./assets/images/clean/roughbrushslot.png'),
     title: "거친 솔",
     idforstore: require('./assets/images/store/roughbrushslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/roughbrush.png'),
     count : 1,
   },
   {
     type : 21,
     key : 2,
-    id: require('./assets/images/clean/softbrush.png'),
+    id: require('./assets/images/clean/softbrushslot.png'),
     title: "부드러운 솔",
     idforstore: require('./assets/images/store/softbrushslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/softbrush.png'),
     count : 1,
   },
   {
     type : 21,
     key : 3,
-    id: require('./assets/images/clean/showerbrush.png'),
+    id: require('./assets/images/clean/showerbrushslot.png'),
     title: "욕실 브러쉬",
     idforstore: require('./assets/images/store/showerbrushslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/showerbrush.png'),
     count : 1,
   },
   // {
@@ -345,28 +393,28 @@ const DetergentData = [
   {
     type : 22,
     key : 1,
-    id: require('./assets/images/clean/petshampoo.png'),
+    id: require('./assets/images/clean/petshampooslot.png'),
     title: "펫 샴푸",
     idforstore: require('./assets/images/store/petshampooslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/petshampoo.png'),
     count : 1,
   },
   {
     type : 22,
     key : 2,
-    id: require('./assets/images/clean/orientalshampoo.png'),
+    id: require('./assets/images/clean/orientalshampooslot.png'),
     title: "한방샴푸",
     idforstore: require('./assets/images/store/orientalshampooslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/orientalshampoo.png'),
     count : 1,
   },
   {
     type : 22,
     key : 3,
-    id: require('./assets/images/clean/snowshampoo.png'),
+    id: require('./assets/images/clean/snowshampooslot.png'),
     title: "눈꽃샴푸",
     idforstore: require('./assets/images/store/snowshampooslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/snowshampoo.png'),
     count : 1,
   },
   // {
@@ -382,19 +430,19 @@ const TubData = [
   {
     type : 23,
     key : 1,
-    id: require('./assets/images/clean/rubbertub.png'),
+    id: require('./assets/images/clean/rubbertubslot.png'),
     title: "고무 대야",
     idforstore: require('./assets/images/store/rubbertubslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/rubbertub.png'),
     count : 1,
   },
   {
     type : 23,
     key : 2,
-    id: require('./assets/images/clean/movabletub.png'),
+    id: require('./assets/images/clean/movabletubslot.png'),
     title: "이동식 욕조",
     idforstore: require('./assets/images/store/movabletubslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/movabletub.png'),
     count : 1,
   },
   // {
@@ -422,6 +470,7 @@ const WallFData = [
     idforstore: require('./assets/images/store/wallplantslot.png'),
     idformain : require('./assets/images/furnitureposition/wallplant.png'),
     count : 1,
+    position : false,
   },
   {
     type : 31,
@@ -431,6 +480,7 @@ const WallFData = [
     idforstore: require('./assets/images/store/thincurtainslot.png'),
     idformain : require('./assets/images/store/thincurtainslot.png'),
     count : 1,
+    position : false,
   },
   {
     type : 31,
@@ -438,8 +488,9 @@ const WallFData = [
     id : require('./assets/images/furnitureposition/wallclockslot.png'),
     title: "벽걸이 시계",
     idforstore: require('./assets/images/store/wallclockslot.png'),
-    idformain : require('./assets/images/store/wallclockslot.png'),
+    idformain : require('./assets/images/furnitureposition/wallclock.png'),
     count : 1,
+    position : false,
   },
 ];
 
@@ -450,8 +501,9 @@ const FloorFData = [
     id: require('./assets/images/furnitureposition/footmatslot.png'),
     title: "규조토 매트",
     idforstore: require('./assets/images/store/footmatslot.png'),
-    idformain: require('./assets/images/store/footmatslot.png'),
+    idformain: require('./assets/images/furnitureposition/footmat.png'),
     count : 1,
+    position : false,
   },
   {   
     type : 32,
@@ -459,8 +511,9 @@ const FloorFData = [
     id: require('./assets/images/furnitureposition/furrugslot.png'),
     title: "털 러그",
     idforstore: require('./assets/images/store/furrugslot.png'),
-    idformain: require('./assets/images/store/furrugslot.png'),
+    idformain: require('./assets/images/furnitureposition/furrug.png'),
     count : 1,
+    position : false,
   },
   {
     type : 32,
@@ -470,6 +523,7 @@ const FloorFData = [
     idforstore: require('./assets/images/store/europeancarpetslot.png'),
     idformain: require('./assets/images/store/europeancarpetslot.png'),
     count : 1,
+    position : false,
   },
 ];
 
@@ -494,7 +548,7 @@ const ShopEatData = [
     idforshop: require('./assets/images/shop/watermeloninfo.png'),
     idforeatslot: require('./assets/images/eat/watermelonslot.png'),
     idforstore : require('./assets/images/store/watermelonslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/watermelon.png'),
   },
   {
     type : 11,
@@ -505,7 +559,7 @@ const ShopEatData = [
     idforshop: require('./assets/images/shop/pineappleinfo.png'),
     idforeatslot: require('./assets/images/eat/pineappleslot.png'),
     idforstore: require('./assets/images/store/pineappleslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/pineapple.png'),
   },
   {
     type : 12,
@@ -516,7 +570,7 @@ const ShopEatData = [
     idforshop: require('./assets/images/shop/porkinfo.png'),
     idforeatslot: require('./assets/images/eat/porkslot.png'),
     idforstore: require('./assets/images/store/porkslot.png'),
-    idforeat : require('./assets/images/eat/apple.png'),
+    idforeat : require('./assets/images/eat/pork.png'),
   },
 ];
 
@@ -528,9 +582,9 @@ const ShopCleanData = [
     title: "거친 솔",
     cost : 10,
     idforshop: require('./assets/images/shop/roughbrushinfo.png'),
-    idforcleanslot: require('./assets/images/clean/roughbrush.png'),
+    idforcleanslot: require('./assets/images/clean/roughbrushslot.png'),
     idforstore: require('./assets/images/store/roughbrushslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/roughbrush.png'),
   },
   {
     type : 21,
@@ -539,9 +593,9 @@ const ShopCleanData = [
     title: "부드러운 솔",
     cost : 100,
     idforshop: require('./assets/images/shop/softbrushinfo.png'),
-    idforcleanslot: require('./assets/images/clean/softbrush.png'),
+    idforcleanslot: require('./assets/images/clean/softbrushslot.png'),
     idforstore: require('./assets/images/store/softbrushslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/softbrush.png'),
   },
   {
     type : 21,
@@ -550,9 +604,9 @@ const ShopCleanData = [
     title: "욕실 브러쉬",
     cost : 100,
     idforshop: require('./assets/images/shop/showerbrushinfo.png'),
-    idforcleanslot: require('./assets/images/clean/showerbrush.png'),
+    idforcleanslot: require('./assets/images/clean/showerbrushslot.png'),
     idforstore: require('./assets/images/store/showerbrushslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/showerbrush.png'),
   },
   {
     type : 22,
@@ -561,9 +615,9 @@ const ShopCleanData = [
     title: "펫 샴푸",
     cost : 100,
     idforshop: require('./assets/images/shop/petshampooinfo.png'),
-    idforcleanslot: require('./assets/images/clean/petshampoo.png'),
+    idforcleanslot: require('./assets/images/clean/petshampooslot.png'),
     idforstore: require('./assets/images/store/petshampooslot.png'),
-    idforclean : require('./assets/images/clean/brush1.png'),
+    idforclean : require('./assets/images/clean/petshampoo.png'),
   },
 ];
 
@@ -576,7 +630,7 @@ const ShopFurnitureData = [
     idforshop: require('./assets/images/shop/wallplantinfo.png'),
     idforfurniture: require('./assets/images/furnitureposition/wallplantslot.png'),
     idforstore: require('./assets/images/store/wallplantslot.png'),
-    idformain: require('./assets/images/store/wallplantslot.png'),
+    idformain: require('./assets/images/furnitureposition/wallplant.png'),
   },
   {
     type : 31,
@@ -597,7 +651,7 @@ const ShopFurnitureData = [
     idforshop: require('./assets/images/shop/wallclockinfo.png'),
     idforfurniture: require('./assets/images/furnitureposition/wallclockslot.png'),
     idforstore: require('./assets/images/store/wallclockslot.png'),
-    idformain: require('./assets/images/store/wallclockslot.png'),
+    idformain: require('./assets/images/furnitureposition/wallclock.png'),
   },
   {
     type : 32,
@@ -645,10 +699,113 @@ const StoreCleanData = [];
 
 const StoreFurnitureData = [];
 
+const StoreCostData = [
+  {
+    key : 1,
+    id :  require('./assets/images/store/goldslot.png'),
+    coin : 0,
+  },
+  {
+    key : 2,
+    id : require('./assets/images/store/diamondslot.png'),
+    jam : 0,
+  },
+  {
+    key : 3,
+    id : require('./assets/images/store/heartslot.png'),
+    heart : 0,
+  },
+];
+
+const MinigameData = [
+{
+  key : 1,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},
+{
+  key : 2,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 3,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 4,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 5,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 6,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/answercard.png'),
+},{
+  key : 7,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 8,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 9,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 10,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 11,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 12,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 13,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 14,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},{
+  key : 15,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/answercard.png'),
+},{
+  key : 16,
+  id : require('./assets/images/fun/defaultcard.png'),
+  default : require('./assets/images/fun/defaultcard.png'),
+  card : require('./assets/images/fun/wrongcard.png'),
+},
+];
+
 const EatItem = ({item, onPress}) => (
   <View style={styles2.item}>
   <TouchableOpacity
-  style={[styles2.image]}
+  style={styles2.image}
   onPress={onPress} activeOpacity={1}>
   <Image source={item.id} resizeMode ="stretch"/>
 <Text style={styles2.itemcount}>보유량 : {item.count}개</Text>
@@ -659,7 +816,7 @@ const EatItem = ({item, onPress}) => (
 const CleanItem = ({item, onPress}) => (
   <View style={styles2.item}>
   <TouchableOpacity
-  style={[styles2.image]}
+  style={styles2.image}
   onPress={onPress} activeOpacity={1}>
   <Image source={item.id} resizeMode ="stretch"/>
 <Text style={styles2.leftcount}>남은 횟수 : {item.count}회</Text>
@@ -669,19 +826,24 @@ const CleanItem = ({item, onPress}) => (
 
 const FurnitureItem = ({item, onPress}) => (
   <View style={styles2.item}>
+   {!item.position && 
   <TouchableOpacity
-  style={[styles2.image]}
+  style={styles2.image}
   onPress={onPress} activeOpacity={1}>
   <Image source={item.id} resizeMode ="stretch"/>
-{/* <Text style={styles2.itemcount}>보유량 : {item.count}개</Text> */}
-  </TouchableOpacity>
+  </TouchableOpacity> }
+  {item.position &&
+  <Image source={item.id} style={styles2.image} resizeMode ="stretch"/>
+  }
+  {item.position && 
+  <Text style={styles2.itemcount}>배치중</Text> }
 </View>
 );
 
 const ShopItem = ({item, onPress}) => (
   <View style={styles2.shopitem}>
   <TouchableOpacity
-  style={[styles2.image]}
+  style={styles2.image}
   onPress={onPress} activeOpacity={1}>
   <Image source={item.id} resizeMode ="stretch"/>
   </TouchableOpacity>
@@ -691,7 +853,17 @@ const ShopItem = ({item, onPress}) => (
 const StoreItem = ({item, onPress}) => (
   <View style={styles2.storeitem}>
   <TouchableOpacity
-  style={[styles2.image]}
+  style={styles2.image}
+  onPress={onPress} activeOpacity={1}>
+  <Image source={item.id} resizeMode ="stretch"/>
+  </TouchableOpacity>
+</View>
+);
+
+const MinigameItem = ({item, onPress}) => (
+  <View style={styles2.minigameitem}>
+  <TouchableOpacity
+  style={styles2.image}
   onPress={onPress} activeOpacity={1}>
   <Image source={item.id} resizeMode ="stretch"/>
   </TouchableOpacity>
@@ -730,6 +902,12 @@ const styles2 = StyleSheet.create({
     color : '#6D6060',
     fontSize : 9.5,
   },
+
+  minigameitem : {
+    padding: 0,
+    marginVertical: 2,
+    marginHorizontal: 5,
+  }
 });
 
 function MainScreen({navigation, route}) {
@@ -751,6 +929,27 @@ function MainScreen({navigation, route}) {
 
   const [tutorial1visible, settutorial1visible] = useState(true);
   const [tutorial2visible, settutorial2visible] = useState(true);
+
+  const [change, setchange] = useState(false);
+
+  // useEffect(() => {
+  //   // 10초마다 감소
+  //   const interval = setInterval(() => {
+  //     setchange((change) => !change);
+  //     UpdatePercent()
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  // const UpdatePercent = () => {
+  //   if(change)
+  //     return;
+
+  //   seteatpercent(eatpercent - 10 > 0 ? eatpercent-10 : 0);
+  //     setcleanpercent(cleanpercent - 10 > 0 ? cleanpercent-10 : 0);
+  //     setfunpercent(funpercent - 0 > 0 ? funpercent-0 : 0);
+  //     setsleeppercent(sleeppercent - 0 > 0 ? sleeppercent-0 : 0);
+  // }
 
   const itemnumdown = () => {
     setitemnum(itemnum => itemnum -1 > 1 ? itemnum -1 : 1);
@@ -887,8 +1086,6 @@ function MainScreen({navigation, route}) {
       setdictionaryinfofalse();
     else{
       setpath();
-
-      console.log("click", dictionaryinfonum);
     }
   }
 
@@ -933,6 +1130,10 @@ function MainScreen({navigation, route}) {
     
     setdictionaryinfos(mydictionaryinfos);
   }
+
+  const [detailmenuvisible, setdetailmenuvisible] = useState(false);
+  const showdetailmenu = () => setdetailmenuvisible(true);
+  const hidedetailmenu = () => setdetailmenuvisible(false);
 
   const [achievevisible, setachieveVisible] = useState(false);
   const showachieveDialog = () => setachieveVisible(true);
@@ -1140,7 +1341,14 @@ function MainScreen({navigation, route}) {
   }
 
   const [funvisible, setfunVisible] = useState(false);
-  const showfunDialog = () => setfunVisible(true);
+  const showfunDialog = () => {
+    setfunVisible(true);
+    hidecard();
+    setfirst(false);
+    setfindnum(0);
+    setstartminigame(false);
+    settimergauge(1);
+  }
   const hidefunDialog = () => setfunVisible(false);
 
 
@@ -1152,11 +1360,13 @@ function MainScreen({navigation, route}) {
   const [furnituretype, setfurnituretype] = useState(1);
   const [furnitureid, setfurnitureid] = useState("");
   const [furniturecheck, setfurniturecheck] = useState(false);
+  const [furniturekey, setfurniturekey] = useState(0);
 
   const [furniturecheckvisible, setfurniturecheckVisible] = useState(false);
-  const showfurniturecheckDialog = (myfurnituretype, myfurniturename, myfurnitureid) => {
+  const showfurniturecheckDialog = (myfurnituretype, myfurniturekey, myfurniturename, myfurnitureid) => {
     setisaddfurniture(false);
     setfurnituretype(myfurnituretype);
+    setfurniturekey(myfurniturekey);
     setfurniturename(myfurniturename);
     setfurnitureid(myfurnitureid);
     setfurniturecheckVisible(true);
@@ -1191,6 +1401,14 @@ function MainScreen({navigation, route}) {
       {
       myfws[i].imagepath = furnitureid;
       myfws[i].active = true;
+      myfws[i].key = furniturekey;
+
+    for(let i=0; i < WallFData.length; i++)
+      {
+        if(WallFData[i].key == furniturekey)
+          WallFData[i].position = true;
+      }
+
       break;
       }
     }
@@ -1204,6 +1422,14 @@ function MainScreen({navigation, route}) {
         {
         myfws[i].imagepath = furnitureid;
         myfws[i].active = true;
+        myfws[i].key = furniturekey;
+
+        for(let i=0; i < FloorFData.length; i++)
+        {
+          if(FloorFData[i].key == furniturekey)
+            FloorFData[i].position = true;
+        }
+
         break;
         }
       }
@@ -1261,7 +1487,10 @@ function MainScreen({navigation, route}) {
   }
 
   const [rewardvisible, setrewardVisible] = useState(false);
-  const showrewardDialog = () => setrewardVisible(true);
+  const showrewardDialog = () => {
+    setstartminigame(false);
+    setrewardVisible(true);
+  }
   const hiderewardDialog = () => {
     setfunVisible(false);
     setrewardVisible(false);
@@ -1273,9 +1502,11 @@ function MainScreen({navigation, route}) {
     setrewardcheckVisible(true);
   }
   const hiderewardcheckDialog = () => {
+    hidequestDialog();
+    hideminigame();
     setfunVisible(false);
     setrewardcheckVisible(false);
-    setCoin(coin => coin + 100);
+    setCoin(coin => coin + rewardtext);
   }
 
   const [questrewardvisible, setquestrewardVisible] = useState(false);
@@ -1351,6 +1582,9 @@ function MainScreen({navigation, route}) {
 
           if(item.title == fruit.title)
           {
+            if(fruit.count == 10)
+              continue;
+
             let itemcount = item.count + fruit.count;
 
             if(itemcount > 10)
@@ -1380,6 +1614,9 @@ function MainScreen({navigation, route}) {
 
           if(item.title == meat.title)
           {
+            if(meat.count == 10)
+              continue;
+
             let itemcount = item.count + meat.count;
 
             if(itemcount > 10)
@@ -1409,6 +1646,9 @@ function MainScreen({navigation, route}) {
 
           if(item.title == etc.title)
           {
+            if(etc.count == 10)
+              continue;
+
             let itemcount = item.count + etc.count;
 
             if(itemcount > 10)
@@ -1438,6 +1678,9 @@ function MainScreen({navigation, route}) {
 
           if(item.title == brush.title)
           {
+            if(brush.count == 10)
+              continue;
+
             let itemcount = item.count + brush.count;
 
             if(itemcount > 10)
@@ -1467,6 +1710,9 @@ function MainScreen({navigation, route}) {
 
           if(item.title == detergent.title)
           {
+            if(detergent.count == 10)
+              continue;
+
             let itemcount = item.count + detergent.count;
 
             if(itemcount > 10)
@@ -1496,6 +1742,9 @@ function MainScreen({navigation, route}) {
 
           if(item.title == tub.title)
           {
+            if(tub.count == 10)
+              continue;
+
             let itemcount = item.count + tub.count;
 
             if(itemcount > 10)
@@ -1605,7 +1854,7 @@ function MainScreen({navigation, route}) {
         return (
           <FurnitureItem
             item={item}
-            onPress={() => showfurniturecheckDialog(item.type, item.title, item.idformain)}
+            onPress={() => showfurniturecheckDialog(item.type, item.key, item.title, item.idformain)}
             //onPress={hideeatDialog}
           />
         );
@@ -1629,6 +1878,15 @@ function MainScreen({navigation, route}) {
             />
           );
           }
+
+          const renderMinigame = ({ item }) => {
+            return (
+              <MinigameItem
+                item={item}
+                onPress={() => tapcard(item.key)}
+              />
+            );
+            }
 
   const [type, settype] = useState(0);
   const [fruitdatanum, setfruitdatanum] = useState(FruitData.length);
@@ -1736,6 +1994,7 @@ function MainScreen({navigation, route}) {
           idforstore : myitem.idforstore,
           idformain : myitem.idformain,
           count : 1,
+          position : false,
         };
         setitem(tempfloorfitem);
         break;
@@ -1752,6 +2011,7 @@ function MainScreen({navigation, route}) {
     setStoreEatData();
     setStoreCleanData();
     setStoreFurnitureData();
+    setStoreCostData();
   }
 
   const setStoreEatData = () => {
@@ -1827,32 +2087,52 @@ function MainScreen({navigation, route}) {
       }
     }
 
+    const setStoreCostData = () => {
+      StoreCostData[0].coin = coin;
+      StoreCostData[0].jam = jam;
+      StoreCostData[0].heart = heart;
+    }
+
   const removefurniture = (furnituretype, index) => {
     if(furnituretype == 1)
     {
       let myfws = [ ...furniturewalls];
       myfws[index].active = false;
+
+      for(let i=0; i < WallFData.length; i++)
+      {
+        if(WallFData[i].key == myfws[index].key)
+          WallFData[i].position = false;
+      }
+
       setfurniturewalls(myfws);
     }
     else
     {
       let myfws = [ ...furniturefloors];
       myfws[index].active = false;
+
+      for(let i=0; i < FloorFData.length; i++)
+      {
+        if(FloorFData[i].key == myfws[index].key)
+          FloorFData[i].position = false;
+      }
+
       setfurniturefloors(myfws);
     }
   }
   
   const [furniturewalls, setfurniturewalls] = useState([{
-    key: 'slot1', left : 0, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
+    key: 0, left : 0, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
   }, {
-    key: 'slot2', left : 300, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
+    key: 0, left : 300, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
     }, 
   ]);
 
   const [furniturefloors, setfurniturefloors] = useState([{
-    key: 'slot1', left : 0, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
+    key: 0, left : 0, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
   }, {
-    key: 'slot2', left : 300, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
+    key: 0, left : 300, active : false, imagepath : require('./assets/images/furnitureposition/wallplant.png'),
     },
   ]);
 
@@ -1910,7 +2190,89 @@ function MainScreen({navigation, route}) {
     }
   }
 
-  const [rewardtext, setrewardtext] = useState("5000G");
+  const [rewardtext, setrewardtext] = useState(500);
+  const [rewardtype, setrewardtype] = useState("G");
+  const [timergauge, settimergauge] = useState(1);
+  const [startminigame, setstartminigame] = useState(false);
+  const [first, setfirst] = useState(false);
+  const [findnum, setfindnum] = useState(0);
+
+  useEffect(() => {
+    // 1초마다 감소
+    const interval = setInterval(() => {
+      settimergauge(timergauge => timergauge-0.01);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [minigamevisible, setminigamevisible] = useState(false);
+  const showminigame = () => {
+    setminigamevisible(true);
+    settimergauge(1);
+    hidefunDialog();
+    setisclear(false);
+    setTimeout(showcard, 1000);
+    setTimeout(hidecard, 3000);
+    setTimeout(Startminigame, 4000);
+  }
+  const hideminigame = () => {
+    setminigamevisible(false);
+  }
+
+  const Startminigame = () => {
+    if(!first)
+    {
+      setfirst(true);
+      settimergauge(1);
+    }
+
+    setstartminigame(true);
+  }
+
+  const showcard = () => {
+    for(let i=0; i < MinigameData.length; i++)
+      MinigameData[i].id = MinigameData[i].card;
+  }
+
+  const hidecard = () => {
+    for(let i=0; i < MinigameData.length; i++)
+      MinigameData[i].id = MinigameData[i].default;
+  }
+
+  const tapcard = (mykey) => {
+    let find = false;
+
+    for(let i=0; i < MinigameData.length; i++)
+    {
+      if(MinigameData[i].key == mykey)
+      {
+        MinigameData[i].id = MinigameData[i].card;
+
+        if(MinigameData[i].id == require('./assets/images/fun/answercard.png'))
+        {
+          find = true;
+          break;
+        }
+      }
+    }
+
+    if(find)
+    {
+      setfindnum(findnum => findnum+1)
+
+      if(findnum >= 1)
+        clearminigame();
+    }
+    else
+      settimergauge(timergauge => timergauge-0.1);
+  }
+
+  const [isclear, setisclear] = useState(false);
+
+  const clearminigame = () => {
+    setisclear(true);
+    setTimeout(showrewardDialog, 2000);
+  }
 
   return(
     <View style={styles.container}>
@@ -1927,20 +2289,39 @@ function MainScreen({navigation, route}) {
     style={styles.furniturewallslot1} resizeMode ="stretch"/> }
     {furnitureslotVisible == true && <Image source={require('./assets/images/main/furniturewallslot1.png')} 
     style={{...styles.furniturewallslot1, left : 300}} resizeMode ="stretch"/> } */}
+
+  {eatpercent > 50 && cleanpercent> 50 &&  <TouchableOpacity
+                style={styles.feel1}
+                onPress={() => {}} activeOpacity={1}>
+          <Image source={require('./assets/images/main/feelgood.png')} resizeMode ="stretch"/>
+  </TouchableOpacity> }
+
+      { (eatpercent < 50 || cleanpercent < 50) && <TouchableOpacity
+                style={styles.feel1}
+                onPress={() => {}} activeOpacity={1}>
+          <Image source={require('./assets/images/main/feelbad.png')} resizeMode ="stretch"/>
+      </TouchableOpacity> }
+
+      { eatpercent < 50 && <TouchableOpacity
+                style={styles.feel2}
+                onPress={showeatDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/needeat.png')} resizeMode ="stretch"/>
+      </TouchableOpacity> }
+
     <MovingPet petnum={petnum} /> 
+
     {/* <Image source={require('./assets/images/main/pet1.png')} style={styles.mainpetbg} resizeMode ="cover"/> */}
-    <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/>
+    {/* <Image source={require('./assets/images/main/smile.png')} style={styles.mainsmile} resizeMode ="cover"/> */}
 
     <TouchableOpacity
                 style={styles.mainstage}
                 onPress={showstageDialog} activeOpacity={1}>
-          <Image source={require('./assets/images/main/circle.png')} resizeMode ="cover"/>
-          <Text style={styles.stage}>stage</Text>
+          <Image source={require('./assets/images/main/stageicon.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
 
     <Button disabled onPress={() => {}} style={styles.gamemoneybackground}><Text ></Text></Button>
     <Button disabled onPress={() => {}} style={styles.heartbackground}><Text ></Text></Button>
-    <Button disabled onPress={() => {}} style={{...styles.heartgaugeimage, width : 291 * heart / 100}}><Text ></Text></Button>
+    <Button disabled onPress={() => {}} style={{...styles.heartgaugeimage, width : 380 * heart / 100}}><Text ></Text></Button>
     <Image source={require('./assets/images/coin.png')} style={styles.coinimage} resizeMode ="cover"/>
     <Image source={require('./assets/images/diamond.png')} style={styles.jamimage} resizeMode ="cover"/>
     <Image source={require('./assets/images/heart.png')} style={styles.heartimage} resizeMode ="cover"/>
@@ -1953,11 +2334,22 @@ function MainScreen({navigation, route}) {
     <MyModal />  */}
 
     <TouchableOpacity
-                style={styles.menubg}
-                onPress={showmenuDialog} activeOpacity={1}>
-          <Image source={require('./assets/images/main/menu.png')} resizeMode ="stretch"/>
+                style={styles.menuicon}
+                onPress={showdetailmenu} activeOpacity={1}>
+          <Image source={require('./assets/images/main/menuicon.png')} resizeMode ="stretch"/>
         </TouchableOpacity>
 
+        <TouchableOpacity
+                style={styles.questicon}
+                onPress={showquestDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/questicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>  
+
+        <TouchableOpacity
+                style={styles.furnitureicon}
+                onPress={showfurnitureDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/furnitureicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>
     
   {/* <Button disabled onPress={() => {}} style={styles.bottommenu}><Text></Text></Button> */}
   <Image source={require('./assets/images/main/bottommenubg.png')} style={styles.bottommenu} resizeMode ="stretch"/>
@@ -2079,8 +2471,43 @@ function MainScreen({navigation, route}) {
 
 {/* 메뉴 화면 */}
 
+{detailmenuvisible && <TouchableOpacity
+                style={styles.detailmenubg}
+                onPress={hidedetailmenu} >
+          <Text></Text>
+        </TouchableOpacity>} 
+
+        {detailmenuvisible &&  <TouchableOpacity
+                style={styles.questicon}
+                onPress={showstoreDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/storeicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity>  }
+
+        {detailmenuvisible &&  <TouchableOpacity
+                style={styles.furnitureicon}
+                onPress={showachieveDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/achieveicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> }
+        {detailmenuvisible &&  <TouchableOpacity
+                style={styles.settingicon}
+                onPress={showsettingDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/settingicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> }
+        {detailmenuvisible &&  <TouchableOpacity
+                style={styles.shopicon}
+                onPress={showshopDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/shopicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> }
+        {detailmenuvisible &&  <TouchableOpacity
+                style={styles.dictionaryicon}
+                onPress={showdictionaryDialog} activeOpacity={1}>
+          <Image source={require('./assets/images/main/dictionaryicon.png')} resizeMode ="stretch"/>
+        </TouchableOpacity> }
+
+
+{/* 메뉴 다이얼로그 */}
+
 <Dialog visible={menuvisible} onDismiss={hidemenuDialog} style={styles.settinglist}>
-  <Dialog.Title style={styles.textcenter}>메뉴</Dialog.Title>
   <Dialog.Content>
 
   {/* <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> 
@@ -2089,7 +2516,7 @@ function MainScreen({navigation, route}) {
         <Image style={styles.menubg1} source={require('./assets/images/menu/menu1bg.png')} resizeMode ="stretch"/> :
         <Image style={styles.menubg1} source={require('./assets/images/menu/menu2bg.png')} resizeMode ="stretch"/>
   } */}
-  <Image style={styles.menubg1} source={require('./assets/images/menu/menubg.png')} resizeMode ="stretch"/> 
+  {/* <Image style={styles.menubg1} source={require('./assets/images/menu/menubg.png')} resizeMode ="stretch"/> 
   <Text style={styles.menufont}>메뉴</Text>
 
   {/* <Image style={styles.menu1} source={require('./assets/images/menu/menu1.png')} resizeMode ="stretch"/>
@@ -2101,7 +2528,7 @@ function MainScreen({navigation, route}) {
         <Image style={styles.menu1} source={require('./assets/images/menu/menu1.1.png')} resizeMode ="stretch"/> :
         <Image style={styles.menu1} source={require('./assets/images/menu/menu1.2.png')} resizeMode ="stretch"/>
   } */}
-    <Image style={styles.menu1} source={require('./assets/images/menu/menu1.1.png')} resizeMode ="stretch"/>
+    {/* <Image style={styles.menu1} source={require('./assets/images/menu/menu1.1.png')} resizeMode ="stretch"/>
   {menu == false && <Image style={styles.menu1} source={require('./assets/images/menu/menu1.2.png')} resizeMode ="stretch"/>}
 
   {(menu == true) ?
@@ -2111,7 +2538,7 @@ function MainScreen({navigation, route}) {
                 style={styles.menu1}
                 onPress={setmenu1} >
   </TouchableOpacity>
-  }
+  } */}
 
   {/* <Image style={styles.menu2} source={require('./assets/images/menu/menu2.png')} resizeMode ="stretch"/>
   {(menu == true) ?
@@ -2122,79 +2549,79 @@ function MainScreen({navigation, route}) {
         <Image style={styles.menu2} source={require('./assets/images/menu/menu2.2.png')} resizeMode ="stretch"/> :
         <Image style={styles.menu2} source={require('./assets/images/menu/menu2.1.png')} resizeMode ="stretch"/>
   } */}
-    <Image style={styles.menu2} source={require('./assets/images/menu/menu2.2.png')} resizeMode ="stretch"/>
+    {/* <Image style={styles.menu2} source={require('./assets/images/menu/menu2.2.png')} resizeMode ="stretch"/>
   {menu == false && <Image style={styles.menu2} source={require('./assets/images/menu/menu2.1.png')} resizeMode ="stretch"/>}
 
-{(menu == true) ?
-      // <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
-      <TouchableOpacity
-                style={styles.menu2}
-                onPress={setmenu2} >
-  </TouchableOpacity> :
-       <Button disabled color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
+{(menu == true) ? */}
+      {/* // <Button color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
+//       <TouchableOpacity 
+//                 style={styles.menu2}
+//                 onPress={setmenu2} >
+//   </TouchableOpacity> :
+//        <Button disabled color={Colors.black} onPress={setmenu2} style={styles.menu2}><Text ></Text></Button>
   
-  }
+//   }
      
-  {(menu == true) ?
-      <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
-  }   
+//   {(menu == true) ?
+//       <Image style={styles.menuquest} source={require('./assets/images/menu/quest.png')} resizeMode ="stretch"/> :
+//       <Image style={styles.menushop} source={require('./assets/images/menu/shop.png')} resizeMode ="stretch"/>
+//   }   
 
-  {(menu == true) ?
-     //<Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button>
-     <TouchableOpacity
-     style={styles.menuquestbutton}
-     onPress={showquestDialog} >
-</TouchableOpacity> :
-     //<Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
-     <TouchableOpacity
-     style={styles.menushopbutton}
-     onPress={showshopDialog} >
-</TouchableOpacity>
-  }  
+//   {(menu == true) ?
+//      //<Button color={Colors.black} onPress={showquestDialog} style={styles.menuquestbutton}><Text></Text></Button>
+//      <TouchableOpacity
+//      style={styles.menuquestbutton}
+//      onPress={showquestDialog} >
+// </TouchableOpacity> :
+//      //<Button color={Colors.black} onPress={showachieveDialog} style={styles.menuquestbutton}><Text></Text></Button>
+//      <TouchableOpacity
+//      style={styles.menushopbutton}
+//      onPress={showshopDialog} >
+// </TouchableOpacity>
+//   }  
 
-  {(menu == true) ?
-      <Image style={styles.menuachieve} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
-  }   
+//   {(menu == true) ?
+//       <Image style={styles.menuachieve} source={require('./assets/images/menu/achieve.png')} resizeMode ="stretch"/> :
+//       <Image style={styles.menusetting} source={require('./assets/images/menu/setting.png')} resizeMode ="stretch"/>
+//   }   
 
-  {(menu == true) ?
+//   {(menu == true) ?
      //<Button color={Colors.black} onPress={showshopDialog} style={styles.menushopbutton}><Text></Text></Button> 
-     <TouchableOpacity
-     style={styles.menuachievebutton}
-     onPress={showachieveDialog} >
-</TouchableOpacity> :
+//      <TouchableOpacity
+//      style={styles.menuachievebutton}
+//      onPress={showachieveDialog} >
+// </TouchableOpacity> :
      // <Button color={Colors.black} onPress={()=>{}} style={styles.menushopbutton}><Text></Text></Button>
-     <TouchableOpacity
-     style={styles.menusettingbutton}
-     onPress={showsettingDialog} >
-</TouchableOpacity>
-  }  
+//    <TouchableOpacity
+//      style={styles.menusettingbutton}
+//      onPress={showsettingDialog} >
+// </TouchableOpacity>
+//   }  
 
-  {(menu == true) ?
-      <Image style={styles.menufurniture} source={require('./assets/images/menu/furnitureposition.png')} resizeMode ="stretch"/> :
-      <Image style={styles.menudictionary} source={require('./assets/images/menu/dictionary.png')} resizeMode ="stretch"/>
-  }   
+//   {(menu == true) ?
+//       <Image style={styles.menufurniture} source={require('./assets/images/menu/furnitureposition.png')} resizeMode ="stretch"/> :
+//       <Image style={styles.menudictionary} source={require('./assets/images/menu/dictionary.png')} resizeMode ="stretch"/>
+//   }   
 
-  {(menu == true) ?
-     // <Button color={Colors.black} onPress={showfurnitureDialog} style={styles.menufurniturebutton}><Text></Text></Button> 
-     <TouchableOpacity
-     style={styles.menufurniturebutton}
-     onPress={showfurnitureDialog} >
-</TouchableOpacity> :
+//   {(menu == true) ?
+//      // <Button color={Colors.black} onPress={showfurnitureDialog} style={styles.menufurniturebutton}><Text></Text></Button> 
+//      <TouchableOpacity
+//      style={styles.menufurniturebutton}
+//      onPress={showfurnitureDialog} >
+// </TouchableOpacity> :
     // <Button color={Colors.black} onPress={showdictionaryDialog} style={styles.menufurniturebutton}><Text></Text></Button>
-    <TouchableOpacity
-    style={styles.menudictionarybutton}
-    onPress={showdictionaryDialog} >
-</TouchableOpacity>
-  }  
+//     <TouchableOpacity
+//     style={styles.menudictionarybutton}
+//     onPress={showdictionaryDialog} >
+// </TouchableOpacity>
+//   }  
     
-  {menu == true && <Image style={styles.menustore} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>}
-  {menu == true && <TouchableOpacity
-  style={styles.menustorebutton}
-  onPress={showstoreDialog} >
-</TouchableOpacity>
-}
+//   {menu == true && <Image style={styles.menustore} source={require('./assets/images/menu/store.png')} resizeMode ="stretch"/>}
+//   {menu == true && <TouchableOpacity
+//   style={styles.menustorebutton}
+//   onPress={showstoreDialog} >
+// </TouchableOpacity>
+// }
 
 
 {/* 
@@ -2293,30 +2720,45 @@ function MainScreen({navigation, route}) {
 {/* 퀘스트 화면 */}
 
 <Dialog visible={questvisible} onDismiss={hidequestDialog} style={styles.quest}>
-  <Dialog.Title style={styles.textcenter}>퀘스트</Dialog.Title>
+  <Dialog.Title style={styles.textcenter}></Dialog.Title>
   <Dialog.Content>
 
-  <TouchableOpacity
-                style={styles.questmenu1}
+  <Image style={styles.settingbg} source={require('./assets/images/setting/settingbg.png')} resizeMode ="stretch"/>
+  <Text style={styles.settingbg2}></Text>
+
+        {(quest == "daily") ? <TouchableOpacity
+                style={{...styles.questmenu1, backgroundColor:'#EEEEEE'}}
                 onPress={setquestdaily} activeOpacity={1}>
-          <Image source={require('./assets/images/quest/tab1.png')} resizeMode ="stretch"/>
           <Text style={styles.dailyreward}>일일 도전</Text>
-        </TouchableOpacity>
+</TouchableOpacity> : <TouchableOpacity
+                style={{...styles.questmenu1, backgroundColor:'#CACACA'}}
+                onPress={setquestdaily} activeOpacity={1}>
+          <Text style={styles.dailyreward}>일일 도전</Text>
+</TouchableOpacity>}
 
-  <TouchableOpacity
-                style={styles.questmenu2}
+{(quest == "daily") ?  <TouchableOpacity
+                style={{...styles.questmenu2, backgroundColor:'#CACACA'}}
                 onPress={setquestattend} activeOpacity={1}>
-  <Image source={require('./assets/images/quest/tab2.png')} resizeMode ="stretch"/>
   <Text style={styles.attendancereward}>출석 보상</Text>
-        </TouchableOpacity>
+</TouchableOpacity> : <TouchableOpacity
+                style={{...styles.questmenu2, backgroundColor:'#EEEEEE'}}
+                onPress={setquestattend} activeOpacity={1}>
+  <Text style={styles.attendancereward}>출석 보상</Text>
+</TouchableOpacity>}
 
-  {(quest == "daily") ?
+  {/* {(quest == "daily") ?
       <Text style={{...styles.questtitlefont, backgroundColor: "#959FFF"}}>일일 도전</Text> :
       <Text style={{...styles.questtitlefont, backgroundColor: "#3C3C94"}}>출석 보상</Text>
-  }
+  } */}
+
+{quest == "daily" && <Image style={styles.questnpc} source={require('./assets/images/quest/questnpc.png')} resizeMode ="stretch"/> }
 
 {quest == "daily" && <Image style={styles.dailyslot1} source={require('./assets/images/quest/selectslot.png')} resizeMode ="stretch"/>}
-{quest == "daily" && <Image style={styles.checkslot1} source={require('./assets/images/quest/checkbutton1.png')} resizeMode ="stretch"/>}
+
+{quest == "daily" && <TouchableOpacity style={styles.checkslot1} onPress={showrewardDialog} activeOpacity={1}>
+<Image source={require('./assets/images/quest/checkbutton.png')} resizeMode ="stretch"/>
+</TouchableOpacity>} 
+
 {quest == "daily" &&   <Text style={styles.dailyinfoslot1}>아무 펫의 청결도를 2회 올리세요.</Text>}
 
 {quest == "daily" && <Image style={styles.dailyslot2} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
@@ -2325,11 +2767,11 @@ function MainScreen({navigation, route}) {
 
 {quest == "daily" && <Image style={styles.dailyslot3} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
 {quest == "daily" && <Image style={styles.checkslot3} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
-{quest == "daily" &&   <Text style={styles.dailyinfoslot3}></Text>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot3}>상점에서 1개 이상 구입하세요.</Text>}
 
-{quest == "daily" && <Image style={styles.dailyslot4} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
+{/* {quest == "daily" && <Image style={styles.dailyslot4} source={require('./assets/images/quest/defaultslot.png')} resizeMode ="stretch"/>}
 {quest == "daily" && <Image style={styles.checkslot4} source={require('./assets/images/quest/defaultbutton.png')} resizeMode ="stretch"/>}
-{quest == "daily" &&   <Text style={styles.dailyinfoslot4}></Text>}
+{quest == "daily" &&   <Text style={styles.dailyinfoslot4}></Text>} */}
 
 {/*
 {quest != "daily" && <Image style={styles.attendbg} source={require('./assets/images/quest/attendbg.png')} resizeMode ="stretch"/>}
@@ -2344,7 +2786,7 @@ function MainScreen({navigation, route}) {
 
 {quest != "daily" &&  <TouchableOpacity
                 style={styles.attendawardbutton}
-                onPress={hidequestDialog} activeOpacity={1}>
+                onPress={showrewardDialog} activeOpacity={1}>
   <Text style={styles.attendawardbuttontext}>보상받기</Text>
 </TouchableOpacity> }
 
@@ -2385,7 +2827,7 @@ function MainScreen({navigation, route}) {
 <Dialog visible={shopvisible} onDismiss={hideshopDialog} style={styles.stageScene}>
   <Dialog.Content>
   <Image style={styles.stagebg} source={require('./assets/images/shop/shopbg.png')} resizeMode ="stretch"/>
-
+  <Text style={styles.shopbg2}></Text>
   <Image source={require('./assets/images/coin.png')} style={styles.shopcoinimage} resizeMode ="cover"/>
   <Button disabled onPress={() => {}} style={styles.shopcoinnum}><Text style={styles.coinfont}>{coin}</Text></Button>
   <Image source={require('./assets/images/shop/tabmenu.png')} style={styles.shoptabmenu} resizeMode ="cover"/>
@@ -2623,7 +3065,7 @@ function MainScreen({navigation, route}) {
 
 {/* 가구 배치 화면 */}
 
-<Dialog visible={furniturevisible} onDismiss={hidefurnitureDialog} style={styles.quest}>
+<Dialog visible={furniturevisible} dismissable={false} onDismiss={hidefurnitureDialog} style={styles.quest}>
   <Dialog.Content>
 
   {/* <TouchableOpacity
@@ -2659,6 +3101,12 @@ function MainScreen({navigation, route}) {
         </TouchableOpacity>
 
 <View style={{...styles.furnituretab, left : 50 + (furnituretabnum-1)*100}}><Text style={styles.textcenter}>{furniture}</Text></View>
+
+<TouchableOpacity
+        style={styles.furnituremenuxbutton}
+        onPress={hidefurnitureDialog} activeOpacity={1}>
+      <Image source={require('./assets/images/xbutton.png')} resizeMode ="stretch"/>
+</TouchableOpacity>
 
 {/* {furniture == "벽 가구" &&   <TouchableOpacity
                 style={styles.furnitureslot1}
@@ -2805,23 +3253,38 @@ function MainScreen({navigation, route}) {
           <Image source={require('./assets/images/dictionary/pet2slot.png')} resizeMode ="stretch"/>
   </TouchableOpacity> }
 
-  <TouchableOpacity
+  {dictionarynum != 1 && <TouchableOpacity
                 style={styles.dicslot2}
                 onPress={hidedictionaryDialog} activeOpacity={1}>
           <Image source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>
-  </TouchableOpacity>
+  </TouchableOpacity> }
+
+  {/* <Image style={styles.dicslot1} source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>  
+  <Image style={styles.dicslot2} source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>   */}
+  {dictionarynum != 1 && <Image style={styles.dicslot3} source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>   }
+  {dictionarynum != 1 && <Image style={styles.dicslot4} source={require('./assets/images/dictionary/dic4.png')} resizeMode ="stretch"/> }
+  {dictionarynum != 1 && <Image style={styles.dicslot5} source={require('./assets/images/dictionary/dic5.png')} resizeMode ="stretch"/> } 
+  {dictionarynum != 1 && <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/> }
 
   {dictionarynum == 1 && 
           <Image style={styles.dicslot2} source={require('./assets/images/dictionary/pet1slot2.png')} resizeMode ="stretch"/>
   }
-  
-  {/* <Image style={styles.dicslot1} source={require('./assets/images/dictionary/dic1.png')} resizeMode ="stretch"/>  
-  <Image style={styles.dicslot2} source={require('./assets/images/dictionary/dic2.png')} resizeMode ="stretch"/>   */}
-  <Image style={styles.dicslot3} source={require('./assets/images/dictionary/dic3.png')} resizeMode ="stretch"/>  
-  <Image style={styles.dicslot4} source={require('./assets/images/dictionary/dic4.png')} resizeMode ="stretch"/>
-  <Image style={styles.dicslot5} source={require('./assets/images/dictionary/dic5.png')} resizeMode ="stretch"/>
-  <Image style={styles.dicslot6} source={require('./assets/images/dictionary/dic6.png')} resizeMode ="stretch"/>
 
+{dictionarynum == 1 && 
+          <Image style={styles.dicslot3} source={require('./assets/images/dictionary/pet1slot3.png')} resizeMode ="stretch"/>
+  }
+
+{dictionarynum == 1 && 
+          <Image style={styles.dicslot4} source={require('./assets/images/dictionary/pet1slot4.png')} resizeMode ="stretch"/>
+  }
+
+{dictionarynum == 1 && 
+          <Image style={styles.dicslot5} source={require('./assets/images/dictionary/pet1slot5.png')} resizeMode ="stretch"/>
+  }
+
+{dictionarynum == 1 && 
+          <Image style={styles.dicslot6} source={require('./assets/images/dictionary/pet1slot6.png')} resizeMode ="stretch"/>
+  }
 
   {dictionaryinfo && <Text style={styles.dicinfobg1}></Text>}
   {dictionaryinfo && <Text style={styles.dicinfobg2}></Text>}
@@ -2835,27 +3298,36 @@ function MainScreen({navigation, route}) {
   {/* 설정 화면 */}
 
   <Dialog visible={settingvisible} onDismiss={hidesettingDialog} style={styles.setting}>
-  <Dialog.Title style={styles.textcenter}>설정</Dialog.Title>
+  <Dialog.Title style={styles.textcenter}></Dialog.Title>
   <Dialog.Content>
 
-  <TouchableOpacity
-                style={styles.questmenu1}
+  <Image style={styles.settingbg} source={require('./assets/images/setting/settingbg.png')} resizeMode ="stretch"/>
+  <Text style={styles.settingbg2}></Text>
+
+  {(setting == "account") ? <TouchableOpacity
+                style={{...styles.questmenu1, backgroundColor:'#EEEEEE'}}
                 onPress={setsettingaccount} activeOpacity={1}>
-          <Image source={require('./assets/images/quest/tab1.png')} resizeMode ="stretch"/>
           <Text style={styles.dailyreward}>계정 설정</Text>
-        </TouchableOpacity>
+</TouchableOpacity> : <TouchableOpacity
+                style={{...styles.questmenu1, backgroundColor:'#CACACA'}}
+                onPress={setsettingaccount} activeOpacity={1}>
+          <Text style={styles.dailyreward}>계정 설정</Text>
+</TouchableOpacity>}
 
-  <TouchableOpacity
-                style={styles.questmenu2}
+{(setting == "account") ?  <TouchableOpacity
+                style={{...styles.questmenu2, backgroundColor:'#CACACA'}}
                 onPress={setsettinggame} activeOpacity={1}>
-  <Image source={require('./assets/images/quest/tab2.png')} resizeMode ="stretch"/>
   <Text style={styles.attendancereward}>게임 설정</Text>
-        </TouchableOpacity>
+</TouchableOpacity> : <TouchableOpacity
+                style={{...styles.questmenu2, backgroundColor:'#EEEEEE'}}
+                onPress={setsettinggame} activeOpacity={1}>
+  <Text style={styles.attendancereward}>게임 설정</Text>
+</TouchableOpacity>}
 
-  {(setting == "account") ?
+  {/* {(setting == "account") ?
       <Text style={{...styles.questtitlefont, backgroundColor: "#959FFF"}}>계정 설정</Text> :
       <Text style={{...styles.questtitlefont, backgroundColor: "#3C3C94"}}>게임 설정</Text>
-  }
+  } */}
 
 {setting == "account" && <Image style={styles.settinggooglelogin} source={require('./assets/images/setting/googlelogin.png')} resizeMode ="stretch"/>}
 {setting == "account" && <Image style={styles.settingfacebooklogin} source={require('./assets/images/setting/facebooklogin.png')} resizeMode ="stretch"/>}
@@ -2904,11 +3376,12 @@ function MainScreen({navigation, route}) {
 <Dialog visible={storevisible} onDismiss={hidestoreDialog} style={styles.stageScene}>
   <Dialog.Content>
   <Image style={styles.stagebg} source={require('./assets/images/shop/shopbg.png')} resizeMode ="stretch"/>
-  <Image source={require('./assets/images/store/topbarbg.png')} style={styles.storetopbarbg} resizeMode ="stretch"/>
+  <Text style={styles.shopbg2}></Text>
+  {/* <Image source={require('./assets/images/store/topbarbg.png')} style={styles.storetopbarbg} resizeMode ="stretch"/>
   <Image source={require('./assets/images/coin.png')} style={styles.storecoinimage} resizeMode ="cover"/>
   <Button disabled onPress={() => {}} style={styles.storecoinnum}><Text style={styles.coinfont}>{coin}</Text></Button>
   <Image source={require('./assets/images/diamond.png')} style={styles.storejamimage} resizeMode ="cover"/>
-  <Button disabled onPress={() => {}} style={styles.storejamnum}><Text style={styles.coinfont}>{jam}</Text></Button>
+  <Button disabled onPress={() => {}} style={styles.storejamnum}><Text style={styles.coinfont}>{jam}</Text></Button> */}
 
   <Image source={require('./assets/images/shop/tabmenu.png')} style={styles.shoptabmenu} resizeMode ="cover"/>
 
@@ -2989,27 +3462,20 @@ function MainScreen({navigation, route}) {
   {storetabnum == 4 && 
         <ScrollView 
         showsVerticalScrollIndicator={false}
-        style={{position : 'absolute', top : 150, left : 70, width : 300, height : 480, marginTop: 0}}>
+        style={{position : 'absolute', top : 150, left : 20, width : 400, height : 360, marginTop: 0}}>
         <View  >
           <FlatList
-          data={ShopCostData}
-          renderItem={renderShop}
+          data={StoreCostData}
+          renderItem={renderStore}
           keyExtractor={(item) => item.key}
-          numColumns={1}
+          numColumns={3}
           />
         </View >
         </ScrollView>
         }
 
 
-    <Image style={styles.shopnpc} source={require('./assets/images/shop/shopnpc.png')} resizeMode ="cover"/>
-    
-    <TouchableOpacity style={styles.shopnpctext1} activeOpacity={1}><Text style={styles.shopnpctextfont}>오늘의 할인 물품은</Text></TouchableOpacity>
-    <TouchableOpacity style={styles.shopnpctext2} activeOpacity={1}><Text style={styles.shopnpctextfont2}>"{todayitem}"</Text></TouchableOpacity>
-    <TouchableOpacity style={styles.shopnpctext3} activeOpacity={1}><Text style={styles.shopnpctextfont}>라고</Text></TouchableOpacity>
-    <TouchableOpacity style={styles.shopnpctext4} activeOpacity={1}><Text style={styles.shopnpctextfont}>놓치면 후회할걸?</Text></TouchableOpacity>
-
-    <TouchableOpacity style={styles.shopnpcbutton} onPress={hideshopDialog} activeOpacity={1}><Text style={styles.shopnpcbuttonfont}>바로가기</Text></TouchableOpacity>
+    <Image style={styles.storenpc} source={require('./assets/images/store/storenpc.png')} resizeMode ="cover"/>
     
   </Dialog.Content>
 </Dialog>
@@ -3385,21 +3851,43 @@ function MainScreen({navigation, route}) {
 
   <TouchableOpacity
                 style={styles.gamestartbutton}
-                onPress={showrewardDialog} activeOpacity={1}>
+                onPress={showminigame} activeOpacity={1}>
           <Image source={require('./assets/images/fun/gamestartbutton.png')} resizeMode ="stretch"/>
         </TouchableOpacity> 
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
                 style={styles.minigamexbutton}
                 onPress={hidefunDialog} activeOpacity={1}>
           <Image source={require('./assets/images/fun/xbutton.png')} resizeMode ="stretch"/>
-        </TouchableOpacity> 
+        </TouchableOpacity>  */}
 
   </Dialog.Content>
 </Dialog>
 
 {/* 미니게임 화면 */}
 
+<Dialog visible={minigamevisible} onDismiss={hideminigame} style={{...styles.stageScene, backgroundColor:'#4D3D98'}}>
+  <Dialog.Content>
+    {!isclear && <Image style={styles.minigamenpc} source={require('./assets/images/fun/defaulttext.png')} resizeMode ="stretch"/>}
+      { isclear && <Image style={styles.minigamenpc} source={require('./assets/images/fun/cleartext.png')} resizeMode ="stretch"/> }
+  <Text style={styles.minigamewhitebg} />
+  
+  <View style={{position : 'absolute', top : 155, left : 45, width : 350, height : 500}}>
+          <FlatList
+          data={MinigameData}
+          renderItem={renderMinigame}
+          keyExtractor={(item) => item.key}
+          numColumns={4}
+          />
+  </View >
+
+  {!startminigame && <Text style={{...styles.stageScene, left : 0, top : 0}}></Text>}
+
+  <Progress.Bar progress={timergauge} color={'#665AAC'} width={360} height={30} borderColor={'#665AAC'} borderWidth={1} unfilledColor={'#C4C4C4'} style={{position : 'absolute', top : 630, left : 25}}/>
+  {!startminigame && <Progress.Bar progress={1} color={'#665AAC'} width={360} height={30} borderColor={'#665AAC'} borderWidth={1} unfilledColor={'#C4C4C4'} style={{position : 'absolute', top : 630, left : 25}}/>}
+
+  </Dialog.Content>
+</Dialog>
 
 
 {/* 보상 획득 화면 */}
@@ -3409,7 +3897,7 @@ function MainScreen({navigation, route}) {
   <Button disabled color={Colors.black} onPress={() => {}} style={styles.rewardinfo} />
   <Image style={styles.rewardimage} source={require('./assets/images/fun/coin.png')} resizeMode ="stretch"/>
 
-  <Paragraph style={styles.rewardtext}><Text>{rewardtext}를 획득했습니다!</Text></Paragraph>
+  <Paragraph style={styles.rewardtext}><Text>{rewardtext}{rewardtype}를 획득했습니다!</Text></Paragraph>
 
   <TouchableOpacity
                 style={styles.rewardbutton}
@@ -3575,6 +4063,14 @@ const styles = StyleSheet.create({
   intro:{
     width : WINDOW_W,
     height : WINDOW_H+20,
+  },
+
+  intro2:{
+    position : 'absolute',
+    width : WINDOW_W,
+    height : WINDOW_H,
+    left : 0,
+    top : 0,
   },
 
   prologuebg : {
@@ -3868,6 +4364,18 @@ const styles = StyleSheet.create({
     backgroundColor : '#A9A8B8',
   },
 
+  feel1:{
+    position: 'absolute',
+    left : 50,
+    top: 300,
+  },
+
+  feel2:{
+    position: 'absolute',
+    left : 250,
+    top: 250,
+  },
+
   furniturewallslot:{
     position: 'absolute',
     left : 0,
@@ -3927,8 +4435,6 @@ const styles = StyleSheet.create({
 
   mainstage:{
     position: 'absolute',
-    width : 50,
-    height: 50,
     left : 10,
     top: 100-10,
   },
@@ -3955,9 +4461,9 @@ const styles = StyleSheet.create({
 
   gamemoneybackground:{
     position: 'absolute',
-    width : 290,
+    width : 380,
     height: 20,
-    right : 30,
+    right : 15,
     top: 30-10,
     borderRadius: 25,
     backgroundColor : 'white',
@@ -3967,7 +4473,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 20,
     height: 20,
-    left : 96,
+    left : 21,
     top: 30-10,
   },
 
@@ -3975,10 +4481,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 100,
     height: 20,
-    left : 120,
-    top: 20-10,
+    left : 65,
+    top: 20-10+1,
     textAlign: 'center',
     textAlignVertical: 'center',
+  },
+
+  shopbg2:{
+    position: 'absolute',
+    width : WINDOW_W,
+    height: WINDOW_H - 20,
+    left : 0,
+    top : 40,
+    backgroundColor : '#EEEEEE',
+    borderTopLeftRadius : 20,
+    borderTopRightRadius : 20,
   },
 
   shopcoinimage:{
@@ -3986,7 +4503,7 @@ const styles = StyleSheet.create({
     width : 20,
     height: 20,
     left : 96+50+30+5,
-    top: 50,
+    top: 50+10,
   },
 
   shopcoinnum:{
@@ -3994,7 +4511,7 @@ const styles = StyleSheet.create({
     width : 100,
     height: 20,
     left : 120+50+5,
-    top: 40+1.5,
+    top: 40+1.5+10,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -4063,8 +4580,8 @@ const styles = StyleSheet.create({
 
   shopbackbutton:{
     position: 'absolute',
-    top: 40,
-    right : 20,
+    top: 50,
+    right : 15,
   },
 
   shopeatslot1:{
@@ -4162,7 +4679,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 20,
     height: 20,
-    left : 236,
+    left : 200-5,
     top: 30-10,
   },
 
@@ -4170,8 +4687,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 100,
     height: 20,
-    left : 260,
-    top: 20-10,
+    left : 250,
+    top: 20-10+1,
     textAlign: 'center',
     textAlignVertical: 'center',
    },
@@ -4182,9 +4699,9 @@ const styles = StyleSheet.create({
 
   heartbackground:{
     position: 'absolute',
-    width : 290,
+    width : 380,
     height: 20,
-    right : 30,
+    right : 15,
     top: 60-10,
     borderRadius: 25,
     backgroundColor : 'white',
@@ -4193,7 +4710,7 @@ const styles = StyleSheet.create({
   heartgaugeimage:{
     position: 'absolute',
     height: 20,
-    left : 91,
+    left : 15,
     top: 60-10,
     borderRadius: 25,
     backgroundColor : '#FF9AB2',
@@ -4203,15 +4720,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width : 15,
     height: 15,
-    left : 100,
-    top: 64-10,
+    left : 24,
+    top: 52.5,
   },
 
   heartgauge:{
     position: 'absolute',
     width : 100,
     height: 20,
-    left : 190,
+    left : 160,
     top: 50-10,
     textAlign: 'center',
     textAlignVertical: 'center',
@@ -4246,12 +4763,48 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 
-  menubg:{
+  detailmenubg:{
     position: 'absolute',
-    width : 50,
-    height: 50,
+    width : WINDOW_W,
+    height : WINDOW_H,
+    backgroundColor : 'black',
+    opacity : 0.5,
+  },
+
+  menuicon:{
+    position: 'absolute',
     right : 10,
     top: 100-10,
+  },
+
+  questicon:{
+    position: 'absolute',
+    right : 10,
+    top: 100-10+60,
+  },
+
+  furnitureicon:{
+    position: 'absolute',
+    right : 10,
+    top: 100-10+60+60,
+  },
+
+  settingicon:{
+    position: 'absolute',
+    right : 10,
+    top: 100-10+60+60+60,
+  },
+
+  shopicon:{
+    position: 'absolute',
+    right : 10,
+    top: 100-10+60+60+60+60,
+  },
+
+  dictionaryicon:{
+    position: 'absolute',
+    right : 10,
+    top: 100-10+60+60+60+60+60,
   },
 
   menubutton:{
@@ -4312,7 +4865,7 @@ const styles = StyleSheet.create({
 
   eatbutton:{
     position: 'absolute',
-    left : 30,
+    left : 20,
     bottom: 5,
   },
 
@@ -4345,7 +4898,7 @@ const styles = StyleSheet.create({
 
   cleanbutton:{
     position: 'absolute',
-    left : 40+ 85,
+    left : 30+ 85,
     bottom: 5,
   },
 
@@ -4378,7 +4931,7 @@ const styles = StyleSheet.create({
 
   funbutton:{
     position: 'absolute',
-    left : 40+85+85+5,
+    left : 30+85+85+5,
     bottom: 5,
   },
 
@@ -4411,7 +4964,7 @@ const styles = StyleSheet.create({
 
   sleepbutton:{
     position: 'absolute',
-    left : 40+ 85+85+85+10,
+    left : 30+ 85+85+85+10,
     bottom: 5,
   },
 
@@ -4545,6 +5098,25 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left : 200,
     top : 100,
+  },
+
+  minigamenpc : {
+    position: 'absolute',
+    left : 20-3,
+    top : 20,
+    width : 338 * 1.1,
+    height : 102 * 1.1,
+  },
+
+  minigamewhitebg:{
+    position: 'absolute',
+    left : 0,
+    top : 150,
+    width : WINDOW_W,
+    height : 600,
+    backgroundColor : '#EEEEEE',
+    borderTopLeftRadius : 10,
+    borderTopRightRadius : 10,
   },
 
   scoreboard:{
@@ -5275,18 +5847,28 @@ const styles = StyleSheet.create({
 
   questmenu1:{
     position: 'absolute',
-    width : 130+10,
-    height : 30,
+    width : 150,
+    height : 50,
     left : 0,
-    top : -80,
+    top : -75-2,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
 
   questmenu2:{
     position: 'absolute',
-    width : 130+10,
-    height : 30,
-    right : 10,
-    top : -80,
+    width : 150,
+    height : 50,
+    right : 0,
+    top : -75-2,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+
+  questnpc:{
+    position: 'absolute',
+    top : 0,
+    left : 0,
   },
 
   menu2:{
@@ -5409,6 +5991,12 @@ const styles = StyleSheet.create({
     backgroundColor : '#665AAC'
   },
 
+  furnituremenuxbutton:{
+    position: 'absolute',
+    top : 15,
+    right : 15,
+  },
+
   furnitureslot1:{
     position: 'absolute',
     left : 20,
@@ -5461,19 +6049,19 @@ const styles = StyleSheet.create({
   dailyslot1:{
     position: 'absolute',
     left : 20,
-    top : 50,
+    top : 50+100,
   },
 
   dailyslot2:{
     position: 'absolute',
     left : 20,
-    top : 50+100,
+    top : 50+100+100,
   },
 
   dailyslot3:{
     position: 'absolute',
     left : 20,
-    top : 50+100+100,
+    top : 50+100+100+100,
   },
 
   dailyslot4:{
@@ -5485,19 +6073,19 @@ const styles = StyleSheet.create({
   checkslot1:{
     position: 'absolute',
     left : 30,
-    top : 60,
+    top : 60+100,
   },
 
   checkslot2:{
     position: 'absolute',
     left : 30,
-    top : 60+100,
+    top : 60+100+100,
   },
 
   checkslot3:{
     position: 'absolute',
     left : 30,
-    top : 60+100+100,
+    top : 60+100+100+100,
   },
 
   checkslot4:{
@@ -5509,21 +6097,21 @@ const styles = StyleSheet.create({
   dailyinfoslot1:{
     position: 'absolute',
     left : 90,
-    top : 75,
+    top : 75+100,
     fontSize : 12,
   },
 
   dailyinfoslot2:{
     position: 'absolute',
     left : 90,
-    top : 75+100,
+    top : 75+100+100,
     fontSize : 12,
   },
 
   dailyinfoslot3:{
     position: 'absolute',
     left : 90,
-    top : 75+100+100,
+    top : 75+100+100+100,
     fontSize : 12,
   },
 
@@ -5569,7 +6157,6 @@ const styles = StyleSheet.create({
     left : 37,
     top : 10,
     fontSize : 20,
-    color : 'white',
   },
 
   furniturewall:{
@@ -5585,7 +6172,6 @@ const styles = StyleSheet.create({
     left : 37,
     top : 10,
     fontSize : 20,
-    color : 'white',
   },
 
   menuquest:{
@@ -6147,7 +6733,13 @@ const styles = StyleSheet.create({
 	},
 
 
-
+  absoluteContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+},
 
 
   setting : {
@@ -6157,6 +6749,24 @@ const styles = StyleSheet.create({
     height : 430+120,
     backgroundColor: 'white',
     borderRadius : 0,
+    borderTopLeftRadius : 20,
+    borderTopRightRadius : 20,
+  },
+
+  settingbg:{
+    position: 'absolute',
+    left : -13,
+    top : -90,
+  },
+
+  settingbg2:{
+    position: 'absolute',
+    width : 300,
+    height : 430+120,
+    left : 0,
+    top : -55,
+    backgroundColor: '#EEEEEE',
+    borderRadius : 10,
   },
 
   settinggooglelogin: {
@@ -6191,39 +6801,39 @@ const styles = StyleSheet.create({
 
   qualitytext : {
     position: 'absolute',
-    left : 40-10,
+    left : 40,
     top : 100+5,
     fontSize : 15,
   },
 
   qualitybutton : {
     position: 'absolute',
-    left : 150,
+    left : 170,
     top : 100,
   },
 
   pushtext : {
     position: 'absolute',
-    left : 40,
+    left : 50,
     top : 180+5,
     fontSize : 15,
   },
 
   pushbutton : {
     position: 'absolute',
-    left : 150,
+    left : 170,
     top : 180,
   },
 
   soundtext : {
     position: 'absolute',
-    left : 40+5,
+    left : 50+5,
     top : 280-5,
     fontSize : 15,
   },
   soundbar : {
     position: 'absolute',
-    left : 120,
+    left : 130,
     top : 280,
   },
 
@@ -6291,7 +6901,11 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
 
-
+  storenpc:{
+    position: 'absolute',
+    left : 15,
+    top : 500,
+  },
 
 
 

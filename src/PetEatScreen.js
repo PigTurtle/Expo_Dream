@@ -4,7 +4,9 @@ import { Dimensions, View, Image, StyleSheet, TouchableOpacity, Pressable, Touch
 import { Modal, Text, Button, TouchableRipple, Paragraph } from 'react-native-paper';
 import { State, TapGestureHandler, PanGestureHandler, RotationGestureHandler } from 'react-native-gesture-handler';
 import Animated, { Easing, useSharedValue, useDerivedValue, interpolateColors, withSpring, useAnimatedStyle, 
-    repeat, delay, useAnimatedGestureHandler, withTiming, sequence, EasingNode, cancelAnimation } from 'react-native-reanimated';
+    repeat, delay, useAnimatedGestureHandler, withTiming, sequence, EasingNode, cancelAnimation, set, add } from 'react-native-reanimated';
+import { PetMove } from './PetMove';
+import * as Progress from 'react-native-progress';
 
 const WINDOW_H = Dimensions.get('window').height;
 const WINDOW_W = Dimensions.get('window').width;
@@ -55,14 +57,12 @@ const EatItem = (props) => {
         }
     });
 
-    let imagepath = props.imagepath;
-
     return (
         <PanGestureHandler onGestureEvent={panHandler}>
         <Animated.View  style={[styles.item, animatedStyle]} >
         <TouchableOpacity
                 onPress={onTap} activeOpacity={1}>
-          <Image source={imagepath} resizeMode ="cover"/>
+          <Image source={props.imagepath} resizeMode ="cover"/>
         </TouchableOpacity>
         </Animated.View>
         </PanGestureHandler>
@@ -76,6 +76,7 @@ const PetEatScreen = (props) => {
     const [eatgauge, seteatgauge] = useState(props.eatpercent);
     const [out, setout] = useState(false);
     const [addgauge, setaddgauge] = useState(30);
+    const [move, setmove] = useState(false);
 
     let menutext;
     switch(props.type)
@@ -97,9 +98,10 @@ const PetEatScreen = (props) => {
     }
 
     const IsEat = () => {
+        setmove(true);
         setiseat(true);
         seteatgauge(eatgauge + addgauge > 100 ? 100 : eatgauge + addgauge);
-        setTimeout(goout, 3000);
+        setTimeout(goout, 5000);
     }
 
     const goout = () => {
@@ -174,16 +176,20 @@ const PetEatScreen = (props) => {
     return (
         <View style={{top : -30}}>
             <Image source={mainimagepath} style={styles.main} resizeMode ="cover"/>
-            <Image source={petimagepath} style={styles.pet} resizeMode ="cover"/>
+            <PetMove petnum={props.petnum} move={move} /> 
+            {/* <Image source={petimagepath} style={styles.pet} resizeMode ="cover"/> */}
             <Image source={require('../assets/images/main/bottommenu.png')} style={styles.bottomtab} resizeMode ="cover"/>
             <Button disabled style={styles.bottommenutext}><Text>{bottommenutext}</Text></Button>
+
             {bottomgauge == true && <Image source={gaugemaxpath} style={styles.eatgaugemax} resizeMode ="cover"/> }
             {bottomgauge == true && <Image source={gaugepath} style={{...styles.eatgauge,  width : 339 * eatgauge/100}} resizeMode ="cover"/>  }
-
             {bottomgauge == true && <Button disabled style={styles.eatgaugetext}><Text>{eatgauge}%</Text></Button> }
 
             {iseat == false && <EatItem imagepath={props.imagepath} ontap={onTap} touchcheck={touchcheck} /> } 
 
+            {iseat == true && <Image source={require('../assets/images/main/heart.gif')} style={styles.hearteffect} resizeMode ="cover"/> }
+           {iseat == true && <Image source={require('../assets/images/main/heart.gif')} style={styles.hearteffect2} resizeMode ="cover"/> }
+           {iseat == true && <Image source={require('../assets/images/main/heart.gif')} style={styles.hearteffect3} resizeMode ="cover"/> }
             {iseat == true && <TouchableOpacity onPress={goout} activeOpacity={1} style={styles.gooutbg}><Text></Text></TouchableOpacity>}
 
             <StatusBar hidden={true} />
@@ -278,19 +284,19 @@ const styles = StyleSheet.create({
     eatgaugemax : {
         position: 'absolute',
         left : -WINDOW_W/2+35,
-        bottom : -WINDOW_H/2+30,
+        bottom : -WINDOW_H/2+20,
     },
 
     eatgauge : {
         position: 'absolute',
         left : -WINDOW_W/2+35,
-        bottom : -WINDOW_H/2+30,
+        bottom : -WINDOW_H/2+20,
     },
 
     bottommenutext : {
         position: 'absolute',
         left : -100,
-        bottom : -260,
+        bottom : -265,
         width : 200,
         height : 30,
         justifyContent : 'center',
@@ -299,7 +305,7 @@ const styles = StyleSheet.create({
     eatgaugetext : {
         position: 'absolute',
         left : -100,
-        bottom : -303,
+        bottom : -303-5,
         width : 200,
         height : 30,
         justifyContent : 'center',
@@ -311,5 +317,29 @@ const styles = StyleSheet.create({
         height : WINDOW_H,
         left : -WINDOW_W/2,
         top : -WINDOW_H/2,
+    },
+
+    hearteffect : {
+        position: 'absolute',
+        width : 35,
+        height : 35,
+        left : 20,
+        top : 30,
+    },
+
+    hearteffect2 : {
+        position: 'absolute',
+        width : 40,
+        height : 40,
+        left : 45,
+        top : -5,
+    },
+
+    hearteffect3 : {
+        position: 'absolute',
+        width : 45,
+        height : 45,
+        left : 65,
+        top : -45,
     },
 });

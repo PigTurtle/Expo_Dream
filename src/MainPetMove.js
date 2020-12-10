@@ -20,7 +20,7 @@ const Pet = (props) => {
       
     const react = () => {
         // 랜덤 패턴
-        let pattern = Math.floor(Math.random()*10) % 4;
+        let pattern = Math.floor(Math.random()*10) % 3;
 
         if(pattern == 0)
         {
@@ -28,13 +28,9 @@ const Pet = (props) => {
         }
         else if(pattern == 1)
         {
-            reactxmove();
-        }
-        else if(pattern == 2)
-        {
             reactymove();
         }
-        else if(pattern == 3)
+        else if(pattern == 2)
         {
             reactrotate();
         }
@@ -42,32 +38,32 @@ const Pet = (props) => {
 
     const reactchangescale = () => {
         scale.value = sequence(
-            withTiming(0.9, {duration: 250}),
-            repeat(withTiming(1.1, {duration: 500}), 3, true)
-            , withTiming(1.0, {duration: 250,  ease: Easing.linear}));
+            withTiming(0.9, {duration: 200}),
+            repeat(withTiming(1.1, {duration: 400}), 3, true)
+            , withTiming(1.0, {duration: 200,  ease: Easing.linear}));
         
-        ismove.value = withTiming(0, {duration: 2000+100});
+        ismove.value = withTiming(0, {duration: 1600});
     }
 
     const reactxmove = () => {
         x.value = sequence(
-            withTiming(x.value-40, {duration: 250}),
-            repeat(withTiming(x.value+40+40, {duration: 500}), 3, true)
-            , withTiming(x.value, {duration: 250, ease: Easing.linear}));
+            withTiming(x.value-40, {duration: 200}),
+            repeat(withTiming(x.value+40+40, {duration: 400}), 3, true)
+            , withTiming(x.value, {duration: 200, ease: Easing.linear}));
 
-        ismove.value = withTiming(0, {duration: 2000+100});
+        ismove.value = withTiming(0, {duration: 1600});
     }
 
     const reactymove = () => {
-        y.value = repeat(withTiming(y.value-80, { duration: 500}), 4, true);
+        y.value = repeat(withTiming(y.value-80, { duration: 400}), 4, true);
 
-        ismove.value = withTiming(0, {duration: 2000+100});
+        ismove.value = withTiming(0, {duration: 1600});
     }
 
     const reactrotate = () => {
-        rotate.value = sequence(withTiming(360, { duration: 1000}), withTiming(0, { duration: 1000}));
+        rotate.value = sequence(withTiming(360, { duration: 750}), withTiming(0, { duration: 750}));
 
-        ismove.value = withTiming(0, {duration: 2000+100});
+        ismove.value = withTiming(0, {duration: 1500});
     }
     
     const panHandler = useAnimatedGestureHandler( {
