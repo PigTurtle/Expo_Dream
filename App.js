@@ -6904,7 +6904,7 @@ const styles = StyleSheet.create({
   storenpc:{
     position: 'absolute',
     left : 15,
-    top : 500,
+    top : 520,
   },
 
 
